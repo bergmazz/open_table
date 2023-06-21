@@ -1,4 +1,11 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+.env
+__pycache__/
+*.py[cod]
+.venv
+.DS_Store
+.vscode/
+dev.db
 
 # dependencies
 /node_modules
