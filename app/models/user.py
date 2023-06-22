@@ -20,7 +20,7 @@ class User(db.Model, UserMixin):
     created_at = db.Column(db.DateTime, default= datetime.utcnow)
     updated_at = db.Column(db.DateTime, default= datetime.utcnow, onupdate=datetime.utcnow)
 
-    favorite_restaurants = db.relationship('Restaurant', secondary='user_favorite_restaurants', backref='favorited_by')
+    favorites = db.relationship('Restaurant', secondary='user_favorite_restaurants', backref='favorited_by')
     owned = db.relationship('Restaurant', backref='owner')
     reservations = db.relationship('Reservation', backref='user')
     reviews = db.relationship('Review', backref='user')

@@ -29,7 +29,7 @@ class Restaurant(db.Model, UserMixin):
     created_at = db.Column(db.DateTime, default= datetime.utcnow)
     updated_at = db.Column(db.DateTime, default= datetime.utcnow, onupdate=datetime.utcnow)
 
-    user = db.relationship('User', backref='restaurant')
+    owner = db.relationship('User', backref='restaurant')
     reviews = db.relationship("Review", cascade="all, delete-orphan", lazy="joined", backref='restaurant')
     reservations = db.relationship('Reservation', cascade="all, delete-orphan", lazy="joined", backref='restaurant')
 
