@@ -4,46 +4,52 @@ from flask_login import UserMixin
 from datetime import datetime
 
 
-class User(db.Model, UserMixin):
-    __tablename__ = 'users'
+class Restaurant(db.Model, UserMixin):
+    __tablename__ = 'restaurants'
 
     if environment == "production":
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
-    restaurant_name = db.Column(db.String(40), nullable=False, unique=True)
+    restaurant_name = db.Column(db.String(50), nullable=False, unique=True)
     cover_image = db.Column(db.String(255), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
-    phoneNumber = db.Column(db.Integer, nullable=False, unique=True)
-    hashed_password = db.Column(db.String(255), nullable=False)
-    owner = db.Column(db.Boolean, default=False, unique=True)
+    phone_number = db.Column(db.Integer, nullable=False, unique=True)
+    address = db.Column(db.String(50), nullable=False)
+    city = db.Column(db.String(30), nullable=False)
+    state = db.Column(db.String(30), nullable=False)
+    zip_code = db.Column(db.Integer, nullable=False)
+    country= db.Column(db.String(30), nullable=False)
+    cuisine_type= db.Column(db.String(30), nullable=False)
+    price_range= db.Column(db.Integer, nullable=False)
+    phone_number = db.Column(db.Integer, nullable=False)
+    open_hours = db.Column(db.String(8))
+    closing_hours = db.Column(db.String(8))
     created_at = db.Column(db.DateTime, default= datetime.utcnow)
     updated_at = db.Column(db.DateTime, default= datetime.utcnow, onupdate=datetime.utcnow)
 
-    # following = db.relationship('Follower', back_populates='follower_user', foreign_keys='Follower.follower_id')
-
-
-    @property
-    def password(self):
-        return self.hashed_password
-
-    @password.setter
-    def password(self, password):
-        self.hashed_password = generate_password_hash(password)
-
-    def check_password(self, password):
-        return check_password_hash(self.password, password)
+    user = db.relationship('User', backref='restaurant')
+    reviews = db.relationship("Review", cascade="all, delete-orphan", lazy="joined", backref='restaurant')
+    reservations = db.relationship('Reservation', cascade="all, delete-orphan", lazy="joined", backref='restaurant')
 
     def to_dict(self):
         return {
             'id': self.id,
-            'firstName': self.first_name,
-            'lastName': self.last_name,
+            'userId': self.user_id,
+            'restaurantName': self.restaurant_name,
+            'coverImage': self.cover_image,
             'email': self.email,
-            "phoneNumber": self.phone_number,
+            'phoneNumber': self.phone_number,
+            'address': self.address,
+            'city': self.city,
+            'state': self.state,
+            'zipCode': self.zip_code,
+            'country': self.country,
+            'cuisineType': self.cuisine_type,
+            'priceRange': self.price_range,
+            'openHours': self.open_hours,
+            'closingHours': self.closing_hours,
             'createdAt': self.created_at,
-            'updatedAt': self.updated_at,
-            # 'followers': [follower.to_dict() for follower in self.followers],
-            #  'numFollowers': len(self.followers)
+            'updatedAt': self.updated_at
         }
