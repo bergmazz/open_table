@@ -43,6 +43,7 @@ class User(db.Model, UserMixin):
             "owner": self.owner,
             'createdAt': self.created_at,
             'updatedAt': self.updated_at,
+            'favorites': [favorite.to_dict() for favorite in self.favorites],
             ## example aggregates????
             # 'followers': [follower.to_dict() for follower in self.followers],
             #  'numFollowers': len(self.followers)

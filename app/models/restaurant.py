@@ -23,7 +23,6 @@ class User(db.Model, UserMixin):
 
     # following = db.relationship('Follower', back_populates='follower_user', foreign_keys='Follower.follower_id')
 
-
     @property
     def password(self):
         return self.hashed_password
@@ -44,6 +43,8 @@ class User(db.Model, UserMixin):
             "phoneNumber": self.phone_number,
             'createdAt': self.created_at,
             'updatedAt': self.updated_at,
+            'favorites': [favorite.to_dict() for favorite in self.favorites],
+            'numFavorites': len(self.followers)
             # 'followers': [follower.to_dict() for follower in self.followers],
             #  'numFollowers': len(self.followers)
         }
