@@ -11,10 +11,11 @@ class User(db.Model, UserMixin):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    first_name = db.Column(db.String(40), nullable=False, unique=True)
-    last_name = db.Column(db.String(40), nullable=False, unique=True)
+    user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
+    restaurant_name = db.Column(db.String(40), nullable=False, unique=True)
+    cover_image = db.Column(db.String(255), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
-    phone_number = db.Column(db.Integer, nullable=False, unique=True)
+    phoneNumber = db.Column(db.Integer, nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
     owner = db.Column(db.Boolean, default=False, unique=True)
     created_at = db.Column(db.DateTime, default= datetime.utcnow)
@@ -40,10 +41,8 @@ class User(db.Model, UserMixin):
             'lastName': self.last_name,
             'email': self.email,
             "phoneNumber": self.phone_number,
-            "owner": self.owner,
             'createdAt': self.created_at,
             'updatedAt': self.updated_at,
-            ## example aggregates????
             # 'followers': [follower.to_dict() for follower in self.followers],
             #  'numFollowers': len(self.followers)
         }
