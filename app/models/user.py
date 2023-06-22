@@ -20,7 +20,10 @@ class User(db.Model, UserMixin):
     created_at = db.Column(db.DateTime, default= datetime.utcnow)
     updated_at = db.Column(db.DateTime, default= datetime.utcnow, onupdate=datetime.utcnow)
 
-    # following = db.relationship('Follower', back_populates='follower_user', foreign_keys='Follower.follower_id')
+    favorite_restaurants = db.relationship('Restaurant', secondary='user_favorite_restaurants', backref='favorited_by')
+    owned = db.relationship('Restaurant', backref='owner')
+    reservations = db.relationship('Reservation', backref='user')
+    reviews = db.relationship('Review', backref='user')
 
     @property
     def password(self):
