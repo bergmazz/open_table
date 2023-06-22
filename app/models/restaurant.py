@@ -23,6 +23,7 @@ class User(db.Model, UserMixin):
 
     # following = db.relationship('Follower', back_populates='follower_user', foreign_keys='Follower.follower_id')
 
+
     @property
     def password(self):
         return self.hashed_password
