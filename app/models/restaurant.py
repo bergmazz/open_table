@@ -44,7 +44,7 @@ class User(db.Model, UserMixin):
             'createdAt': self.created_at,
             'updatedAt': self.updated_at,
             'favorites': [favorite.to_dict() for favorite in self.favorites],
-            'numFavorites': len(self.followers)
+            'numFavorites': len(self.favorites)
             # 'followers': [follower.to_dict() for follower in self.followers],
             #  'numFollowers': len(self.followers)
         }
