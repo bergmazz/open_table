@@ -20,9 +20,6 @@ class User(db.Model, UserMixin):
     created_at = db.Column(db.DateTime, default= datetime.utcnow)
     updated_at = db.Column(db.DateTime, default= datetime.utcnow, onupdate=datetime.utcnow)
 
-    favorites = db.relationship('Restaurant', secondary='user_favorite_restaurants', backref='favorited_by')
-    owned = db.relationship('Restaurant', backref='owner')
-    reservations = db.relationship('Reservation', backref='user')
     reviews = db.relationship('Review', backref='user')
 
     @property
@@ -47,7 +44,4 @@ class User(db.Model, UserMixin):
             'createdAt': self.created_at,
             'updatedAt': self.updated_at,
             'favorites': [favorite.to_dict() for favorite in self.favorites],
-            ## example aggregates????
-            # 'followers': [follower.to_dict() for follower in self.followers],
-            #  'numFollowers': len(self.followers)
         }

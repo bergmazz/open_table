@@ -31,7 +31,7 @@ class Restaurant(db.Model, UserMixin):
 
     owner = db.relationship('User', backref='restaurant')
     reviews = db.relationship("Review", cascade="all, delete-orphan", lazy="joined", backref='restaurant')
-    reservations = db.relationship('Reservation', cascade="all, delete-orphan", lazy="joined", backref='restaurant')
+    # reservations = db.relationship('Reservation', cascade="all, delete-orphan", lazy="joined", backref='restaurant')
 
     def to_dict(self):
         return {
