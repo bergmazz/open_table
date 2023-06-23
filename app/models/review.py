@@ -5,12 +5,12 @@ class Review(db.Model):
     __tablename__ = 'reviews'
 
     id = db.Column(db.Integer, primary_key=True)
-    userId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
-    restaurantId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('restaurants.id')), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
+    restaurant_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('restaurants.id')), nullable=False)
     rating = db.Column(db.Integer, nullable=False)
     comment = db.Column(db.Text)
-    reviewImage = db.Column(db.String) 
-    createdAt = db.Column(db.DateTime, default=datetime.utcnow)
+    review_image = db.Column(db.String) 
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default= datetime.utcnow, onupdate=datetime.utcnow)
 
 
@@ -18,10 +18,10 @@ class Review(db.Model):
     def to_dict(self):
         return {
             'id': self.id,
-            'userId': self.userId,
-            'restaurantId': self.restaurantId,
+            'userId': self.user_id,
+            'restaurantId': self.restaurant_id,
             'rating': self.rating,
             'comment': self.comment,
-            'reviewImage': self.reviewImage
+            'reviewImage': self.review_image
         }
         
