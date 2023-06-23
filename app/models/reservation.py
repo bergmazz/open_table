@@ -22,8 +22,8 @@ class Reservation(db.Model):
     created_at = db.Column(db.DateTime, default= datetime.utcnow)
     updated_at = db.Column(db.DateTime, default= datetime.utcnow, onupdate=datetime.utcnow)
 
-    user = db.relationship('User', backref='reservations')
-    restaurant = db.relationship('Restaurant', backref='reservations')
+    # user = db.relationship('User', backref='reservations')
+    # restaurant = db.relationship('Restaurant', backref='reservations')
 
 def to_dict(self):
     return {

@@ -12,7 +12,7 @@ class Favorite(db.Model):
     restaurant_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('restaurants.id')))
 
     user = db.relationship("User", backref="favorites")
-    restaurant = db.relationship("Restaurant", backref="favorites")
+    # restaurant = db.relationship("Restaurant", backref="favorites")
 
     def to_dict(self):
         return {
