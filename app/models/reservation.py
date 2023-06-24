@@ -7,10 +7,9 @@ from datetime import datetime
 #     CANCELLED = "cancelled"
 #     ATTENDED = "attended"
 
-
 class Reservation(db.Model):
     __tablename__ = 'reservations'
-    
+
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
     restaurant_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('restaurants.id')), nullable=False)
@@ -25,15 +24,15 @@ class Reservation(db.Model):
     # user = db.relationship('User', backref='reservations')
     # restaurant = db.relationship('Restaurant', backref='reservations')
 
-def to_dict(self):
-    return {
-        'id': self.id,
-        'userId': self.user_id,
-        'restaurantId': self.restaurant_id,
-        'numberOfPeople': self.number_of_people,
-        'reservationTime': self.reservation_time,
-        'status': self.status,
-        'notes': self.notes,
-        'createdAt': self.created_at,
-        'updatedAt': self.updated_at,
-    }
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'userId': self.user_id,
+            'restaurantId': self.restaurant_id,
+            'numberOfPeople': self.number_of_people,
+            'reservationTime': self.reservation_time,
+            'status': self.status,
+            'notes': self.notes,
+            'createdAt': self.created_at,
+            'updatedAt': self.updated_at,
+        }
