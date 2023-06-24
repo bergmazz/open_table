@@ -22,7 +22,8 @@ class User(db.Model, UserMixin):
 
     reviews = db.relationship('Review', backref='user')
     reservations = db.relationship('Reservation', cascade="all, delete-orphan", lazy="joined", backref='user')
-    favorites = db.relationship('Favorite', cascade='all, delete-orphan', lazy="joined", backref='favorites')
+    favorites = db.relationship('Favorite', cascade='all, delete-orphan', lazy="joined", backref='user')
+    restaurants = db.relationship('Restaurant', cascade='all, delete-orphan', lazy="joined", backref='user')
 
     @property
     def password(self):
@@ -46,4 +47,5 @@ class User(db.Model, UserMixin):
             'createdAt': self.created_at,
             'updatedAt': self.updated_at,
             'favorites': [favorite.to_dict() for favorite in self.favorites],
+            'restaurants': [restaurant.to_dict() for restaurant in self.restaurants]
         }

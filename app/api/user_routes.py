@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify
-from flask_login import login_required
-from app.models import User
+from flask_login import login_required, current_user
+from app.models import db, User, Favorite, Reservation
 
 user_routes = Blueprint('users', __name__)
 
@@ -23,3 +23,8 @@ def user(id):
     """
     user = User.query.get(id)
     return user.to_dict()
+
+@user_routes.route('/restaurants')
+def get_user_restaurant():
+    if current_user.is_authenticated:
+        return jsonify(current_user.restaurants)
