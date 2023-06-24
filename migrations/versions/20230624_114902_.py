@@ -1,7 +1,7 @@
 """empty message
 
 Revision ID: a2e3969e7280
-Revises: 
+Revises:
 Create Date: 2023-06-24 11:49:02.782692
 
 """
@@ -30,9 +30,6 @@ def upgrade():
     sa.Column('updated_at', sa.DateTime(), nullable=True),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('email'),
-    sa.UniqueConstraint('first_name'),
-    sa.UniqueConstraint('last_name'),
-    sa.UniqueConstraint('owner'),
     sa.UniqueConstraint('phone_number')
     )
     op.create_table('restaurants',
