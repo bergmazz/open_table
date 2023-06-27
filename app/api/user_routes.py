@@ -61,7 +61,6 @@ def get_favorites(id):
 #     else:
 #         return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
-<<<<<<< HEAD
 # Delete favorite
 @user_routes.route('/<int:id>/favorites/<int:fav_id>', methods=['DELETE'])
 def delete_favorite(id, fav_id):
@@ -72,15 +71,3 @@ def delete_favorite(id, fav_id):
         return {'message': 'Favorite successfully removed'}
     else:
         return {'message': 'Favorite does not exist'}
-=======
-# # Delete favorite
-# @user_routes.route('/<int:id>/favorites/<int:fav_id', methods=['DELETE'])
-# def delete_favorite(id, fav_id):
-#     favorite = Favorite.query.get(fav_id)
-#     if (favorite):
-#         db.session.delete(favorite)
-#         db.session.commit()
-#         return {'message': 'Favorite successfully removed'}
-#     else: 
-#         return {'message': 'Favorite does not exist'}
->>>>>>> reservationRoutes

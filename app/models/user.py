@@ -54,6 +54,6 @@ class User(db.Model, UserMixin):
             "owner": self.owner,
             'createdAt': self.created_at,
             'updatedAt': self.updated_at,
-            'favorites': [favorite.to_dict() for favorite in self.favorites],
+            'favorites': [favorite.to_dict() for favorite in self.user_favorites],
             'restaurants': [restaurant.to_dict() for restaurant in self.restaurants]
         }
