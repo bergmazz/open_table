@@ -13,6 +13,10 @@ class Favorite(db.Model):
 
     # user = db.relationship("User", backref="favorites")
     # restaurant = db.relationship("Restaurant", backref="favorites")
+    restaurantId = db.Column(db.Integer, db.ForeignKey('restaurants.id'), nullable=False)
+    restaurant_fav = db.relationship('Restaurant', back_populates='restaurant_favorites')
+
+
 
     def to_dict(self):
         return {

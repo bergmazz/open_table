@@ -14,6 +14,12 @@ class Review(db.Model):
     updated_at = db.Column(db.DateTime, default= datetime.utcnow, onupdate=datetime.utcnow)
 
 
+    owner = db.relationship('User', back_populates="reviewer")
+    restaurant = db.relationship(
+        'Restaurant', back_populates="restaurant_review")
+
+
+
     
     def to_dict(self):
         return {
