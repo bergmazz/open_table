@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request
-
-from app import models
-from ..models import Restaurant
+from flask_login import login_required, current_user
+from app.models import db, Restaurant
+from app.forms import RestaurantForm
 
 restaurant_routes = Blueprint('restaurants', __name__)
 
@@ -55,5 +55,39 @@ def get_restaurant_by_id(restaurant_id):
     return jsonify({'restaurant': restaurant.details_to_dict()}), 200
 
 # Create a Restaurant
+@login_required
+@restaurant_routes.route("/", methods=["POST"])
+def create_restaurant():
+    form =RestaurantForm()
+    data = request.json
+
+    if form.validate_on_submit():
+        data = form.data
+        restaurant = Restaurant(
+            user_id = current_user.id,
+            restaurant_name=data["restaurant_name"],
+            cover_image=data["cover_image"],
+            email=data["email"],
+            address=data["address"],
+            city=data["city"],
+            state=data["state"],
+            zip_code=data["zip_code"],
+            country=data["country"],
+            cuisine_type=data["cuisine_type"],
+            price_range=data["price_range"],
+            phone_number=data["phone_number"],
+            open_hours=data["open_hours"],
+            closing_hours=data["closing_hours"]
+        )
+    if form.errors:
+        errors = {}
+        for field_name, field_errors in form.errors.items():
+            errors[field_name] = field_errors[0]
+        return {'error': errors}
+
+    db.session.add(restaurant)
+    db.session.commit()
+
+    return jsonify({"restaurant": restaurant.to_dict()}), 201
 
 # Delete a Restaurant

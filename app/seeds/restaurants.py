@@ -12,7 +12,7 @@ def seed_restaurants():
     restaurant2 = Restaurant(
         user_id=2, restaurant_name='Tao', cover_image='https://images.unsplash.com/photo-1552566626-52f8b828add9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80',
         email='tao@tao.com', phone_number=1234567892, address='2121 E 7th Pl', city='Los Angeles',
-        state='CA', zip_code=90021, country='USA', cuisine_type='Asian', price_range=3,
+        state='CA', zip_code=90021, country='USA', cuisine_type='Thai', price_range=3,
         open_hours='10:00 am', closing_hours='11:30 pm')
     restaurant3 = Restaurant(
         user_id=3, restaurant_name='Haute Dog Diner', cover_image='https://images.unsplash.com/photo-1618670708336-2df80fdd0ecb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80',
