@@ -42,5 +42,9 @@ def create_review(restaurant_id):
         db.session.add(new_review)
         db.session.commit()
         return new_review.to_dict()
-    else:
-        return jsonify({'error': 'NOPE'}), 404
+    if form.errors:
+        errors = {}
+        for field_name, field_errors in form.errors.items():
+            errors[field_name] = field_errors[0]
+        return {'error': errors}
+  
