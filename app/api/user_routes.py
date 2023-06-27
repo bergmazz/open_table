@@ -24,12 +24,18 @@ def user(id):
     user = User.query.get(id)
     return user.to_dict()
 
+# Get restaurant by current user
 @user_routes.route('/restaurants')
 def get_user_restaurant():
     curr_user_id = current_user.id
     restaurants = db.session.query(Restaurant).filter(
         Restaurant.user_id == curr_user_id).all()
     return {'Restaurants': [restaurant.to_dict() for restaurant in restaurants]}
-        
-        # if current_user.is_authenticated:
-        # return str(current_user.id)
+
+# Get current user reservations
+@user_routes.route('/reservations')
+def get_user_reservation():
+    curr_user_id = current_user.id
+    reservations = db.session.query(Reservation).filter(
+        Reservation.user_id == curr_user_id).all()
+    return {'Reservations': [reservation.to_dict() for reservation in reservations],}
