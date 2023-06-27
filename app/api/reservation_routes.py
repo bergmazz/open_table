@@ -23,10 +23,29 @@ def create_reservation():
     else:
         return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
-# # Edit a Reservation
-# @reservation_routes.route('/', methods=['PUT'])
-# def edit_reservation():
-#     form = ReservationForm()
-#     reservation_to_edit = db.session.query(Reservation).filter(
-#         Reservation.id == reservation_id
-#     )
+# Edit a Reservation
+@reservation_routes.route('/reservations/<int:reservation_id>', methods=['PUT'])
+@login_required
+def edit_reservation(restaurant_id, reservation_id):
+    """
+    Edits a reservation
+    """
+    if Reservation.query.get(restaurant_id) is None:
+        return jsonify({'error': 'Restaurant not found'}), 404
+
+    reservation = Reservation.query.get(reservation_id)
+
+    if current_user.id is not reservation.user_id:
+        return jsonify({ 'error': 'You are not authorized to edit this post' })
+
+    form = ReservationForm(obj=reservation)
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        form.populate_obj(reservation)
+        db.session.commit()
+        return reservation.to_dict()
+    if form.errors:
+        errors = {}
+        for field_name, field_errors in form.errors.items():
+            errors[field_name] = field_errors[0]
+        return {'error': errors}
