@@ -26,9 +26,13 @@ def create_review(restaurant_id):
     """
     Creates a new review
     """
+    # Checks if restaurant id is valid
     if Restaurant.query.get(restaurant_id) is None:
         return jsonify({'error': 'Restaurant not found'}), 404
-    # if Review.query.filter_by(restaurant_id=restaurant_id, user_id=current_user)
+
+    # Checks if user already left a review for this restaurant
+    # if Review.query.filter_by(restaurant_id=restaurant_id, user_id=current_user):
+    #     return jsonify({'error': 'User already has a review for this restaurant'}), 403
 
     form = ReviewForm()
     form['csrf_token'].data = request.cookies['csrf_token']
@@ -47,4 +51,3 @@ def create_review(restaurant_id):
         for field_name, field_errors in form.errors.items():
             errors[field_name] = field_errors[0]
         return {'error': errors}
-  
