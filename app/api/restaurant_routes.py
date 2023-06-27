@@ -55,8 +55,8 @@ def get_restaurant_by_id(restaurant_id):
     return jsonify({'restaurant': restaurant.details_to_dict()}), 200
 
 # Create a Restaurant
-@login_required
 @restaurant_routes.route("/", methods=["POST"])
+@login_required
 def create_restaurant():
     form =RestaurantForm()
     data = request.json
@@ -92,3 +92,22 @@ def create_restaurant():
     return jsonify({"restaurant": restaurant.to_dict()}), 201
 
 # Delete a Restaurant
+@restaurant_routes.route('/<int:restaurant_id>', methods=['DELETE'])
+@login_required
+def delete_restaurant(restaurant_id):
+    """
+    Deletes a restaurant
+    Only the owner can do so
+    """
+    if Restaurant.query.get(restaurant_id) is None:
+        return jsonify({'error': 'Restaurant not found'}), 404
+
+    restaurant = Restaurant.query.get(restaurant_id)
+
+    #authorization required- must be owner of resturant
+    if current_user.id is not restaurant.user_id:
+        return jsonify({ 'error': 'You are not authorized to delete this establishment' })
+
+    db.session.delete(restaurant)
+    db.session.commit()
+    return {'message': 'Restaurant successfully removed'}
