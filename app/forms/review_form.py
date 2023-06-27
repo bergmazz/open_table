@@ -5,7 +5,7 @@ from app.models import Review
 
 def rating_validation(form, field):
     rating = field.data
-    if 1 < rating > 5:
+    if rating <= 0 or  rating > 5:
         raise ValidationError("Rating must be an integer from 1 to 5")
 
 
