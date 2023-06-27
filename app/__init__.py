@@ -9,6 +9,7 @@ from .api.user_routes import user_routes
 from .api.auth_routes import auth_routes
 from .api.restaurant_routes import restaurant_routes
 from .api.review_routes import review_routes
+from .api.reservation_routes import reservation_routes
 from .seeds import seed_commands
 from .config import Config
 
@@ -30,6 +31,7 @@ app.config.from_object(Config)
 app.register_blueprint(user_routes, url_prefix='/api/user')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
 restaurant_routes.register_blueprint(review_routes, url_prefix='/<int:restaurant_id>/reviews')
+restaurant_routes.register_blueprint(reservation_routes, url_prefix='/<int:restaurant_id>')
 app.register_blueprint(restaurant_routes, url_prefix='/api/restaurants')
 # app.register_blueprint(review_routes, url_prefix='/api/reviews')
 db.init_app(app)

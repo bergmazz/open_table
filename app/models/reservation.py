@@ -23,6 +23,11 @@ class Reservation(db.Model):
 
     # user = db.relationship('User', backref='reservations')
     # restaurant = db.relationship('Restaurant', backref='reservations')
+    restaurant_reservations = db.relationship(
+        'Restaurant', back_populates="reservation")
+    restaurant_customers = db.relationship(
+        'User', back_populates="user_reservations")
+
 
     def to_dict(self):
         return {
@@ -35,4 +40,5 @@ class Reservation(db.Model):
             'notes': self.notes,
             'createdAt': self.created_at,
             'updatedAt': self.updated_at,
+            'reservations': [reservation.to_dict() for reservation in self.reservations]
         }
