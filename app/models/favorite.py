@@ -13,7 +13,7 @@ class Favorite(db.Model):
 
     # user = db.relationship("User", backref="favorites")
     # restaurant = db.relationship("Restaurant", backref="favorites")
-    restaurantId = db.Column(db.Integer, db.ForeignKey('restaurants.id'), nullable=False)
+    user_fav = db.relationship('User', back_populates='user_favorites')
     restaurant_fav = db.relationship('Restaurant', back_populates='restaurant_favorites')
 
 
