@@ -51,9 +51,8 @@ def edit_reservation(restaurant_id, reservation_id):
             errors[field_name] = field_errors[0]
         return {'error': errors}
 
-
 # Delete a Reservation (technically just updates status to cancel)
-@reservation_routes.route('/<int:reservation_id>', methods=['PUT'])
+@reservation_routes.route('/reservations/<int:reservation_id>', methods=['DELETE'])
 @login_required
 def delete_reservation(reservation_id, restaurant_id):
     """
@@ -68,15 +67,22 @@ def delete_reservation(reservation_id, restaurant_id):
         return jsonify({'error': 'Restaurant not found'}), 404
     if reservation is None:
         return jsonify({'error': 'Reservation not found'}), 404
+    if reservation.restaurant_id != restaurant_id:
+        return jsonify({'error': 'Reservation is not for this restaurant'}), 404
 
-    if current_user.id not in [reservation.user_id, restaurant.user_id]:
-            return jsonify({ 'error': 'You are not authorized to cancel this reservation' })
+    # print('Current user ID:', current_user.id)
+    # print('Reservation user ID:', reservation.user_id)
+    # print('Restaurant user ID:', restaurant.user_id)
 
-    if datetime.utcnow > reservation.reservation_time:
-        if reservation.status is not "cancelled":
+    if (current_user.id != reservation.user_id) and (current_user.id != restaurant.user_id):
+        return jsonify({'error': 'You are not authorized to cancel this reservation'})
+
+
+    if datetime.utcnow() > reservation.reservation_time:
+        if reservation.status == "confirmed":
             reservation.status = "attended"
 
-    if reservation.status is not "confirmed":
+    if reservation.status != "confirmed":
         return jsonify({'error': 'Reservation has already been cancelled or attended'}), 404
 
     reservation.status = "cancelled"
