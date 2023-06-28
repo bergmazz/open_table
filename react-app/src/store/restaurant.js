@@ -5,6 +5,7 @@ const ADD_RESTAURANT = 'restaurant/ADD_RESTAURANT';
 const DELETE_RESTAURANT = 'restaurant/DELETE_RESTAURANT';
 
 //Action Creators
+//RESTAURANTS
 export const getRestaurant = (restaurants) => ({
     type: GET_RESTAURANT,
     restaurants
@@ -20,9 +21,20 @@ export const deleteRestaurant = (restaurantId) => ({
     restaurantId
 })
 
+
 //Thunks
-export const getRestaurants = () => async (dispatch) => {
-    const response = await fetch('/api/restaurants', {
+export const getRestaurants = (type, city) => async (dispatch) => {
+    let url = '/api/restaurants';
+    const params = new URLSearchParams();
+
+    if (type) params.append('type', type);
+    if (city) params.append('city', city);
+
+    if (params.toString()) {
+        url += '?' + params.toString();
+    }
+
+    const response = await fetch(url, {
         headers: {
             'Content-Type': 'application/json'
         },

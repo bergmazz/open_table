@@ -21,34 +21,43 @@ function LoginFormModal() {
     }
   };
 
+  const demoUser = (e) => {
+    e.preventDefault();
+    dispatch(login('demo@aa.io', 'password'));
+    closeModal()
+  }
+
   return (
     <>
-      <h1>Log In</h1>
+      <h1 className="login-header">Log In</h1>
       <form onSubmit={handleSubmit}>
         <ul>
           {errors.map((error, idx) => (
             <li key={idx}>{error}</li>
           ))}
         </ul>
-        <label>
+        <label className="elabel">
           Email
           <input
+            className="email-input"
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
         </label>
-        <label>
+        <label className="plabel">
           Password
           <input
+            className="pass-input"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
         </label>
-        <button type="submit">Log In</button>
+        <button type="submit" className="loginbttn">Log In</button>
+        <button onClick={demoUser} type='submit' className="demoLogin">Demo User</button>
       </form>
     </>
   );

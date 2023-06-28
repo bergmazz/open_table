@@ -1,7 +1,30 @@
-.profile-dropdown {
-  position: absolute;
-}
-
 .hidden {
   display: none;
+}
+
+.navigation-bar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  background-color: #da3743; /* Opentable's primary red color */
+  height: 60px;
+}
+
+.navigation-bar-container li {
+  list-style-type: none;
+}
+
+.profile-button-position {
+  display: flex;
+  align-items: center;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.home-button {
+  font-weight: bold;
+  font-size: 20px;
+  color: #ffffff;
+  text-decoration: none;
 }
