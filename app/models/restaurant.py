@@ -31,7 +31,7 @@ class Restaurant(db.Model, UserMixin):
     # reservations = db.relationship('Reservation', cascade="all, delete-orphan", lazy="joined", backref='restaurant')
     # favorites = db.relationship('Favorite', cascade='all, delete-orphan', lazy="joined", backref='restaurant')
     owner = db.relationship('User', back_populates="restaurants")
-    reservation = db.relationship(
+    reservations = db.relationship(
         'Reservation', back_populates="restaurant_reservations", cascade="all, delete-orphan")
     restaurant_favorites = db.relationship(
         'Favorite', back_populates="restaurant_fav", cascade="all, delete-orphan")
@@ -131,8 +131,8 @@ class Restaurant(db.Model, UserMixin):
             'closingHours': self.closing_hours,
             'createdAt': self.created_at,
             'updatedAt': self.updated_at,
-            'favoritedBy': [favorite.to_dict() for favorite in self.favorites],
-            'reviews': [review.to_dict() for review  in self.reviews],
+            'favoritedBy': [favorite.to_dict() for favorite in self.restaurant_favorites],
+            'reviews': [review.to_dict() for review  in self.restaurant_review],
             'reservations': [reservation.to_dict() for reservation in self.reservations],
             'averageRating': average_rating ,
             'reviewImages': review_images,
