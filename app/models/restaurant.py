@@ -27,18 +27,9 @@ class Restaurant(db.Model, UserMixin):
     created_at = db.Column(db.DateTime, default= datetime.utcnow)
     updated_at = db.Column(db.DateTime, default= datetime.utcnow, onupdate=datetime.utcnow)
 
-    # reviews = db.relationship("Review", cascade="all, delete-orphan", lazy="joined", backref='restaurant')
-    # reservations = db.relationship('Reservation', cascade="all, delete-orphan", lazy="joined", backref='restaurant')
-    # favorites = db.relationship('Favorite', cascade='all, delete-orphan', lazy="joined", backref='restaurant')
-    owner = db.relationship('User', back_populates="restaurants")
-    reservations = db.relationship(
-        'Reservation', back_populates="restaurant_reservations", cascade="all, delete-orphan")
-    restaurant_favorites = db.relationship(
-        'Favorite', back_populates="restaurant_fav", cascade="all, delete-orphan")
-    restaurant_review = db.relationship(
-        "Review", back_populates="restaurant", cascade="all, delete-orphan")
-
-
+    reviews = db.relationship("Review", cascade="all, delete-orphan", lazy="joined", backref='restaurant')
+    reservations = db.relationship('Reservation', cascade="all, delete-orphan", lazy="joined", backref='restaurant')
+    favorites = db.relationship('Favorite', cascade='all, delete-orphan', lazy="joined", backref='restaurant')
 
     def next_three_available_slots(self, num_slots=3, slot_duration=30):
         current_time = datetime.now().time()
@@ -131,8 +122,8 @@ class Restaurant(db.Model, UserMixin):
             'closingHours': self.closing_hours,
             'createdAt': self.created_at,
             'updatedAt': self.updated_at,
-            'favoritedBy': [favorite.to_dict() for favorite in self.restaurant_favorites],
-            'reviews': [review.to_dict() for review  in self.restaurant_review],
+            'favoritedBy': [favorite.to_dict() for favorite in self.favorites],
+            'reviews': [review.to_dict() for review  in self.reviews],
             'reservations': [reservation.to_dict() for reservation in self.reservations],
             'averageRating': average_rating ,
             'reviewImages': review_images,
