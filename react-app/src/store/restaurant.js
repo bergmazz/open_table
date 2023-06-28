@@ -87,3 +87,46 @@ export const addRestaurants = (restaurant) => async (dispatch) => {
         }
     }
 }
+
+export const deleteRestaurants = (restaurantId) => async (dispatch) => {
+    const response = await fetch('/api/restaurants/${restaurantId}', {
+        method: 'DELETE',
+    });
+
+    if (response.ok) {
+        dispatch(deleteRestaurant(restaurantId));
+        return response;
+    }
+}
+
+
+
+// Reducer
+const initialState = {};
+
+const restaurantReducer = (state = initialState, action) => {
+    let newState;
+    switch (action.type) {
+        case GET_RESTAURANT:
+            newState = { ...state };
+            action.restaurants.forEach(restaurant => {
+                newState[restaurant.id] = restaurant;
+            });
+            return newState;
+        case ADD_RESTAURANT:
+            newState = {
+                ...state,
+                [action.newRestaurant.id]: action.newRestaurant
+            };
+            return newState;
+        case DELETE_RESTAURANT:
+            newState = { ...state };
+            delete newState[action.restaurantId];
+            return newState;
+        default:
+            return state;
+    }
+}
+
+export default restaurantReducer;
+
