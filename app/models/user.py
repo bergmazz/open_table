@@ -20,18 +20,10 @@ class User(db.Model, UserMixin):
     created_at = db.Column(db.DateTime, default= datetime.utcnow)
     updated_at = db.Column(db.DateTime, default= datetime.utcnow, onupdate=datetime.utcnow)
 
-    # reviews = db.relationship('Review', backref='user')
-    # reservations = db.relationship('Reservation', cascade="all, delete-orphan", lazy="joined", backref='user')
-    # favorites = db.relationship('Favorite', cascade='all, delete-orphan', lazy="joined", backref='user')
-    # restaurants = db.relationship('Restaurant', cascade='all, delete-orphan', lazy="joined", backref='user')
-    restaurants = db.relationship(
-        'Restaurant', back_populates='owner', cascade="all, delete-orphan")
-    user_reservations = db.relationship(
-        'Reservation', back_populates="restaurant_customers", cascade="all, delete-orphan")
-    user_favorites = db.relationship(
-        'Favorite', back_populates='user_fav', cascade="all, delete-orphan")
-    reviewer = db.relationship(
-        'Review', back_populates='owner', cascade="all, delete-orphan")
+    reviews = db.relationship('Review', backref='user')
+    reservations = db.relationship('Reservation', cascade="all, delete-orphan", lazy="joined", backref='user')
+    favorites = db.relationship('Favorite', cascade='all, delete-orphan', lazy="joined", backref='user')
+    restaurants = db.relationship('Restaurant', cascade='all, delete-orphan', lazy="joined", backref='user')
 
     @property
     def password(self):
@@ -54,6 +46,6 @@ class User(db.Model, UserMixin):
             "owner": self.owner,
             'createdAt': self.created_at,
             'updatedAt': self.updated_at,
-            'favorites': [favorite.to_dict() for favorite in self.user_favorites],
+            'favorites': [favorite.to_dict() for favorite in self.favorites],
             'restaurants': [restaurant.to_dict() for restaurant in self.restaurants]
         }
