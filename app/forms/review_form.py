@@ -3,13 +3,13 @@ from wtforms import IntegerField, TextAreaField, StringField
 from wtforms.validators import DataRequired, ValidationError
 from app.models import Review
 
-def rating_validation(form, field):
+def validate_rating(form, field):
     rating = field.data
     if rating <= 0 or  rating > 5:
         raise ValidationError("Rating must be an integer from 1 to 5")
 
 
 class ReviewForm(FlaskForm):
-    rating = IntegerField('rating', validators=[DataRequired(), rating_validation])
+    rating = IntegerField('rating', validators=[DataRequired(), validate_rating])
     comment = TextAreaField('comment', validators=[DataRequired()])
     review_image = StringField('review_image')
