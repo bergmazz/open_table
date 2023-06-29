@@ -53,27 +53,70 @@ export const getRestaurantReviews = (restaurantId) => async (dispatch) => {
 }
 
 export const addReviews = (restaurantId, review) => async (dispatch) => {
+    const {
+        user_id,
+        restaurant_id,
+        rating,
+        comment,
+        review_image
+    } = review;
+
     const res = await fetch(`/api/restaurants/${restaurantId}/reviews`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(review)
+        body: JSON.stringify({
+            user_id,
+            restaurant_id,
+            rating,
+            comment,
+            review_image
+        })
     });
+
     if (res.ok) {
         const review = await res.json();
         dispatch(addReview(restaurantId, review));
         return review
+    } else if (res.status < 500) {
+        const data = await res.json();
+        if (data.errors) {
+            const errorData = await res.json()
+            return errorData.errors
+        } else {
+            return ['An error occured. Please try again.']
+        }
     }
 }
 
 export const editReviews = (reviewId, review) => async (dispatch) => {
+    const {
+        rating,
+        comment,
+        review_image
+    } = review
+
     const res = await fetch(`/api/reviews/${reviewId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(review)
-    })
+        body: JSON.stringify({
+            rating,
+            comment,
+            review_image
+        })
+    });
+
     if (res.ok) {
         const review = await res.json();
         dispatch(editReview(reviewId, review))
+        return review
+    } else if (res.status < 500) {
+        const data = await res.json()
+        if (data.errors) {
+            const errorData = await res.json()
+            return errorData.errors
+        } else {
+            return ['An error occured. Please try again.']
+        }
     }
 }
 
