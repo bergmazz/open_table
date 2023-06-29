@@ -16,7 +16,7 @@ def seed_users():
         first_name='Gordon',
         last_name='Ramsay',
         email='gordon@idiotsandwich.com',
-        phone_number='1223456789',
+        phone_number='1234567891',
         password='password',
         owner=True
     )
@@ -24,7 +24,7 @@ def seed_users():
         first_name='Action',
         last_name='Bronson',
         email='misterbaklava@bambam.io',
-        phone_number='5555555555',
+        phone_number='1234567892',
         password='password',
         owner=True
     )
@@ -32,7 +32,7 @@ def seed_users():
         first_name='Martha',
         last_name='Stewart',
         email='mdiddy@bic-ez-reach.com',
-        phone_number='5555555556',
+        phone_number='1234567893',
         password='password',
         owner=True
     )
@@ -40,7 +40,7 @@ def seed_users():
         first_name='Sean',
         last_name='Evans',
         email='hotones@firstwefeast.com',
-        phone_number='5555555557',
+        phone_number='1234567894',
         password='password',
         owner=True
     )
@@ -48,7 +48,7 @@ def seed_users():
         first_name='Andrew',
         last_name='Rea',
         email='bingingwith@babbish.com',
-        phone_number='5555555558',
+        phone_number='1234567895',
         password='password',
         owner=False
     )
@@ -56,7 +56,7 @@ def seed_users():
         first_name='Nicole',
         last_name='DiMascio',
         email='nic@dopekitchen.com',
-        phone_number='5555555559',
+        phone_number='1234567896',
         password='password',
         owner=False
     )
@@ -64,7 +64,7 @@ def seed_users():
         first_name='Buddy',
         last_name='Valastro',
         email='bud@cakeboss.com',
-        phone_number='5555555560',
+        phone_number='1234567897',
         password='password',
         owner=False
     )
@@ -72,7 +72,7 @@ def seed_users():
         first_name='Guy',
         last_name='Fieri',
         email='guy@flavortown.com',
-        phone_number='5555555561',
+        phone_number='1234567898',
         password='password',
         owner=False
     )
@@ -80,7 +80,7 @@ def seed_users():
         first_name='Dominique',
         last_name='Crenn',
         email='chef@ateliercrenn.com',
-        phone_number='5555555562',
+        phone_number='1234567899',
         password='password',
         owner=False
     )
