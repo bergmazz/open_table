@@ -32,5 +32,18 @@ class Reservation(db.Model):
             'notes': self.notes,
             'createdAt': self.created_at,
             'updatedAt': self.updated_at,
-            'restaurants': [self.restaurant.to_dict()]
+            'restaurant': [self.restaurant.name_to_dict()]
+        }
+
+    def less_detail_to_dict(self):
+        return {
+            'id': self.id,
+            'userId': self.user_id,
+            'restaurantId': self.restaurant_id,
+            'numberOfPeople': self.number_of_people,
+            'reservationTime': self.reservation_time,
+            'status': self.status,
+            'notes': self.notes,
+            'createdAt': self.created_at,
+            'updatedAt': self.updated_at,
         }

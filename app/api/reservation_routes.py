@@ -7,31 +7,48 @@ from datetime import datetime
 
 reservation_routes = Blueprint('restaurants/<int:restaurant_id>', __name__)
 
-# Create a Review
+# Create a Reservation
 @reservation_routes.route('/reservations', methods=['POST'])
 @login_required
 def create_reservation(restaurant_id):
     """
     Creates a new reservation
     """
-    # Checks if restaurant id is valid
-    if Restaurant.query.get(restaurant_id) is None:
-        return jsonify({'error': 'Restaurant not found'}), 404
+    restaurant = Restaurant.query.get(restaurant_id)
 
-    # need to do validations....
+    # Checks if restaurant id is valid
+    if restaurant is None:
+        return jsonify({'error': 'Restaurant not found'}), 404
 
     form = ReservationForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         data = form.data
+
+        # Check if there is an existing reservation at the specified time
+        for reservation in restaurant.reservations:
+            if reservation.reservation_time == data["reservation_time"]:
+                if reservation.status != "cancelled":
+                    return jsonify({'error': 'The selected time slot is already booked'}), 400
+
+        #Does not allow booking outside of open and close
+            #will do at a later date or on front end somehow, I give up
+
+        #Does not allow owner to book at their own restaurant
+        if current_user.id == restaurant.user_id:
+            return jsonify({'error': 'You do not need a reservation to eat at your own restaurant'}), 400
+
+
         new_reservation = Reservation(user_id=current_user.id,
                             restaurant_id=restaurant_id,
                             number_of_people=data["number_of_people"],
                             reservation_time=data["reservation_time"],
-                            status=data["status"],
+                            status=data["status"].lower(),
                             notes=data["notes"])
+
         db.session.add(new_reservation)
         db.session.commit()
+
         return new_reservation.to_dict()
     if form.errors:
         errors = {}
@@ -46,7 +63,8 @@ def edit_reservation(restaurant_id, reservation_id):
     """
     Edits a reservation
     """
-    if Restaurant.query.get(restaurant_id) is None:
+    restaurant = Restaurant.query.get(restaurant_id)
+    if restaurant is None:
         return jsonify({'error': 'Restaurant not found'}), 404
 
     reservation = Reservation.query.get(reservation_id)
@@ -55,14 +73,26 @@ def edit_reservation(restaurant_id, reservation_id):
         return jsonify({'error': 'Reservation not found'}), 404
 
     if current_user.id is not reservation.user_id:
-        return jsonify({ 'error': 'You are not authorized to edit this post' })
+        if current_user.id is not restaurant.user_id:
+            return jsonify({ 'error': 'You are not authorized to edit this post' })
 
     form = ReservationForm(obj=reservation)
+    data = form.data
+    # Check if there is an existing reservation at the specified time
+    for xreservation in restaurant.reservations:
+        if xreservation.reservation_time == data["reservation_time"]:
+            if xreservation.status != "cancelled":
+                if xreservation.id != reservation.id:
+                    return jsonify({'error': 'The selected time slot is already booked'}), 400
+
     form['csrf_token'].data = request.cookies['csrf_token']
+
     if form.validate_on_submit():
         form.populate_obj(reservation)
+        reservation.updated_at = datetime.utcnow()
         db.session.commit()
         return reservation.to_dict()
+
     if form.errors:
         errors = {}
         for field_name, field_errors in form.errors.items():
@@ -90,12 +120,13 @@ def delete_reservation(reservation_id, restaurant_id):
 
     # print('Current user ID:', current_user.id)
     # print('Reservation user ID:', reservation.user_id)
+    # print('Reservation status:', reservation.status)
     # print('Restaurant user ID:', restaurant.user_id)
 
     if (current_user.id != reservation.user_id) and (current_user.id != restaurant.user_id):
         return jsonify({'error': 'You are not authorized to cancel this reservation'})
 
-
+    reservation.status = reservation.status.lower()
     if datetime.utcnow() > reservation.reservation_time:
         if reservation.status == "confirmed":
             reservation.status = "attended"
