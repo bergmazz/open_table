@@ -20,10 +20,10 @@ class User(db.Model, UserMixin):
     created_at = db.Column(db.DateTime, default= datetime.utcnow)
     updated_at = db.Column(db.DateTime, default= datetime.utcnow, onupdate=datetime.utcnow)
 
-    reviews = db.relationship('Review', backref='user')
-    reservations = db.relationship('Reservation', cascade="all, delete-orphan", backref='user')
-    favorites = db.relationship('Favorite', cascade='all, delete-orphan', backref='user')
-    restaurants = db.relationship('Restaurant', cascade='all, delete-orphan', backref='user')
+    reviews = db.relationship('Review', cascade="all, delete-orphan", lazy="joined", backref='user')
+    reservations = db.relationship('Reservation', cascade="all, delete-orphan", lazy="joined", backref='user')
+    favorites = db.relationship('Favorite', cascade='all, delete-orphan', lazy="joined", backref='user')
+    restaurants = db.relationship('Restaurant', cascade='all, delete-orphan', lazy="joined", backref='user')
 
     @property
     def password(self):
