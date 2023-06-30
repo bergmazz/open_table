@@ -32,6 +32,7 @@ function ProfileButton({ user }) {
   const handleLogout = (e) => {
     e.preventDefault();
     dispatch(logout());
+    setShowMenu(false);
   };
 
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");

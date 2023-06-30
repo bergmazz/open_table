@@ -3,28 +3,46 @@
 }
 
 .navigation-bar-container {
+  list-style: none;
+  padding: 0;
+  margin: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 20px;
-  background-color: #da3743; /* Opentable's primary red color */
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   height: 60px;
 }
 
-.navigation-bar-container li {
-  list-style-type: none;
+.home-button a, .profile-button-position a {
+  text-decoration: none;
+  font-family: 'Arial', sans-serif;
+    font-size: 16px; 
+    font-weight: 700;
+    color: #333;
 }
 
-.profile-button-position {
+.navigation-bar-container .home-button, .navigation-bar-container .profile-button-position {
+  text-decoration: none;
+  color: #333;
   display: flex;
   align-items: center;
-  color: #ffffff;
+  height: 100%;
+  padding: 0 20px;
+  cursor: pointer;
+}
+
+.navigation-bar-container .home-button {
+  font-weight: 700;
+  font-size: 1.2rem;
   text-decoration: none;
 }
 
-.home-button {
-  font-weight: bold;
-  font-size: 20px;
-  color: #ffffff;
-  text-decoration: none;
+.navigation-bar-container .home-button:hover, .navigation-bar-container .profile-button-position:hover {
+  color: #da3743;
+  background-color: rgba(0,0,0,0.05);
+}
+
+.navigation-bar-container .home-button.active, .navigation-bar-container .profile-button-position.active {
+  color: #da3743;
 }
