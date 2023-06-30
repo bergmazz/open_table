@@ -40,7 +40,9 @@ export const getRestaurants = (type, city) => async (dispatch) => {
         },
     });
     if (response.ok) {
+        console.log("5: I'm in the right thunk, response ok: ", )
         const restaurants = await response.json();
+        console.log("RESTAURANTTTTTTTS:======= ",restaurants)
         dispatch(getRestaurant(restaurants));
         return restaurants;
     }
@@ -81,7 +83,7 @@ export const addRestaurants = (restaurant) => async (dispatch) => {
             price_range,
             phone_number,
             open_hours,
-            closing_hours, 
+            closing_hours,
         })
     });
 
@@ -121,7 +123,9 @@ const restaurantReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_RESTAURANT:
             newState = { ...state };
-            action.restaurants.forEach(restaurant => {
+            console.log("GETTTTTTTRESTTTTTAURANTTTT STATE-------", action.restaurants)
+
+            action.restaurants.restaurants.forEach(restaurant => {
                 newState[restaurant.id] = restaurant;
             });
             return newState;
@@ -141,4 +145,3 @@ const restaurantReducer = (state = initialState, action) => {
 }
 
 export default restaurantReducer;
-

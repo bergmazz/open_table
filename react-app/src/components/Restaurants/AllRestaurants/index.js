@@ -9,9 +9,12 @@ const AllRestaurants = () => {
 
     const allRestaurants = useSelector(state => state.restaurants)
 
-    console.log("IN RESTAURANTS COMPONENT", allRestaurants);
+    // const restaurantValues = Object.values(allRestaurants)
+
+    console.log("1: IN RESTAURANTS COMPONENT", allRestaurants);
 
     useEffect(() => {
+        console.log("2: I'm in the useEffect function.")
         dispatch(getRestaurants());
     }, [dispatch]);
 
@@ -20,7 +23,11 @@ const AllRestaurants = () => {
 
         return (
                 <div>
-                    <h1>Test</h1>
+                    {
+                        Object.values(allRestaurants).map(restaurant => {
+                            <div>restaurant.restaurant_name</div>
+                        })
+                    }
                 </div>
 
         )
