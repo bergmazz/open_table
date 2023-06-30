@@ -25,7 +25,7 @@ const AllRestaurants = () => {
                 <div>
                     {
                         Object.values(allRestaurants).map(restaurant => {
-                            <div>restaurant.restaurant_name</div>
+                            <div>{`${restaurant.restaurant_name}, ${restaurant.city}`}</div>
                         })
                     }
                 </div>
