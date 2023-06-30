@@ -34,8 +34,6 @@ const AllRestaurants = () => {
                         </>
                     ))
                 }
-
-
             </div>
         )
     } else {

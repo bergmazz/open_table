@@ -3,6 +3,7 @@
 const GET_RESTAURANT = 'restaurant/GET_RESTAURANT';
 const ADD_RESTAURANT = 'restaurant/ADD_RESTAURANT';
 const DELETE_RESTAURANT = 'restaurant/DELETE_RESTAURANT';
+const GET_RESTAURANT_DETAILS = 'restaurant/GET_RESTAURANT_DETAILS'
 
 //Action Creators
 //RESTAURANTS
@@ -18,6 +19,11 @@ export const addRestaurant = (newRestaurant) => ({
 
 export const deleteRestaurant = (restaurantId) => ({
     type: DELETE_RESTAURANT,
+    restaurantId
+})
+
+export const getRestaurantDetails = (restaurantId) => ({
+    type: GET_RESTAURANT_DETAILS,
     restaurantId
 })
 
@@ -113,6 +119,17 @@ export const deleteRestaurants = (restaurantId) => async (dispatch) => {
     }
 }
 
+export const getDetailsRestaurant = (restaurantId) => async (dispatch) => {
+    const response = await fetch('/api/restaurants/${restaurantId}', {
+        method: 'GET',
+    });
+
+    if (response.ok) {
+        dispatch(getRestaurantDetails(restaurantId));
+        return response;
+    }
+}
+
 
 
 // Reducer
@@ -139,8 +156,13 @@ const restaurantReducer = (state = initialState, action) => {
             newState = { ...state };
             delete newState[action.restaurantId];
             return newState;
+        case GET_RESTAURANT_DETAILS:
+            newState = {...state};
+            newState.restaurantDetails = action.restaurantId
+            return newState;
         default:
             return state;
+
     }
 }
 
