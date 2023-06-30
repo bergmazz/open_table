@@ -9,7 +9,7 @@ const AllRestaurants = () => {
 
     const allRestaurants = useSelector(state => state.restaurants)
 
-    // const restaurantValues = Object.values(allRestaurants)
+    const restaurantValues = Object.values(allRestaurants)
 
     console.log("1: IN RESTAURANTS COMPONENT", allRestaurants);
 
@@ -18,18 +18,25 @@ const AllRestaurants = () => {
         dispatch(getRestaurants());
     }, [dispatch]);
 
-    if (allRestaurants) {
+    if (restaurantValues.length) {
         console.log("ALLL RESTAURANTAASSSSSSSSSSSSSSS", allRestaurants)
-
+        console.log("AhhhhhhhhhS", restaurantValues)
+        restaurantValues.map(restaurant => {
+            console.log(restaurant.restaurantName)
+        })
         return (
-                <div>
-                    {
-                        Object.values(allRestaurants).map(restaurant => {
-                            <div>{`${restaurant.restaurant_name}, ${restaurant.city}`}</div>
-                        })
-                    }
-                </div>
+            <div>
+                <h1>Restaurants</h1>
+                {
+                    restaurantValues.map(restaurant => (
+                        <>
+                            <div>{`${restaurant.restaurantName}`}</div>
+                        </>
+                    ))
+                }
 
+
+            </div>
         )
     } else {
         return null;
