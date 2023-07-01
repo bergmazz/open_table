@@ -13,27 +13,26 @@ export const getReviews = (restaurantId, reviews) => {
     }
 }
 
-export const addReview = (restaurantId, review) => {
+export const addReview = (restaurantId, newReview) => {
     return {
         type: ADD_REVIEWS,
         restaurantId,
-        review
+        newReview
     }
 }
 
-export const editReview = (restaurantId, review) => {
+export const editReview = (restaurantId, newReview) => {
     return {
         type: EDIT_REVIEWS,
         restaurantId,
-        review
+        newReview
     }
 }
 
-export const deleteReview = (reviewId, restaurantId) => {
+export const deleteReview = (reviewId) => {
     return {
         type: DELETE_REVIEWS,
-        reviewId,
-        restaurantId
+        reviewId
     }
 }
 
@@ -45,6 +44,7 @@ export const getRestaurantReviews = (restaurantId) => async (dispatch) => {
             'Content-Type': 'application/json'
         }
     });
+    
     if (res.ok) {
         const reviews = await res.json();
         dispatch(getReviews(restaurantId, reviews));
@@ -88,14 +88,14 @@ export const addReviews = (restaurantId, review) => async (dispatch) => {
     }
 }
 
-export const editReviews = (reviewId, review) => async (dispatch) => {
+export const editReviews = (restaurantId, reviewId, review) => async (dispatch) => {
     const {
         rating,
         comment,
         review_image
     } = review
 
-    const res = await fetch(`/api/reviews/${reviewId}`, {
+    const res = await fetch(`/api/restaurants/${restaurantId}/reviews/${reviewId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -107,7 +107,7 @@ export const editReviews = (reviewId, review) => async (dispatch) => {
 
     if (res.ok) {
         const review = await res.json();
-        dispatch(editReview(reviewId, review))
+        dispatch(editReview(review))
         return review
     } else if (res.status < 500) {
         const data = await res.json()
@@ -120,8 +120,8 @@ export const editReviews = (reviewId, review) => async (dispatch) => {
     }
 }
 
-export const deleteReviews = (reviewId) => async (dispatch) => {
-    const res = await fetch(`/api/reviews/${reviewId}`, {
+export const deleteReviews = (restaurantId, reviewId) => async (dispatch) => {
+    const res = await fetch(`/api/restauants/${restaurantId}/reviews/${reviewId}`, {
         method: 'DELETE'
     });
     if (res.ok) {
@@ -134,13 +134,7 @@ export const deleteReviews = (reviewId) => async (dispatch) => {
 // ----------------------------------------------------------------------- REDUCER
 
 const initialState = {
-    restaurantReviews: {}
-}
-
-const normalize = (reviews) => {
-    const data = {};
-    reviews.forEach(review => data[review.id] = review);
-    return data
+    restaurantReviews: []
 }
 
 export default function reviewsReducer(state = initialState, action) {
@@ -148,27 +142,27 @@ export default function reviewsReducer(state = initialState, action) {
     switch (action.type) {
         case GET_REVIEWS: {
             newState = { ...state }
-            if (action.reviews.reviews) {
-                newState.restaurantReviews = normalize(action.reviews.reviews)
-                return newState
-            }
+            newState.restaurantReviews = action.reviews;
+            return newState;
         }
         case ADD_REVIEWS: {
             newState = { ...state }
-            newState.restaurantReviews = { ...state.restaurantReviews, [action.review.id]: action.review }
-            return newState
+            newState.restaurantReviews = [...newState.restaurantReviews, action.newReview];
+            return newState;
         }
         case EDIT_REVIEWS: {
             newState = { ...state }
-            newState.restaurantReviews = { ...state.restaurantReviews, [action.reviewId]: action.review }
-            return newState
+            newState.restaurantReviews = newState.restaurantReviews.map((review) => 
+            review.id === action.newReview.id ? action.newReview : review
+            );
+            return newState;
         }
         case DELETE_REVIEWS: {
             newState = { ...state }
-            delete newState.restaurantReviews[action.reviewId]
-            return newState
+            newState.restaurantReviews = newState.restaurantReviews.filter((review) => review.id !== action.reviewId);
+            return newState;
         }
         default:
-            return state;
+            return state
     }
 }
