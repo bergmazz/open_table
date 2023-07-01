@@ -24,7 +24,13 @@ const RestaurantPage = () => {
         return (
             <>
                 <h1>Restaurant Details</h1>
-
+                <div>Restaurant Name: {`${restaurant.restaurantName}`}</div>
+                <h2>Reviews</h2>
+                {
+                    restaurant.reviews.map(review => (
+                        <p>{`${review.comment}`}</p>
+                    ))
+                }
             </>
         )
     } else {

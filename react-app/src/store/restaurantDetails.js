@@ -21,7 +21,7 @@ const restaurantDetailsReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_RESTAURANT_DETAILS:
             newState = {...state};
-            newState.restaurantDetails = action.restaurant
+            newState = action.restaurant.restaurant
             return newState;
         default:
             return state;
