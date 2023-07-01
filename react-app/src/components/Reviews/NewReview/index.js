@@ -8,7 +8,6 @@ import './newReview.css';
 const CreateReview = () => {
     const dispatch = useDispatch();
     const currentUser = useSelector((state) => state.session.user);
-    const { closeModal } = useModal();
     const { restaurantId } = useParams();
     const [rating, setRating] = useState(1);
     const [comment, setComment] = useState('');
