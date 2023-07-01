@@ -49,3 +49,11 @@ class User(db.Model, UserMixin):
             'favorites': [favorite.to_dict() for favorite in self.favorites],
             'restaurants': [restaurant.to_dict() for restaurant in self.restaurants]
         }
+
+    def simple_dict(self):
+        return {
+        'id': self.id,
+        'firstName': self.first_name,
+        'lastName': self.last_name,
+        'phoneNumber': self.phone_number
+        }
