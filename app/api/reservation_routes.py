@@ -7,6 +7,26 @@ from datetime import datetime
 
 reservation_routes = Blueprint('restaurants/<int:restaurant_id>', __name__)
 
+# Get reservations based on restaurantId
+@reservation_routes.route('reservations', methods=['GET'])
+def get_reservations(restaurant_id):
+    """
+    Gets a list of all the restaurants reservations
+
+    """
+    restaurant = Restaurant.query.get(restaurant_id)
+    if restaurant is None:
+        return jsonify({'error': 'Restaurant could not be found.'}), 404
+    
+    non_owner_reservations = [reservation.non_owner_to_dict() for reservation in Reservation.query.filter_by(restaurant_id=restaurant_id).all()]
+    owner_reservations = [reservation.owner_to_dict() for reservation in Reservation.query.filter_by(restaurant_id=restaurant_id).all()]
+
+    if current_user.id == restaurant.user_id:
+        return jsonify ({'Reservations': owner_reservations}), 200
+    else:
+        return jsonify ({'Reservations': non_owner_reservations}), 200
+
+
 # Create a Reservation
 @reservation_routes.route('/reservations', methods=['POST'])
 @login_required

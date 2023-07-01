@@ -50,3 +50,24 @@ class Reservation(db.Model):
             'createdAt': self.created_at,
             'updatedAt': self.updated_at,
         }
+    
+    def non_owner_to_dict(self):
+        return {
+            'restaurantId': self.restaurant_id,
+            'reservationId': self.id,
+            'reservationTime': self.reservation_time
+        }
+    
+    def owner_to_dict(self):
+        return {
+            'id': self.id,
+            'restaurantId': self.restaurant_id,
+            'userId': self.user_id,
+            'User': self.user.simple_dict(),
+            'numberOfPeople': self.number_of_people,
+            'reservationTime': self.reservation_time,
+            'status': self.status,
+            'notes': self.notes,
+            'createdAt': self.created_at,
+            'updatedAt': self.updated_at
+        }
