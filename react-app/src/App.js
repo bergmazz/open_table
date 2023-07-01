@@ -8,6 +8,7 @@ import Navigation from "./components/Navigation";
 import AllRestaurants from "./components/Restaurants/AllRestaurants";
 import HomePage from "./components/HomePage";
 import RestaurantPage from "./components/Restaurants/RestaurantPage";
+import CreateReview from "./components/Reviews/NewReview";
 
 function App() {
   const dispatch = useDispatch();
@@ -35,6 +36,9 @@ function App() {
           </Route>
           <Route exact path="/restaurants">
             <AllRestaurants />
+          </Route>
+          <Route exact path='/restaurants/:id/reviews'>
+            <CreateReview />
           </Route>
         </Switch>
       )}
