@@ -19,7 +19,7 @@ const RestaurantPage = () => {
         dispatch(getDetailsRestaurant(id));
     }, [dispatch]);
 
-    if (restaurant) {
+    if (Object.keys(restaurant).length) {
         console.log("RESTAURANTAASSSSSSSSSSSSSSS", restaurant)
         return (
             <>
@@ -34,7 +34,9 @@ const RestaurantPage = () => {
             </>
         )
     } else {
-        return null;
+        return (
+            <div>Loading....</div>
+        )
     }
 
 }
