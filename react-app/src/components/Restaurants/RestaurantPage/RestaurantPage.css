@@ -76,6 +76,14 @@
 
 .ratings-average-bar {
     grid-area: ratings-average-bar;
+    display: grid;
+    /* grid-template-columns: 20px 20px 20px 20px auto;
+    grid-template-rows: 1fr;
+    grid-template-areas:
+        "average-rating review-summary "; */
+
+
+
 }
 
 .average-rating {

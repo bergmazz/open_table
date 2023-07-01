@@ -43,7 +43,12 @@ const RestaurantPage = () => {
                     <div className="restaurant-name">{`${restaurant.restaurantName}`}</div>
                     <div className="random-box">
                         <div className="ratings-average-bar">
-                            <meter class="average-rating" min="0" max="5" value={restaurant.averageRating}></meter>
+                            <meter class="average-rating" min="0" max="5" value={restaurant.averageRating}>{restaurant.averageRating}</meter>
+                            <div>{restaurant.averageRating}</div>
+                            <div className="review-summary">
+                                <i className="fa-regular fa-message" />
+                            </div>
+                            
                         </div>
                         <div className="top-tags"></div>
                         <div className="restaurant-description"></div>
