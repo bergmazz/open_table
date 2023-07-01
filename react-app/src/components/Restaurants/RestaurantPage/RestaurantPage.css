@@ -1,3 +1,4 @@
+
 .restaurant-container {
     width: 100%;
     display: grid;
@@ -64,7 +65,50 @@
 .random-box {
     grid-area: random-box;
     background-color: bisque;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 50px 50px 100px;
+    grid-template-areas:
+        "ratings-average-bar"
+        "top-tags"
+        "restaurant-description";
 }
+
+.ratings-average-bar {
+    grid-area: ratings-average-bar;
+}
+
+.average-rating {
+    position: relative;
+    appearance: none;
+    color: transparent;
+    width: auto;
+    display: inline-block;
+    vertical-align: baseline;
+  }
+
+  .average-rating::before {
+    --percent: calc(4.3/5*100%);
+    content: '★★★★★';
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: rgba(0,0,0,0.2);
+    background:
+      linear-gradient(90deg, rgb(221, 65, 65) var(--percent), rgba(0,0,0,0.2) var(--percent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+
+.top-tags {
+    grid-area: top-tags;
+}
+
+.restaurant-description {
+    grid-area: restaurant-description;
+}
+
 
 #restaurant-reviews {
     grid-area: restaurant-reviews;
