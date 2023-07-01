@@ -1,0 +1,32 @@
+.restaurant-container {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 0.9fr 2.9fr 0.15fr 1.4fr 0.9fr;
+    grid-template-rows: 375px 1.1fr 0.7fr 2.2fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+      "restaurant-cover-image restaurant-cover-image restaurant-cover-image restaurant-cover-image restaurant-cover-image"
+      ". restaurant-column1 . restaurant-column2 ."
+      ". restaurant-column1 . restaurant-column2 ."
+      ". restaurant-column1 . restaurant-column2 .";
+      background-color: lightyellow;
+}
+
+.restaurant-cover-image {
+    grid-area: restaurant-cover-image;
+    background-color: lightblue;
+    /* overflow: hidden; */
+}
+
+.restaurant-column1 {
+    grid-area: restaurant-column1;
+    background-color: lightcoral;
+    margin-top: -40px;
+}
+
+.restaurant-column2 {
+    grid-area: restaurant-column2;
+    background-color: lightcyan;
+    margin-top: -40px;
+}
