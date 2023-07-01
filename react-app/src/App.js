@@ -7,6 +7,7 @@ import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 import AllRestaurants from "./components/Restaurants/AllRestaurants";
 import HomePage from "./components/HomePage";
+import RestaurantPage from "./components/Restaurants/RestaurantPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -29,7 +30,10 @@ function App() {
           <Route path="/signup">
             <SignupFormPage />
           </Route>
-          <Route path="/restaurants">
+          <Route exact path="/restaurants/:id">
+            <RestaurantPage />
+          </Route>
+          <Route exact path="/restaurants">
             <AllRestaurants />
           </Route>
         </Switch>

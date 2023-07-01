@@ -4,6 +4,7 @@ const GET_RESTAURANT = 'restaurant/GET_RESTAURANT';
 const ADD_RESTAURANT = 'restaurant/ADD_RESTAURANT';
 const DELETE_RESTAURANT = 'restaurant/DELETE_RESTAURANT';
 
+
 //Action Creators
 //RESTAURANTS
 export const getRestaurant = (restaurants) => ({
@@ -20,7 +21,6 @@ export const deleteRestaurant = (restaurantId) => ({
     type: DELETE_RESTAURANT,
     restaurantId
 })
-
 
 //Thunks
 export const getRestaurants = (type, city) => async (dispatch) => {
@@ -114,7 +114,6 @@ export const deleteRestaurants = (restaurantId) => async (dispatch) => {
 }
 
 
-
 // Reducer
 const initialState = {};
 
@@ -141,6 +140,7 @@ const restaurantReducer = (state = initialState, action) => {
             return newState;
         default:
             return state;
+
     }
 }
 
