@@ -2,7 +2,7 @@
     width: 100%;
     display: grid;
     grid-template-columns: 0.9fr 2.9fr 0.15fr 1.4fr 0.9fr;
-    grid-template-rows: 375px 1.1fr 0.7fr 2.2fr;
+    grid-template-rows: 375px auto auto auto auto;
     gap: 0px 0px;
     grid-auto-flow: row;
     grid-template-areas:
@@ -23,6 +23,53 @@
     grid-area: restaurant-column1;
     background-color: lightcoral;
     margin-top: -40px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 40px 100px 200px auto;
+    grid-template-areas:
+      "restaurant-links"
+      "restaurant-name"
+      "random-box"
+      "restaurant-reviews";
+    padding-left: 15px;
+    border-radius: 3px;
+}
+
+.restaurant-links{
+    grid-area: restaurant-links;
+    background-color: aquamarine;
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    gap: 20px;
+    justify-content: flex-start;
+    align-items: center;
+    padding-left: 0px;
+    font-size: 12px;
+
+
+}
+
+.restaurant-name {
+    grid-area: restaurant-name;
+    background-color: pink;
+    border-top: solid lightgray thin;
+    font-size: 40px;
+    display: flex;
+    align-items: center;
+    border-bottom: solid lightgray thin;
+
+}
+
+.random-box {
+    grid-area: random-box;
+    background-color: bisque;
+}
+
+#restaurant-reviews {
+    grid-area: restaurant-reviews;
+    background-color: rgb(150, 150, 99);
+
 }
 
 .restaurant-column2 {

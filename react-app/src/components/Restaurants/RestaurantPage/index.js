@@ -29,16 +29,23 @@ const RestaurantPage = () => {
                         <img style={{ width: "100%", height: "100%"}} src={`${restaurant.coverImage}`} alt="" />
                 </div>
 
-                <div className="restaurant-column1">
-                    <ul className="restaurant-navbar">
-                        <li>
-                            <NavLink exact to ="/restaurants/`${restaurant.id}`">Overview</NavLink>
-                        </li>
-                        <li>
-                            <a id="restaurant-reviews" href="#element_target">Reviews</a>
-                        </li>
+                <div className="restaurant-column1">Ï
+                    <ul className="restaurant-links">
+                            <li className="restaurant-overview-link">
+                                <NavLink style={{textDecoration: 'none'}} exact to ="/restaurants/`${restaurant.id}`">Overview</NavLink>
+                            </li>
+                            <li className="restaurant-review-link">
+                                <a style={{textDecoration: 'none'}} id="restaurant-reviews" href="#element_target">Reviews</a>
+                            </li>
                     </ul>
-                    <h1>{`${restaurant.restaurantName}`}</h1>
+
+
+                    <div className="restaurant-name">{`${restaurant.restaurantName}`}</div>
+                    <div className="random-box">
+                        <div className="ratings-average-bar"></div>
+                        <div className="top-tags"></div>
+                        <div className="restaurant-description"></div>
+                    </div>
                     <div id="restaurant-reviews">
                     {
                         restaurant.reviews.map(review => (
