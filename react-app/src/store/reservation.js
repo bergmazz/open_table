@@ -4,9 +4,11 @@ const ADD_RESERVATIONS = 'reservations/ADD_RESERVATIONS'
 const EDIT_RESERVATIONS = 'reservations/EDIT_RESERVATIONS'
 const DELETE_RESERVATIONS = 'reservations/DELETE_RESERVATIONS'
 
+
 // ------------------------------------------------- ACTIONS
 
 export const getUserReservation = (reservations) => {
+    reservations = Object.values( reservations )
     return {
         type: GET_USER_RESERVATIONS,
         reservations
@@ -161,40 +163,40 @@ export const deleteReservations = (restaurantId, reservationId) => async (dispat
 // ------------------------------------------------------------------------------ REDUCER
 
 const initialState = {
-    userReservations: [],
-    restaurantReservations: {}
+    byUser: [],
+    byRestaurant: {}
 }
 export default function reservationsReducer(state = initialState, action) {
     let newState
     switch (action.type) {
         case GET_USER_RESERVATIONS: {
             newState = { ...state }
-            newState.userReservations = action.reservations;
+            newState.byUser = action.reservations;
             return newState;
         }
         case GET_RESTAURANT_RESERVATIONS: {
             newState = { ...state }
-            newState.restaurantReservations[action.restaurantId] = action.reservations;
+            newState.byRestaurant[ action.restaurantId ] = action.reservations;
             return newState;
         }
         case ADD_RESERVATIONS: {
             newState = { ...state }
-            newState.restaurantReservations[action.restaurantId] = [
-                ...newState.restaurantReservations[action.restaurantId],
+            newState.byRestaurant[ action.restaurantId ] = [
+                ...newState.byRestaurant[ action.restaurantId ],
                 action.newReservation
             ];
             return newState;
         }
         case EDIT_RESERVATIONS: {
             newState = { ...state }
-            newState.restaurantReservations[action.restaurantId] = newState.restaurantReservations[
+            newState.byRestaurant[ action.restaurantId ] = newState.byRestaurant[
                 action.restaurantId
             ].map((reservation) => reservation.id === action.newReservation.id ? action.newReservation : reservation);
             return newState;
         }
         case DELETE_RESERVATIONS: {
             newState = { ...state }
-            newState.restaurantReservations[action.restaurantId] = newState.restaurantReservations[
+            newState.byRestaurant[ action.restaurantId ] = newState.byRestaurant[
                 action.restaurantId
             ].filter((reservation) => reservation.id !== action.reservationId);
             return newState;
@@ -203,44 +205,3 @@ export default function reservationsReducer(state = initialState, action) {
             return state
     }
 }
-
-// export default function reservationsReducer(state = initialState, action) {
-//     let newState
-//     switch (action.type) {
-//         case GET_USER_RESERVATIONS: {
-//             newState = { ...state }
-//             newState.userReservations = action.reservations;
-//             return newState;
-//         }
-//         case GET_RESTAURANT_RESERVATIONS: {
-//             newState = { ...state }
-//             newState.restaurantReservations[action.restaurantId] = action.reservations;
-//             return newState;
-//         }
-//         case ADD_RESERVATIONS: {
-//             newState = { ...state }
-//             newState.restaurantReservations[action.restaurantId] = [
-//                 ...(newState.restaurantReservations[action.restaurantId] || []),
-//                 action.newReservation
-//             ];
-//             return newState;
-//         }
-//         case EDIT_RESERVATIONS: {
-//             newState = { ...state }
-//             newState.restaurantReservations[action.restaurantId] = newState.restaurantReservations[
-//                 action.restaurantId
-//             ].map((existingReservation) => existingReservation.id === action.newReservation.id ? action.newReservation : existingReservation);
-//             return newState;
-//         }
-//         case DELETE_RESERVATIONS: {
-//             newState = { ...state }
-//             newState.restaurantReservations[action.restaurantId] = newState.restaurantReservations[
-//                 action.restaurantId
-//             ].filter((reservation) => reservation.id !== action.reservationId);
-//             return newState;
-
-//         }
-//         default:
-//             return state
-//     }
-// }

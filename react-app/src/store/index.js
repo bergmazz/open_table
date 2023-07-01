@@ -4,13 +4,16 @@ import session from './session'
 import favoriteReducer from './favorite';
 import restaurantReducer from './restaurant';
 import restaurantDetailsReducer from './restaurantDetails';
+import reservationsReducer from './reservation';
+import reviewReducer from './review';
 
 const rootReducer = combineReducers({
   session,
   favorites: favoriteReducer,
   restaurants: restaurantReducer,
-  restaurantDetails: restaurantDetailsReducer
-
+  restaurantDetails: restaurantDetailsReducer,
+  reservations: reservationsReducer,
+  reviews: reviewReducer
 });
 
 
