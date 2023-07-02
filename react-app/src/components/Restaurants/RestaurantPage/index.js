@@ -4,6 +4,7 @@ import { NavLink, useParams } from "react-router-dom";
 import { getDetailsRestaurant } from "../../../store/restaurantDetails";
 import './RestaurantPage.css'
 
+
 const RestaurantPage = () => {
     const dispatch = useDispatch();
 
@@ -22,11 +23,17 @@ const RestaurantPage = () => {
 
     if (Object.keys(restaurant).length) {
         console.log("RESTAURANTAASSSSSSSSSSSSSSS", restaurant)
+        let reviews = "reviews"
+        if (restaurant.reviews.length === 1) reviews = "review"
+        let priceRange = "$50 and over"
+        if (restaurant.priceRange <= 2) priceRange = "$30 and under";
+        if (restaurant.priceRange === 3) priceRange = "$31 to $50";
+        const description = "Whether you’re chatting over a flavorful roasted chicken salad or sipping a merlot as your hand-cut blackened ribeye is mesquite grilled over a live fire, Paul Martin’s American Grill is the ideal place to impress or decompress.";
         return (
             <div className="restaurant-container">
 
                 <div className="restaurant-cover-image">
-                        <img style={{ width: "100%", height: "100%"}} src={`${restaurant.coverImage}`} alt="" />
+                        <img className="restaurant-image-cover" src={`${restaurant.coverImage}`} alt="" />
                 </div>
 
                 <div className="restaurant-column1">Ï
@@ -43,15 +50,22 @@ const RestaurantPage = () => {
                     <div className="restaurant-name">{`${restaurant.restaurantName}`}</div>
                     <div className="random-box">
                         <div className="ratings-average-bar">
-                            <meter class="average-rating" min="0" max="5" value={restaurant.averageRating}>{restaurant.averageRating}</meter>
-                            <div>{restaurant.averageRating}</div>
-                            <div className="review-summary">
-                                <i className="fa-regular fa-message" />
+                            <div className="ratings">
+                                <meter class="average-rating" min="0" max="5" value={restaurant.averageRating}></meter>
+                                <span className="number-rating">{restaurant.averageRating}</span>
                             </div>
-                            
+                            <div className="review-summary">
+                                <i className="fa-regular fa-message"></i>
+                                <span>  {restaurant.reviews.length} {reviews}</span>
+                            </div>
+                            <div className="money">
+                            <i class="fa-sharp fa-regular fa-money-bill-1"></i> {priceRange}
+                            </div>
+                            <div className="cuisine-type"><i class="fa-solid fa-utensils"></i> {restaurant.cuisineType}</div>
+
                         </div>
                         <div className="top-tags"></div>
-                        <div className="restaurant-description"></div>
+                        <div className="restaurant-description">{description}</div>
                     </div>
                     <div id="restaurant-reviews">
                     {
@@ -63,7 +77,7 @@ const RestaurantPage = () => {
                 </div>
 
                 <div className="restaurant-column2">
-                    <h2>Make a reservation</h2>
+                    <h2 className="make-res">Make a reservation</h2>
                 </div>
 
             </div>

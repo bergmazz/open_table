@@ -1,5 +1,6 @@
 
 .restaurant-container {
+    font-family: sans-serif;
     width: 100%;
     display: grid;
     grid-template-columns: 0.9fr 2.9fr 0.15fr 1.4fr 0.9fr;
@@ -20,13 +21,19 @@
     /* overflow: hidden; */
 }
 
+.restaurant-image-cover {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* or "contain" */
+}
+
 .restaurant-column1 {
     grid-area: restaurant-column1;
     background-color: lightcoral;
     margin-top: -40px;
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 40px 100px 200px auto;
+    grid-template-rows: 0.4fr 1fr 2fr auto;
     grid-template-areas:
       "restaurant-links"
       "restaurant-name"
@@ -47,6 +54,7 @@
     align-items: center;
     padding-left: 0px;
     font-size: 12px;
+    color: lightgray;
 
 
 }
@@ -67,23 +75,22 @@
     background-color: bisque;
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 50px 50px 100px;
+    grid-template-rows: 1fr 1fr 2fr;
     grid-template-areas:
         "ratings-average-bar"
         "top-tags"
         "restaurant-description";
+    font-size: 12px;
 }
 
 .ratings-average-bar {
     grid-area: ratings-average-bar;
     display: grid;
-    /* grid-template-columns: 20px 20px 20px 20px auto;
+    background-color: yellow;
+    grid-template-columns: 1fr 1fr 1fr 1fr 0.2fr;
     grid-template-rows: 1fr;
     grid-template-areas:
-        "average-rating review-summary "; */
-
-
-
+        "ratings review-summary money cuisine-type .";
 }
 
 .average-rating {
@@ -108,14 +115,41 @@
     -webkit-text-fill-color: transparent;
   }
 
+  .number-rating {
+    margin-left: 60px;
+  }
+
+  .ratings {
+    grid-area: ratings;
+    background-color: brown;
+  }
+
+  .review-summary {
+    grid-area: review-summary;
+    background-color: azure;
+  }
+
+  .money {
+    grid-area: money;
+    background-color: blueviolet;
+  }
+
+.cuisine-type {
+    grid-area: cuisine-type;
+    background-color: peru;
+}
+
 
 .top-tags {
     grid-area: top-tags;
+    background-color: green;
 }
 
 .restaurant-description {
     grid-area: restaurant-description;
+    background-color: aqua;
 }
+
 
 
 #restaurant-reviews {
@@ -128,4 +162,10 @@
     grid-area: restaurant-column2;
     background-color: lightcyan;
     margin-top: -40px;
+}
+
+.make-res {
+    display: flex;
+    justify-content: center;
+    font-size: 14px;
 }
