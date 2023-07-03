@@ -9,6 +9,7 @@ import AllRestaurants from "./components/Restaurants/AllRestaurants";
 import HomePage from "./components/HomePage";
 import RestaurantPage from "./components/Restaurants/RestaurantPage";
 import UserProfile from "./components/UserProfile";
+import CreateReview from "./components/Reviews/NewReview";
 
 function App() {
   const dispatch = useDispatch();
@@ -36,15 +37,6 @@ function App() {
           </Route>
           <Route exact path="/restaurants">
             <AllRestaurants />
-          </Route>
-          {/* <Route exact path="/user/favorites">
-            <Favorites />
-          </Route> */}
-          {/* <Route exact path="/user/restaurants">
-            <OwnedRestaurants />
-          </Route> */}
-          <Route path="/user">
-            <UserProfile />
           </Route>
         </Switch>
       )}
