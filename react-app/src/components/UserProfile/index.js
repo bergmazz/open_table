@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { getUserReservations } from "../../store/reservation"
 // import ReservationFormModal from "../ReservationFormModal";
-
+import "./UserProfile.css"
 
 function UserProfile () {
 
@@ -14,13 +15,19 @@ function UserProfile () {
 
     const currentUser = useSelector( state => state.session.user )
     const reservations = useSelector( state => state.reservations.byUser )
-    console.log( "---------------byUser state:", reservations )
+    // console.log( "---------------byUser state:", reservations )
 
     return (
         <>
             <div className="extends-nav-height">
                 <h2>{ currentUser.firstName }{ currentUser.lastName }</h2>
                 <h4>0 points</h4>
+            </div>
+
+            <div className="links">
+                <Link to="/user/restaurants">Owned Restaurants</Link>
+                <Link to="/user/favorites">Favorites</Link>
+                <Link to="/user/details">Account Details</Link>
             </div>
 
             <div className="points-container">
@@ -42,7 +49,7 @@ function UserProfile () {
                 </div>
             </div>
 
-            <div className="Reservations">
+            <div className="reservations-container">
                 { reservations.length > 0 ? (
                     <div>
                         <h1>Your Reservations</h1>
