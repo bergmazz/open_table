@@ -38,6 +38,9 @@ function App() {
           <Route exact path="/restaurants">
             <AllRestaurants />
           </Route>
+          <Route exact path="/user">
+            <UserProfile />
+          </Route>
         </Switch>
       )}
     </>

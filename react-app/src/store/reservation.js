@@ -58,7 +58,8 @@ export const getUserReservations = () => async (dispatch) => {
 
     if (res.ok) {
         const reservation = await res.json();
-        dispatch(getUserReservation(reservation));
+
+        dispatch( getUserReservation( reservation ) );
         return reservation;
     }
 }
@@ -170,9 +171,10 @@ export default function reservationsReducer(state = initialState, action) {
     let newState
     switch (action.type) {
         case GET_USER_RESERVATIONS: {
-            newState = { ...state }
-            newState.byUser = action.reservations;
-            return newState;
+            return {
+                ...state,
+                byUser: action.reservations,
+            }
         }
         case GET_RESTAURANT_RESERVATIONS: {
             newState = { ...state }

@@ -13,9 +13,8 @@ function UserProfile () {
     }, [ dispatch ] );
 
     const currentUser = useSelector( state => state.session.user )
-    const reservationsObj = useSelector( state => state.reservations.byUser )
-    const reservations = Object.values( reservationsObj )
-    // console.log( "---------------byUser state:", reservations )
+    const reservations = useSelector( state => state.reservations.byUser )
+    console.log( "---------------byUser state:", reservations )
 
     return (
         <>
@@ -44,14 +43,23 @@ function UserProfile () {
             </div>
 
             <div className="Reservations">
-                { reservations ? (
-                    <>
-                        <li>{ reservations }</li>
-                    </>
+                { reservations.length > 0 ? (
+                    <div>
+                        <h1>Your Reservations</h1>
+                        { reservations.map( ( reservation ) => (
+                            <div>
+                                <img src={ reservation.restaurant[ 0 ].coverImage } />
+                                <p>{ reservation.restaurant[ 0 ].restaurantName }</p>
+                                <p>{ reservation.reservationTime }</p>
+                            </div>
+                        ) )
+                        }
+                    </div>
                 ) : (
                     <>
-                        <h1>Create a reservation</h1>
-                        {/* <ReservationModal></ReservationModal> */ }
+                            <h1>You have no upoming reservations</h1>
+                            <h3>Find your table for any occasion</h3>
+                            {/* <ReservationFormBar></ReservationFormBar> */ }
                     </>
                 ) }
             </div>
