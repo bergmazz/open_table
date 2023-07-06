@@ -8,6 +8,7 @@ import Navigation from "./components/Navigation";
 import AllRestaurants from "./components/Restaurants/AllRestaurants";
 import HomePage from "./components/HomePage";
 import RestaurantPage from "./components/Restaurants/RestaurantPage";
+import UserProfile from "./components/UserProfile";
 import CreateReview from "./components/Reviews/NewReview";
 
 function App() {
@@ -37,8 +38,8 @@ function App() {
           <Route exact path="/restaurants">
             <AllRestaurants />
           </Route>
-          <Route exact path='/restaurants/:id/reviews'>
-            <CreateReview />
+          <Route exact path="/user">
+            <UserProfile />
           </Route>
         </Switch>
       )}
