@@ -114,37 +114,29 @@
     grid-template-areas:
         "ratings review-summary money cuisine-type .";
 }
+.ratings {
+  grid-area: ratings;
+  background-color: rgb(85, 25, 145);
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  grid-template-rows: 1fr;
+  grid-template-areas:
+    "star-row number-rating";
+  color: red;
 
-.average-rating {
-    position: relative;
-    appearance: none;
-    color: transparent;
-    width: auto;
-    display: inline-block;
-    vertical-align: baseline;
-  }
-
-  .average-rating::before {
-    --percent: calc(4.3/5*100%);
-    content: '★★★★★';
-    position: absolute;
-    top: 0;
-    left: 0;
-    color: rgba(0,0,0,0.2);
-    background:
-      linear-gradient(90deg, rgb(221, 65, 65) var(--percent), rgba(0,0,0,0.2) var(--percent));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
+}
 
   .number-rating {
-    margin-left: 60px;
+    grid-area: number-rating;
+    color: black;
+    background-color: pink;
   }
 
-  .ratings {
-    grid-area: ratings;
-    background-color: brown;
+  .star-row {
+    grid-area: star-row;
+    background-color: aquamarine;
   }
+
 
   .review-summary {
     grid-area: review-summary;
@@ -210,6 +202,7 @@
 }
 
 .individual-review {
+  display: grid;
   grid-area: individual-review;
   grid-template-columns: 1fr 4fr;
   grid-template-rows: auto;
