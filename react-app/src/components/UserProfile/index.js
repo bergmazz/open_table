@@ -2,7 +2,8 @@ import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getUserReservations } from "../../store/reservation"
-// import ReservationFormModal from "../ReservationFormModal";
+import SearchBar from "../SearchBar";
+
 import "./UserProfile.css"
 
 function UserProfile () {
@@ -27,7 +28,7 @@ function UserProfile () {
             <div className="links">
                 <Link to="/user/restaurants">Owned Restaurants</Link>
                 <Link to="/user/favorites">Favorites</Link>
-                <Link to="/user/details">Account Details</Link>
+                {/* <Link to="/user/details">Account Details</Link> */ }
             </div>
 
             <div className="points-container">
@@ -61,12 +62,13 @@ function UserProfile () {
                             </div>
                         ) )
                         }
+                        <SearchBar></SearchBar>
                     </div>
                 ) : (
                     <>
                             <h1>You have no upoming reservations</h1>
                             <h3>Find your table for any occasion</h3>
-                            {/* <ReservationFormBar></ReservationFormBar> */ }
+                            {/* <SearchBar></SearchBar> */ }
                     </>
                 ) }
             </div>

@@ -21,6 +21,6 @@
     float: right;
     height: calc(100vh - 100px);
 }
-.reservations-container{
+/* .reservations-container{
     overflow-y: scroll;
-}
+} */

@@ -3,7 +3,7 @@
 const GET_RESTAURANT = 'restaurant/GET_RESTAURANT';
 const ADD_RESTAURANT = 'restaurant/ADD_RESTAURANT';
 const DELETE_RESTAURANT = 'restaurant/DELETE_RESTAURANT';
-
+const CLEAR_RESTAURANTS = 'restaurant/CLEAR_RESTAURANTS';
 
 //Action Creators
 //RESTAURANTS
@@ -20,9 +20,17 @@ export const addRestaurant = (newRestaurant) => ({
 export const deleteRestaurant = (restaurantId) => ({
     type: DELETE_RESTAURANT,
     restaurantId
-})
+} )
+
+export const clear = () => ( {
+    type: CLEAR_RESTAURANTS
+} );
 
 //Thunks
+export const clearRestaurants = () => ( dispatch ) => {
+    dispatch( clear() );
+};
+
 export const getRestaurants = (type, city) => async (dispatch) => {
     let url = '/api/restaurants';
     const params = new URLSearchParams();
@@ -33,6 +41,7 @@ export const getRestaurants = (type, city) => async (dispatch) => {
     if (params.toString()) {
         url += '?' + params.toString();
     }
+
 
     const response = await fetch(url, {
         headers: {
@@ -119,11 +128,16 @@ const initialState = {};
 
 const restaurantReducer = (state = initialState, action) => {
     let newState;
-    switch (action.type) {
+    switch ( action.type ) {
+
+        case CLEAR_RESTAURANTS:
+            return {
+                ...initialState
+            };
+
         case GET_RESTAURANT:
             newState = { ...state };
-            console.log("GETTTTTTTRESTTTTTAURANTTTT STATE-------", action.restaurants)
-
+            // console.log("GETTTTTTTRESTTTTTAURANTTTT STATE-------", action.restaurants)
             action.restaurants.restaurants.forEach(restaurant => {
                 newState[restaurant.id] = restaurant;
             });
