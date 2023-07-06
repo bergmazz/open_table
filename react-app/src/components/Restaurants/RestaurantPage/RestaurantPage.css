@@ -1,7 +1,22 @@
+.outer-restaurant-container {
+  display: grid;
+  grid-template-columns: auto 1140px auto;
+  grid-template-rows: 1fr;
+  grid-template-areas:
+  ". restaurant-container .";
+  background-color: #f7f7f7;
+
+}
+
+
 .restaurant-container {
+    /* max-width: 1600px; */
+    margin: auto;
+    grid-area: restaurant-container;
+    font-family: sans-serif;
     width: 100%;
     display: grid;
-    grid-template-columns: 0.9fr 2.9fr 0.15fr 1.4fr 0.9fr;
+    grid-template-columns: 0.9fr 2.5fr 0.15fr 1.2fr 0.9fr;
     grid-template-rows: 375px auto auto auto auto;
     gap: 0px 0px;
     grid-auto-flow: row;
@@ -10,34 +25,44 @@
       ". restaurant-column1 . restaurant-column2 ."
       ". restaurant-column1 . restaurant-column2 ."
       ". restaurant-column1 . restaurant-column2 .";
-      background-color: lightyellow;
+      background-color: white;
 }
 
 .restaurant-cover-image {
     grid-area: restaurant-cover-image;
-    background-color: lightblue;
+    /* background-color: lightblue; */
+    background-color: white;
     /* overflow: hidden; */
+}
+
+
+.restaurant-image-cover {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
 }
 
 .restaurant-column1 {
     grid-area: restaurant-column1;
-    background-color: lightcoral;
-    margin-top: -40px;
+    background-color: white;
+    margin-top: -50px;
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 40px 100px 200px auto;
+    grid-template-rows: 62px 100px 20px auto;
     grid-template-areas:
       "restaurant-links"
       "restaurant-name"
       "random-box"
       "restaurant-reviews";
     padding-left: 15px;
-    border-radius: 3px;
+    padding-right: 15px;
+    border-radius: 4px;
+    gap: 0px;
 }
 
 .restaurant-links{
     grid-area: restaurant-links;
-    background-color: aquamarine;
+    background-color: white;
     display: flex;
     flex-direction: row;
     list-style: none;
@@ -46,34 +71,249 @@
     align-items: center;
     padding-left: 0px;
     font-size: 12px;
-
+    color: lightgray;
+    border-bottom: solid lightgray thin;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
 
 }
 
 .restaurant-name {
     grid-area: restaurant-name;
     background-color: pink;
-    border-top: solid lightgray thin;
     font-size: 40px;
     display: flex;
     align-items: center;
     border-bottom: solid lightgray thin;
-
 }
 
 .random-box {
     grid-area: random-box;
     background-color: bisque;
+    display: grid;
+    /* grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 2fr;
+    grid-template-areas:
+        "ratings-average-bar"
+        "top-tags"
+        "restaurant-description"; */
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas:
+        "ratings-average-bar";
+    font-size: 12px;
 }
+
+.ratings-average-bar {
+    grid-area: ratings-average-bar;
+    display: grid;
+    background-color: yellow;
+    grid-template-columns: 1fr 1fr 1fr 1fr 0.2fr;
+    grid-template-rows: 1fr;
+    grid-template-areas:
+        "ratings review-summary money cuisine-type .";
+}
+.ratings {
+  grid-area: ratings;
+  background-color: rgb(85, 25, 145);
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  grid-template-rows: 1fr;
+  grid-template-areas:
+    "star-row number-rating";
+  color: red;
+
+}
+
+  .number-rating {
+    grid-area: number-rating;
+    color: black;
+    background-color: pink;
+  }
+
+  .star-row {
+    grid-area: star-row;
+    background-color: aquamarine;
+  }
+
+
+  .review-summary {
+    grid-area: review-summary;
+    background-color: azure;
+  }
+
+  .money {
+    grid-area: money;
+    background-color: blueviolet;
+  }
+
+.cuisine-type {
+    grid-area: cuisine-type;
+    background-color: peru;
+}
+
+
+.top-tags {
+    grid-area: top-tags;
+    background-color: green;
+}
+
+.restaurant-description {
+    grid-area: restaurant-description;
+    background-color: aqua;
+}
+
+
 
 #restaurant-reviews {
     grid-area: restaurant-reviews;
     background-color: rgb(150, 150, 99);
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 50px auto;
+    grid-template-areas:
+        "reviews-bar"
+        "reviews-area";
+}
 
+.reviews-bar {
+  grid-area: reviews-bar;
+  display: grid;
+  background-color: blue;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  grid-template-areas:
+    "total-restaurant-reviews sort-reviews";
+}
+
+.total-restaurant-reviews {
+  grid-area: total-restaurant-reviews;
+  background-color: orange;
+}
+
+.sort-reviews {
+  grid-area: sort-reviews;
+  background-color: purple;
+}
+
+.reviews-area {
+  grid-area: reviews-area;
+}
+
+.individual-review {
+  display: grid;
+  grid-area: individual-review;
+  grid-template-columns: 1fr 4fr;
+  grid-template-rows: auto;
+  grid-template-areas:
+    "user-section review-section";
+}
+
+.user-section {
+  grid-area: user-section;
+  background-color: aquamarine;
+}
+
+.review-section {
+  grid-area: review-section;
+  background-color: aliceblue;
 }
 
 .restaurant-column2 {
     grid-area: restaurant-column2;
-    background-color: lightcyan;
-    margin-top: -40px;
+    /* background-color: lightcyan; */
+    background-color: white;
+    margin-top: -50px;
+    border-radius: 4px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 260px 175px 400px auto;
+    grid-template-areas:
+    "reservation-box"
+    "delivery-box"
+    "map-container"
+    "restaurant-details-box";
+    gap: 15px;
+}
+
+.reservation-box {
+  display: grid;
+  grid-area: reservation-box;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1.5fr 1fr 1fr 2fr 2fr 1fr;
+  grid-template-areas:
+    "make-res"
+    "party-size"
+    "party-select"
+    "res-time"
+    "find-time"
+    "times-booked";
+  border-radius: 4px;
+  box-shadow: 0px 2px 3px 0px rgba(181, 181, 180, 0.438);
+  padding: 10px;
+}
+
+.make-res {
+  grid-area: make-res;
+  background-color: green;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: solid lightgray thin;
+  border-radius: 4px;
+}
+
+.party-size {
+  grid-area: party-size;
+  background-color: blue;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+}
+
+.party-select {
+  grid-area: party-select;
+  background-color: yellow;
+}
+
+.res-time {
+  grid-area: res-time;
+  background-color: blueviolet;
+}
+
+.find-time {
+  grid-area: find-time;
+  background-color: rosybrown;
+}
+
+.times-booked {
+  grid-area: times-booked;
+  background-color: aqua;
+}
+
+.delivery-box {
+  grid-area: delivery-box;
+  background-color: white;
+  border-radius: 4px;
+  box-shadow: 0px 2px 3px 0px rgba(181, 181, 180, 0.438);
+}
+
+.map-container {
+  grid-area: map-container;
+  background-color: yellow;
+}
+
+.restaurant-details-box {
+  grid-area: restaurant-details-box;
+  background-color: red;
+}
+
+
+@media only screen and (max-width: 1055px) {
+  /* For mobile phones: */
+  [class*="column"] {
+    background-color: yellowgreen;
+    width: 100%;
+  }
 }
