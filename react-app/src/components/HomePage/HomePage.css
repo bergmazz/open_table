@@ -1,0 +1,76 @@
+.homepage-search {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 400px;
+    background: url("https://assets.bonappetit.com/photos/62f40c3d43365e834b4d2813/16:9/w_2992,h_1683,c_limit/0810-dimes-square-lede.jpg") no-repeat center center;
+    background-size: cover;
+  }
+
+.homepage-search::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.5);
+}
+  
+  h1 {
+    position: absolute;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  }
+  
+  .reservation-search {
+    position: absolute;
+    top: 60%;
+  }
+
+
+
+.restaurant-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 0 50px;
+  }
+
+  h1, .reservation-search {
+    text-align: center;
+  }
+
+
+  h2 {
+    position: relative;
+    left: 60px;
+  }
+  
+  .card-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 230px;
+    margin: 10px;
+    padding: 5px;
+    box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.2);
+    transition: box-shadow 0.3s ease-in-out;
+  }
+  
+  .card-container:hover {
+    box-shadow: 0px 2px 10px 0px rgba(0,0,0,0.2);
+  }
+  
+  .card-img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 5px;
+  }
+  
+  .card-name, .card-cuisine, .card-price {
+    margin: 10px 0;
+  }
