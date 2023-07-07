@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getRestaurants } from "../../store/restaurant";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import SearchBar from "../SearchBar";
 import "./HomePage.css"
 
@@ -57,12 +57,14 @@ const HomePage = () => {
             <div className="restaurant-cards">
                 {
                     selectedRestaurants.map(restaurant => (
-                    <div className="card-container" key={restaurant.id}>
+                        <Link to={`/restaurants/${restaurant.id}`} key={restaurant.id}>
+                    <div className="card-container">
                         <img className="card-img" src={restaurant.coverImage} alt="restaurant" />
                         <div className="card-name">{ `${ restaurant.restaurantName }` }</div>
                         <div className="card-cuisine">{ `${ restaurant.cuisineType }` }</div>
-                        <div className="card-price">{ `${ restaurant.priceRange }` }</div>
+                        <div className="card-price">{ '$'.repeat(restaurant.priceRange) }</div>
                     </div>
+                    </Link>
                     ))
                 }
             </div>
