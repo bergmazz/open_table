@@ -65,7 +65,7 @@ export const getUserReservations = () => async (dispatch) => {
 }
 
 export const getRestaurantReservations = (restaurantId) => async (dispatch) => {
-    const res = await fetch(`/api/restaurant/${restaurantId}/reservations`, {
+    const res = await fetch(`/api/restaurant/${restaurantId}/reservations/`, {
         headers: {
             'Content-Type': 'application/json'
         }

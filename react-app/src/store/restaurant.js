@@ -32,7 +32,7 @@ export const clearRestaurants = () => ( dispatch ) => {
 };
 
 export const getRestaurants = (type, city) => async (dispatch) => {
-    let url = '/api/restaurants';
+    let url = '/api/restaurants/';
     const params = new URLSearchParams();
 
     if (type) params.append('type', type);
@@ -75,7 +75,7 @@ export const addRestaurants = (restaurant) => async (dispatch) => {
         closing_hours,
     } = restaurant;
 
-    const response = await fetch('/api/restaurants', {
+    const response = await fetch('/api/restaurants/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -112,7 +112,7 @@ export const addRestaurants = (restaurant) => async (dispatch) => {
 }
 
 export const deleteRestaurants = (restaurantId) => async (dispatch) => {
-    const response = await fetch('/api/restaurants/${restaurantId}', {
+    const response = await fetch(`/api/restaurants/${restaurantId}`, {
         method: 'DELETE',
     });
 
