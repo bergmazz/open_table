@@ -84,7 +84,7 @@ export const addReservations = (restaurantId, reservation) => async (dispatch) =
         restaurant_id,
         number_of_people,
         reservation_time,
-        status,
+        status = "confirmed",
         notes
     } = reservation
 
