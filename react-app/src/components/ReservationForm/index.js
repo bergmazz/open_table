@@ -7,7 +7,7 @@ import { addReservationThunk } from "../../store/reservation"
 const ReservationForm = () => {
     const dispatch = useDispatch();
 
-    const [ numberOfPeople, setNumberOfPeople ] = useState( "" );
+    const [ numberOfPeople, setNumberOfPeople ] = useState( 2 );
     const [ reservationTime, setReservationTime ] = useState( "" );
     const [ date, setDate ] = useState( "" );
     const [ time, setTime ] = useState( "" );
@@ -22,8 +22,7 @@ const ReservationForm = () => {
     }, [ dispatch ] );
 
     const currentUser = useSelector( state => state.session.user )
-    const restaurant = useSelector( state => state.session.restaurantDetails )
-    // const times = restaurant.slots
+    const restaurant = useSelector( state => state.restaurantDetails )
 
     if ( !currentUser ) return <Redirect to="/signup" />;
 
@@ -31,8 +30,11 @@ const ReservationForm = () => {
         e.preventDefault();
         if ( currentUser ) {
             setReservationTime( new Date( `${ date }T${ time }` ).toISOString() )
+            console.log( " reservationTime: ", reservationTime )
+            console.log( " numberOfPeople: ", numberOfPeople )
+            console.log( " status: ", status )
             const data = dispatch( addReservationThunk(
-                numberOfPeople, reservationTime, status, notes
+                restaurant.id, numberOfPeople, reservationTime, status, notes
             ) );
             if ( data.errors ) {
                 setErrors( data )
@@ -42,6 +44,9 @@ const ReservationForm = () => {
             setErrors( [ 'Please create an account' ] );
         }
     };
+    // if ( restaurant.slots ) {
+    //     console.log( "restaurant slots:", Object.values( restaurant.slots ) )
+    // }
 
     return (
         <div>
@@ -75,8 +80,9 @@ const ReservationForm = () => {
                     value={ time }
                     onChange={ ( e ) => setTime( e.target.value ) }
                 />
-                { errors.reservationTime && <span>This field is required</span> }
+                { errors.time && <span>This field is required</span> }
 
+                {/* EDIT RESRVATION: */ }
                 {/* <label htmlFor="status">Status:</label>
                 <select id="status" name="status" ref={ register( { required: true } ) }>
                     <option value="Confirmed">Confirmed</option>

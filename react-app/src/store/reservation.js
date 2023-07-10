@@ -78,22 +78,22 @@ export const getRestaurantReservations = (restaurantId) => async (dispatch) => {
     }
 }
 
-export const addReservationThunk = ( restaurantId, numberOfPeople, reservationTime, status, notes ) => async ( dispatch ) => {
+export const addReservationThunk = ( restaurant_id, number_of_people, reservation_time, status = "confirmed", notes ) => async ( dispatch ) => {
     const reservationData = {
-        numberOfPeople, reservationTime, status, notes
+        number_of_people, reservation_time, status, notes
     }
-
-    const res = await fetch(`/api/restaurant/${restaurantId}/reservations`, {
+    // console.log( "thunk reservation data:", reservationData )
+    const res = await fetch( `/api/restaurants/${ restaurant_id }/reservations`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-            numberOfPeople, reservationTime, status, notes
+            number_of_people, reservation_time, status, notes
         })
     });
 
     if (res.ok) {
         const reservation = await res.json();
-        dispatch(addReservation(restaurantId, reservation));
+        dispatch( addReservation( restaurant_id, reservationData ) );
         return reservation
     } else if (res.status < 500) {
         const data = await res.json();
