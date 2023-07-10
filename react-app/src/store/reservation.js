@@ -23,7 +23,7 @@ export const getUserReservation = (reservations) => {
     }
  }
 
-export const addReservation = (restaurantId, newReservation) => {
+export const addReservation = ( restaurantId, newReservation ) => {
     return {
         type: ADD_RESERVATIONS,
         restaurantId,
@@ -78,26 +78,16 @@ export const getRestaurantReservations = (restaurantId) => async (dispatch) => {
     }
 }
 
-export const addReservations = (restaurantId, reservation) => async (dispatch) => {
-    const {
-        user_id,
-        restaurant_id,
-        number_of_people,
-        reservation_time,
-        status,
-        notes
-    } = reservation
+export const addReservationThunk = ( restaurantId, numberOfPeople, reservationTime, status, notes ) => async ( dispatch ) => {
+    const reservationData = {
+        numberOfPeople, reservationTime, status, notes
+    }
 
     const res = await fetch(`/api/restaurant/${restaurantId}/reservations`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-            user_id,
-            restaurant_id,
-            number_of_people,
-            reservation_time,
-            status,
-            notes
+            numberOfPeople, reservationTime, status, notes
         })
     });
 
@@ -182,11 +172,11 @@ export default function reservationsReducer(state = initialState, action) {
             return newState;
         }
         case ADD_RESERVATIONS: {
-            newState = { ...state }
-            newState.byRestaurant[ action.restaurantId ] = [
+            newState = { ...state };
+            newState.byRestaurant[ action.restaurantId ] = {
                 ...newState.byRestaurant[ action.restaurantId ],
-                action.newReservation
-            ];
+                [ action.newReservation.id ]: action.newReservation,
+            };
             return newState;
         }
         case EDIT_RESERVATIONS: {
