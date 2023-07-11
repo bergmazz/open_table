@@ -17,11 +17,14 @@ function CreateRestaurant() {
     const [phone_number, setPhone_number] = useState('');
     const [open_hours, setOpen_hours] = useState('');
     const [closing_hours, setClosing_hours] = useState('');
+    const [errors, setErrors] = useState([]);
 
     const dispatch = useDispatch();
     const history = useHistory();
 
     const handleAddRestaurant = (e) => {
+        e.preventDefault();
+        setErrors([]);
         const newRestaurant = {
             restaurant_name,
             cover_image,
@@ -44,7 +47,12 @@ function CreateRestaurant() {
     return (
         <div className='restaurant-form-container'>
             <h1>Add Your Restaurant</h1>
-            <form >
+            <form id="new-restaurant-form" onSubmit={handleAddRestaurant}>
+                <div>
+                    {errors.map((error, idx) => (
+                        <li key={idx}>{error}</li>
+                    ))}
+                </div>
             <label>
                 Restaurant Name
                 <input
@@ -87,12 +95,17 @@ function CreateRestaurant() {
             <br />
             <label>
                 State
-                <input
-                type='text'
+                <select
                 value={state}
                 onChange={(e) => setState(e.target.value)}
                 required
-                />
+                >
+                    <option value=''>--Select a State--</option>
+                    <option value='CA'>California</option>
+                    <option value='NY'>New York</option>
+                    <option value='TX'>Texas</option>
+                    <option value='FL'>Florida</option>
+                </select>
             </label>
             <br />
             <label>
