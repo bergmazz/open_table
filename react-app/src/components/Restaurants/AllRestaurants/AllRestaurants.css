@@ -1,25 +1,35 @@
+.restaurants-outer {
+    display: grid;
+    justify-content: center;
+}
+
 .restaurants-results-container {
      display: grid;
      border-top: solid lightgray thin;
+     font-family: sans-serif;
+     width: 600px;
+     border: solid lightgray thin;
+     margin: 10px;
+     box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.2);
+    transition: box-shadow 0.3s ease-in-out;
+
+
 }
 
 .restaurant-results {
     display: grid;
-    grid-template-columns: 200px 500px;
+    grid-template-columns: 200px 300px;
     grid-template-rows: 1fr;
     grid-template-areas:
     "all-res-image-container all-res-info";
     height: 240px;
     border-bottom: solid lightgray thin;
-
-
-    background-color: blueviolet;
+    margin: 20px;
 
 }
 
 .all-res-image-container {
     grid-area: all-res-image-container;
-    background-color: blueviolet;
     padding-top: 25px;
     padding-left: 15px;
 }
@@ -34,7 +44,6 @@
 
 .all-res-info {
     grid-area: all-res-info;
-    background-color: bisque;
     padding-top: 25px;
     display: grid;
     grid-template-columns: 1fr;
@@ -49,20 +58,29 @@
 
 .res-name {
     grid-area: res-name;
-    background-color: aqua;
+    text-decoration: none;
+    color: #379091;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.res-name:hover {
+    text-decoration: underline;
 }
 
 .res-stars {
     grid-area: res-stars;
-    background-color: azure;
+    color: yellow;
 }
 
 .res-price {
+    font-size: 13px;
     grid-area: res-price;
-    background-color: pink;
+
 }
 
-.res-times {
-    grid-area: res-times;
-    background-color: lightgoldenrodyellow;
+.no-luck {
+    margin-top: 20px;
+    font-family: sans-serif;
+    margin-bottom: 20px;
 }
