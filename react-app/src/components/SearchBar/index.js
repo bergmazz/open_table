@@ -3,7 +3,6 @@ import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom"
 import "./SearchBar.css"
 function SearchBar () {
-    // const [ date, setDate ] = useState( "" );
     const [ city, setCity ] = useState( "" );
     const [ cuisine, setCuisine ] = useState( "" );
     const [ date, setDate ] = useState( "" );
@@ -30,21 +29,23 @@ function SearchBar () {
         <form onSubmit={ handleSubmit }>
 
 
-            <label className="date" htmlFor="date">Date:</label>
-            <input
-                type="date"
-                id="date"
-                value={ date }
-                onChange={ ( e ) => setDate( e.target.value ) }
-            />
+            <label className="date">Date:
+                <input
+                    type="date"
+                    id="date"
+                    value={ date }
+                    onChange={ ( e ) => setDate( e.target.value ) }
+                />
+            </label>
 
-            <label className="time" htmlFor="time">Time:</label>
+            <label className="time" >Time:</label>
             <input
                 type="time"
                 id="time"
                 value={ time }
                 onChange={ ( e ) => setTime( e.target.value ) }
             />
+
 
             <label className="city" htmlFor="city">City:</label>
             <select
