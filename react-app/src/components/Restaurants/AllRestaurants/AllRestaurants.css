@@ -1,0 +1,68 @@
+.restaurants-results-container {
+     display: grid;
+     border-top: solid lightgray thin;
+}
+
+.restaurant-results {
+    display: grid;
+    grid-template-columns: 200px 500px;
+    grid-template-rows: 1fr;
+    grid-template-areas:
+    "all-res-image-container all-res-info";
+    height: 240px;
+    border-bottom: solid lightgray thin;
+
+
+    background-color: blueviolet;
+
+}
+
+.all-res-image-container {
+    grid-area: all-res-image-container;
+    background-color: blueviolet;
+    padding-top: 25px;
+    padding-left: 15px;
+}
+
+.all-res-image {
+    grid-area: all-res-image;
+    height: 175px;
+    width: 170px;
+    border-radius: 4px;
+    object-fit: cover;
+}
+
+.all-res-info {
+    grid-area: all-res-info;
+    background-color: bisque;
+    padding-top: 25px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 5px;
+    grid-template-rows: 30px 30px 25px 35px;
+    grid-template-areas:
+    "res-name"
+    "res-stars"
+    "res-price"
+    "res-times";
+}
+
+.res-name {
+    grid-area: res-name;
+    background-color: aqua;
+}
+
+.res-stars {
+    grid-area: res-stars;
+    background-color: azure;
+}
+
+.res-price {
+    grid-area: res-price;
+    background-color: pink;
+}
+
+.res-times {
+    grid-area: res-times;
+    background-color: lightgoldenrodyellow;
+}

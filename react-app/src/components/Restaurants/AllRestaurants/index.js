@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { clearRestaurants, getRestaurants } from "../../../store/restaurant";
 import { NavLink } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import "./AllRestaurants.css"
 
 const AllRestaurants = () => {
     const dispatch = useDispatch();
@@ -24,17 +25,65 @@ const AllRestaurants = () => {
     }, [ dispatch, cuisineType, city ] );
 
     if (restaurantValues.length) {
-        // restaurantValues.map(restaurant => {
-        //     console.log(restaurant.restaurantName)
-        // })
+
+        // const fullStars = Math.floor(restaurant.averageRating);
+        // const starArr = [];
+
+        // for (let i = 1; i <= fullStars; i++) {
+        //     starArr.push(1);
+        // }
+
+        // if (restaurant.averageRating < 5) {
+        //     const partialStar = restaurant.averageRating - fullStars;
+        //     starArr.push(partialStar);
+        //     const emptyStars = 5 - starArr.length;
+        //     for (let i = 1; i <= emptyStars; i++) {
+        //         starArr.push(0);
+        //     }
+
+        //     function starRating(star) {
+        //         if (star === 0) return <i className="fa-regular fa-star" style="color: #d50b1f;"></i>
+        //         else if (star < 1) return <i className="fa-solid fa-star-half-stroke" style="color: #d50b1f;"></i>
+        //         else return <i className="fa-solid fa-star" style="color: #d50b1f;"></i>
+        //     }
+        // }
+
+
         return (
             <div>
-                <h1>Restaurants</h1>
+                {
+                    cuisineType && city && <div>Results for "{cuisineType}" restaurants in {city}</div>
+                }
+                <div className="restaurants-results-container">
+
                 {
                     restaurantValues.map(restaurant => (
-                        <div key={ restaurant.id }>{ `${ restaurant.restaurantName }` }</div>
+                        <>
+                        <div className="restaurant-results" key={ restaurant.id }>
+                            <div className="all-res-image-container">
+
+                            <img className="all-res-image" src={restaurant.coverImage} alt="restaurant" height="50px"/>
+                            </div>
+                            <div className="all-res-info">
+                                <div className="res-name">{restaurant.restaurantName}</div>
+                                <div className="res-stars">
+                                <span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star"></span>
+<span class="fa fa-star"></span>
+                                </div>
+                                <div className="res-price">$$$$</div>
+                                <div className="res-times">
+                                    6:30
+                                </div>
+                            </div>
+
+                        </div>
+                        </>
                     ))
                 }
+                </div>
             </div>
         )
     } else {

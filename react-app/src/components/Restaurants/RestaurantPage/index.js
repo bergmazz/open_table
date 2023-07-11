@@ -28,7 +28,6 @@ const RestaurantPage = () => {
         let priceRange = "$50 and over"
         if (restaurant.priceRange <= 2) priceRange = "$30 and under";
         if (restaurant.priceRange === 3) priceRange = "$31 to $50";
-        const description = "Whether you’re chatting over a flavorful roasted chicken salad or sipping a merlot as your hand-cut blackened ribeye is mesquite grilled over a live fire, Paul Martin’s American Grill is the ideal place to impress or decompress.";
 
         const fullStars = Math.floor(restaurant.averageRating);
         // Gets the number of full stars. starAverage is the rating, for example
