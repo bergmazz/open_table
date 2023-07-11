@@ -26,11 +26,8 @@ const ReservationForm = () => {
     const currentUser = useSelector( state => state.session.user )
     // const restaurant = useSelector( state => state.restaurantDetails )
 
-    if ( !currentUser ) return <Redirect to="/signup" />;
-
-    const handleSubmit = async ( e ) => {
-        e.preventDefault();
-        if ( currentUser ) {
+    useEffect( () => {
+        if ( date && time ) {
             let dateObject = new Date( `${ date }T${ time }` )
             const year = dateObject.getUTCFullYear();
             const month = `0${ dateObject.getUTCMonth() + 1 }`.slice( -2 ); // Months are zero-indexed, so add 1
@@ -39,16 +36,25 @@ const ReservationForm = () => {
             const minutes = `0${ dateObject.getUTCMinutes() }`.slice( -2 );
             const seconds = `0${ dateObject.getUTCSeconds() }`.slice( -2 );
             setReservationTime( `${ year }-${ month }-${ day } ${ hours }:${ minutes }:${ seconds }` )
+        }
+    }, [ date, time ] )
+
+    if ( !currentUser ) return <Redirect to="/signup" />;
+
+    const handleSubmit = async ( e ) => {
+        e.preventDefault();
+        if ( currentUser ) {
             // console.log( " reservationTime: ", reservationTime )
             // console.log( " numberOfPeople: ", numberOfPeople )
             // console.log( " status: ", status )
             const data = dispatch( addReservationThunk(
                 id, numberOfPeople, reservationTime, status, notes
             ) );
+            // console.log( '---------------------', data.error )
             if ( data.error ) {
+                // console.log( '---------------------', data.error )
                 setErrors( data )
             }
-
         } else {
             setErrors( [ 'Please create an account' ] );
         }
@@ -72,7 +78,7 @@ const ReservationForm = () => {
                         onChange={ ( e ) => setNumberOfPeople( e.target.value ) }
                     />
                 </label>
-                { errors.numberOfPeople && <span>This field is required</span> }
+                {/* { errors.numberOfPeople && <span>This field is required</span> } */ }
 
                 <label className="date">Date:
                     <input
@@ -89,7 +95,7 @@ const ReservationForm = () => {
                     value={ time }
                     onChange={ ( e ) => setTime( e.target.value ) }
                 />
-                { errors.time && <span>This field is required</span> }
+                {/* { errors.time && <span>This field is required</span> } */ }
 
                 {/* EDIT RESERVATION: */ }
                 {/* <label htmlFor="status">Status:</label>
@@ -109,6 +115,7 @@ const ReservationForm = () => {
                         placeholder="Leave a note, if you'd like."
                     />
                 </label>
+                { errors && <div>{ errors }</div> }
 
                 <button type="submit">Create Reservation</button>
 

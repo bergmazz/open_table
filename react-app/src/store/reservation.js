@@ -131,7 +131,7 @@ export const editReservations = (restaurantId, reservationId, reservation) => as
         return reservation
     } else if (res.status < 500) {
         const data = await res.json()
-        if (data.errors) {
+        if ( data.error ) {
             const errorData = await res.json()
             return errorData.errors
         } else {
