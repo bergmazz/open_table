@@ -28,28 +28,28 @@ function LoginFormModal() {
   }
 
   return (
-    <>
+    <div className="login-form-c">
       <h1 className="login-header">Log In</h1>
       <form onSubmit={handleSubmit}>
-        <ul>
+        <ul className="errors">
           {errors.map((error, idx) => (
             <li key={idx}>{error}</li>
           ))}
         </ul>
-        <label className="elabel">
+        <label className="l-elabel">
           Email
           <input
-            className="email-input"
+            className="l-email-input"
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
         </label>
-        <label className="plabel">
+        <label className="l-plabel">
           Password
           <input
-            className="pass-input"
+            className="l-pass-input"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -59,7 +59,7 @@ function LoginFormModal() {
         <button type="submit" className="loginbttn">Log In</button>
         <button onClick={demoUser} type='submit' className="demoLogin">Demo User</button>
       </form>
-    </>
+    </div>
   );
 }
 

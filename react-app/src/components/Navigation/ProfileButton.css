@@ -1,8 +1,17 @@
-/* button {
+.dropdown-btn {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: #333;
+    color: #fff;
     border: none;
-    background: transparent;
-    color: #ffffff;
-    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
     cursor: pointer;
-} */
-  
+  }
+
+  .dropdown-btn:hover {
+    background-color: #007bff;
+  }

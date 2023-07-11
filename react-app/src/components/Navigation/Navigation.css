@@ -14,7 +14,7 @@
   height: 60px;
 }
 
-.home-button a, .profile-button-position a {
+.home-link, .reservation-link {
   text-decoration: none;
   font-family: 'Arial', sans-serif;
     font-size: 16px; 
@@ -40,9 +40,40 @@
 
 .navigation-bar-container .home-button:hover, .navigation-bar-container .profile-button-position:hover {
   color: #da3743;
-  background-color: rgba(0,0,0,0.05);
+  /* background-color: rgba(0,0,0,0.05); */
 }
 
 .navigation-bar-container .home-button.active, .navigation-bar-container .profile-button-position.active {
   color: #da3743;
+}
+
+.profile-reservation-position {
+  padding: 0 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.right-group {
+	display: flex; 
+  justify-content: flex-end;
+}
+
+.reservation-nav-button {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.fa:hover {
+  background-color: #007bff;
 }

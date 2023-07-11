@@ -1,4 +1,4 @@
-.form-container {
+.search-form-container {
     display: flex;
     justify-content: center;
     padding: 20px;
@@ -6,7 +6,15 @@
     border-radius: 10px;
   }
   
-  input, select {
+  /* input, select {
+    width: 200px;
+    padding: 10px;
+    margin: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+  } */
+
+  #date, #time, #city, #cuisine {
     width: 200px;
     padding: 10px;
     margin: 10px;
@@ -14,7 +22,7 @@
     border-radius: 5px;
   }
   
-  button {
+  .table-button {
     padding: 10px 20px;
     margin: 10px;
     background-color: #007bff;
@@ -24,10 +32,10 @@
     cursor: pointer;
   }
   
-  button:hover {
+  .table-button:hover {
     background-color: #0056b3;
   }
 
   .date, .time, .city, .food-type {
-    color: white
+    color: #333
   }
