@@ -91,6 +91,8 @@ export const addReservationThunk = ( restaurant_id, number_of_people, reservatio
         })
     });
 
+    console.log( "res:", res )
+
     if (res.ok) {
         const reservation = await res.json();
         dispatch( addReservation( restaurant_id, reservationData ) );

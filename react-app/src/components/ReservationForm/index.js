@@ -1,111 +1,113 @@
-import React, { useState, useEffect } from "react";
-import { Redirect, useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { getDetailsRestaurant } from "../../store/restaurantDetails";
-import { addReservationThunk } from "../../store/reservation"
-// DOES NOT WORK YET
-const ReservationForm = () => {
-    const dispatch = useDispatch();
+// import React, { useState, useEffect } from "react";
+// import { Redirect, useParams } from "react-router-dom";
+// import { useDispatch, useSelector } from "react-redux";
+// import { getDetailsRestaurant } from "../../store/restaurantDetails";
+// import { addReservationThunk } from "../../store/reservation"
 
-    const [ numberOfPeople, setNumberOfPeople ] = useState( 2 );
-    const [ reservationTime, setReservationTime ] = useState( "" );
-    const [ date, setDate ] = useState( "" );
-    const [ time, setTime ] = useState( "" );
-    const [ status, setStatus ] = useState( "confirmed" );
-    const [ notes, setNotes ] = useState( "" );
+// // DOES NOT WORK YET
 
-    const [ errors, setErrors ] = useState( [] );
+// const ReservationForm = () => {
+//     const dispatch = useDispatch();
 
-    const { id } = useParams();
-    useEffect( () => {
-        dispatch( getDetailsRestaurant( id ) );
-    }, [ dispatch ] );
+//     const [ numberOfPeople, setNumberOfPeople ] = useState( 2 );
+//     const [ reservationTime, setReservationTime ] = useState( "" );
+//     const [ date, setDate ] = useState( "" );
+//     const [ time, setTime ] = useState( "" );
+//     const [ status, setStatus ] = useState( "confirmed" );
+//     const [ notes, setNotes ] = useState( "" );
 
-    const currentUser = useSelector( state => state.session.user )
-    const restaurant = useSelector( state => state.restaurantDetails )
+//     const [ errors, setErrors ] = useState( [] );
 
-    if ( !currentUser ) return <Redirect to="/signup" />;
+//     const { id } = useParams();
+//     useEffect( () => {
+//         dispatch( getDetailsRestaurant( id ) );
+//     }, [ dispatch ] );
 
-    const handleSubmit = async ( e ) => {
-        e.preventDefault();
-        if ( currentUser ) {
-            setReservationTime( new Date( `${ date }T${ time }` ).toISOString() )
-            console.log( " reservationTime: ", reservationTime )
-            console.log( " numberOfPeople: ", numberOfPeople )
-            console.log( " status: ", status )
-            const data = dispatch( addReservationThunk(
-                restaurant.id, numberOfPeople, reservationTime, status, notes
-            ) );
-            if ( data.errors ) {
-                setErrors( data )
-            }
+//     const currentUser = useSelector( state => state.session.user )
+//     const restaurant = useSelector( state => state.restaurantDetails )
 
-        } else {
-            setErrors( [ 'Please create an account' ] );
-        }
-    };
-    // if ( restaurant.slots ) {
-    //     console.log( "restaurant slots:", Object.values( restaurant.slots ) )
-    // }
+//     if ( !currentUser ) return <Redirect to="/signup" />;
 
-    return (
-        <div>
-            <h1>Reservation Form</h1>
-            <form className="reserve" onSubmit={ handleSubmit }>
-                <ul>
-                    { errors.map( ( error, idx ) => <li key={ idx }>{ error }</li> ) }
-                </ul>
-                <label className="num">
-                    Number of Guests:
-                    <input
-                        type="number"
-                        value={ numberOfPeople }
-                        onChange={ ( e ) => setNumberOfPeople( e.target.value ) }
-                    />
-                </label>
-                { errors.numberOfPeople && <span>This field is required</span> }
+//     const handleSubmit = async ( e ) => {
+//         e.preventDefault();
+//         if ( currentUser ) {
+//             setReservationTime( new Date( `${ date }T${ time }` ).toISOString() )
+//             console.log( " reservationTime: ", reservationTime )
+//             console.log( " numberOfPeople: ", numberOfPeople )
+//             console.log( " status: ", status )
+//             const data = dispatch( addReservationThunk(
+//                 restaurant.id, numberOfPeople, reservationTime, status, notes
+//             ) );
+//             if ( data.errors ) {
+//                 setErrors( data )
+//             }
 
-                <label className="date">Date:
-                    <input
-                        type="date"
-                        id="date"
-                        value={ date }
-                        onChange={ ( e ) => setDate( e.target.value ) }
-                    />
-                </label>
-                <label className="time" >Time:</label>
-                <input
-                    type="time"
-                    id="time"
-                    value={ time }
-                    onChange={ ( e ) => setTime( e.target.value ) }
-                />
-                { errors.time && <span>This field is required</span> }
+//         } else {
+//             setErrors( [ 'Please create an account' ] );
+//         }
+//     };
+//     // if ( restaurant.slots ) {
+//     //     console.log( "restaurant slots:", Object.values( restaurant.slots ) )
+//     // }
 
-                {/* EDIT RESRVATION: */ }
-                {/* <label htmlFor="status">Status:</label>
-                <select id="status" name="status" ref={ register( { required: true } ) }>
-                    <option value="Confirmed">Confirmed</option>
-                    <option value="Attended">Attended</option>
-                    <option value="Cancelled">Cancelled</option>
-                </select>
-                { errors.status && <span>This field is required</span> } */}
+//     return (
+//         <div>
+//             <h1>Reservation Form</h1>
+//             <form className="reserve" onSubmit={ handleSubmit }>
+//                 <ul>
+//                     { errors.map( ( error, idx ) => <li key={ idx }>{ error }</li> ) }
+//                 </ul>
+//                 <label className="num">
+//                     Number of Guests:
+//                     <input
+//                         type="number"
+//                         value={ numberOfPeople }
+//                         onChange={ ( e ) => setNumberOfPeople( e.target.value ) }
+//                     />
+//                 </label>
+//                 { errors.numberOfPeople && <span>This field is required</span> }
 
-                <label htmlFor="notes">
-                    {/* Notes: */ }
-                    <input
-                        type="text"
-                        id="notes"
-                        onChange={ ( e ) => setNotes( e.target.value ) }
-                        placeholder="Leave a note, if you'd like."
-                    />
-                </label>
+//                 <label className="date">Date:
+//                     <input
+//                         type="date"
+//                         id="date"
+//                         value={ date }
+//                         onChange={ ( e ) => setDate( e.target.value ) }
+//                     />
+//                 </label>
+//                 <label className="time" >Time:</label>
+//                 <input
+//                     type="time"
+//                     id="time"
+//                     value={ time }
+//                     onChange={ ( e ) => setTime( e.target.value ) }
+//                 />
+//                 { errors.time && <span>This field is required</span> }
 
-                <button type="submit">Create Reservation</button>
+//                 {/* EDIT RESERVATION: */ }
+//                 {/* <label htmlFor="status">Status:</label>
+//                 <select id="status" name="status" ref={ register( { required: true } ) }>
+//                     <option value="Confirmed">Confirmed</option>
+//                     <option value="Attended">Attended</option>
+//                     <option value="Cancelled">Cancelled</option>
+//                 </select>
+//                 { errors.status && <span>This field is required</span> } */}
 
-            </form>
-        </div>
-    );
-};
+//                 <label htmlFor="notes">
+//                     {/* Notes: */ }
+//                     <input
+//                         type="text"
+//                         id="notes"
+//                         onChange={ ( e ) => setNotes( e.target.value ) }
+//                         placeholder="Leave a note, if you'd like."
+//                     />
+//                 </label>
 
-export default ReservationForm
+//                 <button type="submit">Create Reservation</button>
+
+//             </form>
+//         </div>
+//     );
+// };
+
+// export default ReservationForm
