@@ -1,19 +1,24 @@
 import React, { useState, useEffect } from "react";
+import { useModal } from '../../../context/Modal';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import { addReviews } from "../../../store/review";
 import { getRestaurants } from "../../../store/restaurant";
 import './newReview.css';
 
-const CreateReview = () => {
+export default function CreateReviewModal({restaurant}) {
     const dispatch = useDispatch();
     const currentUser = useSelector((state) => state.session.user);
+    const { closeModal } = useModal();
     const { restaurantId } = useParams();
-    const [rating, setRating] = useState(1);
+    const [rating, setRating] = useState('');
     const [comment, setComment] = useState('');
     const [reviewImage, setReviewImage] = useState('');
     const [errors, setErrors] = useState([]);
-    const [emptyField, setEmptyField] = useState('true');
+    const [emptyField, setEmptyField] = useState(true);
+    const [hasSubmitted, setHasSubmitted] = useState(false);
+    const [hover, setHover] = useState(0);
+    const starArr = ["", "", "", "", ""];
 
     useEffect(() => {
         const valErrors = [];
@@ -36,103 +41,72 @@ const CreateReview = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setErrors([]);
-        const data = await dispatch(
-            addReviews(currentUser.id, restaurantId, rating, comment, reviewImage)
-        );
-        if (data) {
-            setErrors([]);
+        setHasSubmitted(true);
+        if (errors.length > 0) {
+          return;
         }
-        dispatch(getRestaurants());
-        reset();
-    };
+          const newReview = {
+            comment,
+            rating,
+            reviewImage
+
+          }
+          await dispatch(addReviews(restaurant?.id, newReview))
+          closeModal();
+    }
+
 
     return (
-        <div className="createReview">
-            <form onSubmit={handleSubmit} className='createReviewForm'>
-                <p className="enterReview">How was your visit?</p>
-                <div className="errors">
-                    {errors &&
-                      errors.map((error, i) => {
-                        return <p key={i}>{error}</p>
-                      })}
-                </div>
-                <div className="rating">
-                    <input
-                      type="radio"
-                      id="star5"
-                      name="rating"
-                      value={5}
-                      onClick={(e) => setRating(Number(e.target.value))}
-                    />
-                    <label htmlFor="star5" title="text">
-                        5 stars
-                    </label>
-                    <input
-                      type="radio"
-                      id="star4"
-                      name="rating"
-                      value={4}
-                      onClick={(e) => setRating(Number(e.target.value))}
-                    />
-                    <label htmlFor="star4" title="text">
-                        4 stars
-                    </label>
-                    <input
-                      type="radio"
-                      id="star3"
-                      name="rating"
-                      value={3}
-                      onClick={(e) => setRating(Number(e.target.value))}
-                    />
-                    <label htmlFor="star3" title="text">
-                        3 stars
-                    </label>
-                    <input
-                      type="radio"
-                      id="star2"
-                      name="rating"
-                      value={2}
-                      onClick={(e) => setRating(Number(e.target.value))}
-                    />
-                    <label htmlFor="star2" title="text">
-                        2 stars
-                    </label>
-                    <input
-                      type="radio"
-                      id="star1"
-                      name="rating"
-                      value={1}
-                      onClick={(e) => setRating(Number(e.target.value))}
-                    />
-                    <label htmlFor="star1" title="text">
-                        1 star
-                    </label>
-                </div>
-                <div className="comment">
-                    <textarea
-                      onChange={(e) => setComment(e.target.value)}
-                      value={comment}
-                      placeholder='Describe your dining experience...'
-                      name="comment"
-                      className="commentInput"
-                    />
-                </div>
-                <div className="reviewImage">
-                    <input
-                      type="text"
-                      placeholder="Image URL"
-                      value={reviewImage}
-                      onChange={(e) => setReviewImage(e.target.value)}
-                    />
-                </div>
+      <div className="createReview">
+        <form onSubmit={handleSubmit} className='createReviewForm'>
+          <h1 className="enterReview">How was your visit?</h1>
+          <ul className="errors-list">
+            {hasSubmitted && errors.map((error, idx) => (
+              <li key={`error${idx}`} className='errors'>{error}</li>
+            ))}
+          </ul>
+          <textarea
+            className="review-textarea"
+            placeholder="Leave your review here"
+            value={comment}
+            onChange={(e) => setComment(e.target.value)}
+          />
+          <div className="rating-container">
+            {starArr.map((starEl, index) => {
+              index++;
+              return (
                 <button
-                  className={emptyField ? 'submit-review-button-disabled' : 'submit-review-button'}
-                  disabled={Boolean(emptyField)}
-                  type='submit'>Submit Your Review</button>
-            </form>
-        </div>
-    );
+                  className="star-button"
+                  key={`index${index}`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setRating(index)
+                  }}
+                  onMouseEnter={() => setHover(index)}
+                  onMouseLeave={() => setHover(rating)}
+                  >
+                    <i className={index <= (hover || rating) ? 'fa-solid star-review' : 'fa-regular star-review'}></i>
+                  </button>
+              );
+            })}
+          <p className="stars-text"><b>Rating</b></p>
+          </div>
+          <div className="reviewImage">
+            <input
+              type="text"
+              placeholder="Image URL"
+              value={reviewImage}
+              onChange={(e) => setReviewImage(e.target.value)}
+            />
+          </div>
+          <button
+            className={emptyField ? 'submit-review-button-disabled' : 'submit-review-button'}
+            disabled={!comment || !rating}
+            type='submit'>Submit Your Review</button>
+      </form>
+  </div>
+);
+
+    
 };
 
-export default CreateReview;

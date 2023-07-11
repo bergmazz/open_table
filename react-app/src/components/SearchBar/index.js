@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom"
+import "./SearchBar.css"
 function SearchBar () {
-    // const [ date, setDate ] = useState( "" );
     const [ city, setCity ] = useState( "" );
     const [ cuisine, setCuisine ] = useState( "" );
     const [ date, setDate ] = useState( "" );
@@ -29,15 +29,16 @@ function SearchBar () {
         <form onSubmit={ handleSubmit }>
 
 
-            <label htmlFor="date">Date:</label>
-            <input
-                type="date"
-                id="date"
-                value={ date }
-                onChange={ ( e ) => setDate( e.target.value ) }
-            />
+            <label className="date">Date:
+                <input
+                    type="date"
+                    id="date"
+                    value={ date }
+                    onChange={ ( e ) => setDate( e.target.value ) }
+                />
+            </label>
 
-            <label htmlFor="time">Time:</label>
+            <label className="time" >Time:</label>
             <input
                 type="time"
                 id="time"
@@ -45,7 +46,8 @@ function SearchBar () {
                 onChange={ ( e ) => setTime( e.target.value ) }
             />
 
-            <label htmlFor="city">City:</label>
+
+            <label className="city" htmlFor="city">City:</label>
             <select
                 id="city"
                 value={ city }
@@ -59,7 +61,7 @@ function SearchBar () {
                 <option value="Houston">Houston</option>
             </select>
 
-            <label htmlFor="cuisine">Cuisine Type:</label>
+            <label className="food-type" htmlFor="cuisine">Cuisine Type:</label>
             <select
                 id="cuisine"
                 value={ cuisine }

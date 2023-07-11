@@ -23,7 +23,7 @@ export const getUserReservation = (reservations) => {
     }
  }
 
-export const addReservation = (restaurantId, newReservation) => {
+export const addReservation = ( restaurantId, newReservation ) => {
     return {
         type: ADD_RESERVATIONS,
         restaurantId,
@@ -65,7 +65,7 @@ export const getUserReservations = () => async (dispatch) => {
 }
 
 export const getRestaurantReservations = (restaurantId) => async (dispatch) => {
-    const res = await fetch(`/api/restaurant/${restaurantId}/reservations`, {
+    const res = await fetch(`/api/restaurant/${restaurantId}/reservations/`, {
         headers: {
             'Content-Type': 'application/json'
         }
@@ -78,6 +78,7 @@ export const getRestaurantReservations = (restaurantId) => async (dispatch) => {
     }
 }
 
+<<<<<<< HEAD
 export const addReservations = (restaurantId, reservation) => async (dispatch) => {
     const {
         user_id,
@@ -89,21 +90,24 @@ export const addReservations = (restaurantId, reservation) => async (dispatch) =
     } = reservation
 
     const res = await fetch(`/api/restaurant/${restaurantId}/reservations`, {
+=======
+export const addReservationThunk = ( restaurant_id, number_of_people, reservation_time, status = "Confirmed", notes ) => async ( dispatch ) => {
+    const reservationData = {
+        number_of_people, reservation_time, status, notes
+    }
+    console.log( "thunk reservation data:", reservationData )
+    const res = await fetch( `/api/restaurants/${ restaurant_id }/reservations`, {
+>>>>>>> frontend
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-            user_id,
-            restaurant_id,
-            number_of_people,
-            reservation_time,
-            status,
-            notes
+            number_of_people, reservation_time, status, notes
         })
-    });
-
+    } );
+    // console.log( "res:", res )
     if (res.ok) {
         const reservation = await res.json();
-        dispatch(addReservation(restaurantId, reservation));
+        dispatch( addReservation( restaurant_id, reservationData ) );
         return reservation
     } else if (res.status < 500) {
         const data = await res.json();
@@ -141,7 +145,7 @@ export const editReservations = (restaurantId, reservationId, reservation) => as
         return reservation
     } else if (res.status < 500) {
         const data = await res.json()
-        if (data.errors) {
+        if ( data.error ) {
             const errorData = await res.json()
             return errorData.errors
         } else {
@@ -182,11 +186,11 @@ export default function reservationsReducer(state = initialState, action) {
             return newState;
         }
         case ADD_RESERVATIONS: {
-            newState = { ...state }
-            newState.byRestaurant[ action.restaurantId ] = [
+            newState = { ...state };
+            newState.byRestaurant[ action.restaurantId ] = {
                 ...newState.byRestaurant[ action.restaurantId ],
-                action.newReservation
-            ];
+                [ action.newReservation.id ]: action.newReservation,
+            };
             return newState;
         }
         case EDIT_RESERVATIONS: {
