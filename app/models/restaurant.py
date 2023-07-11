@@ -105,7 +105,9 @@ class Restaurant(db.Model, UserMixin):
             'closingHours': self.closing_hours,
             'createdAt': self.created_at,
             'updatedAt': self.updated_at,
-            'nextThreeAvailableSlots': next_three_available_slots
+            'nextThreeAvailableSlots': next_three_available_slots,
+            'reviews': [review.to_dict() for review in self.reviews]
+
         }
 
     def details_to_dict(self):

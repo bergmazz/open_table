@@ -1,0 +1,86 @@
+.restaurants-outer {
+    display: grid;
+    justify-content: center;
+}
+
+.restaurants-results-container {
+     display: grid;
+     border-top: solid lightgray thin;
+     font-family: sans-serif;
+     width: 600px;
+     border: solid lightgray thin;
+     margin: 10px;
+     box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.2);
+    transition: box-shadow 0.3s ease-in-out;
+
+
+}
+
+.restaurant-results {
+    display: grid;
+    grid-template-columns: 200px 300px;
+    grid-template-rows: 1fr;
+    grid-template-areas:
+    "all-res-image-container all-res-info";
+    height: 240px;
+    border-bottom: solid lightgray thin;
+    margin: 20px;
+
+}
+
+.all-res-image-container {
+    grid-area: all-res-image-container;
+    padding-top: 25px;
+    padding-left: 15px;
+}
+
+.all-res-image {
+    grid-area: all-res-image;
+    height: 175px;
+    width: 170px;
+    border-radius: 4px;
+    object-fit: cover;
+}
+
+.all-res-info {
+    grid-area: all-res-info;
+    padding-top: 25px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 5px;
+    grid-template-rows: 30px 30px 25px 35px;
+    grid-template-areas:
+    "res-name"
+    "res-stars"
+    "res-price"
+    "res-times";
+}
+
+.res-name {
+    grid-area: res-name;
+    text-decoration: none;
+    color: #379091;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.res-name:hover {
+    text-decoration: underline;
+}
+
+.res-stars {
+    grid-area: res-stars;
+    color: yellow;
+}
+
+.res-price {
+    font-size: 13px;
+    grid-area: res-price;
+
+}
+
+.no-luck {
+    margin-top: 20px;
+    font-family: sans-serif;
+    margin-bottom: 20px;
+}
