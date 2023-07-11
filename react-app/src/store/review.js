@@ -134,7 +134,7 @@ export const deleteReviews = (restaurantId, reviewId) => async (dispatch) => {
 // ----------------------------------------------------------------------- REDUCER
 
 const initialState = {
-    restaurantReviews: []
+    restaurantReviews: {}
 }
 
 export default function reviewsReducer(state = initialState, action) {
@@ -142,24 +142,29 @@ export default function reviewsReducer(state = initialState, action) {
     switch (action.type) {
         case GET_REVIEWS: {
             newState = { ...state }
-            newState.restaurantReviews = action.reviews;
+            newState.restaurantReviews[action.restaurantId] = action.reviews;
             return newState;
         }
         case ADD_REVIEWS: {
             newState = { ...state }
-            newState.restaurantReviews = [...newState.restaurantReviews, action.newReview];
+            newState.restaurantReviews[action.restaurantId] = [
+                ...newState.restaurantReviews[ action.restaurantId ],
+                action.newReview
+            ];
             return newState;
         }
         case EDIT_REVIEWS: {
             newState = { ...state }
-            newState.restaurantReviews = newState.restaurantReviews.map((review) => 
-            review.id === action.newReview.id ? action.newReview : review
-            );
+            newState.restaurantReviews[action.restaurantId] = newState.restaurantReviews[
+                action.restaurantId
+            ].map((review) => review.id === action.newReview.id ? action.newReview : review);
             return newState;
         }
         case DELETE_REVIEWS: {
             newState = { ...state }
-            newState.restaurantReviews = newState.restaurantReviews.filter((review) => review.id !== action.reviewId);
+            newState.restaurantReviews[action.restaurantId] = newState.restaurantReviews[
+                action.restaurantId
+            ].filter((review) => review.id !== action.reviewId);
             return newState;
         }
         default:
