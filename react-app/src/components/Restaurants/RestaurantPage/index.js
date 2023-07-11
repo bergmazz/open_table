@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getDetailsRestaurant } from "../../../store/restaurantDetails";
+import CreateReviewModal from "../../Reviews/NewReview";
 import './RestaurantPage.css'
 
 
