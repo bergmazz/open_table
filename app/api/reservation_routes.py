@@ -17,7 +17,7 @@ def get_reservations(restaurant_id):
     restaurant = Restaurant.query.get(restaurant_id)
     if restaurant is None:
         return jsonify({'error': 'Restaurant could not be found.'}), 404
-    
+
     non_owner_reservations = [reservation.non_owner_to_dict() for reservation in Reservation.query.filter_by(restaurant_id=restaurant_id).all()]
     owner_reservations = [reservation.owner_to_dict() for reservation in Reservation.query.filter_by(restaurant_id=restaurant_id).all()]
 
@@ -34,6 +34,7 @@ def create_reservation(restaurant_id):
     """
     Creates a new reservation
     """
+    # print("--------------------in backend")
     restaurant = Restaurant.query.get(restaurant_id)
 
     # Checks if restaurant id is valid
@@ -41,10 +42,14 @@ def create_reservation(restaurant_id):
         return jsonify({'error': 'Restaurant not found'}), 404
 
     form = ReservationForm()
+    form.status.default = 'confirmed'
+    # print("-----------------form?:", form.errors)
     form['csrf_token'].data = request.cookies['csrf_token']
+    # print("-----------------CSRF token:", request.cookies['csrf_token'])
+    # print("-------------------------form", form.data)
     if form.validate_on_submit():
+        # print("-----------------validated")
         data = form.data
-
         # Check if there is an existing reservation at the specified time
         for reservation in restaurant.reservations:
             if reservation.reservation_time == data["reservation_time"]:
@@ -70,11 +75,13 @@ def create_reservation(restaurant_id):
         db.session.commit()
 
         return new_reservation.to_dict()
+
     if form.errors:
+        # print("------------errors", form.errors)
         errors = {}
         for field_name, field_errors in form.errors.items():
             errors[field_name] = field_errors[0]
-        return {'error': errors}
+        return  jsonify({'error': errors}), 400
 
 # Edit a Reservation
 @reservation_routes.route('reservations/<int:reservation_id>', methods=['PUT'])
