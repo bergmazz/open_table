@@ -32,7 +32,7 @@ const HomePage = () => {
     }
 
     const shuffledRestaurants = shuffle(restaurantValues)
-    const selectedRestaurants = shuffledRestaurants.slice(0, 8)
+    const selectedRestaurants = shuffledRestaurants.slice(0, 12)
     // console.log("RANDOM, ", selectedRestaurants)
     
     
@@ -53,7 +53,10 @@ const HomePage = () => {
                 <SearchBar />
             </div>
             </div>
-                <h2 className="featured-bar">Featured restaurants</h2>
+            <div className="featured-bar">
+                <h2>Featured restaurants</h2>
+                <Link to='/restaurants'>View all Restaurants</Link>
+            </div>
             <div className="restaurant-cards">
                 {
                     selectedRestaurants.map(restaurant => (

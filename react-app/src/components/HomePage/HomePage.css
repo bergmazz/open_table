@@ -55,10 +55,14 @@ body {
 
   .featured-bar {
     position: relative;
-    left: 60px;
+    left: 40px;
     color: #333;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: 90px;
   }
-  
+
   .card-container {
     display: flex;
     flex-direction: column;

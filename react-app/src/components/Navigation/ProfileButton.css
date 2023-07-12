@@ -7,6 +7,7 @@
     /* width: 450px;
     right: 0;
     left: 200px; */
+    
   }
   
   .dropdown-btn {
@@ -27,12 +28,12 @@
     top: 40px;
     background-color: white;
     padding: 10px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.9);
     z-index: 1;
     /* display: none; */
     flex-direction: column;
   }
-  
+
   .profile-dropdown.dropdown-open {
     display: flex;
   }
@@ -59,7 +60,7 @@
     background-color: #f1f1f1;
   }
   
-  .logout-user {
+  .logout-user, .open-modal-button {
     background-color: #007bff;
     width: 100%;
     color: white;
@@ -73,3 +74,5 @@
   .logout-user:hover {
     background-color: #0056b3;
   }
+
+
