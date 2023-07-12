@@ -1,19 +1,25 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getDetailsRestaurant } from "../../../store/restaurantDetails";
 import CreateReviewModal from "../../Reviews/NewReview";
 import './RestaurantPage.css'
-
+import { addFavorites, deleteFavorites } from "../../../store/favorite";
 
 const RestaurantPage = () => {
     const dispatch = useDispatch();
-
-    const restaurant = useSelector(state => state.restaurantDetails)
-
     const { id } = useParams();
+    const restaurant = useSelector(state => state.restaurantDetails)
+    const user = useSelector(state => state.session.user)
 
-    console.log("idddd", id)
+    // check if already saved restaurant
+    const checkFav = user?.favorites.every(fav => fav.restaurantId !== id);
+    console.log("ISSSS IT ALREADY FAV???", checkFav)
+    const [favorite, setFavorite] = useState(checkFav);
+
+
+
+
 
     console.log("1: IN RESTAURANT DETAILS COMPONENT", restaurant);
 
@@ -45,7 +51,22 @@ const RestaurantPage = () => {
             }
         }
 
-        console.log("STARRRRR", starArr)
+        // add fav
+        const addFav = (e) => {
+            e.preventDefault();
+            console.log("in save restauranttttttt")
+            dispatch(addFavorites(user, id));
+            setFavorite(true)
+          };
+
+
+        // delete fav
+        const deleteFav = (e) => {
+            e.preventDefault();
+            console.log("in UNNsave restauranttttttt")
+            dispatch(deleteFavorites(user, id));
+            setFavorite(false);
+          };
 
         return (
             <div className="outer-restaurant-container">
@@ -53,7 +74,19 @@ const RestaurantPage = () => {
 
                     <div className="restaurant-cover-image">
                         <img className="restaurant-image-cover" src={`${restaurant.coverImage}`} alt="" />
-                        <button className="fav-button"><i class="fa-regular fa-bookmark"></i> Save this restaurant</button>
+                        {
+                            user ? (
+                                <span>
+                                    {
+                                        favorite ? (
+                                            <button className="fav-button" onClick={deleteFav}><i className="fa-solid fa-heart"></i></button>
+                                        ) : (
+                                            <button className="fav-button" onClick={addFav}><i className="far fa-heart"></i></button>
+                                        )
+                                    }
+                                </span>
+                            ): null}
+
                     </div>
 
                     <div className="restaurant-column1">Ï
@@ -73,9 +106,9 @@ const RestaurantPage = () => {
                                     <div className="star-row">
                                     {
                                         starArr.map((star, i) => {
-                                            if (star === 0) return <i className="fa-regular fa-star" key={star}></i>
-                                            else if (star < 1) return <i className="fa-solid fa-star-half-stroke" key={star}></i>
-                                            else return <i className="fa-solid fa-star" key={star}></i>
+                                            if (star === 0) return <i className="fa-regular fa-star" key={i}></i>
+                                            else if (star < 1) return <i className="fa-solid fa-star-half-stroke" key={i}></i>
+                                            else return <i className="fa-solid fa-star" key={i}></i>
                                         })
                                     }
                                     </div>

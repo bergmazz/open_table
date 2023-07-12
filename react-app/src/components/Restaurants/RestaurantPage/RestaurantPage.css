@@ -54,7 +54,6 @@
   color: black; /* set your desired text color */
   border: none; /* remove button border */
   padding: 10px 20px; /* set your desired padding */
-  width: 200px;
 }
 
 .fav-button:hover {

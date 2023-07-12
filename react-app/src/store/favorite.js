@@ -35,16 +35,19 @@ export const getFavorites = (userId) => async (dispatch) => {
 }
 
 export const addFavorites = (userId, restaurantId) => async (dispatch) => {
-    const response = await fetch('/api/user/${userId}/favorites', {
+    console.log("in addddfavvvvsss", userId, restaurantId)
+    const response = await fetch('/api/users/favorites', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ userId, restaurantId })
+        body: JSON.stringify({userId, restaurantId })
     });
 
     if (response.ok) {
         const newFavorite = await response.json();
         dispatch(addFavorite(newFavorite));
         return newFavorite;
+    }else{
+        return response
     }
 }
 
