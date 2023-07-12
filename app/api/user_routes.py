@@ -48,13 +48,18 @@ def get_favorites(id):
     return { 'favorites': [fav.to_dict() for fav in favorites]}
 
 # Add favorite
-@user_routes.route('/favorites', methods=['POST'])
-def add_favorite(user, restaurant):
-        print("INNNNN ADDD FAVVV ROUTE============")
-        newFav = Favorite(user_id=user, restaurant_id=restaurant)
+@user_routes.route('/<int:id>/favorites', methods=['POST'])
+def add_favorite(id):
+    form = FavoriteForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        newFav = Favorite(user_id=form['userId'].data,
+                          restaurant_id=form['restaurantId'].data)
         db.session.add(newFav)
         db.session.commit()
         return newFav.to_dict()
+    else:
+        return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 
 

@@ -4,41 +4,60 @@ import { useParams } from "react-router-dom";
 import { getDetailsRestaurant } from "../../../store/restaurantDetails";
 import CreateReviewModal from "../../Reviews/NewReview";
 import './RestaurantPage.css'
-import { addFavorites, deleteFavorites } from "../../../store/favorite";
+import { getFavorites ,addFavorites, deleteFavorites } from "../../../store/favorite";
 
 const RestaurantPage = () => {
     const dispatch = useDispatch();
     const { id } = useParams();
-    const restaurant = useSelector(state => state.restaurantDetails)
-    const user = useSelector(state => state.session.user)
-
-    // check if already saved restaurant
-    const checkFav = user?.favorites.every(fav => fav.restaurantId !== id);
-    console.log("ISSSS IT ALREADY FAV???", checkFav)
-    const [favorite, setFavorite] = useState(checkFav);
-
-
-
+    const restaurant = useSelector(state => state.restaurantDetails);
+    const favorites = useSelector(state => state.favorites);
+    const user = useSelector(state => state.session?.user);
+    const [favorite, setFavorite] = useState(false);
+    // console.log("USSRRRR", user)
+    // console.log("restaurant iddddd", id)
 
 
     console.log("1: IN RESTAURANT DETAILS COMPONENT", restaurant);
+    // console.log("FAVORITE BEGINNING", favorites)
+
 
     useEffect(() => {
         console.log("2: I'm in the useEffect function.")
         dispatch(getDetailsRestaurant(id));
+        if (user) dispatch(getFavorites(user.id))
     }, [dispatch]);
 
-    if (Object.keys(restaurant).length) {
-        console.log("RESTAURANTAASSSSSSSSSSSSSSS", restaurant)
-        let reviews = "Reviews"
-        if (restaurant.reviews.length === 1) reviews = "Review"
+
+
+    if (!user && Object.keys(restaurant).length || user && Object.keys(favorites).length !== 0) {
+    //     console.log("favorites", favorites)
+    //     let favArr = Object.values(favorites);
+
+
+    //     // check if already saved restaurant
+    //     let checkFav = false;
+    //     if (favArr) {
+    //     checkFav = favorites.find(f => f.restaurantId === id);
+    //     console.log("AFTER CHECK FAVE, IS IT ALREADY SAVED?-----------", Object.values(favorites).filter(f => f.restaurantId === id))
+    //     // checkFav = Object.values(favorites).every(fav => fav.restaurantId == id);
+    // }
+
+
+        // check restaurant info
+        let reviews = "Reviews";
+        console.log("XXXX, ", restaurant.reviews)
+        if (restaurant.reviews.length) {
+            if (restaurant.reviews.length === 1) {
+                reviews = "Review";
+            }
+        }
         let priceRange = "$50 and over"
         if (restaurant.priceRange <= 2) priceRange = "$30 and under";
         if (restaurant.priceRange === 3) priceRange = "$31 to $50";
 
+        // star rating
         const fullStars = Math.floor(restaurant.averageRating);
         const starArr = [];
-
         for (let i = 1; i <= fullStars; i++) {
             starArr.push(1);
         }
@@ -55,7 +74,7 @@ const RestaurantPage = () => {
         const addFav = (e) => {
             e.preventDefault();
             console.log("in save restauranttttttt")
-            dispatch(addFavorites(user, id));
+            dispatch(addFavorites(user.id, id));
             setFavorite(true)
           };
 
@@ -63,8 +82,10 @@ const RestaurantPage = () => {
         // delete fav
         const deleteFav = (e) => {
             e.preventDefault();
-            console.log("in UNNsave restauranttttttt")
-            dispatch(deleteFavorites(user, id));
+            console.log("in UNNsave restauranttttttt", )
+
+            console.log("in addFAv, ", favorites)
+            dispatch(deleteFavorites(user.id));
             setFavorite(false);
           };
 

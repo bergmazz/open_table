@@ -22,7 +22,7 @@ export const deleteFavorite = (favoriteId) => ({
 
 // Thunks
 export const getFavorites = (userId) => async (dispatch) => {
-    const response = await fetch('/api/user/${userId}/favorites', {
+    const response = await fetch(`/api/user/${userId}/favorites`, {
         headers: {
             'Content-Type': 'application/json'
         },
@@ -35,28 +35,26 @@ export const getFavorites = (userId) => async (dispatch) => {
 }
 
 export const addFavorites = (userId, restaurantId) => async (dispatch) => {
-    console.log("in addddfavvvvsss", userId, restaurantId)
-    const response = await fetch('/api/users/favorites', {
+    const response = await fetch(`/api/user/${userId}/favorites`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({userId, restaurantId })
+        body: JSON.stringify({ userId, restaurantId })
     });
 
     if (response.ok) {
         const newFavorite = await response.json();
         dispatch(addFavorite(newFavorite));
         return newFavorite;
-    }else{
-        return response
     }
 }
 
-export const deleteFavorites = (id, userId) => async (dispatch) => {
-    const response = await fetch('/api/user/${userId}/favorites/${id}', {
+export const deleteFavorites = (favId, userId) => async (dispatch) => {
+    console.log("in FELETE THUNKKKK")
+    const response = await fetch(`/api/user/${userId}/favorites/${favId}`, {
         method: 'DELETE',
     });
 
-    dispatch(deleteFavorite(id));
+    dispatch(deleteFavorite(favId));
     return response;
 }
 
@@ -67,9 +65,11 @@ const favoriteReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_FAVORITE: {
             const newState = { ...state };
-            action.payload.forEach((favorite) => {
+            if (!action.payload.favorites.length) return {favorites: null}
+            action.payload.favorites.forEach((favorite) => {
                 newState[favorite.id] = favorite;
             });
+            console.log("ACTION", action.payload)
             return newState;
         }
         case ADD_FAVORITE: {
