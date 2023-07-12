@@ -1,7 +1,8 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
-from app.models import db, Restaurant
+from app.models import db, Restaurant, Review
 from app.forms import RestaurantForm
+from sqlalchemy.orm import lazyload, joinedload
 
 restaurant_routes = Blueprint('restaurants', __name__)
 
@@ -25,7 +26,8 @@ def get_retaurants():
     elif city:
         query = query.filter(Restaurant.city == city)
 
-    restaurants = [rest.to_dict() for rest in query.all()]
+    restaurants = [rest.details_to_dict() for rest in query.all()]
+
     return jsonify({ "restaurants": restaurants }), 200
 
                                     # ##google maps api example
