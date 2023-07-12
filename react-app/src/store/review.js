@@ -52,33 +52,61 @@ export const getRestaurantReviews = (restaurantId) => async (dispatch) => {
     }
 }
 
-export const addReviews = (restaurant_id, rating, comment, review_image) => async (dispatch) => {
+// export const addReviews = (restaurant_id, rating, comment, review_image) => async (dispatch) => {
+//     const reviewData = {
+//         rating, comment, review_image
+//     }
+//     console.log('Review thunk', reviewData)
+
+//     const res = await fetch(`/api/restaurants/${restaurant_id}/reviews`, {
+//         method: "POST",
+//         headers: { 'Content-Type': 'application/json' },
+//         body: JSON.stringify({
+//             rating, comment, review_image
+//         })
+//     });
+
+//     if (res.ok) {
+//         const review = await res.json();
+//         dispatch( addReview( restaurant_id, reviewData ) );
+//         return review
+//     } else if (res.status < 500) {
+//         const data = await res.json();
+//         if (data.errors) {
+//             return data.errors
+//         } else {
+//             return ['An error occured. Please try again.']
+//         }
+//     }
+// }
+
+export const addReviews = ( restaurant_id, rating, comment, review_image ) => async ( dispatch ) => {
     const reviewData = {
         rating, comment, review_image
     }
-
-    const res = await fetch(`/api/restaurants/${restaurant_id}/reviews`, {
-        method: "POST",
+    console.log( "thunk review data:", reviewData )
+    const res = await fetch( `/api/restaurants/${ restaurant_id }/reviews/`, {
+        method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
             rating, comment, review_image
         })
-    });
+    } );
 
     if (res.ok) {
         const review = await res.json();
-        dispatch(addReview(restaurant_id, reviewData));
+        dispatch( addReview( restaurant_id, review) );
         return review
     } else if (res.status < 500) {
         const data = await res.json();
         if (data.errors) {
-            const errorData = await res.json()
-            return errorData.errors
+            return data.errors
         } else {
             return ['An error occured. Please try again.']
         }
     }
 }
+
 
 export const editReviews = (restaurantId, reviewId, review) => async (dispatch) => {
     const {
@@ -138,12 +166,9 @@ export default function reviewsReducer(state = initialState, action) {
             return newState;
         }
         case ADD_REVIEWS: {
-            newState = { ...state }
-            newState.restaurantReviews[action.restaurantId] = [
-                ...newState.restaurantReviews[ action.restaurantId ],
-                action.newReview
-            ];
-            return newState;
+            const newState = { ...state }
+            newState.restaurantReviews = { ...state.restaurantReviews, [action.restaurantId]: action.newReview }
+            return newState
         }
         case EDIT_REVIEWS: {
             newState = { ...state }
@@ -154,9 +179,7 @@ export default function reviewsReducer(state = initialState, action) {
         }
         case DELETE_REVIEWS: {
             newState = { ...state }
-            newState.restaurantReviews[action.restaurantId] = newState.restaurantReviews[
-                action.restaurantId
-            ].filter((review) => review.id !== action.reviewId);
+            delete newState.restaurantReviews[action.reviewId]
             return newState;
         }
         default:
