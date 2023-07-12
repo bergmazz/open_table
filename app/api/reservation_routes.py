@@ -52,6 +52,8 @@ def create_reservation(restaurant_id):
         data = form.data
         # Check if there is an existing reservation at the specified time
         for reservation in restaurant.reservations:
+            print("reservation.reservation_time", reservation.reservation_time, "datareservationtime", data["reservation_time"])
+
             if reservation.reservation_time == data["reservation_time"]:
                 if reservation.status != "cancelled":
                     return jsonify({'error': 'The selected time slot is already booked'}), 400
@@ -101,7 +103,7 @@ def edit_reservation(restaurant_id, reservation_id):
 
     if current_user.id is not reservation.user_id:
         if current_user.id is not restaurant.user_id:
-            return jsonify({ 'error': 'You are not authorized to edit this post' })
+            return jsonify({ 'error': 'You are not authorized to edit this post' }), 400
 
     form = ReservationForm(obj=reservation)
     data = form.data
@@ -121,10 +123,10 @@ def edit_reservation(restaurant_id, reservation_id):
         return reservation.to_dict()
 
     if form.errors:
-        errors = {}
+        errors = []
         for field_name, field_errors in form.errors.items():
-            errors[field_name] = field_errors[0]
-        return {'error': errors}
+            errors.extend(field_errors)
+        return {'errors': errors}
 
 # Delete a Reservation (technically just updates status to cancel)
 @reservation_routes.route('/reservations/<int:reservation_id>', methods=['DELETE'])

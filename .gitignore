@@ -5,3 +5,4 @@ __pycache__/
 .DS_Store
 .vscode/
 instance/dev.db
+react-app/package.json

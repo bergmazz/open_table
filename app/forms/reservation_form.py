@@ -6,7 +6,7 @@ import datetime
 
 def validate_date(form, field):
     if field.data.date() < datetime.date.today():
-        raise ValidationError("reservation time cannot be in the past")
+        raise ValidationError("Reservation time cannot be in the past")
 
 def validate_time_slot(form, field):
     slot_duration = 30  # Set the slot duration to 30 minutes
