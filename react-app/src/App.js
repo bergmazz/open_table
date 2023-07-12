@@ -12,6 +12,7 @@ import UserProfile from "./components/UserProfile";
 import CreateReview from "./components/Reviews/NewReview";
 import ReservationForm from "./components/ReservationForm"
 import CreateRestaurant from "./components/CreateRestaurant";
+import OwnerRestaurant from "./components/UserProfile/owned";
 
 function App() {
   const dispatch = useDispatch();
@@ -34,7 +35,7 @@ function App() {
           <Route path="/signup">
             <SignupFormPage />
           </Route>
-          <Route exact path="/new-restaurant/">
+          <Route exact path="/new-restaurant">
             <CreateRestaurant />
           </Route>
           <Route exact path="/restaurants/:id/reserve">
@@ -51,6 +52,9 @@ function App() {
           </Route>
           <Route exact path="/user">
             <UserProfile />
+          </Route>
+          <Route exact path="/user/restaurants">
+            <OwnerRestaurant />
           </Route>
         </Switch>
       )}
