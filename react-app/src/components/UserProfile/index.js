@@ -26,7 +26,7 @@ function UserProfile () {
         <div className="user">
             <div className="extends-nav-height">
                 <h2>{ currentUser.firstName }{ currentUser.lastName }</h2>
-                <h4>0 points</h4>
+                <h4>{ points } points</h4>
             </div>
 
             <div className="links">
@@ -37,10 +37,10 @@ function UserProfile () {
 
             <div className="points-container">
                 <h3>Points</h3>
-                <h4>Your points: 0 points</h4>
+                <h4>Your points: { points }  points</h4>
                 <div className="earned">
                     <p>Earned</p>
-                    <h4>0 PTS</h4>
+                    <h4>{ points }  PTS</h4>
                 </div>
                 <div className="goal">
                     <p>Next Reward</p>

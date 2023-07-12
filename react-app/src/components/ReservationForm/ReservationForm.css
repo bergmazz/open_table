@@ -1,21 +1,65 @@
-.reservation-form-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.reservation-box {
+display: grid;
+grid-area: reservation-box;
+grid-template-columns: 2fr;
+grid-template-rows: 1.5fr 1fr 1fr 2fr 2fr 1fr;
+grid-template-areas:
+    "make-res make-res"
+    "party-size party-size"
+    "party-select party-select"
+    "date time"
+    "notes"
+    "book";
+border-radius: 4px;
+box-shadow: 0px 2px 3px 0px rgba(181, 181, 180, 0.438);
+padding: 10px;
 }
 
-.reserve {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+
+.make-res {
+grid-area: make-res;
+background-color: green;
+display: flex;
+justify-content: center;
+align-items: center;
+border-bottom: solid lightgray thin;
+border-radius: 4px;
 }
 
-.reserve label {
-    display: flex;
-    align-items: center;
+.party-size {
+grid-area: party-size;
+background-color: blue;
+font-size: 12px;
+display: flex;
+align-items: center;
 }
 
-.reserve input,
-.reserve select {
-    margin-left: 10px;
+.party-select {
+grid-area: party-select;
+background-color: yellow;
+}
+
+.date{
+grid-area: date ;
+background-color: blueviolet;
+}
+
+.time{
+grid-area: time ;
+background-color: blueviolet;
+}
+
+
+.find-time {
+grid-area: find-time;
+background-color: rosybrown;
+}
+
+
+.notes {
+grid-area: notes;
+}
+
+.book {
+grid-area: book;
 }

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getDetailsRestaurant } from "../../../store/restaurantDetails";
 import CreateReviewModal from "../../Reviews/NewReview";
+import ReservationForm from "../../ReservationForm";
 import './RestaurantPage.css'
 
 
@@ -12,18 +13,16 @@ const RestaurantPage = () => {
     const restaurant = useSelector(state => state.restaurantDetails)
 
     const { id } = useParams();
-
-    console.log("idddd", id)
-
-    console.log("1: IN RESTAURANT DETAILS COMPONENT", restaurant);
+    // console.log("idddd", id)
+    // console.log("1: IN RESTAURANT DETAILS COMPONENT", restaurant);
 
     useEffect(() => {
-        console.log("2: I'm in the useEffect function.")
+        // console.log("2: I'm in the useEffect function.")
         dispatch(getDetailsRestaurant(id));
     }, [dispatch]);
 
     if (Object.keys(restaurant).length) {
-        console.log("RESTAURANTAASSSSSSSSSSSSSSS", restaurant)
+        // console.log("RESTAURANTAASSSSSSSSSSSSSSS", restaurant)
         let reviews = "Reviews"
         if (restaurant.reviews.length === 1) reviews = "Review"
         let priceRange = "$50 and over"
@@ -45,7 +44,7 @@ const RestaurantPage = () => {
             }
         }
 
-        console.log("STARRRRR", starArr)
+        // console.log("STARRRRR", starArr)
 
         return (
             <div className="outer-restaurant-container">
@@ -114,14 +113,19 @@ const RestaurantPage = () => {
                     </div>
 
                     <div className="restaurant-column2">
-                        <div className="reservation-box">
+                        {/* <div className="reservation-box">
                             <div className="make-res">Make a reservation</div>
                             <div className="party-size">Party Size</div>
                             <div className="party-select">2 people</div>
                             <div className="res-time">date time</div>
                             <div className="find-time">find time</div>
                             <div className="times-booked">Booked 11 times today</div>
+                        </div> */}
+                        <div className="reservation-box">
+                            <div className="make-res">Make a reservation</div>
+                            <ReservationForm />
                         </div>
+
                         <div className="delivery-box">Delivery</div>
                         <div className="map-container">Map</div>
                         <div className="restaurant-details-box">Details</div>

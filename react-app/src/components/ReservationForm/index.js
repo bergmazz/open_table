@@ -96,9 +96,10 @@ const ReservationForm = () => {
         <div className="reservation-form-container">
             {/* <h1>Reservation Form</h1> */ }
             <form className="reserve" onSubmit={ handleSubmit }>
-                <label className="num">
-
+                <div className="party-size">Party Size</div>
+                <label >
                     <input
+                        className="party-select"
                         type="number"
                         value={ numberOfPeople }
                         onChange={ ( e ) => setNumberOfPeople( e.target.value ) }
@@ -106,22 +107,26 @@ const ReservationForm = () => {
                 </label>
                 {/* { errors.numberOfPeople && <span>This field is required</span> } */ }
 
+                <div className="date-time">Date and Time</div>
                 <label className="date">
-                    <i className="fas fa-calendar"></i>
+                    {/* <i className="fas fa-calendar"></i> */ }
                     <input
+                        className="date"
                         type="date"
                         id="date"
                         value={ date }
                         onChange={ ( e ) => setDate( e.target.value ) }
                     />
                 </label>
-                <label className="time" >Time:</label>
+                <label >
                 <input
+                        className="time"
                     type="time"
                     id="time"
                     value={ time }
                     onChange={ ( e ) => setTime( e.target.value ) }
-                />
+                    />
+                </label>
                 {/* { errors.time && <span>This field is required</span> } */ }
 
                 {/* EDIT RESERVATION: */ }
@@ -133,9 +138,10 @@ const ReservationForm = () => {
                 </select>
                 { errors.status && <span>This field is required</span> } */}
 
-                <label htmlFor="notes">
+                <label >
                     {/* Notes: */ }
                     <input
+                        className="notes"
                         type="text"
                         id="notes"
                         onChange={ ( e ) => setNotes( e.target.value ) }
@@ -144,7 +150,7 @@ const ReservationForm = () => {
                 </label>
                 {/* { errors && <div>{ errors }</div> } */ }
 
-                <button type="submit" onClick={ handleAddPoints } >Create Reservation</button>
+                <button className="book" type="submit" onClick={ handleAddPoints } >Book Table</button>
                 <ul>
                     { errors.map( ( error, idx ) => <li key={ idx }>{ error }</li> ) }
                 </ul>

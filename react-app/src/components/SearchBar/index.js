@@ -49,6 +49,7 @@ function SearchBar () {
 
             <label className="date">Date:
                 <input
+                    className="dateinput"
                     type="date"
                     id="date"
                     value={ date }
@@ -58,6 +59,7 @@ function SearchBar () {
 
             <label className="time" >Time:</label>
             <input
+                className="timeinput"
                 type="time"
                 id="time"
                 value={ time }
@@ -67,6 +69,7 @@ function SearchBar () {
 
             <label className="city" htmlFor="city">City:</label>
             <select
+                className="cityinput"
                 id="city"
                 value={ city }
                 onChange={ ( e ) => setCity( e.target.value ) }
@@ -81,6 +84,7 @@ function SearchBar () {
 
             <label className="food-type" htmlFor="cuisine">Cuisine Type:</label>
             <select
+                className="typeinput"
                 id="cuisine"
                 value={ cuisine }
                 onChange={ ( e ) => setCuisine( e.target.value ) }
