@@ -1,9 +1,22 @@
+.user{
+    width: 80%;
+    margin: 0 auto;
+}
+
 .extends-nav-height {
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100px;
+    flex-direction: column;
+}
+
+.extends-nav-height h4 {
+margin: 1px;
+}
+
+.extends-nav-height h2 {
+margin: 1px;
 }
 
 .links {
@@ -24,3 +37,16 @@
 /* .reservations-container{
     overflow-y: scroll;
 } */
+
+.points-bar {
+  width: 100%;
+  height: 20px;
+  background-color: lightgray;
+  border-radius: 10px;
+}
+
+.progress {
+  height: 100%;
+  background-color: green;
+  border-radius: 10px;
+}

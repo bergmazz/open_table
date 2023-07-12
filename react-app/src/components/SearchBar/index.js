@@ -2,11 +2,29 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom"
 import "./SearchBar.css"
+
+const getTodayDate = () => {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String( today.getMonth() + 1 ).padStart( 2, "0" );
+    const day = String( today.getDate() ).padStart( 2, "0" );
+    return `${ year }-${ month }-${ day }`;
+};
+
+const getOneHourFromNow = () => {
+    const currentTime = new Date();
+    currentTime.setHours( currentTime.getHours() + 1 );
+    currentTime.setMinutes( Math.ceil( currentTime.getMinutes() / 30 ) * 30 ); // Round up to next 30-minute increment
+    const hours = String( currentTime.getHours() ).padStart( 2, "0" );
+    const minutes = String( currentTime.getMinutes() ).padStart( 2, "0" );
+    return `${ hours }:${ minutes }`;
+};
+
 function SearchBar () {
     const [ city, setCity ] = useState( "" );
     const [ cuisine, setCuisine ] = useState( "" );
-    const [ date, setDate ] = useState( "" );
-    const [ time, setTime ] = useState( "" );
+    const [ date, setDate ] = useState( getTodayDate() );
+    const [ time, setTime ] = useState( getOneHourFromNow() );
     // const dispatch = useDispatch();
     const history = useHistory();
 
@@ -53,7 +71,7 @@ function SearchBar () {
                 value={ city }
                 onChange={ ( e ) => setCity( e.target.value ) }
             >
-                <option value="">Select City</option>
+                <option value="">Search by City</option>
                 <option value="San Francisco">San Francisco</option>
                 <option value="New York">New York</option>
                 <option value="Los Angeles">Los Angeles</option>
@@ -67,7 +85,7 @@ function SearchBar () {
                 value={ cuisine }
                 onChange={ ( e ) => setCuisine( e.target.value ) }
             >
-                <option value="">Select Cuisine</option>
+                <option value="">Search by Cuisine</option>
                 <option value="Italian">Italian</option>
                 <option value="Chinese">Chinese</option>
                 <option value="Mexican">Mexican</option>

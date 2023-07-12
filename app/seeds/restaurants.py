@@ -105,7 +105,7 @@ def seed_restaurants():
         state='FL', zip_code=32801, country='USA', cuisine_type='Greek', price_range=2,
         open_hours='12:00 pm', closing_hours='10:00 pm')
     restaurant21 = Restaurant(
-        user_id=11, restaurant_name='Pasta Bella', cover_image='https://images.unsplash.com/photo-1498579150354-977475b7ea0b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8aXRhbGlhbiUyMGZvb2R8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60',
+        user_id=1, restaurant_name='Pasta Bella', cover_image='https://images.unsplash.com/photo-1498579150354-977475b7ea0b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8aXRhbGlhbiUyMGZvb2R8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60',
         email='pasta@bella.com', phone_number=1234567911, address='789 Linguine St', city='San Francisco',
         state='CA', zip_code=94102, country='USA', cuisine_type='Italian', price_range=2,
         open_hours='11:00 am', closing_hours='9:30 pm')

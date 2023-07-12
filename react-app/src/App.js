@@ -10,11 +10,8 @@ import HomePage from "./components/HomePage";
 import RestaurantPage from "./components/Restaurants/RestaurantPage";
 import UserProfile from "./components/UserProfile";
 import CreateReview from "./components/Reviews/NewReview";
-<<<<<<< HEAD
 import ReservationForm from "./components/ReservationForm";
-=======
-import ReservationForm from "./components/ReservationForm"
->>>>>>> frontend
+
 
 function App() {
   const dispatch = useDispatch();
@@ -43,13 +40,8 @@ function App() {
           <Route exact path="/restaurants/:id">
             <RestaurantPage />
           </Route>
-<<<<<<< HEAD
-          <Route exact path="/restaurants/:id/reservation">
-            <ReservationForm />
-=======
           <Route exact path='/restaurants/:id/reviews'>
             <CreateReview />
->>>>>>> frontend
           </Route>
           <Route exact path="/restaurants">
             <AllRestaurants />

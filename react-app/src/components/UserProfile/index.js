@@ -16,10 +16,14 @@ function UserProfile () {
 
     const currentUser = useSelector( state => state.session.user )
     const reservations = useSelector( state => state.reservations.byUser )
+    // const points = useSelector( ( state ) => state.reservations.points );
+    const points = reservations.length * 100
     // console.log( "---------------byUser state:", reservations )
+    const goal = 5000;
+    const progress = Math.min( ( points / goal ) * 100, 100 );
 
     return (
-        <>
+        <div className="user">
             <div className="extends-nav-height">
                 <h2>{ currentUser.firstName }{ currentUser.lastName }</h2>
                 <h4>0 points</h4>
@@ -40,14 +44,14 @@ function UserProfile () {
                 </div>
                 <div className="goal">
                     <p>Next Reward</p>
-                    <h4>2,000 PTS</h4>
+                    <h4>5,000 PTS</h4>
                 </div>
-                <div className="points-bar" >
-                    <img alt="progress towards reward"></img>
+                <div className="points-bar">
+                    <div className="progress" style={ { width: `${ progress }%` } }></div>
                 </div>
-                <div className="reward">
-                    <p>You are only 2,000 points away from a $10 reward!</p>
-                </div>
+                {/* <div className="reward">
+                    <p>It only takes 5,000 points for a $10 reward!</p>
+                </div> */}
             </div>
 
             <div className="reservations-container">
@@ -73,7 +77,7 @@ function UserProfile () {
                 ) }
             </div>
 
-        </>
+        </div>
     );
 }
 
