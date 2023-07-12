@@ -53,6 +53,7 @@ const RestaurantPage = () => {
 
                     <div className="restaurant-cover-image">
                         <img className="restaurant-image-cover" src={`${restaurant.coverImage}`} alt="" />
+                        <button className="fav-button"><i class="fa-regular fa-bookmark"></i> Save this restaurant</button>
                     </div>
 
                     <div className="restaurant-column1">Ï

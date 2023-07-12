@@ -32,7 +32,8 @@
     grid-area: restaurant-cover-image;
     /* background-color: lightblue; */
     background-color: white;
-    /* overflow: hidden; */
+    position: relative; /* set container to a relative position */
+
 }
 
 
@@ -40,7 +41,27 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
+
 }
+
+.fav-button {
+  position: absolute; /* set button to an absolute position */
+  top: 10%; /* adjust the top position of the button */
+  left: 85%; /* adjust the left position of the button */
+  transform: translate(-50%, -50%); /* center the button */
+  z-index: 2; /* set a higher z-index than the image */
+  background-color: white; /* set your desired background color */
+  color: black; /* set your desired text color */
+  border: none; /* remove button border */
+  padding: 10px 20px; /* set your desired padding */
+  width: 200px;
+}
+
+.fav-button:hover {
+  background-color: rgb(251, 243, 243);
+  border: red thin solid;
+}
+
 
 .restaurant-column1 {
     grid-area: restaurant-column1;
