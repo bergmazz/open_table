@@ -52,6 +52,9 @@ const OwnerRestaurant = () => {
                 <button onClick={() => handleDelete(restaurant.id)}>Delete Restaurant</button>
             </div>
             ))}
+            <Link to="/new-restaurant">
+                <button>Create a restaurant</button>
+            </Link>
         </div>
     )
 }

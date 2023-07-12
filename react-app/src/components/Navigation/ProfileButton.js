@@ -40,6 +40,11 @@ function ProfileButton({ user }) {
     history.push("/");
   };
 
+  const closeMenuAndNavigate = (e) => {
+    e.stopPropagation();
+    closeMenu();
+  };
+
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
   const closeMenu = () => setShowMenu(false);
 
@@ -50,31 +55,38 @@ function ProfileButton({ user }) {
       </button>
       <ul className={ulClassName} ref={ulRef}>
         {user ? (
-          <div className="welcomeUser">
-            <li>
-            Hello, {user.firstName}!
-            <NavLink className="myprofile" to="/user">My Profile</NavLink>
-            <NavLink to="/user/favorites">My Favorite Restaurants</NavLink>
-            </li>
-            <li>
+          <>
+            <li className="user-greeting">Hello, {user.firstName}!</li>
+            <div onClick={closeMenuAndNavigate}>
+              <li className="dropdown-item">
+                <NavLink to="/user">My Profile</NavLink>
+              </li>
+            </div>
+            <div onClick={closeMenuAndNavigate}>
+              <li className="dropdown-item">
+                <NavLink to="/user/favorites">My Favorite Restaurants</NavLink>
+              </li>
+            </div>
+            <li className="dropdown-item">
               <button onClick={handleLogout} className="logout-user">Log Out</button>
             </li>
-          </div>
+          </>
         ) : (
           <>
-            <OpenModalButton 
-            className="login-user"
-              buttonText="Log In"
-              onItemClick={closeMenu}
-              modalComponent={<LoginFormModal />}
-            />
-
-            <OpenModalButton
-            className="signup-user"
-              buttonText="Sign Up"
-              onItemClick={closeMenu}
-              modalComponent={<SignupFormModal />}
-            />
+            <li className="dropdown-item">
+              <OpenModalButton 
+                buttonText="Log In"
+                onItemClick={closeMenu}
+                modalComponent={<LoginFormModal />}
+              />
+            </li>
+            <li className="dropdown-item">
+              <OpenModalButton
+                buttonText="Sign Up"
+                onItemClick={closeMenu}
+                modalComponent={<SignupFormModal />}
+              />
+            </li>
           </>
         )}
       </ul>

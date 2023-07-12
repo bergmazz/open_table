@@ -12,27 +12,23 @@ function Navigation({ isLoaded }){
 			<li className='home-button'>
 				<NavLink className='home-link' exact to="/">Bone Apple Teeth</NavLink>
 			</li>
-			{isLoaded && (
-				<li className='right-group'>
-				<>
-				{sessionUser && (
-					<li className='profile-reservation-position'>
-						<Link to="/user/reservations">
-							<button>
-								<i className='fa-solid fa-calendar'></i>
-							</button>
-						</Link> 
-						{/* <NavLink className='reservation-link' to="/user/reservations">Upcoming reservations</NavLink> */}
-					</li>
-					)}
-				 <li className='profile-button-position'>
-				 	<ProfileButton user={sessionUser} />
-				 </li>
-				</>
-				</li>
-			)}
+			 <li className='profile-button-position'>
+				<ProfileButton user={sessionUser} />
+			</li>
 		</ul>
 	);
 }
 
 export default Navigation;
+
+
+// {sessionUser && (
+// 	<li className='profile-reservation-position'>
+// 		<Link to="/user/reservations">
+// 			<button>
+// 				<i className='fa-solid fa-calendar'></i>
+// 			</button>
+// 		</Link> 
+// 		{/* <NavLink className='reservation-link' to="/user/reservations">Upcoming reservations</NavLink> */}
+// 	</li>
+// 	)}
