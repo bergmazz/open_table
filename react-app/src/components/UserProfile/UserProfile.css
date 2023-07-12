@@ -1,9 +1,22 @@
+.user{
+    width: 80%;
+    margin: 0 auto;
+}
+
 .extends-nav-height {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    align-items: left;
+    justify-content: left;
     height: 100px;
+    flex-direction: column;
+}
+
+.extends-nav-height h4 {
+margin: 1px;
+}
+
+.extends-nav-height h2 {
+margin: 1px;
 }
 
 .links {
@@ -15,7 +28,6 @@
     flex-direction: column;
 }
 
-.points-container,
 .reservations-container{
     width: 66%;
     float: right;
@@ -24,3 +36,39 @@
 /* .reservations-container{
     overflow-y: scroll;
 } */
+
+.progress {
+    height: 100%;
+    background-color: green;
+    border-radius: 10px;
+}
+
+
+.points-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto 80px;
+    gap: 10px;
+}
+
+.points-container p {
+margin: 0px;
+}
+.points-container h4 {
+margin: 2px;
+}
+
+.earned {
+    grid-column: 1 / span 1;
+}
+
+.goal {
+    grid-column: 4 / span 1;
+}
+
+.points-bar {
+    grid-column: 1 / span 4;
+    height: 20px;
+    background-color: lightgray;
+    border-radius: 10px;
+}

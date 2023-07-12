@@ -3,7 +3,7 @@ const GET_RESTAURANT_RESERVATIONS = 'reservations/GET_RESTAURANT_RESERVATIONS'
 const ADD_RESERVATIONS = 'reservations/ADD_RESERVATIONS'
 const EDIT_RESERVATIONS = 'reservations/EDIT_RESERVATIONS'
 const DELETE_RESERVATIONS = 'reservations/DELETE_RESERVATIONS'
-
+const UPDATE_POINTS = 'reservations/UPDATE_POINTS';
 
 // ------------------------------------------------- ACTIONS
 
@@ -47,6 +47,13 @@ export const deleteReservation = (reservationId) => {
     }
 }
 
+export const updatePoints = ( points ) => {
+    return {
+        type: UPDATE_POINTS,
+        points
+    };
+};
+
 // ----------------------------------------------------- THUNKS
 
 export const getUserReservations = () => async (dispatch) => {
@@ -82,7 +89,7 @@ export const addReservationThunk = ( restaurant_id, number_of_people, reservatio
     const reservationData = {
         number_of_people, reservation_time, status, notes
     }
-    console.log( "thunk reservation data:", reservationData )
+    // console.log( "thunk reservation data:", reservationData )
     const res = await fetch( `/api/restaurants/${ restaurant_id }/reservations`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -94,15 +101,21 @@ export const addReservationThunk = ( restaurant_id, number_of_people, reservatio
     if (res.ok) {
         const reservation = await res.json();
         dispatch( addReservation( restaurant_id, reservationData ) );
+        dispatch( updatePoints( 100 ) );
         return reservation
-    } else if (res.status < 500) {
+    } else {
         const data = await res.json();
-        if (data.errors) {
-            const errorData = await res.json()
-            return errorData.errors
-        } else {
-            return ['An error occured. Please try again.']
-        }
+        return Object.values( data )
+        // console.log( "data:", data )
+
+        // if ( data.errors ) {
+        //     const errorData = await res.json()
+        //     return errorData.errors
+        // }
+            // else {
+            //     return ['An error occured. Please try again.']
+            // }
+
     }
 }
 
@@ -155,7 +168,8 @@ export const deleteReservations = (restaurantId, reservationId) => async (dispat
 
 const initialState = {
     byUser: [],
-    byRestaurant: {}
+    byRestaurant: {},
+    points: 0
 }
 export default function reservationsReducer(state = initialState, action) {
     let newState
@@ -192,6 +206,12 @@ export default function reservationsReducer(state = initialState, action) {
                 action.restaurantId
             ].filter((reservation) => reservation.id !== action.reservationId);
             return newState;
+        }
+        case UPDATE_POINTS: {
+            return {
+                ...state,
+                points: action.points
+            };
         }
         default:
             return state

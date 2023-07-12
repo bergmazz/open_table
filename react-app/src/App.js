@@ -10,7 +10,8 @@ import HomePage from "./components/HomePage";
 import RestaurantPage from "./components/Restaurants/RestaurantPage";
 import UserProfile from "./components/UserProfile";
 import CreateReview from "./components/Reviews/NewReview";
-import ReservationForm from "./components/ReservationForm"
+import ReservationForm from "./components/ReservationForm";
+
 
 function App() {
   const dispatch = useDispatch();
