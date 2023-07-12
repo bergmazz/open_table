@@ -64,6 +64,7 @@
 
 
 .restaurant-column1 {
+    z-index: 2;
     grid-area: restaurant-column1;
     background-color: white;
     margin-top: -50px;
@@ -83,6 +84,7 @@
 
 .restaurant-links{
     grid-area: restaurant-links;
+    height: 50px;
     background-color: white;
     display: flex;
     flex-direction: row;
@@ -102,7 +104,6 @@
 
 .restaurant-name {
     grid-area: restaurant-name;
-    background-color: pink;
     font-size: 40px;
     display: flex;
     align-items: center;
@@ -243,7 +244,6 @@
 
 .restaurant-column2 {
     grid-area: restaurant-column2;
-    /* background-color: lightcyan; */
     background-color: white;
     margin-top: -50px;
     border-radius: 4px;
@@ -273,16 +273,20 @@
   border-radius: 4px;
   box-shadow: 0px 2px 3px 0px rgba(181, 181, 180, 0.438);
   padding: 10px;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  background-color: white;
 }
 
 .make-res {
   grid-area: make-res;
-  background-color: green;
   display: flex;
   justify-content: center;
   align-items: center;
   border-bottom: solid lightgray thin;
   border-radius: 4px;
+
 }
 
 .party-size {
