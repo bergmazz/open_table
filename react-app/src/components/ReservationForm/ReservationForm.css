@@ -41,12 +41,12 @@ background-color: yellow;
 
 .date{
 grid-area: date ;
-background-color: blueviolet;
+/* background-color: blueviolet; */
 }
 
 .time{
 grid-area: time ;
-background-color: blueviolet;
+/* background-color: blueviolet; */
 }
 
 
