@@ -1,6 +1,20 @@
 .user{
-    width: 80%;
+    width: 60%;
     margin: 0 auto;
+}
+
+.reservimg{
+height: 175px;
+width: 200px;
+border-radius: 4px;
+object-fit: cover;
+}
+
+.reservation-tile{
+   display: grid;
+   height: 240px;
+  border-bottom: solid lightgray thin;
+  margin: 20px;
 }
 
 .extends-nav-height {

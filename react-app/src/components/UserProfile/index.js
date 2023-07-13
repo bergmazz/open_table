@@ -36,8 +36,8 @@ function UserProfile () {
             </div>
 
             <div className="points-container">
-                <h3>Points</h3>
-                <h4>Your points: { points }  points</h4>
+                <h3>Your Points</h3>
+
                 <div className="earned">
                     <p>Earned</p>
                     <h4>{ points }  PTS</h4>
@@ -58,14 +58,27 @@ function UserProfile () {
                 { reservations.length > 0 ? (
                     <div>
                         <h1>Your Reservations</h1>
+                        {/* <h1>Upcoming Reservations</h1> */ }
                         { reservations.map( ( reservation ) => (
-                            <div>
-                                <img src={ reservation.restaurant[ 0 ].coverImage } />
-                                <p>{ reservation.restaurant[ 0 ].restaurantName }</p>
-                                <p>{ reservation.reservationTime }</p>
+                            <div className="reservation-tile">
+                                <img className="reservimg" src={ reservation.restaurant[ 0 ].coverImage } />
+                                <p className="reservname">{ reservation.restaurant[ 0 ].restaurantName }</p>
+                                <p className="reservtime" >{ reservation.reservationTime }</p>
+                                <button>Modify</button>
+                                <button>Cancel</button>
                             </div>
                         ) )
                         }
+                        {/* <h1>Past Reservations</h1> */ }
+                        {/* { reservations.map( ( reservation ) => (
+                            <div className="past-reservation-tile">
+                                <img className="reservimg" src={ reservation.restaurant[ 0 ].coverImage } />
+                                <p className="reservname">{ reservation.restaurant[ 0 ].restaurantName }</p>
+                                <p className="reservtime" >{ reservation.reservationTime }</p>
+                                <button>Leave Review</button>
+                            </div>
+                        ) )
+                        } */}
                         <SearchBar></SearchBar>
                     </div>
                 ) : (
