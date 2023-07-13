@@ -3,16 +3,35 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getUserReservations } from "../../store/reservation"
 import SearchBar from "../SearchBar";
-
+import ReservationModal from "../ReservationModal";
+import OpenModalButton from "../OpenModalButton";
 import "./UserProfile.css"
+
 
 function UserProfile () {
 
     const dispatch = useDispatch();
+    const [ showMenu, setShowMenu ] = useState( false );
+    const ulRef = useRef()
+
+    const closeMenu = ( e ) => {
+        if ( !ulRef.current.contains( e.target ) ) {
+            setShowMenu( false );
+        }
+    };
 
     useEffect( () => {
         dispatch( getUserReservations() );
-    }, [ dispatch ] );
+
+        if ( !showMenu ) return;
+
+        closeMenu()
+        document.addEventListener( "click", closeMenu );
+
+        return () => document.removeEventListener( "click", closeMenu );
+
+    }, [ dispatch, showMenu ] );
+
 
     const currentUser = useSelector( state => state.session.user )
     const reservations = useSelector( state => state.reservations.byUser )
@@ -69,7 +88,12 @@ function UserProfile () {
                                     <p className="reservname">{ reservation.restaurant[ 0 ].restaurantName }</p>
                                     <p className="reservtime" >{ reservation.reservationTime }</p>
                                 </div>
-                                <button>Modify</button>
+                                <OpenModalButton
+                                    className='edit-reserv'
+                                    buttonText="Modify"
+                                    onItemClick={ closeMenu }
+                                    modalComponent={ <ReservationModal reservation={ reservation } /> }
+                                />
                                 <button>Cancel</button>
                             </div>
                         ) )
