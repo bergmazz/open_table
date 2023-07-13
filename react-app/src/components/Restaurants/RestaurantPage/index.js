@@ -96,15 +96,20 @@ const RestaurantPage = () => {
         }
 
         // add fav
-        const addFav = (e) => {
-            e.preventDefault();
-            console.log("in save restauranttttttt")
-            console.log(user.id)
-            dispatch(addFavorites(user.id, id));
-            dispatch(getFavorites(user.id))
-            console.log("backkk")
-            setFavorite(true)
+        // const addFav = (e) => {
+        //     e.preventDefault();
+        //     console.log("in save restauranttttttt")
+        //     console.log(user.id)
+        //     dispatch(addFavorites(user.id, id));
+        //     dispatch(getFavorites(user.id))
+        //     console.log("backkk")
+        //     setFavorite(true)
+        //   };
+        const addFav = async (restaurantId) => {
+            await dispatch(addFavorites(+user.id, +id));
+            setFavorite(true);
           };
+
 
 
         // delete fav
