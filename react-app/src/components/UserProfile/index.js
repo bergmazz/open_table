@@ -22,6 +22,13 @@ function UserProfile () {
     const goal = 5000;
     const progress = Math.min( ( points / goal ) * 100, 100 );
 
+    if ( !currentUser ) return (
+        <div className='no-user'>
+            <h1 className='no-user'>Sorry, you need to log in</h1>
+            <Link to="/login"> </Link>
+        </div>
+    )
+
     return (
         <div className="user">
             <div className="extends-nav-height">
@@ -37,7 +44,6 @@ function UserProfile () {
 
             <div className="points-container">
                 <h3>Your Points</h3>
-
                 <div className="earned">
                     <p>Earned</p>
                     <h4>{ points }  PTS</h4>
@@ -49,9 +55,6 @@ function UserProfile () {
                 <div className="points-bar">
                     <div className="progress" style={ { width: `${ progress }%` } }></div>
                 </div>
-                {/* <div className="reward">
-                    <p>It only takes 5,000 points for a $10 reward!</p>
-                </div> */}
             </div>
 
             <div className="reservations-container">
@@ -62,8 +65,10 @@ function UserProfile () {
                         { reservations.map( ( reservation ) => (
                             <div className="reservation-tile">
                                 <img className="reservimg" src={ reservation.restaurant[ 0 ].coverImage } />
-                                <p className="reservname">{ reservation.restaurant[ 0 ].restaurantName }</p>
-                                <p className="reservtime" >{ reservation.reservationTime }</p>
+                                <div>
+                                    <p className="reservname">{ reservation.restaurant[ 0 ].restaurantName }</p>
+                                    <p className="reservtime" >{ reservation.reservationTime }</p>
+                                </div>
                                 <button>Modify</button>
                                 <button>Cancel</button>
                             </div>
