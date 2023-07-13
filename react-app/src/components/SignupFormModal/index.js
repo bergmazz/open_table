@@ -19,23 +19,25 @@ function SignupFormModal() {
 	const { closeModal } = useModal();
 
 	const handleSubmit = async (e) => {
-        e.preventDefault();
-        if (password === confirmPassword) {
-            const data = await dispatch(signUp(first_name, last_name, email, phone_number, password, owner));
-            if (data) {
-                setErrors(data);
-            } else {
-                if (owner) {
-                    history.push("/new-restaurant");
-                    closeModal();
-                }
-            }
-        } else {
-            setErrors([
-                "Confirm Password field must be the same as the Password field",
-            ]);
-        }
-    };
+		e.preventDefault();
+		if (password === confirmPassword) {
+			const data = await dispatch(signUp(first_name, last_name, email, phone_number, password, owner));
+			if (data) {
+				setErrors(data);
+			} else {
+				if (owner) {
+					history.push("/new-restaurant");
+				} else {
+					history.push("/"); // Redirect to homepage if not an owner
+				}
+				closeModal();
+			}
+		} else {
+			setErrors([
+				"Confirm Password field must be the same as the Password field",
+			]);
+		}
+	};
 
 	return (
 		<div className="signup-form">

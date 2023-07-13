@@ -13,6 +13,7 @@ import CreateReview from "./components/Reviews/NewReview";
 import ReservationForm from "./components/ReservationForm"
 import CreateRestaurant from "./components/CreateRestaurant";
 import OwnerRestaurant from "./components/ManageRestaurants";
+import ProtectedRoute from "./components/auth/ProtectedRoute";
 
 function App() {
   const dispatch = useDispatch();
@@ -35,9 +36,9 @@ function App() {
           <Route path="/signup">
             <SignupFormPage />
           </Route>
-          <Route exact path="/new-restaurant">
+          <ProtectedRoute exact path="/new-restaurant">
             <CreateRestaurant />
-          </Route>
+          </ProtectedRoute>
           <Route exact path="/restaurants/:id/reserve">
             <ReservationForm />
           </Route>
