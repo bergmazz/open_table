@@ -2,7 +2,9 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getDetailsRestaurant } from "../../../store/restaurantDetails";
-import CreateReviewModal from "../../Reviews/NewReview";
+import EditReviewForm from "../../Reviews/EditReview";
+import DeleteReviewForm from "../../Reviews/DeleteReview";
+import OpenModalButton from "../../OpenModalButton";
 import ReservationForm from "../../ReservationForm";
 import './RestaurantPage.css'
 
@@ -11,6 +13,7 @@ const RestaurantPage = () => {
     const dispatch = useDispatch();
 
     const restaurant = useSelector(state => state.restaurantDetails)
+    const user = useSelector(state => state.session.user)
 
     const { id } = useParams();
     // console.log("idddd", id)
@@ -43,6 +46,33 @@ const RestaurantPage = () => {
                 starArr.push(0);
             }
         }
+
+        const monthNames = ["January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+        ];
+
+        const convertDate = (date) => {
+            const month = monthNames[new Date(date).getMonth()];
+            const year = new Date(date).getFullYear();
+
+            return (
+                <p className="reviews-date">{month} {year}</p>
+            )
+        }
+
+        let reviewStars = '';
+        const makeStars = (obj) => {
+            reviewStars = '';
+            const thisObj = { ...obj };
+            for (let i = 0; i < 5; i++) {
+                if (thisObj.rating >= 1) {
+                    reviewStars += '★';
+                    thisObj.rating -= 1;
+                } else reviewStars += '☆';
+            }
+            return reviewStars;
+        }
+
 
         // console.log("STARRRRR", starArr)
 
@@ -101,10 +131,35 @@ const RestaurantPage = () => {
                                 {
                                     restaurant.reviews.map((review, i) => (
                                         <div className="individual-review" key={review.id}>
-                                            <div className="user-section">User</div>
-                                            <div className="review-section">
-                                                {review.comment}
+                                            <div className="user-section">{review.username} {convertDate(review.createdAt)}</div>
+                                            <div className="review-comment">{review.comment}</div>
+                                            <div className="review-rating">{makeStars(review.rating)}</div>
+                                            <div className="review-image-container"> 
+                                                 <img className="review-image" src={review.reviewImage}></img>
                                             </div>
+                                            {user && user.id === review.userId && (
+                                                <div>
+                                                    <div>
+                                                        <button className="edit-review">
+                                                            <OpenModalButton
+                                                                buttonText='Edit Review'
+                                                                modalComponent={<EditReviewForm review={review} />}
+                                                            />
+                                                        </button>
+                                                    </div>
+                                                    <div>
+                                                        <button className="delete-review">
+                                                            <OpenModalButton
+                                                                buttonText='Delete Review'
+                                                                modalComponent={<DeleteReviewForm />}
+                                                            />
+                                                        </button>
+                                                    </div>
+                                                </div>
+                  
+                                            
+                                            )}
+                                        
                                         </div>
                                     ))
                                 }

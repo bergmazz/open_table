@@ -254,6 +254,11 @@
   background-color: red;
 }
 
+.review-rating {
+  color: crimson;
+  font-size: large;
+}
+
 
 @media only screen and (max-width: 1055px) {
   /* For mobile phones: */
