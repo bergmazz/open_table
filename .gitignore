@@ -4,4 +4,5 @@ __pycache__/
 .venv
 .DS_Store
 .vscode/
+instance/dev.db
 react-app/package.json

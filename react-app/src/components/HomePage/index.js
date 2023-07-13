@@ -32,7 +32,7 @@ const HomePage = () => {
     }
 
     const shuffledRestaurants = shuffle(restaurantValues)
-    const selectedRestaurants = shuffledRestaurants.slice(0, 8)
+    const selectedRestaurants = shuffledRestaurants.slice(0, 12)
     // console.log("RANDOM, ", selectedRestaurants)
     
     
@@ -47,13 +47,16 @@ const HomePage = () => {
     return (
         <div className="homepage-container">
             <div className="homepage-search">
-            <h1>Discover a table for every event</h1>
+            <h1 className="homepage-header">Discover a table for every event</h1>
             {/* <img className="homepage-img" src="https://assets.bonappetit.com/photos/62f40c3d43365e834b4d2813/16:9/w_2992,h_1683,c_limit/0810-dimes-square-lede.jpg" alt="dining" /> */}
             <div className="reservation-search">
                 <SearchBar />
             </div>
             </div>
+            <div className="featured-bar">
                 <h2>Featured restaurants</h2>
+                <Link className="view-restaurants" to='/restaurants'>View all Restaurants</Link>
+            </div>
             <div className="restaurant-cards">
                 {
                     selectedRestaurants.map(restaurant => (
@@ -61,8 +64,14 @@ const HomePage = () => {
                     <div className="card-container">
                         <img className="card-img" src={restaurant.coverImage} alt="restaurant" />
                         <div className="card-name">{ `${ restaurant.restaurantName }` }</div>
+                        <div className="card-info">
                         <div className="card-cuisine">{ `${ restaurant.cuisineType }` }</div>
-                        <div className="card-price">{ '$'.repeat(restaurant.priceRange) }</div>
+                        <p className="dot">•</p>
+                        <span className="actice-price">{ '$'.repeat(restaurant.priceRange) }</span>
+                        <span className="inactive-price">{ '$'.repeat(4 - restaurant.priceRange) }</span>
+                        <p className="dot">•</p>
+                        <div className="card-city">{ `${ restaurant.city }` }</div>
+                        </div>
                     </div>
                     </Link>
                     ))

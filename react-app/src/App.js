@@ -10,8 +10,10 @@ import HomePage from "./components/HomePage";
 import RestaurantPage from "./components/Restaurants/RestaurantPage";
 import UserProfile from "./components/UserProfile";
 import CreateReview from "./components/Reviews/NewReview";
-import ReservationForm from "./components/ReservationForm";
-
+import ReservationForm from "./components/ReservationForm"
+import CreateRestaurant from "./components/CreateRestaurant";
+import OwnerRestaurant from "./components/ManageRestaurants";
+import ProtectedRoute from "./components/auth/ProtectedRoute";
 
 function App() {
   const dispatch = useDispatch();
@@ -34,6 +36,9 @@ function App() {
           <Route path="/signup">
             <SignupFormPage />
           </Route>
+          <ProtectedRoute exact path="/new-restaurant">
+            <CreateRestaurant />
+          </ProtectedRoute>
           <Route exact path="/restaurants/:id/reserve">
             <ReservationForm />
           </Route>
@@ -48,6 +53,9 @@ function App() {
           </Route>
           <Route exact path="/user">
             <UserProfile />
+          </Route>
+          <Route exact path="/user/restaurants">
+            <OwnerRestaurant />
           </Route>
         </Switch>
       )}

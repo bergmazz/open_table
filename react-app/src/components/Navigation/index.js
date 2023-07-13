@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import './Navigation.css';
@@ -10,13 +10,11 @@ function Navigation({ isLoaded }){
 	return (
 		<ul className='navigation-bar-container'>
 			<li className='home-button'>
-				<NavLink exact to="/">Bone Apple Teeth</NavLink>
+				<NavLink className='home-link' exact to="/">Bone Apple Teeth</NavLink>
 			</li>
-			{isLoaded && (
-				<li className='profile-button-position'>
-					<ProfileButton user={sessionUser} />
-				</li>
-			)}
+			 <li className='profile-button-position'>
+				<ProfileButton user={sessionUser} />
+			</li>
 		</ul>
 	);
 }

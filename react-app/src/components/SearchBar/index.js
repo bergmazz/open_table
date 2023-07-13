@@ -44,7 +44,7 @@ function SearchBar () {
     };
 
     return (
-        <form onSubmit={ handleSubmit }>
+        <form className="search-form-container" onSubmit={ handleSubmit }>
 
 
             <label className="date">Date:
@@ -102,7 +102,7 @@ function SearchBar () {
                 <option value="Greek">Greek</option>
             </select>
 
-            <button type="submit">Find a table</button>
+            <button className="table-button" type="submit">Find a table</button>
         </form>
     );
 }

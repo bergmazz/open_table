@@ -1,5 +1,5 @@
 .user{
-    width: 80%;
+    width: 60%;
     margin: 0 auto;
 }
 
@@ -27,15 +27,6 @@ margin: 1px;
     justify-content: right;
     flex-direction: column;
 }
-
-.reservations-container{
-    width: 66%;
-    float: right;
-    height: calc(100vh - 100px);
-}
-/* .reservations-container{
-    overflow-y: scroll;
-} */
 
 .progress {
     height: 100%;
@@ -71,4 +62,29 @@ margin: 2px;
     height: 20px;
     background-color: lightgray;
     border-radius: 10px;
+}
+
+
+.reservations-container{
+    width: 66%;
+    float: right;
+    height: calc(100vh - 100px);
+}
+/* .reservations-container{
+    overflow-y: scroll;
+} */
+.reservimg{
+height: 175px;
+width: 200px;
+border-radius: 4px;
+object-fit: cover;
+}
+
+.reservation-tile{
+   display: grid;
+   grid-template-rows: auto 80px;
+   grid-template-columns: repeat(5, 1fr);
+   height: 240px;
+  border-bottom: solid lightgray thin;
+  margin: 20px;
 }

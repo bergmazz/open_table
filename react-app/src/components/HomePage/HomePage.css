@@ -1,3 +1,7 @@
+body {
+  font-family: "Raleway",sans-serif;
+}
+
 .homepage-search {
     position: relative;
     display: flex;
@@ -18,8 +22,8 @@
     left: 0;
     background: rgba(0, 0, 0, 0.5);
 }
-
-  .homepage-container h1 {
+  
+  .homepage-header {
     position: absolute;
     color: white;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
@@ -28,6 +32,11 @@
   .reservation-search {
     position: absolute;
     top: 60%;
+  }
+
+  a {
+    text-decoration: none;
+    color: #333;
   }
 
 
@@ -39,30 +48,42 @@
     padding: 0 50px;
   }
 
-  .reservation-search h1{
+  .homepage-header, .reservation-search {
     text-align: center;
   }
 
+  .view-restaurants {
+    color: #007bff;
+  }
 
-  .homepage-container h2 {
+  .featured-bar {
     position: relative;
-    left: 60px;
+    left: 40px;
+    color: #333;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: 90px;
+    margin-top: 40px;
   }
 
   .card-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 230px;
+    width: 237px;
     margin: 10px;
     padding: 5px;
-    box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.2);
-    transition: box-shadow 0.3s ease-in-out;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
   }
 
   .card-container:hover {
-    box-shadow: 0px 2px 10px 0px rgba(0,0,0,0.2);
-  }
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
 
   .card-img {
     width: 100%;
@@ -70,7 +91,33 @@
     object-fit: cover;
     border-radius: 5px;
   }
-
-  .card-name, .card-cuisine, .card-price {
+  
+  .card-name, .card-cuisine {
     margin: 10px 0;
   }
+
+  .active-price {
+    color: #333;
+  }
+  
+  .inactive-price {
+    color: lightgrey; 
+  }
+  
+  .card-name {
+    flex-grow: 1;
+    font-weight: bold;
+    color: #333;
+  }
+
+  .card-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .dot {
+    margin: 0 5px;
+  }
+
+  

@@ -1,20 +1,28 @@
-.form-container {
+.search-form-container {
     display: flex;
     justify-content: center;
     padding: 20px;
     background-color: #f8f9fa;
     border-radius: 10px;
   }
+  
+  /* input, select {
+    width: 200px;
+    padding: 10px;
+    margin: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+  } */
 
-  .dateinput, .timeinput, .cityinput, .typeinput {
+  #date, #time, #city, #cuisine {
     width: 200px;
     padding: 10px;
     margin: 10px;
     border: 1px solid #ced4da;
     border-radius: 5px;
   }
-
-  button {
+  
+  .table-button {
     padding: 10px 20px;
     margin: 10px;
     background-color: #007bff;
@@ -23,11 +31,11 @@
     border-radius: 5px;
     cursor: pointer;
   }
-
-  button:hover {
+  
+  .table-button:hover {
     background-color: #0056b3;
   }
 
   .date, .time, .city, .food-type {
-    color: white
+    color: #333
   }

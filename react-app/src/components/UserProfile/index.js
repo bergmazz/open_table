@@ -22,6 +22,13 @@ function UserProfile () {
     const goal = 5000;
     const progress = Math.min( ( points / goal ) * 100, 100 );
 
+    if ( !currentUser ) return (
+        <div className='no-user'>
+            <h1 className='no-user'>Sorry, you need to log in</h1>
+            <Link to="/login"> </Link>
+        </div>
+    )
+
     return (
         <div className="user">
             <div className="extends-nav-height">
@@ -36,8 +43,7 @@ function UserProfile () {
             </div>
 
             <div className="points-container">
-                <h3>Points</h3>
-                <h4>Your points: { points }  points</h4>
+                <h3>Your Points</h3>
                 <div className="earned">
                     <p>Earned</p>
                     <h4>{ points }  PTS</h4>
@@ -49,23 +55,35 @@ function UserProfile () {
                 <div className="points-bar">
                     <div className="progress" style={ { width: `${ progress }%` } }></div>
                 </div>
-                {/* <div className="reward">
-                    <p>It only takes 5,000 points for a $10 reward!</p>
-                </div> */}
             </div>
 
             <div className="reservations-container">
                 { reservations.length > 0 ? (
                     <div>
                         <h1>Your Reservations</h1>
+                        {/* <h1>Upcoming Reservations</h1> */ }
                         { reservations.map( ( reservation ) => (
-                            <div>
-                                <img src={ reservation.restaurant[ 0 ].coverImage } />
-                                <p>{ reservation.restaurant[ 0 ].restaurantName }</p>
-                                <p>{ reservation.reservationTime }</p>
+                            <div className="reservation-tile">
+                                <img className="reservimg" src={ reservation.restaurant[ 0 ].coverImage } />
+                                <div>
+                                    <p className="reservname">{ reservation.restaurant[ 0 ].restaurantName }</p>
+                                    <p className="reservtime" >{ reservation.reservationTime }</p>
+                                </div>
+                                <button>Modify</button>
+                                <button>Cancel</button>
                             </div>
                         ) )
                         }
+                        {/* <h1>Past Reservations</h1> */ }
+                        {/* { reservations.map( ( reservation ) => (
+                            <div className="past-reservation-tile">
+                                <img className="reservimg" src={ reservation.restaurant[ 0 ].coverImage } />
+                                <p className="reservname">{ reservation.restaurant[ 0 ].restaurantName }</p>
+                                <p className="reservtime" >{ reservation.reservationTime }</p>
+                                <button>Leave Review</button>
+                            </div>
+                        ) )
+                        } */}
                         <SearchBar></SearchBar>
                     </div>
                 ) : (
