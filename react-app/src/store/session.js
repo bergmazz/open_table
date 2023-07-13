@@ -1,3 +1,5 @@
+import { getFavorites } from "./favorite";
+
 // constants
 const SET_USER = "session/SET_USER";
 const REMOVE_USER = "session/REMOVE_USER";
@@ -24,8 +26,8 @@ export const authenticate = () => async (dispatch) => {
 		if (data.errors) {
 			return;
 		}
-
 		dispatch(setUser(data));
+		dispatch(getFavorites(data.id))
 	}
 };
 
