@@ -12,7 +12,7 @@ import UserProfile from "./components/UserProfile";
 import CreateReview from "./components/Reviews/NewReview";
 import ReservationForm from "./components/ReservationForm"
 import CreateRestaurant from "./components/CreateRestaurant";
-import OwnerRestaurant from "./components/UserProfile/owned";
+import OwnerRestaurant from "./components/ManageRestaurants";
 
 function App() {
   const dispatch = useDispatch();

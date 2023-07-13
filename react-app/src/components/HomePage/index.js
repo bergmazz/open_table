@@ -55,7 +55,7 @@ const HomePage = () => {
             </div>
             <div className="featured-bar">
                 <h2>Featured restaurants</h2>
-                <Link to='/restaurants'>View all Restaurants</Link>
+                <Link className="view-restaurants" to='/restaurants'>View all Restaurants</Link>
             </div>
             <div className="restaurant-cards">
                 {

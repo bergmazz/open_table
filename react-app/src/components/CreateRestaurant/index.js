@@ -41,7 +41,7 @@ function CreateRestaurant() {
             closing_hours,
         };
         dispatch(addRestaurants(newRestaurant));
-        history.push('/restaurants');
+        history.push('user/restaurants');
     }
 
     return (
