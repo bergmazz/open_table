@@ -20,15 +20,3 @@ function Navigation({ isLoaded }){
 }
 
 export default Navigation;
-
-
-// {sessionUser && (
-// 	<li className='profile-reservation-position'>
-// 		<Link to="/user/reservations">
-// 			<button>
-// 				<i className='fa-solid fa-calendar'></i>
-// 			</button>
-// 		</Link> 
-// 		{/* <NavLink className='reservation-link' to="/user/reservations">Upcoming reservations</NavLink> */}
-// 	</li>
-// 	)}

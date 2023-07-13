@@ -17,7 +17,7 @@
   }
   
   .dropdown-btn i {
-    font-size: 1.5em;
+    font-size: 2em;
     color: #333;
   }
   
@@ -34,9 +34,10 @@
     flex-direction: column;
   }
 
-  .profile-dropdown.dropdown-open {
+  /* .profile-dropdown.dropdown-open {
     display: flex;
-  }
+
+  } */
   
   .dropdown-item {
     padding: 10px 20px;

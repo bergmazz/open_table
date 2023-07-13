@@ -10,12 +10,11 @@
   height: 60px;
 }
 
-.home-link, .reservation-link {
+.home-link {
   text-decoration: none;
-  font-family: 'Arial', sans-serif;
-    font-size: 16px; 
-    font-weight: 700;
-    color: #333;
+  font-size: 16px; 
+  font-weight: 700;
+  color: #333;
 }
 
 .navigation-bar-container .home-button, .navigation-bar-container .profile-button-position {
@@ -36,7 +35,7 @@
 
 .navigation-bar-container .home-button:hover, .navigation-bar-container .profile-button-position:hover {
   color: #da3743;
-  /* background-color: rgba(0,0,0,0.05); */
+
 }
 
 .navigation-bar-container .home-button.active, .navigation-bar-container .profile-button-position.active {
@@ -48,7 +47,7 @@
   justify-content: flex-end;
 } */
 
-.reservation-nav-button {
+/* .reservation-nav-button {
   width: 15px;
   height: 15px;
   border-radius: 50%;
@@ -60,8 +59,9 @@
   align-items: center;
   font-size: 24px;
   cursor: pointer;
-}
+} */
 
-.fa:hover {
-  background-color: #007bff;
+.home-link:hover {
+  color:#007bff;
+  /* background-color: #007bff; */
 }

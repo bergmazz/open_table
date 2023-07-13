@@ -1,6 +1,5 @@
 .manage-cards {
     display: flex;
-    /* flex-wrap: wrap; */
     justify-content: space-evenly;
     padding: 0 50px;
   }
