@@ -64,13 +64,18 @@ const initialState = {};
 const favoriteReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_FAVORITE: {
-            const newState = { ...state };
-            if (!action.payload.favorites.length) return {favorites: null}
-            action.payload.favorites.forEach((favorite) => {
-                newState[favorite.id] = favorite;
-            });
-            console.log("ACTION", action.payload)
+            // const newState = { ...state };
+            // if (!action.payload.favorites.length) {
+            // return {favorites: null}
+            // } else {
+            //     console.log("PATTTTTTYYYYYYYYYYYY", action.payload.favorites)
+            //    let newState = action.payload.favorites;
+            //    return newState;
+            // }
+
+            let newState = action.payload.favorites;
             return newState;
+
         }
         case ADD_FAVORITE: {
             return {
