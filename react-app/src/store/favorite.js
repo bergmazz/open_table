@@ -78,6 +78,7 @@ const favoriteReducer = (state = initialState, action) => {
 
         }
         case ADD_FAVORITE: {
+            console.log("STAAAATEEE", ...state)
             return {
                 ...state,
                 [action.payload.id]: action.payload

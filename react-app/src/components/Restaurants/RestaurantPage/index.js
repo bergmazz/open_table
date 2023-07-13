@@ -12,9 +12,30 @@ const RestaurantPage = () => {
     const restaurant = useSelector(state => state.restaurantDetails);
     const favorites = useSelector(state => state.favorites);
     const user = useSelector(state => state.session?.user);
-    // const [favorite, setFavorite] = useState(false);
-    console.log("USSRRRR", user)
-    // console.log("restaurant iddddd", id)
+
+
+
+    console.log("USSRRRR", user.favorites)
+    let fav1;
+    let checkFavorites = () => {
+        for (let k in user.favorites) {
+            if (user.favorites[k].restaurantId == id) {
+
+            fav1 = user.favorites[k].id;
+            console.log("fav11111", fav1)
+
+            return true;
+            }
+        }
+        return false;
+    }
+    const [favorite, setFavorite] = useState(checkFavorites());
+
+    console.log("checkFAVVVVVARORFUEHDKGDHKDGKFDGFKD,", checkFavorites() )
+
+
+
+
 
 
     console.log("1: IN RESTAURANT DETAILS COMPONENT", restaurant);
@@ -27,7 +48,7 @@ const RestaurantPage = () => {
         console.log("2: I'm in the useEffect function.")
         dispatch(getDetailsRestaurant(id));
         if (user) dispatch(getFavorites(user.id))
-    }, [dispatch]);
+    }, [dispatch, id, user]);
 
 
 
@@ -44,13 +65,7 @@ const RestaurantPage = () => {
     //     console.log("AFTER CHECK FAVE, IS IT ALREADY SAVED?-----------", Object.values(favorites).filter(f => f.restaurantId === id))
     //     // checkFav = Object.values(favorites).every(fav => fav.restaurantId == id);
     // }
-    let fav;
-    let check = false;
-    if (favorites.length) {
-        fav = favorites.filter(f => f.restaurantId == id);
-        console.log("FAAVVVVVVVVVVV", fav)
-        check = true;
-    }
+
 
 
 
@@ -84,9 +99,11 @@ const RestaurantPage = () => {
         const addFav = (e) => {
             e.preventDefault();
             console.log("in save restauranttttttt")
+            console.log(user.id)
             dispatch(addFavorites(user.id, id));
-            // setFavorite(true)
-            check = true;
+            dispatch(getFavorites(user.id))
+            console.log("backkk")
+            setFavorite(true)
           };
 
 
@@ -95,10 +112,9 @@ const RestaurantPage = () => {
             e.preventDefault();
             console.log("in UNNsave restauranttttttt", )
 
-            console.log("in addFAv, ", favorites)
-            dispatch(deleteFavorites(fav.id, user.id));
-            // setFavorite(false);
-            check = false;
+            console.log("in addFAv, ", restaurant.favoritedBy)
+            dispatch(deleteFavorites(fav1, user.id));
+            setFavorite(false);
           };
 
         return (
@@ -111,7 +127,7 @@ const RestaurantPage = () => {
                             user ? (
                                 <span>
                                     {
-                                        check ? (
+                                        favorite ? (
                                             <button className="fav-button" onClick={deleteFav}><i className="fa-solid fa-heart"></i></button>
                                         ) : (
                                             <button className="fav-button" onClick={addFav}><i className="far fa-heart"></i></button>
