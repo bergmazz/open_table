@@ -1,37 +1,78 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getDetailsRestaurant } from "../../../store/restaurantDetails";
-import CreateReviewModal from "../../Reviews/NewReview";
+import EditReviewForm from "../../Reviews/EditReview";
+import DeleteReviewForm from "../../Reviews/DeleteReview";
+import OpenModalButton from "../../OpenModalButton";
 import ReservationForm from "../../ReservationForm";
 import './RestaurantPage.css'
-
+import { getFavorites, addFavorites, deleteFavorites } from "../../../store/favorite";
 
 const RestaurantPage = () => {
     const dispatch = useDispatch();
-
-    const restaurant = useSelector(state => state.restaurantDetails)
-
     const { id } = useParams();
-    // console.log("idddd", id)
-    // console.log("1: IN RESTAURANT DETAILS COMPONENT", restaurant);
+    const restaurant = useSelector(state => state.restaurantDetails);
+    const favorites = useSelector(state => state.favorites);
+    console.log("FAVORITES", favorites)
+    const user = useSelector(state => state.session?.user);
+    const [loadingFavorites, setLoadingFavorites] = useState(true);
+    const [favorite, setFavorite] = useState(false);
 
     useEffect(() => {
-        // console.log("2: I'm in the useEffect function.")
         dispatch(getDetailsRestaurant(id));
-    }, [dispatch]);
+        if (user) {
+            dispatch(getFavorites(user.id))
+                .then(() => setLoadingFavorites(false))
+                .catch((error) => {
+                    console.log("Error fetching favorites:", error);
+                    setLoadingFavorites(false);
+                });
+        } else {
+            setLoadingFavorites(false);
+        }
+    }, [dispatch, id, user]);
+
+    // checks if restaurant is in user's favorites
+    let favId;
+    useEffect(() => {
+        if (user && favorites.length) {
+            for (let i = 0; i < favorites.length; i++) {
+                if(favorites[i].restaurantId == id) {
+                    favId = favorites[i].id
+                    setFavorite(true)
+                }
+            }
+        }
+    }, [favorites, id, user]);
+
+    const addFav = () => {
+        dispatch(addFavorites(user.id, id))
+            .then(() => dispatch(getFavorites(user.id)))
+            .then(() => setFavorite(true))
+            .catch((error) => console.log("Error adding favorite: ", error));
+    };
+
+    const deleteFav = () => {
+        console.log("hereeeee, ", favId)
+                dispatch(deleteFavorites(favId, user.id))
+                    .then(() => dispatch(getFavorites(user.id)))
+                    .then(() => setFavorite(false))
+                    .catch((error) => console.log("Error deleting favorite: ", error));
+
+    };
 
     if (Object.keys(restaurant).length) {
-        // console.log("RESTAURANTAASSSSSSSSSSSSSSS", restaurant)
-        let reviews = "Reviews"
-        if (restaurant.reviews.length === 1) reviews = "Review"
+        // check restaurant reviews and price
+        let reviews = "Reviews";
+        if (restaurant.reviews.length === 1) reviews = "Review";
         let priceRange = "$50 and over"
         if (restaurant.priceRange <= 2) priceRange = "$30 and under";
         if (restaurant.priceRange === 3) priceRange = "$31 to $50";
 
+        // star rating
         const fullStars = Math.floor(restaurant.averageRating);
         const starArr = [];
-
         for (let i = 1; i <= fullStars; i++) {
             starArr.push(1);
         }
@@ -44,16 +85,57 @@ const RestaurantPage = () => {
             }
         }
 
+        const monthNames = ["January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+        ];
+
+        const convertDate = (date) => {
+            const month = monthNames[new Date(date).getMonth()];
+            const year = new Date(date).getFullYear();
+
+            return (
+                <p className="reviews-date">{month} {year}</p>
+            )
+        }
+
+        let reviewStars = '';
+        const makeStars = (obj) => {
+            reviewStars = '';
+            const thisObj = { ...obj };
+            for (let i = 0; i < 5; i++) {
+                if (thisObj.rating >= 1) {
+                    reviewStars += '★';
+                    thisObj.rating -= 1;
+                } else reviewStars += '☆';
+            }
+            return reviewStars;
+        }
+
+
         // console.log("STARRRRR", starArr)
+        if (loadingFavorites && !user) {
+            return <div>Loading favorites....</div>
+        }
 
         return (
             <div className="outer-restaurant-container">
                 <div className="restaurant-container">
-
                     <div className="restaurant-cover-image">
                         <img className="restaurant-image-cover" src={`${restaurant.coverImage}`} alt="" />
+                        {user && (
+                            <span>
+                                {favorite ? (
+                                    <button className="fav-button" onClick={deleteFav}>
+                                        <i className="fa-solid fa-heart"></i>
+                                    </button>
+                                ) : (
+                                    <button className="fav-button" onClick={addFav}>
+                                        <i className="far fa-heart"></i>
+                                    </button>
+                                )}
+                            </span>
+                        )}
                     </div>
-
                     <div className="restaurant-column1">Ï
                         <ul className="restaurant-links">
                             <li className="restaurant-overview-link">
@@ -63,19 +145,16 @@ const RestaurantPage = () => {
                                 <a href="#restaurant-reviews">Reviews</a>
                             </li>
                         </ul>
-
                         <div id="top" className="restaurant-name">{`${restaurant.restaurantName}`}</div>
                         <div className="random-box">
                             <div className="ratings-average-bar">
                                 <div className="ratings">
                                     <div className="star-row">
-                                    {
-                                        starArr.map((star, i) => {
-                                            if (star === 0) return <i className="fa-regular fa-star" key={star}></i>
-                                            else if (star < 1) return <i className="fa-solid fa-star-half-stroke" key={star}></i>
-                                            else return <i className="fa-solid fa-star" key={star}></i>
-                                        })
-                                    }
+                                        {starArr.map((star, i) => {
+                                            if (star === 0) return <i className="fa-regular fa-star" key={i}></i>
+                                            else if (star < 1) return <i className="fa-solid fa-star-half-stroke" key={i}></i>
+                                            else return <i className="fa-solid fa-star" key={i}></i>
+                                        })}
                                     </div>
                                     <div className="number-rating">{restaurant.averageRating}</div>
                                 </div>
@@ -89,8 +168,6 @@ const RestaurantPage = () => {
                                 <div className="cuisine-type"><i className="fa-solid fa-utensils"></i> {restaurant.cuisineType}</div>
 
                             </div>
-                            {/* <div className="top-tags"></div>
-                            <div className="restaurant-description">{description}</div> */}
                         </div>
                         <div id="restaurant-reviews">
                             <div className="reviews-bar">
@@ -101,17 +178,40 @@ const RestaurantPage = () => {
                                 {
                                     restaurant.reviews.map((review, i) => (
                                         <div className="individual-review" key={review.id}>
-                                            <div className="user-section">User</div>
-                                            <div className="review-section">
-                                                {review.comment}
+                                            <div className="user-section">{review.username} {convertDate(review.createdAt)}</div>
+                                            <div className="review-comment">{review.comment}</div>
+                                            <div className="review-rating">{makeStars(review.rating)}</div>
+                                            <div className="review-image-container">
+                                                 <img className="review-image" src={review.reviewImage}></img>
                                             </div>
+                                            {user && user.id === review.userId && (
+                                                <div>
+                                                    <div>
+                                                        <button className="edit-review">
+                                                            <OpenModalButton
+                                                                buttonText='Edit Review'
+                                                                modalComponent={<EditReviewForm review={review} />}
+                                                            />
+                                                        </button>
+                                                    </div>
+                                                    <div>
+                                                        <button className="delete-review">
+                                                            <OpenModalButton
+                                                                buttonText='Delete Review'
+                                                                modalComponent={<DeleteReviewForm />}
+                                                            />
+                                                        </button>
+                                                    </div>
+                                                </div>
+
+
+                                            )}
+
                                         </div>
-                                    ))
-                                }
+                                ))}
                             </div>
                         </div>
                     </div>
-
                     <div className="restaurant-column2">
                         {/* <div className="reservation-box">
                             <div className="make-res">Make a reservation</div>
@@ -135,11 +235,8 @@ const RestaurantPage = () => {
             </div>
         )
     } else {
-        return (
-            <div>Loading....</div>
-        )
+        return <div>Loading....</div>
     }
-
 }
 
 export default RestaurantPage;

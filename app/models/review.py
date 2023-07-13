@@ -16,6 +16,10 @@ class Review(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default= datetime.utcnow, onupdate=datetime.utcnow)
 
+    @property
+    def username(self):
+        return self.user.first_name
+
     
     def to_dict(self):
         return {
@@ -26,5 +30,6 @@ class Review(db.Model):
             'comment': self.comment,
             'reviewImage': self.review_image,
             'createdAt': self.created_at,
-            'updatedAt': self.updated_at
+            'updatedAt': self.updated_at,
+            'username': self.username
         }

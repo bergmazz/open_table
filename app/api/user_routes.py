@@ -61,6 +61,8 @@ def add_favorite(id):
     else:
         return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
+
+
 # Delete favorite
 @user_routes.route('/<int:id>/favorites/<int:fav_id>', methods=['DELETE'])
 def delete_favorite(id, fav_id):
