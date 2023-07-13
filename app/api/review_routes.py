@@ -38,18 +38,15 @@ def create_review(restaurant_id):
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         data = form.data
-        print('Review route data', data)
         new_review = Review(user_id=current_user.id,
                             restaurant_id=restaurant_id,
                             rating=data["rating"],
                             comment=data["comment"],
                             review_image=data["review_image"])
-        print('new review', new_review)
         db.session.add(new_review)
         db.session.commit()
         return new_review.to_dict()
     if form.errors:
-        print('form errors', form.errors)
         errors = {}
         for field_name, field_errors in form.errors.items():
             errors[field_name] = field_errors[0]

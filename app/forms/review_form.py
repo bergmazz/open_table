@@ -13,3 +13,4 @@ class ReviewForm(FlaskForm):
     rating = IntegerField('rating', validators=[DataRequired(), validate_rating])
     comment = TextAreaField('comment', validators=[DataRequired()])
     review_image = StringField('review_image')
+
