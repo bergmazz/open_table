@@ -5,9 +5,9 @@ import { useParams, Redirect} from "react-router-dom";
 import { useModal } from "../../../context/Modal";
 import { editReviews } from "../../../store/review";
 
-export default function EditReviewForm(review) {
+export default function EditReviewForm({ review }) {
     const dispatch = useDispatch();
-    const { restaurantId, reviewId } = useParams();
+    const { id } = useParams();
     const currentUser = useSelector((state) => state.session.user);
     const { closeModal } = useModal();
 
@@ -20,32 +20,34 @@ export default function EditReviewForm(review) {
     const [hover, setHover] = useState(0);
     const starArr = ["", "", "", "", ""];
 
+    
 
-  useEffect(() => {
-    const valErrors = [];
 
-    if (comment.length < 10 || rating < 1) {
-      setEmptyField(true);
-    } else setEmptyField(false)
+    useEffect(() => {
+        const valErrors = [];
 
-    if (comment.length < 10) {
-      valErrors.comment = 'Review must be more than 10 characters.';
-    }
-    if (rating < 1) {
-      valErrors.rating = "Rating must be between 1-5 stars.";
-    }
-    if (reviewImage) {
-      if (!(reviewImage.endsWith(".png") || reviewImage.endsWith(".jpg") || reviewImage.endsWith(".jpeg"))) {
-        valErrors.reviewImage = "Image URL must end in .png, .jpg, or .jpeg";
-      }
-    }
-    setErrors(valErrors);
-  }, [comment, rating, reviewImage]);
+        if (comment.length < 10 || rating < 1) {
+        setEmptyField(true);
+        } else setEmptyField(false)
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+        if (comment.length < 10) {
+        valErrors.comment = 'Review must be more than 10 characters.';
+        }
+        if (rating < 1) {
+        valErrors.rating = "Rating must be between 1-5 stars.";
+        }
+        if (reviewImage) {
+        if (!(reviewImage.endsWith(".png") || reviewImage.endsWith(".jpg") || reviewImage.endsWith(".jpeg"))) {
+            valErrors.reviewImage = "Image URL must end in .png, .jpg, or .jpeg";
+        }
+        }
+        setErrors(valErrors);
+    }, [comment, rating, reviewImage]);
 
-    setHasSubmitted(true);
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        setHasSubmitted(true);
 
     const newReview = {
         rating,
@@ -55,10 +57,10 @@ export default function EditReviewForm(review) {
 
     if (currentUser) {
         const data = await dispatch(editReviews(
-            restaurantId, reviewId, newReview
+            review.restaurantId, review.id, newReview
         ));
-        if (data.error) {
-            setErrors(data)
+        if ( data && data.error) {
+            setErrors(data.error)
         }
     } else {
         return <Redirect to='/signup' />;
