@@ -21,8 +21,10 @@ login-form-c {
 
 .errors {
   list-style: none;
-  padding: 0;
   color: red;
+  font-size: 18px;
+  margin-top: 0.2em;
+  padding-left: 5px;
 }
 
 .l-elabel, .l-plabel {

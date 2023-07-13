@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { addRestaurants } from '../../store/restaurant';
+import { addRestaurants, getRestaurants } from '../../store/restaurant';
+import './CreateRestaurant.css'
 
 function CreateRestaurant() {
     const [restaurant_name, setRestaurant_name] = useState('');
@@ -18,40 +19,105 @@ function CreateRestaurant() {
     const [open_hours, setOpen_hours] = useState('');
     const [closing_hours, setClosing_hours] = useState('');
     const [errors, setErrors] = useState([]);
+    const [newRestaurant, setNewRestaurant] = useState(null);
 
     const dispatch = useDispatch();
     const history = useHistory();
 
-    const handleAddRestaurant = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        setErrors([]);
-        const newRestaurant = {
-            restaurant_name,
-            cover_image,
-            email,
-            address,
-            city,
-            state,
-            zip_code,
-            country,
-            cuisine_type,
-            price_range,
-            phone_number,
-            open_hours,
-            closing_hours,
-        };
-        dispatch(addRestaurants(newRestaurant));
-        history.push('user/restaurants');
-    }
+    
+        let errorsArr = [];
+    
+        if (!restaurant_name) errorsArr.push('Please enter a restaurant name');
+        if (!cover_image) errorsArr.push('Please enter a cover image');
+        if (!email) errorsArr.push('Please enter an email');
+        if (!address) errorsArr.push('Please enter an address');
+        if (!city) errorsArr.push('Please enter a city');
+        if (!state) errorsArr.push('Please enter a state');
+        if (!zip_code) errorsArr.push('Please enter a zip code');
+        if (!country) errorsArr.push('Please enter a country');
+        if (!cuisine_type) errorsArr.push('Please enter a cuisine type');
+        if (!price_range) errorsArr.push('Please enter a price range');
+        if (!phone_number) errorsArr.push('Please enter a phone number');
+        if (!open_hours) errorsArr.push('Please enter open hours');
+        if (!closing_hours) errorsArr.push('Please enter closing hours');
+    
+        setErrors(errorsArr);
+    
+        if (errorsArr.length === 0) {
+            const newRestaurant = {
+                restaurant_name,
+                cover_image,
+                email,
+                address,
+                city,
+                state,
+                zip_code,
+                country,
+                cuisine_type,
+                price_range,
+                phone_number,
+                open_hours,
+                closing_hours,
+            };
+            dispatch(addRestaurants(newRestaurant))
+            .then((createdRestaurant) => {
+                if (createdRestaurant) {
+                    setNewRestaurant(createdRestaurant);
+                    history.push('/user/restaurants');
+                }
+            });
+
+        }
+    };
+
+//     const handleAddRestaurant = (e) => {
+//         e.preventDefault();
+
+//         const newErrors = [];
+//         if (!restaurant_name) newErrors.push("Please enter a restaurant name");
+
+//         if (newErrors.length > 0) {
+//     setErrors(newErrors);
+//     return;
+// }
+
+
+//         const newRestaurant = {
+//             restaurant_name,
+//             cover_image,
+//             email,
+//             address,
+//             city,
+//             state,
+//             zip_code,
+//             country,
+//             cuisine_type,
+//             price_range,
+//             phone_number,
+//             open_hours,
+//             closing_hours,
+//         };
+//         const createdRestaurant = dispatch(addRestaurants(newRestaurant));
+//         setNewRestaurant(createdRestaurant);
+//         history.push('user/restaurants');
+//     }
+
+    useEffect (() => {
+        if (newRestaurant) {
+            dispatch(getRestaurants());
+        }
+    }, [dispatch, newRestaurant])
 
     return (
         <div className='restaurant-form-container'>
             <h1>Add Your Restaurant</h1>
-            <form id="new-restaurant-form" onSubmit={handleAddRestaurant}>
+            <form id="new-restaurant-form" onSubmit={handleSubmit}>
                 <div>
-                    {errors.map((error, idx) => (
+                    {/* {errors.map((error, idx) => (
                         <li key={idx}>{error}</li>
-                    ))}
+                    ))} */}
                 </div>
             <label>
                 Restaurant Name
@@ -60,7 +126,9 @@ function CreateRestaurant() {
                 value={restaurant_name}
                 onChange={(e) => setRestaurant_name(e.target.value)}
                 required
+                placeholder='Enter Restaurant Name'
                 />
+                
             </label>
             <br />
             <label>

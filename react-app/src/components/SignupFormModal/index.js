@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { useModal } from "../../context/Modal";
 import { signUp } from "../../store/session";
 import "./SignupForm.css";
 
 function SignupFormModal() {
 	const dispatch = useDispatch();
+	const history = useHistory();
 	const [first_name, setFirst_name] = useState("");
 	const [last_name, setLast_name] = useState("");
 	const [email, setEmail] = useState("");
@@ -17,26 +19,29 @@ function SignupFormModal() {
 	const { closeModal } = useModal();
 
 	const handleSubmit = async (e) => {
-		e.preventDefault();
-		if (password === confirmPassword) {
-			const data = await dispatch(signUp(first_name, last_name, email, phone_number, password, owner));
-			if (data) {
-				setErrors(data);
-			} else {
-				closeModal();
-			}
-		} else {
-			setErrors([
-				"Confirm Password field must be the same as the Password field",
-			]);
-		}
-	};
+        e.preventDefault();
+        if (password === confirmPassword) {
+            const data = await dispatch(signUp(first_name, last_name, email, phone_number, password, owner));
+            if (data) {
+                setErrors(data);
+            } else {
+                if (owner) {
+                    history.push("/new-restaurant");
+                    closeModal();
+                }
+            }
+        } else {
+            setErrors([
+                "Confirm Password field must be the same as the Password field",
+            ]);
+        }
+    };
 
 	return (
 		<div className="signup-form">
 			<h1 className="signup-header">Sign Up</h1>
 			<form onSubmit={handleSubmit}>
-				<ul>
+				<ul className="errors">
 					{errors.map((error, idx) => (
 						<li key={idx}>{error}</li>
 					))}

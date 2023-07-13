@@ -16,6 +16,8 @@ function LoginFormModal() {
     const data = await dispatch(login(email, password));
     if (data) {
       setErrors(data);
+      setEmail("");
+      setPassword("");
     } else {
         closeModal()
     }
@@ -26,12 +28,12 @@ function LoginFormModal() {
     dispatch(login('demo@aa.io', 'password'));
     closeModal()
   }
-
+  
   return (
     <div className="login-form-c">
       <h1 className="login-header">Log In</h1>
       <form onSubmit={handleSubmit}>
-        <ul className="errors">
+      <ul className="errors">
           {errors.map((error, idx) => (
             <li key={idx}>{error}</li>
           ))}
@@ -43,6 +45,7 @@ function LoginFormModal() {
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            placeholder="Please enter your email"
             required
           />
         </label>
@@ -53,9 +56,11 @@ function LoginFormModal() {
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            placeholder="Please enter your password"
             required
           />
         </label>
+        
         <button type="submit" className="loginbttn">Log In</button>
         <button onClick={demoUser} type='submit' className="demoLogin">Demo User</button>
       </form>

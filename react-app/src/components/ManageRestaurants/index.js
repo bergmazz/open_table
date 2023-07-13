@@ -47,10 +47,10 @@ const OwnerRestaurant = () => {
     }
 
     if (myRestaurants.length === 0) return (
-        <div>
-            <h1>You have no restaurants</h1>
+        <div className='no-restaurant-container'>
+            <h1 className='no-restaurant-header'>You own no restaurants</h1>
             <Link to="/new-restaurant">
-                <button>Create a restaurant</button>
+                <button className='no-restaurant-button'>Create a restaurant</button>
             </Link>
         </div>
     )

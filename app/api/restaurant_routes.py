@@ -82,6 +82,8 @@ def create_restaurant():
             open_hours=data["open_hours"],
             closing_hours=data["closing_hours"]
         )
+        current_user.owner = True
+        
     if form.errors:
         errors = {}
         for field_name, field_errors in form.errors.items():
