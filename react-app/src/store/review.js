@@ -107,7 +107,6 @@ export const addReviews = ( restaurant_id, rating, comment, review_image ) => as
     }
 }
 
-
 export const editReviews = (restaurantId, reviewId, review) => async (dispatch) => {
     const {
         rating,
@@ -132,8 +131,7 @@ export const editReviews = (restaurantId, reviewId, review) => async (dispatch) 
     } else if (res.status < 500) {
         const data = await res.json()
         if (data.errors) {
-            const errorData = await res.json()
-            return errorData.errors
+            return data.errors
         } else {
             return ['An error occured. Please try again.']
         }
@@ -172,9 +170,7 @@ export default function reviewsReducer(state = initialState, action) {
         }
         case EDIT_REVIEWS: {
             newState = { ...state }
-            newState.restaurantReviews[action.restaurantId] = newState.restaurantReviews[
-                action.restaurantId
-            ].map((review) => review.id === action.newReview.id ? action.newReview : review);
+            newState.restaurantReviews = { ...state.restaurantReviews, [action.restaurantId]: action.newReview }
             return newState;
         }
         case DELETE_REVIEWS: {

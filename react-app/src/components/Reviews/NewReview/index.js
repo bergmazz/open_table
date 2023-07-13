@@ -9,8 +9,8 @@ import './newReview.css';
 
 const CreateReview = () => {
   const dispatch = useDispatch();
-  const currentUser = useSelector((state) => state.session.user);
   const { id } = useParams();
+  const currentUser = useSelector((state) => state.session.user);
   const { closeModal } = useModal();
 
   const [rating, setRating] = useState(1);
@@ -53,7 +53,7 @@ const CreateReview = () => {
     setHasSubmitted(true);
 
     if (currentUser) {
-      const data = dispatch(addReviews(
+      const data =  await dispatch(addReviews(
         id, rating, comment, reviewImage
       ));
 
@@ -61,7 +61,7 @@ const CreateReview = () => {
         setErrors(data)
       }
     } else {
-      setErrors(['Please create an account']);
+        return <Redirect to='/signup' />; 
     }
 
     closeModal();
