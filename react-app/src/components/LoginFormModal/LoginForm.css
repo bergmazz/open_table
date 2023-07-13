@@ -76,3 +76,7 @@ login-form-c {
 .demoLogin:hover {
   background-color: #1a1a1a;
 }
+
+input:focus::placeholder {
+  color: transparent;
+}
