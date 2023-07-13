@@ -4,78 +4,65 @@ import { useParams } from "react-router-dom";
 import { getDetailsRestaurant } from "../../../store/restaurantDetails";
 import CreateReviewModal from "../../Reviews/NewReview";
 import './RestaurantPage.css'
-import { getFavorites ,addFavorites, deleteFavorites } from "../../../store/favorite";
+import { getFavorites, addFavorites, deleteFavorites } from "../../../store/favorite";
 
 const RestaurantPage = () => {
     const dispatch = useDispatch();
     const { id } = useParams();
     const restaurant = useSelector(state => state.restaurantDetails);
     const favorites = useSelector(state => state.favorites);
+    console.log("FAVORITES", favorites)
     const user = useSelector(state => state.session?.user);
-
-
-
-    console.log("USSRRRR", user.favorites)
-    let fav1;
-    let checkFavorites = () => {
-        for (let k in user.favorites) {
-            if (user.favorites[k].restaurantId == id) {
-
-            fav1 = user.favorites[k].id;
-            console.log("fav11111", fav1)
-
-            return true;
-            }
-        }
-        return false;
-    }
-    const [favorite, setFavorite] = useState(checkFavorites());
-
-    console.log("checkFAVVVVVARORFUEHDKGDHKDGKFDGFKD,", checkFavorites() )
-
-
-
-
-
-
-    console.log("1: IN RESTAURANT DETAILS COMPONENT", restaurant);
-    // console.log("FAVORITE BEGINNING", favorites)
-
-    console.log("favoritesssssssssssssssss", favorites)
-
+    const [loadingFavorites, setLoadingFavorites] = useState(true);
+    const [favorite, setFavorite] = useState(false);
 
     useEffect(() => {
-        console.log("2: I'm in the useEffect function.")
         dispatch(getDetailsRestaurant(id));
-        if (user) dispatch(getFavorites(user.id))
+        if (user) {
+            dispatch(getFavorites(user.id))
+                .then(() => setLoadingFavorites(false))
+                .catch((error) => {
+                    console.log("Error fetching favorites:", error);
+                    setLoadingFavorites(false);
+                });
+        } else {
+            setLoadingFavorites(false);
+        }
     }, [dispatch, id, user]);
 
-
-
-    if ((!user && Object.keys(restaurant).length) ||
-        (user && Object.keys(restaurant).length && Array.isArray(favorites))) {
-    //     console.log("favorites", favorites)
-    //     let favArr = Object.values(favorites);
-
-
-    //     // check if already saved restaurant
-    //     let checkFav = false;
-    //     if (favArr) {
-    //     checkFav = favorites.find(f => f.restaurantId === id);
-    //     console.log("AFTER CHECK FAVE, IS IT ALREADY SAVED?-----------", Object.values(favorites).filter(f => f.restaurantId === id))
-    //     // checkFav = Object.values(favorites).every(fav => fav.restaurantId == id);
-    // }
-
-
-
-
-        // check restaurant info
-        let reviews = "Reviews";
-        if (restaurant.reviews.length) {
-            if (restaurant.reviews.length === 1) {
-                reviews = "Review";
+    // checks if restaurant is in user's favorites
+    let favId;
+    useEffect(() => {
+        if (user && favorites.length) {
+            for (let i = 0; i < favorites.length; i++) {
+                if(favorites[i].restaurantId == id) {
+                    favId = favorites[i].id
+                    setFavorite(true)
+                }
             }
         }
+    }, [favorites, id, user]);
+
+    const addFav = () => {
+        dispatch(addFavorites(user.id, id))
+            .then(() => dispatch(getFavorites(user.id)))
+            .then(() => setFavorite(true))
+            .catch((error) => console.log("Error adding favorite: ", error));
+    };
+
+    const deleteFav = () => {
+        console.log("hereeeee, ", favId)
+                dispatch(deleteFavorites(favId, user.id))
+                    .then(() => dispatch(getFavorites(user.id)))
+                    .then(() => setFavorite(false))
+                    .catch((error) => console.log("Error deleting favorite: ", error));
+
+    };
+
+    if (Object.keys(restaurant).length) {
+        // check restaurant reviews and price
+        let reviews = "Reviews";
+        if (restaurant.reviews.length === 1) reviews = "Review";
         let priceRange = "$50 and over"
         if (restaurant.priceRange <= 2) priceRange = "$30 and under";
         if (restaurant.priceRange === 3) priceRange = "$31 to $50";
@@ -95,54 +82,29 @@ const RestaurantPage = () => {
             }
         }
 
-        // add fav
-        // const addFav = (e) => {
-        //     e.preventDefault();
-        //     console.log("in save restauranttttttt")
-        //     console.log(user.id)
-        //     dispatch(addFavorites(user.id, id));
-        //     dispatch(getFavorites(user.id))
-        //     console.log("backkk")
-        //     setFavorite(true)
-        //   };
-        const addFav = async (restaurantId) => {
-            await dispatch(addFavorites(+user.id, +id));
-            setFavorite(true);
-          };
-
-
-
-        // delete fav
-        const deleteFav = (e) => {
-            e.preventDefault();
-            console.log("in UNNsave restauranttttttt", )
-
-            console.log("in addFAv, ", restaurant.favoritedBy)
-            dispatch(deleteFavorites(fav1, user.id));
-            setFavorite(false);
-          };
+        if (loadingFavorites && !user) {
+            return <div>Loading favorites....</div>
+        }
 
         return (
             <div className="outer-restaurant-container">
                 <div className="restaurant-container">
-
                     <div className="restaurant-cover-image">
                         <img className="restaurant-image-cover" src={`${restaurant.coverImage}`} alt="" />
-                        {
-                            user ? (
-                                <span>
-                                    {
-                                        favorite ? (
-                                            <button className="fav-button" onClick={deleteFav}><i className="fa-solid fa-heart"></i></button>
-                                        ) : (
-                                            <button className="fav-button" onClick={addFav}><i className="far fa-heart"></i></button>
-                                        )
-                                    }
-                                </span>
-                            ): null}
-
+                        {user && (
+                            <span>
+                                {favorite ? (
+                                    <button className="fav-button" onClick={deleteFav}>
+                                        <i className="fa-solid fa-heart"></i>
+                                    </button>
+                                ) : (
+                                    <button className="fav-button" onClick={addFav}>
+                                        <i className="far fa-heart"></i>
+                                    </button>
+                                )}
+                            </span>
+                        )}
                     </div>
-
                     <div className="restaurant-column1">Ï
                         <ul className="restaurant-links">
                             <li className="restaurant-overview-link">
@@ -152,19 +114,16 @@ const RestaurantPage = () => {
                                 <a href="#restaurant-reviews">Reviews</a>
                             </li>
                         </ul>
-
                         <div id="top" className="restaurant-name">{`${restaurant.restaurantName}`}</div>
                         <div className="random-box">
                             <div className="ratings-average-bar">
                                 <div className="ratings">
                                     <div className="star-row">
-                                    {
-                                        starArr.map((star, i) => {
+                                        {starArr.map((star, i) => {
                                             if (star === 0) return <i className="fa-regular fa-star" key={i}></i>
                                             else if (star < 1) return <i className="fa-solid fa-star-half-stroke" key={i}></i>
                                             else return <i className="fa-solid fa-star" key={i}></i>
-                                        })
-                                    }
+                                        })}
                                     </div>
                                     <div className="number-rating">{restaurant.averageRating}</div>
                                 </div>
@@ -178,8 +137,6 @@ const RestaurantPage = () => {
                                 <div className="cuisine-type"><i className="fa-solid fa-utensils"></i> {restaurant.cuisineType}</div>
 
                             </div>
-                            {/* <div className="top-tags"></div>
-                            <div className="restaurant-description">{description}</div> */}
                         </div>
                         <div id="restaurant-reviews">
                             <div className="reviews-bar">
@@ -187,20 +144,17 @@ const RestaurantPage = () => {
                                 <div className="sort-reviews">Newest</div>
                             </div>
                             <div className="reviews-area">
-                                {
-                                    restaurant.reviews.map((review, i) => (
-                                        <div className="individual-review" key={review.id}>
-                                            <div className="user-section">User</div>
-                                            <div className="review-section">
-                                                {review.comment}
-                                            </div>
+                                {restaurant.reviews.map((review, i) => (
+                                    <div className="individual-review" key={review.id}>
+                                        <div className="user-section">User</div>
+                                        <div className="review-section">
+                                            {review.comment}
                                         </div>
-                                    ))
-                                }
+                                    </div>
+                                ))}
                             </div>
                         </div>
                     </div>
-
                     <div className="restaurant-column2">
                         <div className="reservation-box">
                             <div className="make-res">Make a reservation</div>
@@ -219,11 +173,8 @@ const RestaurantPage = () => {
             </div>
         )
     } else {
-        return (
-            <div>Loading....</div>
-        )
+        return <div>Loading....</div>
     }
-
 }
 
 export default RestaurantPage;

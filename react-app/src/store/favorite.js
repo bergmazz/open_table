@@ -40,7 +40,7 @@ export const addFavorites = (userId, restaurantId) => async (dispatch) => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ userId, restaurantId })
     });
-
+    
     if (response.ok) {
         const newFavorite = await response.json();
         dispatch(addFavorite(newFavorite));
@@ -58,40 +58,22 @@ export const deleteFavorites = (favId, userId) => async (dispatch) => {
     return response;
 }
 
-const initialState = {};
+const initialState = [];
 
-// Reducer
 const favoriteReducer = (state = initialState, action) => {
     switch (action.type) {
-        case GET_FAVORITE: {
-            // const newState = { ...state };
-            // if (!action.payload.favorites.length) {
-            // return {favorites: null}
-            // } else {
-            //     console.log("PATTTTTTYYYYYYYYYYYY", action.payload.favorites)
-            //    let newState = action.payload.favorites;
-            //    return newState;
-            // }
-
-            let newState = action.payload.favorites;
-            return newState;
-
+      case GET_FAVORITE: {
+          return action.payload.favorites;
         }
         case ADD_FAVORITE: {
-            console.log("STAAAATEEE", ...state)
-            return {
-                ...state,
-                [action.payload.id]: action.payload
-            };
-        }
-        case DELETE_FAVORITE: {
-            const newState = { ...state };
-            delete newState[action.payload];
-            return newState;
-        }
-        default:
-            return state;
+        return [...state, action.payload];
+      }
+      case DELETE_FAVORITE: {
+        return state.filter((favorite) => favorite.id !== action.payload);
+      }
+      default:
+        return state;
     }
-}
+  };
 
 export default favoriteReducer;
