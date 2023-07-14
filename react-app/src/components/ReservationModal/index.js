@@ -12,34 +12,47 @@ const ReservationModal = ( { reservation } ) => {
     const history = useHistory();
     const { closeModal } = useModal();
 
-    console.log( "---------reservation---", reservation )
+    let dateTime = new Date( reservation.reservationTime )
+    let hours = dateTime.getHours();
+    let minutes = dateTime.getMinutes();
+    let slashDate = dateTime.toLocaleDateString( "en-US" );
+    let dateParts = slashDate.split( "/" );
+    let month = dateParts[ 0 ];
+    let day = dateParts[ 1 ];
+    const year = dateParts[ 2 ];
+    if ( month.length === 1 ) {
+        month = "0" + month;
+    }
+    if ( day.length === 1 ) {
+        day = "0" + day;
+    }
 
-    const [ numberOfPeople, setNumberOfPeople ] = useState( 2 );
-    const [ reservationTime, setReservationTime ] = useState( "" );
-    const [ date, setDate ] = useState( "" );
-    const [ time, setTime ] = useState( "" );
-    const [ status, setStatus ] = useState( "Confirmed" );
-    const [ notes, setNotes ] = useState( "" );
+
+    const [ numberOfPeople, setNumberOfPeople ] = useState( reservation.numberOfPeople );
+    const [ reservationTime, setReservationTime ] = useState( reservation.reservationTime );
+    const [ date, setDate ] = useState( `${ year }-${ month }-${ day }` );
+    const [ time, setTime ] = useState( `${ hours }:${ minutes }:00` );
+    const [ status, setStatus ] = useState( reservation.status );
+    const [ notes, setNotes ] = useState( reservation.notes );
     const [ errors, setErrors ] = useState( [] );
 
-    const { id } = useParams();
-    // useEffect( () => {
-    //     dispatch( getDetailsRestaurant( id ) );
-    // }, [ dispatch ] );
+    // const { id } = useParams();
 
     const currentUser = useSelector( state => state.session.user )
-    // const restaurant = useSelector( state => state.restaurantDetails )
 
     useEffect( () => {
         if ( date && time ) {
-            let dateObject = new Date( `${ date }T${ time }` )
-            const year = dateObject.getUTCFullYear();
-            const month = `0${ dateObject.getUTCMonth() + 1 }`.slice( -2 ); // Months are zero-indexed, so add 1
-            const day = `0${ dateObject.getUTCDate() }`.slice( -2 );
-            const hours = `0${ dateObject.getUTCHours() }`.slice( -2 );
-            const minutes = `0${ dateObject.getUTCMinutes() }`.slice( -2 );
-            const seconds = `0${ dateObject.getUTCSeconds() }`.slice( -2 );
-            setReservationTime( `${ year }-${ month }-${ day } ${ hours }:${ minutes }:${ seconds }` )
+            let datetime = ( new Date( `${ date }T${ time }` ) )
+            // let datetimeZ = datetime.toISOString()
+            // let index = datetimeZ.indexOf( "T" );
+            // let timePart = datetimeZ.slice( index + 1 );
+            // timePart = timePart.slice( 0, -5 );
+            // const options = { weekday: "short", day: "numeric", month: "short", year: "numeric" };
+            // const dateString = datetime.toLocaleDateString( "en-US", options );
+            // // console.log( "date string", dateString )
+            // // console.log( " reservationTime: ", reservationTime )
+            // setReservationTime( `${ dateString } ${ timePart } GMT` )
+            setReservationTime( datetime )
         }
     }, [ date, time ] )
 
@@ -52,7 +65,7 @@ const ReservationModal = ( { reservation } ) => {
             // console.log( " numberOfPeople: ", numberOfPeople )
             // console.log( " status: ", status )
             let data = await dispatch( editReservations(
-                id, numberOfPeople, reservationTime, status, notes
+                reservation.restaurantId, reservation.id, numberOfPeople, reservationTime, status, notes
             ) );
             // console.log( '-------------data-------', data )
             if ( !data.id ) {
@@ -110,13 +123,13 @@ const ReservationModal = ( { reservation } ) => {
                 </label>
 
                 <label >
-                    {/* Notes: */ }
+                    Notes
                     <input
                         className="mnotes"
                         type="text"
                         id="notes"
+                        value={ notes }
                         onChange={ ( e ) => setNotes( e.target.value ) }
-                        placeholder="Leave a note, if you'd like."
                     />
                 </label>
 
