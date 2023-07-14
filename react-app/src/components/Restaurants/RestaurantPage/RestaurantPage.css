@@ -259,8 +259,6 @@
     gap: 15px;
 }
 
-<<<<<<< HEAD
-=======
 .reservation-box {
   display: grid;
   grid-area: reservation-box;
@@ -320,7 +318,6 @@
   background-color: aqua;
 }
 
->>>>>>> favorites-comp
 .delivery-box {
   grid-area: delivery-box;
   background-color: white;
