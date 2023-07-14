@@ -59,6 +59,7 @@ const ReservationForm = () => {
             const minutes = `0${ dateObject.getUTCMinutes() }`.slice( -2 );
             const seconds = `0${ dateObject.getUTCSeconds() }`.slice( -2 );
             setReservationTime( `${ year }-${ month }-${ day } ${ hours }:${ minutes }:${ seconds }` )
+            // setReservationTime( `${ date } ${ time }` )
         }
     }, [ date, time ] )
 

@@ -26,6 +26,12 @@ const ReservationModal = ( { reservation } ) => {
     if ( day.length === 1 ) {
         day = "0" + day;
     }
+    if ( hours < 10 ) {
+        hours = "0" + hours;
+    }
+    // if ( minutes == 0 ) {
+    //     minutes = "0" + minutes;
+    // }
 
 
     const [ numberOfPeople, setNumberOfPeople ] = useState( reservation.numberOfPeople );
@@ -42,17 +48,7 @@ const ReservationModal = ( { reservation } ) => {
 
     useEffect( () => {
         if ( date && time ) {
-            let datetime = ( new Date( `${ date }T${ time }` ) )
-            // let datetimeZ = datetime.toISOString()
-            // let index = datetimeZ.indexOf( "T" );
-            // let timePart = datetimeZ.slice( index + 1 );
-            // timePart = timePart.slice( 0, -5 );
-            // const options = { weekday: "short", day: "numeric", month: "short", year: "numeric" };
-            // const dateString = datetime.toLocaleDateString( "en-US", options );
-            // // console.log( "date string", dateString )
-            // // console.log( " reservationTime: ", reservationTime )
-            // setReservationTime( `${ dateString } ${ timePart } GMT` )
-            setReservationTime( datetime )
+            setReservationTime( `${ date } ${ time }` )
         }
     }, [ date, time ] )
 
@@ -61,9 +57,9 @@ const ReservationModal = ( { reservation } ) => {
     const handleSubmit = async ( e ) => {
         e.preventDefault();
         if ( currentUser ) {
-            // console.log( " reservationTime: ", reservationTime )
-            // console.log( " numberOfPeople: ", numberOfPeople )
-            // console.log( " status: ", status )
+            console.log( " reservationTime: ", reservationTime )
+            console.log( " numberOfPeople: ", numberOfPeople )
+            console.log( " status: ", status )
             let data = await dispatch( editReservations(
                 reservation.restaurantId, reservation.id, numberOfPeople, reservationTime, status, notes
             ) );
@@ -82,9 +78,7 @@ const ReservationModal = ( { reservation } ) => {
             setErrors( [ 'Please create an account' ] );
         }
     };
-    // if ( restaurant.slots ) {
-    //     console.log( "restaurant slots:", Object.values( restaurant.slots ) )
-    // }
+
 
     return (
         <div className="reservation-form-container">

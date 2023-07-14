@@ -133,7 +133,8 @@ export const editReservations = ( restaurantId, id, number_of_people,
         const res = await fetch( `/api/restaurants/${ restaurantId }/reservations/${ id }`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify( {
+            body:
+                JSON.stringify( {
                 number_of_people,
                 reservation_time,
                 status,
