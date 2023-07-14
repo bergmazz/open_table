@@ -28,7 +28,6 @@ export default function DeleteReviewForm({ review }) {
 
     const keepReview = () => {
         closeModal();
-        history.go(0);
     }
 
     return (

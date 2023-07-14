@@ -89,6 +89,7 @@ export const addReservationThunk = ( restaurant_id, number_of_people, reservatio
     const reservationData = {
         number_of_people, reservation_time, status, notes
     }
+
     // console.log( "thunk reservation data:", reservationData )
     const res = await fetch( `/api/restaurants/${ restaurant_id }/reservations`, {
         method: 'POST',
@@ -119,48 +120,53 @@ export const addReservationThunk = ( restaurant_id, number_of_people, reservatio
     }
 }
 
-export const editReservations = (restaurantId, reservationId, reservation) => async (dispatch) => {
-    const {
-        number_of_people,
-        reservation_time,
-        status,
-        notes
-    } = reservation
+export const editReservations = ( restaurantId, id, number_of_people,
+    reservation_time, status, notes ) => async ( dispatch ) => {
 
-    const res = await fetch(`/api/restaurants/${restaurantId}/reservations/${reservationId}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
+        console.log( "json:", JSON.stringify( {
             number_of_people,
             reservation_time,
             status,
             notes
-        })
-    });
+        } ) )
 
-    if (res.ok) {
-        const reservation = await res.json();
-        dispatch(editReservation(reservation));
-        return reservation
-    } else if (res.status < 500) {
-        const data = await res.json()
-        if ( data.error ) {
-            const errorData = await res.json()
-            return errorData.errors
+        const res = await fetch( `/api/restaurants/${ restaurantId }/reservations/${ id }`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body:
+                JSON.stringify( {
+                number_of_people,
+                reservation_time,
+                status,
+                notes
+            } )
+        } );
+        console.log( "res:", res )
+
+        if ( res.ok ) {
+            const reservation = await res.json();
+            console.log( "----reservation:", reservation )
+            dispatch( editReservation( restaurantId, reservation ) );
+            // dispatch( getUserReservation( reservation ) );
+            return reservation
         } else {
-            return ['An error occured. Please try again.']
+            const data = await res.json();
+            console.log( "data:", data )
+            return Object.values( data )
         }
-    }
-}
 
-export const deleteReservations = (restaurantId, reservationId) => async (dispatch) => {
+    }
+
+export const deleteReservations = (reservationId, restaurantId) => async (dispatch) => {
     const res = await fetch(`api/restaurants/${restaurantId}/reservations/${reservationId}`, {
         method: 'DELETE'
     });
+    console.log("ressss", res)
     if (res.ok) {
         const deletedReservation = await res.json();
-        dispatch(deleteReservation(reservationId))
-        return deletedReservation
+        dispatch(getUserReservations())
+        // dispatch(deleteReservation(reservationId))
+        return deletedReservation;
     }
 }
 
@@ -194,14 +200,21 @@ export default function reservationsReducer(state = initialState, action) {
             return newState;
         }
         case EDIT_RESERVATIONS: {
-            newState = { ...state }
-            newState.byRestaurant[ action.restaurantId ] = newState.byRestaurant[
-                action.restaurantId
-            ].map((reservation) => reservation.id === action.newReservation.id ? action.newReservation : reservation);
+            // newState = { ...state }
+            // newState.byRestaurant[ action.restaurantId ] = newState.byRestaurant[
+            //     action.restaurantId
+            // ].map((reservation) => reservation.id === action.newReservation.id ? action.newReservation : reservation);
+            // return newState;
+            newState = { ...state };
+            newState.byRestaurant[ action.restaurantId ] = {
+                ...newState.byRestaurant[ action.restaurantId ],
+                [ action.newReservation.id ]: action.newReservation,
+            }
             return newState;
         }
         case DELETE_RESERVATIONS: {
             newState = { ...state }
+            console.log()
             newState.byRestaurant[ action.restaurantId ] = newState.byRestaurant[
                 action.restaurantId
             ].filter((reservation) => reservation.id !== action.reservationId);

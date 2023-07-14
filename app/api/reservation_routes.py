@@ -7,6 +7,11 @@ from datetime import datetime
 
 reservation_routes = Blueprint('restaurants/<int:restaurant_id>', __name__)
 
+# def update_res_status(reservation):
+#         reservation.status = reservation.status.lower()
+#         if datetime.utcnow() > reservation.reservation_time:
+#                 reservation.status = "attended"
+
 # Get reservations based on restaurantId
 @reservation_routes.route('reservations', methods=['GET'])
 def get_reservations(restaurant_id):
@@ -20,6 +25,9 @@ def get_reservations(restaurant_id):
 
     non_owner_reservations = [reservation.non_owner_to_dict() for reservation in Reservation.query.filter_by(restaurant_id=restaurant_id).all()]
     owner_reservations = [reservation.owner_to_dict() for reservation in Reservation.query.filter_by(restaurant_id=restaurant_id).all()]
+
+    # for reservation in non_owner_reservations:
+    #     update_res_status(reservation)
 
     if current_user.id == restaurant.user_id:
         return jsonify ({'Reservations': owner_reservations}), 200
@@ -52,7 +60,7 @@ def create_reservation(restaurant_id):
         data = form.data
         # Check if there is an existing reservation at the specified time
         for reservation in restaurant.reservations:
-            print("reservation.reservation_time", reservation.reservation_time, "datareservationtime", data["reservation_time"])
+            # print("reservation.reservation_time", reservation.reservation_time, "datareservationtime", data["reservation_time"])
 
             if reservation.reservation_time == data["reservation_time"]:
                 if reservation.status != "cancelled":
@@ -106,15 +114,18 @@ def edit_reservation(restaurant_id, reservation_id):
             return jsonify({ 'error': 'You are not authorized to edit this post' }), 400
 
     form = ReservationForm(obj=reservation)
+    # form.status = 'confirmed'
+    form['csrf_token'].data = request.cookies['csrf_token']
     data = form.data
+    # print("-----------------CSRF token:", request.cookies['csrf_token'])
+    # print("----------formdata:", data)
+
     # Check if there is an existing reservation at the specified time
     for xreservation in restaurant.reservations:
         if xreservation.reservation_time == data["reservation_time"]:
             if xreservation.status != "cancelled":
                 if xreservation.id != reservation.id:
                     return jsonify({'error': 'The selected time slot is already booked'}), 400
-
-    form['csrf_token'].data = request.cookies['csrf_token']
 
     if form.validate_on_submit():
         form.populate_obj(reservation)
@@ -123,6 +134,7 @@ def edit_reservation(restaurant_id, reservation_id):
         return reservation.to_dict()
 
     if form.errors:
+        print("------------errors", form.errors)
         errors = []
         for field_name, field_errors in form.errors.items():
             errors.extend(field_errors)
@@ -132,6 +144,7 @@ def edit_reservation(restaurant_id, reservation_id):
 @reservation_routes.route('/reservations/<int:reservation_id>', methods=['DELETE'])
 @login_required
 def delete_reservation(reservation_id, restaurant_id):
+    print("here**************************!!!!!")
     """
     Cancels a reservation
     Does not delete from database so restaurant owners can keep track of canceled slots
@@ -141,10 +154,13 @@ def delete_reservation(reservation_id, restaurant_id):
     restaurant = Restaurant.query.get(restaurant_id)
 
     if restaurant is None:
+        print("1**************************")
         return jsonify({'error': 'Restaurant not found'}), 404
     if reservation is None:
+        print("2**************************")
         return jsonify({'error': 'Reservation not found'}), 404
     if reservation.restaurant_id != restaurant_id:
+        print("3**************************")
         return jsonify({'error': 'Reservation is not for this restaurant'}), 404
 
     # print('Current user ID:', current_user.id)
@@ -160,7 +176,9 @@ def delete_reservation(reservation_id, restaurant_id):
         if reservation.status == "confirmed":
             reservation.status = "attended"
 
+    print("reswervation statusss", reservation.status)
     if reservation.status != "confirmed":
+        print("4**************************")
         return jsonify({'error': 'Reservation has already been cancelled or attended'}), 404
 
     reservation.status = "cancelled"

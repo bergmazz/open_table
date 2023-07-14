@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, Redirect, useHistory} from "react-router-dom";
 import { useModal } from "../../../context/Modal";
-import { editReviews } from "../../../store/review";
+import { editReviews, getRestaurantReviews } from "../../../store/review";
 
 export default function EditReviewForm({ review }) {
     const dispatch = useDispatch();
@@ -43,7 +43,9 @@ export default function EditReviewForm({ review }) {
           }
         }
         setErrors(valErrors);
-    }, [comment, rating, review_image]);
+
+        dispatch(getRestaurantReviews(review.restaurantId));
+    }, [comment, rating, review_image, dispatch, review.restaurantId]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
