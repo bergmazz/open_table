@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getUserReservations } from "../../store/reservation"
 import SearchBar from "../SearchBar";
+import OpenModalButton from "../OpenModalButton";
+import DeleteReservationModal from "./DeleteReservationModal";
 
 import "./UserProfile.css"
 
@@ -28,6 +30,7 @@ function UserProfile () {
             <Link to="/login"> </Link>
         </div>
     )
+
 
     return (
         <div className="user">
@@ -70,7 +73,12 @@ function UserProfile () {
                                     <p className="reservtime" >{ reservation.reservationTime }</p>
                                 </div>
                                 <button>Modify</button>
-                                <button>Cancel</button>
+
+                                    <OpenModalButton
+                                    buttonText="Cancel"
+                                    modalComponent={<DeleteReservationModal />}
+                                    />
+
                             </div>
                         ) )
                         }
