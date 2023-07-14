@@ -90,8 +90,12 @@ def delete_review(restaurant_id, review_id):
     if Restaurant.query.get(restaurant_id) is None:
         return jsonify({'error': 'Restaurant not found'}), 404
 
+    if Review.query.get(review_id) is None:
+        return jsonify({'error': 'Review not found'}), 404
+
     review = Review.query.get(review_id)
 
+    
     if current_user.id is not review.user_id:
         return jsonify({ 'error': 'You are not authorized to delete this post' })
 

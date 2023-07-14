@@ -1,19 +1,20 @@
 import { func } from "prop-types";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams, Redirect} from "react-router-dom";
+import { useParams, Redirect, useHistory} from "react-router-dom";
 import { useModal } from "../../../context/Modal";
 import { editReviews } from "../../../store/review";
 
 export default function EditReviewForm({ review }) {
     const dispatch = useDispatch();
+    const history = useHistory();
     const { id } = useParams();
     const currentUser = useSelector((state) => state.session.user);
     const { closeModal } = useModal();
 
     const [rating, setRating] = useState(review?.rating);
     const [comment, setComment] = useState(review?.comment);
-    const [reviewImage, setReviewImage] = useState(review?.reviewImage);
+    const [review_image, setReviewImage] = useState(review?.reviewImage);
     const [errors, setErrors] = useState([]);
     const [emptyField, setEmptyField] = useState(true);
     const [hasSubmitted, setHasSubmitted] = useState(false);
@@ -36,13 +37,13 @@ export default function EditReviewForm({ review }) {
         if (rating < 1) {
         valErrors.rating = "Rating must be between 1-5 stars.";
         }
-        if (reviewImage) {
-        if (!(reviewImage.endsWith(".png") || reviewImage.endsWith(".jpg") || reviewImage.endsWith(".jpeg"))) {
-            valErrors.reviewImage = "Image URL must end in .png, .jpg, or .jpeg";
-        }
+        if (review_image) {
+          if (!(review_image.endsWith(".png") || review_image.endsWith(".jpg") || review_image.endsWith(".jpeg"))) {
+            valErrors.review_image = "Image URL must end in .png, .jpg, or .jpeg";
+          }
         }
         setErrors(valErrors);
-    }, [comment, rating, reviewImage]);
+    }, [comment, rating, review_image]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -52,7 +53,7 @@ export default function EditReviewForm({ review }) {
     const newReview = {
         rating,
         comment,
-        reviewImage
+        review_image
     };
 
     if (currentUser) {
@@ -61,13 +62,14 @@ export default function EditReviewForm({ review }) {
         ));
         if ( data && data.error) {
             setErrors(data.error)
-        }
+        } 
     } else {
         return <Redirect to='/signup' />;
     }
 
     closeModal();
-
+    history.go(0);
+    
   }
 
 
@@ -110,7 +112,7 @@ export default function EditReviewForm({ review }) {
         <input
           type="text"
           placeholder="Image URL"
-          value={reviewImage}
+          value={review_image}
           onChange={(e) => setReviewImage(e.target.value)}
         />
       </div>

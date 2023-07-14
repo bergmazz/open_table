@@ -114,6 +114,7 @@ const RestaurantPage = () => {
             }
             return reviewStars;
         }
+        
 
 
         // console.log("STARRRRR", starArr)
@@ -202,7 +203,7 @@ const RestaurantPage = () => {
                                                         <button className="delete-review">
                                                             <OpenModalButton
                                                                 buttonText='Delete Review'
-                                                                modalComponent={<DeleteReviewForm />}
+                                                                modalComponent={<DeleteReviewForm review={review}/>}
                                                             />
                                                         </button>
                                                     </div>
