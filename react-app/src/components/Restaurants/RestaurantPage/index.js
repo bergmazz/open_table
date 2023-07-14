@@ -110,6 +110,7 @@ const RestaurantPage = () => {
             }
             return reviewStars;
         }
+        
 
 
         // console.log("STARRRRR", starArr)
