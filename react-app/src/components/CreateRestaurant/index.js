@@ -116,7 +116,13 @@ function CreateRestaurant() {
 
     return (
         <div className='restaurant-form-container'>
-            <h1 className='manage-header'>Add Your Restaurant</h1>
+            <h1 className='manage-header'>Lets add Your Restaurant</h1>
+            <h3 className='form-description-a'>By adding your restaurant to our platform, 
+                you are opening the doors to a wider audience of potential customers.
+            </h3>
+            <h3 className='form-description-b'>
+                Join our community of restaurants today and give your business a digital boost!
+            </h3>
             <form id="new-restaurant-form" onSubmit={handleSubmit}>
                 <div className='errors'>
                     {errors.map((error, idx) => (
