@@ -132,6 +132,7 @@ def edit_reservation(restaurant_id, reservation_id):
 @reservation_routes.route('/reservations/<int:reservation_id>', methods=['DELETE'])
 @login_required
 def delete_reservation(reservation_id, restaurant_id):
+    print("herrreeeeeee in route")
     """
     Cancels a reservation
     Does not delete from database so restaurant owners can keep track of canceled slots

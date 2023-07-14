@@ -153,15 +153,16 @@ export const editReservations = (restaurantId, reservationId, reservation) => as
     }
 }
 
-export const deleteReservations = (restaurantId, reservationId) => async (dispatch) => {
+export const deleteReservations = (reservationId, restaurantId) => async (dispatch) => {
     const res = await fetch(`api/restaurants/${restaurantId}/reservations/${reservationId}`, {
         method: 'DELETE'
     });
     if (res.ok) {
         const deletedReservation = await res.json();
         dispatch(deleteReservation(reservationId))
-        return deletedReservation
+        return deletedReservation;
     }
+    return res
 }
 
 // ------------------------------------------------------------------------------ REDUCER
