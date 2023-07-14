@@ -144,6 +144,7 @@ def edit_reservation(restaurant_id, reservation_id):
 @reservation_routes.route('/reservations/<int:reservation_id>', methods=['DELETE'])
 @login_required
 def delete_reservation(reservation_id, restaurant_id):
+    print("here**************************!!!!!")
     """
     Cancels a reservation
     Does not delete from database so restaurant owners can keep track of canceled slots
@@ -153,10 +154,13 @@ def delete_reservation(reservation_id, restaurant_id):
     restaurant = Restaurant.query.get(restaurant_id)
 
     if restaurant is None:
+        print("1**************************")
         return jsonify({'error': 'Restaurant not found'}), 404
     if reservation is None:
+        print("2**************************")
         return jsonify({'error': 'Reservation not found'}), 404
     if reservation.restaurant_id != restaurant_id:
+        print("3**************************")
         return jsonify({'error': 'Reservation is not for this restaurant'}), 404
 
     # print('Current user ID:', current_user.id)
@@ -172,7 +176,9 @@ def delete_reservation(reservation_id, restaurant_id):
         if reservation.status == "confirmed":
             reservation.status = "attended"
 
+    print("reswervation statusss", reservation.status)
     if reservation.status != "confirmed":
+        print("4**************************")
         return jsonify({'error': 'Reservation has already been cancelled or attended'}), 404
 
     reservation.status = "cancelled"

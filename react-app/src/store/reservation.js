@@ -157,14 +157,16 @@ export const editReservations = ( restaurantId, id, number_of_people,
 
     }
 
-export const deleteReservations = (restaurantId, reservationId) => async (dispatch) => {
+export const deleteReservations = (reservationId, restaurantId) => async (dispatch) => {
     const res = await fetch(`api/restaurants/${restaurantId}/reservations/${reservationId}`, {
         method: 'DELETE'
     });
+    console.log("ressss", res)
     if (res.ok) {
         const deletedReservation = await res.json();
-        dispatch(deleteReservation(reservationId))
-        return deletedReservation
+        dispatch(getUserReservations())
+        // dispatch(deleteReservation(reservationId))
+        return deletedReservation;
     }
 }
 
@@ -212,6 +214,7 @@ export default function reservationsReducer(state = initialState, action) {
         }
         case DELETE_RESERVATIONS: {
             newState = { ...state }
+            console.log()
             newState.byRestaurant[ action.restaurantId ] = newState.byRestaurant[
                 action.restaurantId
             ].filter((reservation) => reservation.id !== action.reservationId);
