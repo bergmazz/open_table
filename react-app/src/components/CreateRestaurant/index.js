@@ -274,7 +274,7 @@ function CreateRestaurant() {
                     <label className='create-label'>
                         Open Hours
                         <select
-                        className='create-input'
+                        className='create-select'
                         type='text'
                         value={open_hours}
                         onChange={(e) => setOpen_hours(e.target.value)}
@@ -292,7 +292,7 @@ function CreateRestaurant() {
                     <label className='create-label'>
                         Closing Hours
                         <select
-                        className='create-input'
+                        className='create-select'
                         type='text'
                         value={closing_hours}
                         onChange={(e) => setClosing_hours(e.target.value)}
