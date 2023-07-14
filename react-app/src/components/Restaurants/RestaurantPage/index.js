@@ -15,7 +15,7 @@ const RestaurantPage = () => {
     const restaurant = useSelector(state => state.restaurantDetails);
     const favorites = useSelector(state => state.favorites);
     console.log("FAVORITES", favorites)
-    const user = useSelector(state => state.session?.user);
+    const user = useSelector(state => state.session.user);
     const [loadingFavorites, setLoadingFavorites] = useState(true);
     const [favorite, setFavorite] = useState(false);
 
@@ -34,12 +34,10 @@ const RestaurantPage = () => {
     }, [dispatch, id, user]);
 
     // checks if restaurant is in user's favorites
-    let favId;
     useEffect(() => {
         if (user && favorites.length) {
             for (let i = 0; i < favorites.length; i++) {
                 if(favorites[i].restaurantId == id) {
-                    favId = favorites[i].id
                     setFavorite(true)
                 }
             }
@@ -54,6 +52,12 @@ const RestaurantPage = () => {
     };
 
     const deleteFav = () => {
+        let favId;
+        for (let i = 0; i < favorites.length; i++) {
+            if(favorites[i].restaurantId == id) {
+                favId = favorites[i].id
+            }
+        }
         console.log("hereeeee, ", favId)
                 dispatch(deleteFavorites(favId, user.id))
                     .then(() => dispatch(getFavorites(user.id)))
@@ -110,6 +114,7 @@ const RestaurantPage = () => {
             }
             return reviewStars;
         }
+        
 
 
         // console.log("STARRRRR", starArr)
@@ -198,7 +203,7 @@ const RestaurantPage = () => {
                                                         <button className="delete-review">
                                                             <OpenModalButton
                                                                 buttonText='Delete Review'
-                                                                modalComponent={<DeleteReviewForm />}
+                                                                modalComponent={<DeleteReviewForm review={review}/>}
                                                             />
                                                         </button>
                                                     </div>

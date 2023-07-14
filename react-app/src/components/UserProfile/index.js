@@ -5,6 +5,8 @@ import { getUserReservations } from "../../store/reservation"
 import SearchBar from "../SearchBar";
 import ReservationModal from "../ReservationModal";
 import OpenModalButton from "../OpenModalButton";
+import DeleteReservationModal from "./DeleteReservationModal";
+
 import "./UserProfile.css"
 
 
@@ -47,6 +49,7 @@ function UserProfile () {
             <Link to="/login"> </Link>
         </div>
     )
+
 
     return (
         <div className="user">
@@ -95,6 +98,13 @@ function UserProfile () {
                                     modalComponent={ <ReservationModal reservation={ reservation } /> }
                                 />
                                 <button>Cancel</button>
+                                <button>Modify</button>
+
+                                    <OpenModalButton
+                                    buttonText="Cancel"
+                                    modalComponent={<DeleteReservationModal />}
+                                    />
+
                             </div>
                         ) )
                         }

@@ -18,7 +18,8 @@ class Review(db.Model):
 
     @property
     def username(self):
-        return self.user.first_name
+        return self.user.first_name + " " + self.user.last_name
+
 
     
     def to_dict(self):

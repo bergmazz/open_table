@@ -113,6 +113,7 @@ export const editReviews = (restaurantId, reviewId, review) => async (dispatch) 
         comment,
         review_image
     } = review
+    console.log('heyyyyyyyyyyyyyy', review_image)
 
     const res = await fetch(`/api/restaurants/${restaurantId}/reviews/${reviewId}`, {
         method: 'PUT',
@@ -126,7 +127,7 @@ export const editReviews = (restaurantId, reviewId, review) => async (dispatch) 
 
     if (res.ok) {
         const review = await res.json();
-        dispatch(editReview(review))
+        dispatch(editReview(restaurantId, review))
         return review
     } else if (res.status < 500) {
         const data = await res.json()
@@ -139,7 +140,7 @@ export const editReviews = (restaurantId, reviewId, review) => async (dispatch) 
 }
 
 export const deleteReviews = (restaurantId, reviewId) => async (dispatch) => {
-    const res = await fetch(`/api/restauants/${restaurantId}/reviews/${reviewId}`, {
+    const res = await fetch(`/api/restaurants/${restaurantId}/reviews/${reviewId}`, {
         method: 'DELETE'
     });
     if (res.ok) {
@@ -154,6 +155,8 @@ export const deleteReviews = (restaurantId, reviewId) => async (dispatch) => {
 const initialState = {
     restaurantReviews: {}
 }
+
+
 
 export default function reviewsReducer(state = initialState, action) {
     let newState
@@ -170,7 +173,7 @@ export default function reviewsReducer(state = initialState, action) {
         }
         case EDIT_REVIEWS: {
             newState = { ...state }
-            newState.restaurantReviews = { ...state.restaurantReviews, [action.restaurantId]: action.newReview }
+            newState.restaurantReviews[action.restaurantId] = action.newReview;
             return newState;
         }
         case DELETE_REVIEWS: {
