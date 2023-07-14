@@ -48,7 +48,7 @@ const ReservationModal = ( { reservation } ) => {
 
         if ( date && time ) {
             let formattedTime = time
-            if ( time.slice( -2 ) != "30" && !time.includes( ":00:00" ) ) {
+            if ( !time.includes( ":00:00" ) ) {
                 formattedTime += ":00";
             }
             // setReservationTime( `${ date } ${ time }` )
