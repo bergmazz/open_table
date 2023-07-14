@@ -47,11 +47,12 @@ const ReservationModal = ( { reservation } ) => {
     useEffect( () => {
 
         if ( date && time ) {
-            // let formattedTime = time
-            // if ( time.slice( -2 ) === "00" && !time.includes( ":00:00" ) ) {
-            //     formattedTime += ":00";
-            // }
-            setReservationTime( `${ date } ${ time }` )
+            let formattedTime = time
+            if ( time.slice( -2 ) != "30" && !time.includes( ":00:00" ) ) {
+                formattedTime += ":00";
+            }
+            // setReservationTime( `${ date } ${ time }` )
+            setReservationTime( `${ date } ${ formattedTime }` )
         }
     }, [ date, time ] )
 
