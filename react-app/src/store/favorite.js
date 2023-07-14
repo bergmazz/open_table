@@ -40,7 +40,7 @@ export const addFavorites = (userId, restaurantId) => async (dispatch) => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ userId, restaurantId })
     });
-    
+
     if (response.ok) {
         const newFavorite = await response.json();
         dispatch(addFavorite(newFavorite));
@@ -49,7 +49,7 @@ export const addFavorites = (userId, restaurantId) => async (dispatch) => {
 }
 
 export const deleteFavorites = (favId, userId) => async (dispatch) => {
-    console.log("in FELETE THUNKKKK")
+    console.log("in FELETE THUNKKKK", favId, userId)
     const response = await fetch(`/api/user/${userId}/favorites/${favId}`, {
         method: 'DELETE',
     });

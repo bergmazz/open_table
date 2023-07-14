@@ -46,13 +46,14 @@
 }
 
 .fav-button {
+  border-radius: 4px;
   position: absolute; /* set button to an absolute position */
   top: 10%; /* adjust the top position of the button */
   left: 85%; /* adjust the left position of the button */
   transform: translate(-50%, -50%); /* center the button */
   z-index: 2; /* set a higher z-index than the image */
   background-color: white; /* set your desired background color */
-  color: black; /* set your desired text color */
+  color: red; /* set your desired text color */
   border: none; /* remove button border */
   padding: 10px 20px; /* set your desired padding */
 }
