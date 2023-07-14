@@ -76,7 +76,7 @@ function UserProfile () {
 
                                     <OpenModalButton
                                     buttonText="Cancel"
-                                    modalComponent={<DeleteReservationModal />}
+                                    modalComponent={<DeleteReservationModal reservation={reservation} />}
                                     />
 
                             </div>
