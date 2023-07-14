@@ -62,7 +62,7 @@ const ReservationForm = () => {
         }
     }, [ date, time ] )
 
-    if ( !currentUser ) return <Redirect to="/signup" />;
+    if ( !currentUser ) return <Redirect to="/login" />;
 
     const handleSubmit = async ( e ) => {
         e.preventDefault();
