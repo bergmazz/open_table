@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router";
+import { useParams, useHistory } from "react-router";
 import { useModal } from "../../../context/Modal";
 import { deleteReviews } from "../../../store/review";
 import './deleteReview.css';
@@ -8,6 +8,7 @@ import './deleteReview.css';
 export default function DeleteReviewForm({ review }) {
     const dispatch = useDispatch();
     const currentUser = useSelector((state) => state.session.user);
+    const history = useHistory();
     const { closeModal } = useModal();
     const { id } = useParams();
     const [errors, setErrors] = useState([]);
@@ -22,10 +23,12 @@ export default function DeleteReviewForm({ review }) {
             })
         
         closeModal();
+        history.go(0);
     }
 
     const keepReview = () => {
         closeModal();
+        history.go(0);
     }
 
     return (
