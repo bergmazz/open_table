@@ -11,7 +11,7 @@ const ReservationModal = ( { reservation } ) => {
     const dispatch = useDispatch();
     const history = useHistory();
     const { closeModal } = useModal();
-
+//properly populate the form with reservation time in proper format
     let dateTime = new Date( reservation.reservationTime )
     let hours = dateTime.getHours();
     let minutes = dateTime.getMinutes();
@@ -42,12 +42,15 @@ const ReservationModal = ( { reservation } ) => {
     const [ notes, setNotes ] = useState( reservation.notes );
     const [ errors, setErrors ] = useState( [] );
 
-    // const { id } = useParams();
-
     const currentUser = useSelector( state => state.session.user )
 
     useEffect( () => {
+
         if ( date && time ) {
+            // let formattedTime = time
+            // if ( time.slice( -2 ) === "00" && !time.includes( ":00:00" ) ) {
+            //     formattedTime += ":00";
+            // }
             setReservationTime( `${ date } ${ time }` )
         }
     }, [ date, time ] )
@@ -60,6 +63,7 @@ const ReservationModal = ( { reservation } ) => {
             console.log( " reservationTime: ", reservationTime )
             console.log( " numberOfPeople: ", numberOfPeople )
             console.log( " status: ", status )
+
             let data = await dispatch( editReservations(
                 reservation.restaurantId, reservation.id, numberOfPeople, reservationTime, status, notes
             ) );
@@ -68,8 +72,8 @@ const ReservationModal = ( { reservation } ) => {
                 if ( typeof data[ 0 ] == "object" ) {
                     data = Object.values( data[ 0 ] )
                 }
-                // const errorArray = Object.values( data ).map( ( error ) => error );
-                // setErrors( errorArray );
+                const errorArray = Object.values( data ).map( ( error ) => error );
+                setErrors( errorArray );
                 setErrors( data )
             } else {
                 await dispatch( getUserReservations( reservation.restaurantId ) );
@@ -115,6 +119,7 @@ const ReservationModal = ( { reservation } ) => {
                         id="time"
                         value={ time }
                         onChange={ ( e ) => setTime( e.target.value ) }
+                        step="1800"
                     />
                 </label>
 
@@ -132,7 +137,7 @@ const ReservationModal = ( { reservation } ) => {
 
                 <button className="mbook" type="submit" >Edit Reservation</button>
                 <ul>
-                    { errors.map( ( error, idx ) => <li key={ idx }>{ error }</li> ) }
+                    { Object.values( errors ).map( ( error, idx ) => <li key={ idx }>{ error }</li> ) }
                 </ul>
 
             </form>
