@@ -28,14 +28,17 @@ const Favorites = () => {
     console.log("RESTAURANTS", restaurants)
     console.log("FAVS", favorites)
 
-    console.log("res", Object.values(restaurants))
     let favRestaurants = [];
-    for (let i = 0; i < favorites.length; i++) {
-        let restaurant = Object.values(restaurants).filter(r => r.id === favorites[i].restaurantId);
-        console.log("innnn", restaurant)
-        favRestaurants.push(restaurant[0])
+    if (Object.values(restaurants).length) {
+        for (let i = 0; i < favorites.length; i++) {
+            let restaurant = Object.values(restaurants).filter(r => r.id === favorites[i].restaurantId);
+            console.log("innnn", restaurant)
+            favRestaurants.push(restaurant[0])
+        }
     }
-    
+
+    favRestaurants.map(restaurant => {console.log("restairant, ", restaurant)})
+
     if (user && Object.keys(restaurants) && favorites.length) {
         return (
             <div className="homepage-container">
