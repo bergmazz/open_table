@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Redirect, useParams, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 // import { getDetailsRestaurant } from "../../store/restaurantDetails";
-import { editReservations } from "../../store/reservation";
+import { editReservations, getUserReservations } from "../../store/reservation";
 import { useModal } from "../../context/Modal";
 import "./ReservationModal.css";
 
@@ -72,6 +72,8 @@ const ReservationModal = ( { reservation } ) => {
                 // setErrors( errorArray );
                 setErrors( data )
             } else {
+                await dispatch( getUserReservations( reservation.restaurantId ) );
+                closeModal();
                 history.push( "/user" );
             }
         } else {

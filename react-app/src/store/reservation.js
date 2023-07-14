@@ -147,6 +147,7 @@ export const editReservations = ( restaurantId, id, number_of_people,
             const reservation = await res.json();
             console.log( "----reservation:", reservation )
             dispatch( editReservation( restaurantId, reservation ) );
+            // dispatch( getUserReservation( reservation ) );
             return reservation
         } else {
             const data = await res.json();
