@@ -121,6 +121,8 @@ def edit_reservation(restaurant_id, reservation_id):
             return jsonify({ 'error': 'You are not authorized to edit this post' }), 400
 
     form = ReservationForm()
+
+    print("--------------type of reservation time:", type(reservation.reservation_time))
     form.populate_from_reservation(reservation)
     # form.status = 'confirmed'
     form['csrf_token'].data = request.cookies['csrf_token']
