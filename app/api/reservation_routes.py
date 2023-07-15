@@ -27,7 +27,14 @@ def get_reservations(restaurant_id):
     owner_reservations = [reservation.owner_to_dict() for reservation in Reservation.query.filter_by(restaurant_id=restaurant_id).all()]
 
     # for reservation in non_owner_reservations:
-    #     update_res_status(reservation)
+    #         reservation.status = reservation.status.lower()
+    #         print("---------datetime:", datetime.utcnow())
+    #         print("-------reservation.reservation_time:", reservation.reservation_time)
+    #         if datetime.utcnow() > reservation.reservation_time:
+    #             if reservation.status == "confirmed":
+    #                 reservation.status = "attended"
+    #                 db.session.commit()
+    # print("in get routereswervation statusss", reservation.status)
 
     if current_user.id == restaurant.user_id:
         return jsonify ({'Reservations': owner_reservations}), 200
@@ -113,12 +120,15 @@ def edit_reservation(restaurant_id, reservation_id):
         if current_user.id is not restaurant.user_id:
             return jsonify({ 'error': 'You are not authorized to edit this post' }), 400
 
-    form = ReservationForm(obj=reservation)
+    form = ReservationForm()
+
+    # print("--------------type of reservation time:", type(reservation.reservation_time))
+    # form.populate_from_reservation(reservation)
     # form.status = 'confirmed'
     form['csrf_token'].data = request.cookies['csrf_token']
     data = form.data
     # print("-----------------CSRF token:", request.cookies['csrf_token'])
-    # print("----------formdata:", data)
+    print("----------formdata:", data)
 
     # Check if there is an existing reservation at the specified time
     for xreservation in restaurant.reservations:
@@ -129,6 +139,7 @@ def edit_reservation(restaurant_id, reservation_id):
 
     if form.validate_on_submit():
         form.populate_obj(reservation)
+        # form.populate_from_reservation(data)
         reservation.updated_at = datetime.utcnow()
         db.session.commit()
         return reservation.to_dict()
@@ -172,9 +183,10 @@ def delete_reservation(reservation_id, restaurant_id):
         return jsonify({'error': 'You are not authorized to cancel this reservation'})
 
     reservation.status = reservation.status.lower()
-    # if datetime.utcnow() > reservation.reservation_time:
-    #     if reservation.status == "confirmed":
-    #         reservation.status = "attended"
+    if datetime.utcnow() > reservation.reservation_time:
+        if reservation.status == "confirmed":
+            reservation.status = "attended"
+            db.session.commit()
 
     print("reswervation statusss", reservation.status)
     if reservation.status != "confirmed":

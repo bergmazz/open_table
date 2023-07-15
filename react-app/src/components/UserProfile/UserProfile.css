@@ -84,6 +84,7 @@ object-fit: cover;
    display: grid;
    grid-template-rows: auto 80px;
    grid-template-columns: repeat(5, 1fr);
+   /* grid-template-columns: auto 1fr; */
    height: 240px;
   border-bottom: solid lightgray thin;
   margin: 20px;
