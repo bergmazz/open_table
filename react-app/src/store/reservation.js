@@ -129,6 +129,7 @@ export const editReservations = ( restaurantId, id, number_of_people,
             status,
             notes
         } ) )
+        reservation_time = reservation_time.slice( 0, -3 )
 
         const res = await fetch( `/api/restaurants/${ restaurantId }/reservations/${ id }`, {
             method: 'PUT',

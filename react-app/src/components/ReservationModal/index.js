@@ -70,7 +70,7 @@ const ReservationModal = ( { reservation } ) => {
             let data = await dispatch( editReservations(
                 reservation.restaurantId, reservation.id, numberOfPeople, reservationTime, status, notes
             ) );
-            // console.log( '-------------data-------', data )
+            console.log( '-------------data-------', data )
             if ( !data.id ) {
                 if ( typeof data[ 0 ] == "object" ) {
                     data = Object.values( data[ 0 ] )
