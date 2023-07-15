@@ -151,5 +151,6 @@ class Restaurant(db.Model, UserMixin):
     def name_to_dict(self):
         return {
             'restaurantName': self.restaurant_name,
-            'coverImage': self.cover_image
+            'coverImage': self.cover_image,
+            'city': self.city,
         }

@@ -14,6 +14,7 @@ import ReservationForm from "./components/ReservationForm"
 import CreateRestaurant from "./components/CreateRestaurant";
 import OwnerRestaurant from "./components/ManageRestaurants";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
+import Favorites from "./components/UserProfile/favorites";
 
 function App() {
   const dispatch = useDispatch();
@@ -56,6 +57,9 @@ function App() {
           </Route>
           <Route exact path="/user/restaurants">
             <OwnerRestaurant />
+          </Route>
+          <Route exact path="/user/favorites">
+            <Favorites />
           </Route>
         </Switch>
       )}

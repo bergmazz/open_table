@@ -1,0 +1,95 @@
+.edit-review {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.review-header {
+    padding-left: 60px;
+}
+
+.editReview-form {
+  width: 90%;
+}
+
+.editReview-comment {
+    border: groove gray;
+    box-sizing: border-box;
+    border-radius: 10px;
+    width: 100%;
+    height: 150px;
+    padding: 5px;
+}
+
+textarea::placeholder {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.editRating-container {
+    display: flex;
+    justify-content: center;
+}
+
+.star-button {
+    background-color: transparent;
+    border: none;
+    width: 50px;
+    font-size: 30px;
+    color: crimson;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+.rating-text {
+    padding-right: 45px;
+    margin-top: 30px;
+
+}
+
+.errors-list {
+    background-color: transparent;
+    font-size: 12px;
+    padding: 5px;
+    color: #ff5a5f;
+}
+
+.editReview-image {
+    border: groove gray;
+    box-sizing: border-box;
+    border-radius: 10px;
+    width: 100%;
+    height: auto;
+    padding: 5px;
+    margin-top: 10px;
+}
+
+.submit-review-button {
+    background-color: #e31c5f;
+    width: 100%;
+    border: none;
+    border-radius: 10px;
+    height: 50px;
+    color: white;
+    font-weight: bolder;
+    margin-top: 30px;
+
+}
+
+.submit-review-button-disabled {
+    background-color: #e31c5f;
+    opacity: 0.6;
+    width: 100%;
+    border: none;
+    border-radius: 10px;
+    height: 50px;
+    color: white;
+    font-weight: bolder;
+    margin-top: 40px;
+
+}
+
+.submit-review-button:hover {
+    cursor: pointer;
+}

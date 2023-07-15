@@ -30,7 +30,7 @@ const ReservationForm = () => {
     const [ reservationTime, setReservationTime ] = useState( "" );
     const [ date, setDate ] = useState( getTodayDate() );
     const [ time, setTime ] = useState( getOneHourFromNow() );
-    const [ status, setStatus ] = useState( "Confirmed" );
+    const [ status, setStatus ] = useState( "confirmed" );
     const [ notes, setNotes ] = useState( "" );
     const [ errors, setErrors ] = useState( [] );
 
@@ -59,6 +59,7 @@ const ReservationForm = () => {
             const minutes = `0${ dateObject.getUTCMinutes() }`.slice( -2 );
             const seconds = `0${ dateObject.getUTCSeconds() }`.slice( -2 );
             setReservationTime( `${ year }-${ month }-${ day } ${ hours }:${ minutes }:${ seconds }` )
+            // setReservationTime( `${ date } ${ time }` )
         }
     }, [ date, time ] )
 

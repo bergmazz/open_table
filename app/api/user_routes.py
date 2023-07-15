@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 from app.models import db, User, Favorite, Reservation, Restaurant
 from app.forms.favorite_form import FavoriteForm
+from datetime import datetime
 
 user_routes = Blueprint('users', __name__)
 
@@ -39,6 +40,15 @@ def get_user_reservation():
     curr_user_id = current_user.id
     reservations = db.session.query(Reservation).filter(
         Reservation.user_id == curr_user_id).all()
+    for reservation in reservations:
+        reservation.status = reservation.status.lower()
+        # print("---------datetime:", datetime.utcnow())
+        # print("-------reservation.reservation_time:", reservation.reservation_time)
+        if datetime.utcnow() > reservation.reservation_time:
+            if reservation.status == "confirmed":
+                reservation.status = "attended"
+                db.session.commit()
+    # print("in getuser res route reswervation statusss", reservation.status)
     return [reservation.to_dict() for reservation in reservations]
 
 # Get current user favorites
