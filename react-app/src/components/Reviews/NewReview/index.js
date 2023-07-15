@@ -57,10 +57,6 @@ export default function CreateReviewModal({ restaurantId }) {
       const data =  await dispatch(addReviews(
         id, rating, comment, review_image
       ));
-
-      if (data.error) {
-        setErrors(data)
-      }
     } else {
         return <Redirect to='/signup' />; 
     }
