@@ -112,7 +112,6 @@ function UserProfile() {
                                                         onItemClick={ closeMenu }
                                                         modalComponent={ <ReservationModal reservation={ reservation } /> }
                                                     />
-
                                                     <OpenModalButton
                                                         className='cancel-reserv'
                                                         buttonText="Cancel"
