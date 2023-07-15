@@ -139,7 +139,7 @@ const ReservationModal = ( { reservation } ) => {
                 </label>
 
 
-                <button className="mbook" type="submit" >Book Table</button>
+                <button className="mbook" type="submit" >Confirm</button>
                 <ul className="merrors-list">
                     { Object.values( errors ).map( ( error, idx ) => <li key={ idx }>{ error }</li> ) }
                 </ul>
