@@ -89,7 +89,7 @@ function UserProfile() {
                 <div className="points-bar">
                     <div className="progress" style={{ width: `${progress}%` }}></div>
                 </div>
-
+            </div>
                 <div className="reservations-container">
                     {
                         reservations.length ? (
@@ -114,6 +114,7 @@ function UserProfile() {
                                                     />
 
                                                     <OpenModalButton
+                                                        className='cancel-reserv'
                                                         buttonText="Cancel"
                                                         modalComponent={<DeleteReservationModal reservation={reservation} />}
                                                     />
@@ -138,6 +139,7 @@ function UserProfile() {
                                                         <p className="reservtime" >{ reservation.reservationTime }</p>
                                                     </div>
                                                     <OpenModalButton
+                                                        className='review-reserv'
                                                         buttonText='Leave A Review'
                                                         modalComponent={<CreateReviewModal reservation={reservation} />}
                                                     />
@@ -177,7 +179,6 @@ function UserProfile() {
                         )
                     }
 
-                </div>
             </div>
         </div>
     );

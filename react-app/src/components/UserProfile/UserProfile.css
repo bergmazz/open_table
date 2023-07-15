@@ -89,3 +89,16 @@ object-fit: cover;
   border-bottom: solid lightgray thin;
   margin: 20px;
 }
+
+.reservtime{
+      grid-column: 3 / span 2;
+}
+
+/* .edit-reserv .cancel-reserv .review-reserv {} */
+.open-modal-button{
+        background-color: crimson;
+        height: 50px;
+        margin-top: 130px;
+        margin-left: 5px;
+        margin-right: 5px;
+}
