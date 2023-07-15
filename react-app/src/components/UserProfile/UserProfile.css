@@ -95,7 +95,7 @@ object-fit: cover;
 }
 
 /* .edit-reserv .cancel-reserv .review-reserv {} */
-.open-modal-button{
+.reservation-tile .open-modal-button{
         background-color: crimson;
         height: 50px;
         margin-top: 130px;
