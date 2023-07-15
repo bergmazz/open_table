@@ -172,9 +172,9 @@ def delete_reservation(reservation_id, restaurant_id):
         return jsonify({'error': 'You are not authorized to cancel this reservation'})
 
     reservation.status = reservation.status.lower()
-    if datetime.utcnow() > reservation.reservation_time:
-        if reservation.status == "confirmed":
-            reservation.status = "attended"
+    # if datetime.utcnow() > reservation.reservation_time:
+    #     if reservation.status == "confirmed":
+    #         reservation.status = "attended"
 
     print("reswervation statusss", reservation.status)
     if reservation.status != "confirmed":
