@@ -70,8 +70,6 @@ const ReservationForm = () => {
         }
     }, [ date, time ] )
 
-    if ( !currentUser ) return <Redirect to="/signup" />;
-
     const handleSubmit = async ( e ) => {
         e.preventDefault();
         if ( currentUser ) {
@@ -93,6 +91,7 @@ const ReservationForm = () => {
                 history.push( "/user" );
             }
         } else {
+            // if ( !currentUser ) return <Redirect to="/signup" />;
             setErrors( [ 'Please create an account' ] );
         }
     };
