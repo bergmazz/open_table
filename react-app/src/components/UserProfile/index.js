@@ -17,7 +17,7 @@ function timeFormat ( reservation ) {
     const amPm = time[ 0 ] >= 12 ? "pm" : "am";
     const hours = ( ( time[ 0 ] % 12 ) || 12 );
     const formatTime = hours + ":" + time[ 1 ] + " " + amPm;
-    const formatAll = dateArr[ 0 ] + " " + dateArr[ 2 ] + " " + dateArr[ 1 ] + " " + dateArr[ 3 ] + " " + formatTime + " " + "GMT"
+    const formatAll = dateArr[ 0 ] + " " + dateArr[ 2 ] + " " + dateArr[ 1 ] + " " + dateArr[ 3 ] + " " + formatTime
     return formatAll
 }
 
