@@ -42,9 +42,9 @@ def get_user_reservation():
         Reservation.user_id == curr_user_id).all()
     for reservation in reservations:
         reservation.status = reservation.status.lower()
-        # print("---------datetime:", datetime.utcnow())
-        # print("-------reservation.reservation_time:", reservation.reservation_time)
-        if datetime.utcnow() > reservation.reservation_time:
+        print(reservation.id, "---------datetime:", datetime.utcnow())
+        print(reservation.id,"-------reservation.reservation_time:", reservation.reservation_time)
+        if datetime.utcnow().date() > reservation.reservation_time.date():
             if reservation.status == "confirmed":
                 reservation.status = "attended"
                 db.session.commit()
