@@ -111,11 +111,10 @@ function UserProfile() {
                                             upcomingReservations.map((reservation) => (
                                                 <div className="reservation-tile">
                                                     <img className="reservimg" src={reservation.restaurant[0].coverImage} />
-                                                    <div>
+                                                    <div className="col2">
                                                         <p className="reservname">{ reservation.restaurant[ 0 ].restaurantName }</p>
-                                                        <span className="reservuser"><i className="fa-regular fa-user"></i> <p>{ reservation.numberOfPeople } guests </p></span>
-                                                        <span className="reservtime"><i className="fa-regular fa-calendar"></i> <p> { timeFormat( reservation ) } </p></span>
-                                                    </div>
+                                                        <span className="reservuser"><i className="fa-regular fa-user"></i>  { reservation.numberOfPeople } guests </span>
+                                                        <span className="reservtime"><i className="fa-regular fa-calendar"></i>   { timeFormat( reservation ) } </span>
                                                     <OpenModalButton
                                                         className='edit-reserv'
                                                         buttonText="Modify"
@@ -127,6 +126,7 @@ function UserProfile() {
                                                         buttonText="Cancel"
                                                         modalComponent={<DeleteReservationModal reservation={reservation} />}
                                                     />
+                                                    </div>
 
                                                 </div>
                                             ))) : (
@@ -143,16 +143,16 @@ function UserProfile() {
                                             pastReservations.map((reservation) => (
                                                 <div className="reservation-tile">
                                                     <img className="reservimg" src={reservation.restaurant[0].coverImage} />
-                                                    <div>
+                                                    <div className="col2">
                                                         <p className="reservname">{reservation.restaurant[0].restaurantName}</p>
-                                                        <span className="reservuser"><i className="fa-regular fa-user"></i> <p>{ reservation.numberOfPeople } guests </p></span>
-                                                        <span className="reservtime"><i className="fa-regular fa-calendar"></i> <p> { timeFormat( reservation ) } </p></span>
-                                                    </div>
+                                                        <span className="reservuser"><i className="fa-regular fa-user"></i>  { reservation.numberOfPeople } guests </span>
+                                                        <span className="reservtime"><i className="fa-regular fa-calendar"></i>   { timeFormat( reservation ) } </span>
                                                     <OpenModalButton
                                                         className='review-reserv'
-                                                        buttonText='Leave A Review'
+                                                            buttonText='Leave a Review'
                                                         modalComponent={<CreateReviewModal reservation={reservation} />}
                                                     />
+                                                    </div>
                                                 </div>
                                             ))) : (
                                             <div>You have no past reservations</div>
@@ -166,10 +166,10 @@ function UserProfile() {
                                             cancelledReservations.map((reservation) => (
                                                 <div className="reservation-tile">
                                                     <img className="reservimg" src={reservation.restaurant[0].coverImage} />
-                                                    <div>
+                                                    <div className="col2">
                                                         <p className="reservname">{ reservation.restaurant[ 0 ].restaurantName }</p>
-                                                        <span className="reservuser"><i className="fa-regular fa-user"></i> <p>{ reservation.numberOfPeople } guests </p></span>
-                                                        <span className="reservtime"><i className="fa-regular fa-calendar"></i> <p> { timeFormat( reservation ) } </p></span>
+                                                        <span className="reservuser"><i className="fa-regular fa-user"></i>  { reservation.numberOfPeople } guests </span>
+                                                        <span className="reservtime"><i className="fa-regular fa-calendar"></i>   { timeFormat( reservation ) } </span>
                                                     </div>
                                                 </div>
                                             ))) : (
@@ -185,7 +185,7 @@ function UserProfile() {
                             <>
                                 <h1>You have no upoming or past reservations</h1>
                                 <h3>Find your table for any occasion</h3>
-                                {/* <SearchBar></SearchBar> */}
+                                <SearchBar></SearchBar>
                             </>
                         )
                     }
