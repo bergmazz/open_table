@@ -137,7 +137,7 @@ function UserProfile() {
                                                     </div>
                                                     <OpenModalButton
                                                         buttonText='Leave A Review'
-                                                        modalComponent={<CreateReviewModal restaurantId={reservation.restaurant[0].id} />}
+                                                        modalComponent={<CreateReviewModal reservation={reservation} />}
                                                     />
                                                 </div>
                                             ))) : (

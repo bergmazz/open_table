@@ -7,7 +7,7 @@ import { useParams, Redirect, useHistory} from "react-router-dom";
 import { useModal } from "../../../context/Modal";
 import './newReview.css';
 
-export default function CreateReviewModal({ restaurantId }) {
+export default function CreateReviewModal({ reservation }) {
   const dispatch = useDispatch();
   const { id } = useParams();
   const currentUser = useSelector((state) => state.session.user);
@@ -55,14 +55,14 @@ export default function CreateReviewModal({ restaurantId }) {
 
     if (currentUser) {
       const data =  await dispatch(addReviews(
-        id, rating, comment, review_image
+        reservation.restaurantId, rating, comment, review_image
       ));
     } else {
         return <Redirect to='/signup' />; 
     }
 
     closeModal();
-    history.push(`/restaurants/${id}/`)
+    history.push(`/restaurants/${reservation.restaurantId}/`)
 
     
   }
