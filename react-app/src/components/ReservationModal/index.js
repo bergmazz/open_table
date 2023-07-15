@@ -6,6 +6,7 @@ import { editReservations, getUserReservations } from "../../store/reservation";
 import { useModal } from "../../context/Modal";
 import "./ReservationModal.css";
 
+// this is the edit form
 
 const ReservationModal = ( { reservation } ) => {
     const dispatch = useDispatch();
@@ -13,8 +14,8 @@ const ReservationModal = ( { reservation } ) => {
     const { closeModal } = useModal();
 //properly populate the form with reservation time in proper format
     let dateTime = new Date( reservation.reservationTime )
-    let hours = dateTime.getHours();
-    let minutes = dateTime.getMinutes();
+    let hours = dateTime.getUTCHours();
+    let minutes = dateTime.getUTCMinutes();
     let slashDate = dateTime.toLocaleDateString( "en-US" );
     let dateParts = slashDate.split( "/" );
     let month = dateParts[ 0 ];
@@ -51,7 +52,7 @@ const ReservationModal = ( { reservation } ) => {
             if ( !time.includes( ":00:00" ) ) {
                 formattedTime += ":00";
             }
-            setReservationTime( `${ date } ${ time }` )
+            // setReservationTime( `${ date } ${ time }` )
             setReservationTime( `${ date } ${ formattedTime }` )
         }
 

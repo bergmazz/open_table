@@ -73,7 +73,6 @@ function UserProfile() {
         </div>
     )
 
-
     return (
         <div className="user">
             <div className="extends-nav-height">

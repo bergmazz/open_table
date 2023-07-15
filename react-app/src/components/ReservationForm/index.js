@@ -128,16 +128,6 @@ const ReservationForm = () => {
                     onChange={ ( e ) => setTime( e.target.value ) }
                     />
                 </label>
-                {/* { errors.time && <span>This field is required</span> } */ }
-
-                {/* EDIT RESERVATION: */ }
-                {/* <label htmlFor="status">Status:</label>
-                <select id="status" name="status" ref={ register( { required: true } ) }>
-                    <option value="Confirmed">Confirmed</option>
-                    <option value="Attended">Attended</option>
-                    <option value="Cancelled">Cancelled</option>
-                </select>
-                { errors.status && <span>This field is required</span> } */}
 
                 <label >
                     {/* Notes: */ }
@@ -149,7 +139,6 @@ const ReservationForm = () => {
                         placeholder="Leave a note, if you'd like."
                     />
                 </label>
-                {/* { errors && <div>{ errors }</div> } */ }
 
                 <button className="book" type="submit" onClick={ handleAddPoints } >Book Table</button>
                 <ul>
