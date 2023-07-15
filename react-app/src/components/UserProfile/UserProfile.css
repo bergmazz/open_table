@@ -84,7 +84,21 @@ object-fit: cover;
    display: grid;
    grid-template-rows: auto 80px;
    grid-template-columns: repeat(5, 1fr);
+   /* grid-template-columns: auto 1fr; */
    height: 240px;
   border-bottom: solid lightgray thin;
   margin: 20px;
+}
+
+.reservtime{
+      grid-column: 3 / span 2;
+}
+
+/* .edit-reserv .cancel-reserv .review-reserv {} */
+.reservation-tile .open-modal-button{
+        background-color: crimson;
+        height: 50px;
+        margin-top: 130px;
+        margin-left: 5px;
+        margin-right: 5px;
 }
