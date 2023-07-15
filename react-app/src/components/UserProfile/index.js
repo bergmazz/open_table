@@ -62,9 +62,9 @@ function UserProfile() {
     const upcomingReservations = reservations.filter(res => res.status === "confirmed");
     const pastReservations = reservations.filter(res => res.status === "attended");
     const cancelledReservations = reservations.filter(res => res.status === "cancelled");
-    console.log("upcoming", upcomingReservations)
-    console.log("past", pastReservations)
-    console.log("canceled", cancelledReservations)
+    // console.log("upcoming", upcomingReservations)
+    // console.log("past", pastReservations)
+    // console.log("canceled", cancelledReservations)
 
     if (!currentUser) return (
         <div className='no-user'>
