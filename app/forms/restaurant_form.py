@@ -1,10 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import IntegerField, StringField, SelectField, SubmitField
-<<<<<<< HEAD
-from wtforms.validators import DataRequired, ValidationError, Email, NumberRange, Length, AnyOf
-=======
 from wtforms.validators import DataRequired, Email, NumberRange, Length, AnyOf, ValidationError
->>>>>>> frontend
 # from flask_wtf.csrf import CSRFProtect
 import re
 
