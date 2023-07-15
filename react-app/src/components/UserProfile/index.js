@@ -12,12 +12,13 @@ import "./UserProfile.css"
 
 function timeFormat ( reservation ) {
     const dateArr = reservation.reservationTime.split( " " );
-    console.log( dateArr )
+    // console.log( "date arr ------------", dateArr )
     const time = dateArr[ 4 ].split( ":" );
     const amPm = time[ 0 ] >= 12 ? "pm" : "am";
     const hours = ( ( time[ 0 ] % 12 ) || 12 );
     const formatTime = hours + ":" + time[ 1 ] + " " + amPm;
-    return formatTime
+    const formatAll = dateArr[ 0 ] + " " + dateArr[ 2 ] + " " + dateArr[ 1 ] + " " + dateArr[ 3 ] + " " + formatTime + " " + "GMT"
+    return formatAll
 }
 
 function UserProfile() {
@@ -113,8 +114,8 @@ function UserProfile() {
                                                     <img className="reservimg" src={reservation.restaurant[0].coverImage} />
                                                     <div>
                                                         <p className="reservname">{ reservation.restaurant[ 0 ].restaurantName }</p>
-                                                        <p className="reservpeople" >{ reservation.numberOfPeople } guests</p>
-                                                        <p className="reservtime" >{reservation.reservationTime}</p>
+                                                        <span className="reservuser"><i className="fa-regular fa-user"></i> <p>{ reservation.numberOfPeople } guests </p></span>
+                                                        <span className="reservtime"><i className="fa-regular fa-calendar"></i> <p> { timeFormat( reservation ) } </p></span>
                                                     </div>
                                                     <OpenModalButton
                                                         className='edit-reserv'
@@ -145,7 +146,8 @@ function UserProfile() {
                                                     <img className="reservimg" src={reservation.restaurant[0].coverImage} />
                                                     <div>
                                                         <p className="reservname">{reservation.restaurant[0].restaurantName}</p>
-                                                        <p className="reservtime" >{ reservation.reservationTime }</p>
+                                                        <span className="reservuser"><i className="fa-regular fa-user"></i> <p>{ reservation.numberOfPeople } guests </p></span>
+                                                        <span className="reservtime"><i className="fa-regular fa-calendar"></i> <p> { timeFormat( reservation ) } </p></span>
                                                     </div>
                                                     <OpenModalButton
                                                         className='review-reserv'
@@ -167,9 +169,8 @@ function UserProfile() {
                                                     <img className="reservimg" src={reservation.restaurant[0].coverImage} />
                                                     <div>
                                                         <p className="reservname">{ reservation.restaurant[ 0 ].restaurantName }</p>
-                                                        <span><i className="fa-regular fa-user"></i> { reservation.numberOfPeople } guests</span>
-                                                        <span><i className="fa-regular fa-calendar"></i> { reservation.reservationTime }</span>
-                                                        <p className="reservtime" >{ timeFormat( reservation ) }</p>
+                                                        <span className="reservuser"><i className="fa-regular fa-user"></i> <p>{ reservation.numberOfPeople } guests </p></span>
+                                                        <span className="reservtime"><i className="fa-regular fa-calendar"></i> <p> { timeFormat( reservation ) } </p></span>
                                                     </div>
                                                 </div>
                                             ))) : (
