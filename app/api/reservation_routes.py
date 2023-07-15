@@ -27,7 +27,14 @@ def get_reservations(restaurant_id):
     owner_reservations = [reservation.owner_to_dict() for reservation in Reservation.query.filter_by(restaurant_id=restaurant_id).all()]
 
     # for reservation in non_owner_reservations:
-    #     update_res_status(reservation)
+    #         reservation.status = reservation.status.lower()
+    #         print("---------datetime:", datetime.utcnow())
+    #         print("-------reservation.reservation_time:", reservation.reservation_time)
+    #         if datetime.utcnow() > reservation.reservation_time:
+    #             if reservation.status == "confirmed":
+    #                 reservation.status = "attended"
+    #                 db.session.commit()
+    # print("in get routereswervation statusss", reservation.status)
 
     if current_user.id == restaurant.user_id:
         return jsonify ({'Reservations': owner_reservations}), 200
@@ -175,6 +182,7 @@ def delete_reservation(reservation_id, restaurant_id):
     if datetime.utcnow() > reservation.reservation_time:
         if reservation.status == "confirmed":
             reservation.status = "attended"
+            db.session.commit()
 
     print("reswervation statusss", reservation.status)
     if reservation.status != "confirmed":

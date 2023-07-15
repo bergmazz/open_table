@@ -103,7 +103,12 @@ function UserProfile() {
                                                         <p className="reservname">{reservation.restaurant[0].restaurantName}</p>
                                                         <p className="reservtime" >{reservation.reservationTime}</p>
                                                     </div>
-                                                    <button>Modify</button>
+                                                    <OpenModalButton
+                                                        className='edit-reserv'
+                                                        buttonText="Modify"
+                                                        onItemClick={ closeMenu }
+                                                        modalComponent={ <ReservationModal reservation={ reservation } /> }
+                                                    />
 
                                                     <OpenModalButton
                                                         buttonText="Cancel"
@@ -127,7 +132,14 @@ function UserProfile() {
                                                     <img className="reservimg" src={reservation.restaurant[0].coverImage} />
                                                     <div>
                                                         <p className="reservname">{reservation.restaurant[0].restaurantName}</p>
-                                                        <p className="reservtime" >{reservation.reservationTime}</p>
+                                                        <p className="reservtime" >{ reservation.reservationTime }</p>
+                                                        <button>Review</button>
+                                                        {/* <OpenModalButton
+                                                            className='review-reserv'
+                                                            buttonText="Review"
+                                                            onItemClick={ closeMenu }
+                                                            modalComponent={ <ReviewModal reservation={ reservation } /> }
+                                                        /> */}
                                                     </div>
                                                 </div>
                                             ))) : (
