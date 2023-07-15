@@ -122,8 +122,8 @@ def edit_reservation(restaurant_id, reservation_id):
 
     form = ReservationForm()
 
-    print("--------------type of reservation time:", type(reservation.reservation_time))
-    form.populate_from_reservation(reservation)
+    # print("--------------type of reservation time:", type(reservation.reservation_time))
+    # form.populate_from_reservation(reservation)
     # form.status = 'confirmed'
     form['csrf_token'].data = request.cookies['csrf_token']
     data = form.data
@@ -138,8 +138,8 @@ def edit_reservation(restaurant_id, reservation_id):
                     return jsonify({'error': 'The selected time slot is already booked'}), 400
 
     if form.validate_on_submit():
-        # form.populate_obj(reservation)
-        form.populate_from_reservation(data)
+        form.populate_obj(reservation)
+        # form.populate_from_reservation(data)
         reservation.updated_at = datetime.utcnow()
         db.session.commit()
         return reservation.to_dict()

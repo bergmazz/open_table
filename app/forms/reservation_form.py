@@ -26,8 +26,8 @@ class ReservationForm(FlaskForm):
     status = StringField("Status")
     notes = StringField('Notes')
 
-    def populate_from_reservation(self, reservation):
-        self.number_of_people.data = reservation.number_of_people
-        self.reservation_time.data = reservation.reservation_time
-        self.status.data = reservation.status
-        self.notes.data = reservation.notes
+    # def populate_from_reservation(self, reservation):
+    #     self.number_of_people.data = reservation.number_of_people
+    #     self.reservation_time.data = reservation.reservation_time
+    #     self.status.data = reservation.status
+    #     self.notes.data = reservation.notes
