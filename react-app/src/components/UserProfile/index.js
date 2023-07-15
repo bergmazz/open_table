@@ -10,6 +10,16 @@ import CreateReviewModal from "../Reviews/NewReview";
 
 import "./UserProfile.css"
 
+function timeFormat ( reservation ) {
+    const dateArr = reservation.reservationTime.split( " " );
+    console.log( dateArr )
+    const time = dateArr[ 4 ].split( ":" );
+    const amPm = time[ 0 ] >= 12 ? "pm" : "am";
+    const hours = ( ( time[ 0 ] % 12 ) || 12 );
+    const formatTime = hours + ":" + time[ 1 ] + " " + amPm;
+    return formatTime
+}
+
 function UserProfile() {
 
     const dispatch = useDispatch();
@@ -156,8 +166,10 @@ function UserProfile() {
                                                 <div className="reservation-tile">
                                                     <img className="reservimg" src={reservation.restaurant[0].coverImage} />
                                                     <div>
-                                                        <p className="reservname">{reservation.restaurant[0].restaurantName}</p>
-                                                        <p className="reservtime" >{reservation.reservationTime}</p>
+                                                        <p className="reservname">{ reservation.restaurant[ 0 ].restaurantName }</p>
+                                                        <span><i className="fa-regular fa-user"></i> { reservation.numberOfPeople } guests</span>
+                                                        <span><i className="fa-regular fa-calendar"></i> { reservation.reservationTime }</span>
+                                                        <p className="reservtime" >{ timeFormat( reservation ) }</p>
                                                     </div>
                                                 </div>
                                             ))) : (
