@@ -15,8 +15,8 @@ const getTodayDate = () => {
 
 const getOneHourFromNow = () => {
     const currentTime = new Date();
-    currentTime.setHours( currentTime.getHours() + 1 );
-    currentTime.setMinutes( Math.ceil( currentTime.getMinutes() / 30 ) * 30 ); // Round up to next 30-minute increment
+    currentTime.setHours( currentTime.getUTCHours() + 1 );
+    currentTime.setMinutes( Math.ceil( currentTime.getUTCMinutes() / 30 ) * 30 ); // Round up to next 30-minute increment
     const hours = String( currentTime.getHours() ).padStart( 2, "0" );
     const minutes = String( currentTime.getMinutes() ).padStart( 2, "0" );
     return `${ hours }:${ minutes }`;
@@ -52,14 +52,21 @@ const ReservationForm = () => {
     useEffect( () => {
         if ( date && time ) {
             let dateObject = new Date( `${ date }T${ time }` )
-            const year = dateObject.getUTCFullYear();
-            const month = `0${ dateObject.getUTCMonth() + 1 }`.slice( -2 ); // Months are zero-indexed, so add 1
-            const day = `0${ dateObject.getUTCDate() }`.slice( -2 );
-            const hours = `0${ dateObject.getUTCHours() }`.slice( -2 );
-            const minutes = `0${ dateObject.getUTCMinutes() }`.slice( -2 );
-            const seconds = `0${ dateObject.getUTCSeconds() }`.slice( -2 );
+            const utcDateTime = dateObject.toISOString();
+            console.log( "UTC:", utcDateTime )
+            const year = dateObject.getFullYear();
+            const month = `0${ dateObject.getMonth() + 1 }`.slice( -2 ); // Months are zero-indexed, so add 1
+            const day = `0${ dateObject.getDate() }`.slice( -2 );
+            const hours = `0${ dateObject.getHours() }`.slice( -2 );
+            const minutes = `0${ dateObject.getMinutes() }`.slice( -2 );
+            const seconds = `0${ dateObject.getSeconds() }`.slice( -2 );
             setReservationTime( `${ year }-${ month }-${ day } ${ hours }:${ minutes }:${ seconds }` )
             // setReservationTime( `${ date } ${ time }` )
+
+            // const dateObject = new Date( `${ date }T${ time }` );
+            // const utcDateTime = dateObject.toISOString();
+            // console.log( "UTC:", utcDateTime )
+            // setReservationTime( utcDateTime );
         }
     }, [ date, time ] )
 
@@ -128,16 +135,6 @@ const ReservationForm = () => {
                     onChange={ ( e ) => setTime( e.target.value ) }
                     />
                 </label>
-                {/* { errors.time && <span>This field is required</span> } */ }
-
-                {/* EDIT RESERVATION: */ }
-                {/* <label htmlFor="status">Status:</label>
-                <select id="status" name="status" ref={ register( { required: true } ) }>
-                    <option value="Confirmed">Confirmed</option>
-                    <option value="Attended">Attended</option>
-                    <option value="Cancelled">Cancelled</option>
-                </select>
-                { errors.status && <span>This field is required</span> } */}
 
                 <label >
                     {/* Notes: */ }
@@ -149,7 +146,6 @@ const ReservationForm = () => {
                         placeholder="Leave a note, if you'd like."
                     />
                 </label>
-                {/* { errors && <div>{ errors }</div> } */ }
 
                 <button className="book" type="submit" onClick={ handleAddPoints } >Book Table</button>
                 <ul>
