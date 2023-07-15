@@ -48,12 +48,13 @@ const ReservationModal = ( { reservation } ) => {
 
         if ( date && time ) {
             let formattedTime = time
-            // if ( !time.includes( ":00:00" ) ) {
-            //     formattedTime += ":00";
-            // }
-            // setReservationTime( `${ date } ${ time }` )
+            if ( !time.includes( ":00:00" ) ) {
+                formattedTime += ":00";
+            }
+            setReservationTime( `${ date } ${ time }` )
             setReservationTime( `${ date } ${ formattedTime }` )
         }
+
     }, [ date, time ] )
 
     if ( !currentUser ) return <Redirect to="/signup" />;

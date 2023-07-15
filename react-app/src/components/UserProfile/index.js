@@ -39,7 +39,8 @@ function UserProfile() {
     }, [dispatch]);
 
     const currentUser = useSelector(state => state.session.user)
-    const reservations = useSelector(state => state.reservations.byUser)
+    const reservations = useSelector( state => state.reservations.byUser )
+
     console.log("RESERRRVATTIIONNNNS", reservations)
     // const points = useSelector( ( state ) => state.reservations.points );
     const points = reservations.length * 100
@@ -101,7 +102,8 @@ function UserProfile() {
                                                 <div className="reservation-tile">
                                                     <img className="reservimg" src={reservation.restaurant[0].coverImage} />
                                                     <div>
-                                                        <p className="reservname">{reservation.restaurant[0].restaurantName}</p>
+                                                        <p className="reservname">{ reservation.restaurant[ 0 ].restaurantName }</p>
+                                                        <p className="reservpeople" >{ reservation.numberOfPeople } guests</p>
                                                         <p className="reservtime" >{reservation.reservationTime}</p>
                                                     </div>
                                                     <OpenModalButton
