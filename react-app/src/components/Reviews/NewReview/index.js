@@ -16,7 +16,7 @@ export default function CreateReviewModal({ restaurantId }) {
 
   const [rating, setRating] = useState(1);
   const [comment, setComment] = useState("");
-  const [reviewImage, setReviewImage] = useState("");
+  const [review_image, setReviewImage] = useState("");
   const [errors, setErrors] = useState([]);
   const [emptyField, setEmptyField] = useState(true);
   const [hasSubmitted, setHasSubmitted] = useState(false);
@@ -37,13 +37,13 @@ export default function CreateReviewModal({ restaurantId }) {
     if (rating < 1) {
       valErrors.rating = "Rating must be between 1-5 stars.";
     }
-    if (reviewImage) {
-      if (!(reviewImage.endsWith(".png") || reviewImage.endsWith(".jpg") || reviewImage.endsWith(".jpeg"))) {
-        valErrors.reviewImage = "Image URL must end in .png, .jpg, or .jpeg";
+    if (review_image) {
+      if (!(review_image.endsWith(".png") || review_image.endsWith(".jpg") || review_image.endsWith(".jpeg"))) {
+        valErrors.review_image = "Image URL must end in .png, .jpg, or .jpeg";
       }
     }
     setErrors(valErrors);
-  }, [comment, rating, reviewImage]);
+  }, [comment, rating, review_image]);
 
 
   if (!currentUser) return <Redirect to='/signup' />;
@@ -55,7 +55,7 @@ export default function CreateReviewModal({ restaurantId }) {
 
     if (currentUser) {
       const data =  await dispatch(addReviews(
-        restaurantId, rating, comment, reviewImage
+        id, rating, comment, review_image
       ));
 
       if (data.error) {
@@ -66,7 +66,7 @@ export default function CreateReviewModal({ restaurantId }) {
     }
 
     closeModal();
-    history.push(`/restaurants/${restaurantId}/`)
+    history.push(`/restaurants/${id}/`)
 
     
   }
@@ -89,7 +89,7 @@ export default function CreateReviewModal({ restaurantId }) {
       <textarea
         className="review-image"
         placeholder="Image URL"
-        value={reviewImage}
+        value={review_image}
         onChange={(e) => setReviewImage(e.target.value)}
       />
       <div className="rating-container">

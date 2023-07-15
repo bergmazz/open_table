@@ -45,8 +45,7 @@ export default function EditReviewForm({ review }) {
         }
         setErrors(valErrors);
 
-        dispatch(getRestaurantReviews(review.restaurantId));
-    }, [comment, rating, review_image, dispatch, review.restaurantId]);
+    }, [comment, rating, review_image]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
