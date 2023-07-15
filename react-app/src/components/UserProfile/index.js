@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { getUserReservations } from "../../store/reservation"
 import SearchBar from "../SearchBar";
 import ReservationModal from "../ReservationModal";
@@ -24,6 +24,7 @@ function timeFormat ( reservation ) {
 function UserProfile() {
 
     const dispatch = useDispatch();
+    const history = useHistory();
     const [ showMenu, setShowMenu ] = useState( false );
     const ulRef = useRef()
 
@@ -185,7 +186,9 @@ function UserProfile() {
                             <>
                                 <h1>You have no upoming or past reservations</h1>
                                 <h3>Find your table for any occasion</h3>
-                                <SearchBar></SearchBar>
+                                <button className="table-button" onClick={ () => history.push( '/restaurants' ) }>
+                                    Find a table
+                                </button>
                             </>
                         )
                     }
