@@ -32,7 +32,7 @@ export default function DeleteReviewForm({ review }) {
 
     return (
         <div className="delete-form-div">
-            <h1 className="title">Are you sure you want to delete this review?</h1>
+            <h2 className="title">Are you sure you want to remove your review?</h2>
             <ul className="errors">
                 {errors.map((error, idx) => (
                     <li key={idx}>{error}</li>

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams, Redirect, useHistory} from "react-router-dom";
 import { useModal } from "../../../context/Modal";
 import { editReviews, getRestaurantReviews } from "../../../store/review";
+import './editReview.css';
 
 export default function EditReviewForm({ review }) {
     const dispatch = useDispatch();
@@ -76,8 +77,8 @@ export default function EditReviewForm({ review }) {
 
 
   return (
-    <div className="add-review">
-      <form onSubmit={handleSubmit} className='createReview-form'>
+    <div className="edit-review">
+      <form onSubmit={handleSubmit} className='editReview-form'>
       <h1 className="review-header">How was your visit?</h1>
       <ul className="errors-list">
         {hasSubmitted && errors.map((error, idx) => (
@@ -85,12 +86,19 @@ export default function EditReviewForm({ review }) {
         ))}
       </ul>
       <textarea
-        className="review-comment"
+        className="editReview-comment"
         placeholder="Leave your review here"
         value={comment}
         onChange={(e) => setComment(e.target.value)}
       />
-      <div className="rating-container">
+      <textarea
+          className="editReview-image"
+          placeholder="Image URL"
+          value={review_image}
+          onChange={(e) => setReviewImage(e.target.value)}
+        />
+      <div className="editRating-container">
+      <p className="rating-text"><b>Rating</b></p>
         {starArr.map((starEl, index) => {
           index++;
           return (
@@ -104,19 +112,10 @@ export default function EditReviewForm({ review }) {
             onMouseEnter={() => setHover(index)}
             onMouseLeave={() => setHover(rating)}
             >
-            <i className={index <= (hover || rating) ? 'fa-solid' : 'fa-regular'}></i>
+            <i className={index <= (hover || rating) ? 'fa-solid fa-star' : 'fa-regular fa-star'}></i>
             </button>
           );
         })}
-        <p className="rating-text"><b>Rating</b></p>
-      </div>
-      <div className="review-image">
-        <input
-          type="text"
-          placeholder="Image URL"
-          value={review_image}
-          onChange={(e) => setReviewImage(e.target.value)}
-        />
       </div>
       <button
       className={emptyField ? 'submit-review-button-disabled' : 'submit-review-button'}
