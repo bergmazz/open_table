@@ -48,9 +48,9 @@ const ReservationModal = ( { reservation } ) => {
 
         if ( date && time ) {
             let formattedTime = time
-            if ( !time.includes( ":00:00" ) ) {
-                formattedTime += ":00";
-            }
+            // if ( !time.includes( ":00:00" ) ) {
+            //     formattedTime += ":00";
+            // }
             // setReservationTime( `${ date } ${ time }` )
             setReservationTime( `${ date } ${ formattedTime }` )
         }
@@ -61,7 +61,7 @@ const ReservationModal = ( { reservation } ) => {
     const handleSubmit = async ( e ) => {
         e.preventDefault();
         if ( currentUser ) {
-            console.log( " reservationTime: ", reservationTime )
+            console.log( "  in edit submit- reservationTime: ", reservationTime )
             console.log( " numberOfPeople: ", numberOfPeople )
             console.log( " status: ", status )
 
