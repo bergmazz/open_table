@@ -3,8 +3,10 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, Redirect, useHistory} from "react-router-dom";
 import { useModal } from "../../../context/Modal";
-import { editReviews, getRestaurantReviews } from "../../../store/review";
+import { editReviews } from "../../../store/review";
+import { getDetailsRestaurant } from "../../../store/restaurantDetails";
 import './editReview.css';
+
 
 export default function EditReviewForm({ review }) {
     const dispatch = useDispatch();
@@ -22,28 +24,24 @@ export default function EditReviewForm({ review }) {
     const [hover, setHover] = useState(0);
     const starArr = ["", "", "", "", ""];
 
-    
+    const isImageURL = (url) => {
+      return /\.(png|jpe?g|gif)$/i.test(url);
+    };
 
 
     useEffect(() => {
-        const valErrors = [];
+        const errors = [];
 
         if (comment.length < 10 || rating < 1) {
         setEmptyField(true);
         } else setEmptyField(false)
 
-        if (comment.length < 10) {
-        valErrors.comment = 'Review must be more than 10 characters.';
-        }
-        if (rating < 1) {
-        valErrors.rating = "Rating must be between 1-5 stars.";
-        }
         if (review_image) {
-          if (!(review_image.endsWith(".png") || review_image.endsWith(".jpg") || review_image.endsWith(".jpeg"))) {
-            valErrors.review_image = "Image URL must end in .png, .jpg, or .jpeg";
+          if (!isImageURL(review_image)) {
+            errors.review_image = "Invalid Image URL. Please provide a valid image url.";
           }
         }
-        setErrors(valErrors);
+        setErrors(errors);
 
     }, [comment, rating, review_image]);
 
@@ -58,19 +56,21 @@ export default function EditReviewForm({ review }) {
         review_image
     };
 
+    if (Object.keys(errors).length > 0) return;
+
     if (currentUser) {
-        const data = await dispatch(editReviews(
-            review.restaurantId, review.id, newReview
-        ));
-        if ( data && data.error) {
-            setErrors(data.error)
-        } 
+        const data = await dispatch(editReviews(review.restaurantId, review.id, newReview))
+          .catch(async (res) => {
+            const data = await res.json();
+            if (data && data.errors) setErrors(data.errors);
+          })
     } else {
         return <Redirect to='/signup' />;
     }
 
+    dispatch(getDetailsRestaurant(review.restaurantId))
+
     closeModal();
-    history.go(0);
     
   }
 
@@ -79,11 +79,6 @@ export default function EditReviewForm({ review }) {
     <div className="edit-review">
       <form onSubmit={handleSubmit} className='editReview-form'>
       <h1 className="review-header">How was your visit?</h1>
-      <ul className="errors-list">
-        {hasSubmitted && errors.map((error, idx) => (
-          <l1 key={`error${idx}`} className='errors'>{error}</l1>
-        ))}
-      </ul>
       <textarea
         className="editReview-comment"
         placeholder="Leave your review here"
@@ -96,6 +91,7 @@ export default function EditReviewForm({ review }) {
           value={review_image}
           onChange={(e) => setReviewImage(e.target.value)}
         />
+      {<span className={hasSubmitted ? 'error' : 'hidden'}>{errors.review_image}</span>}
       <div className="editRating-container">
       <p className="rating-text"><b>Rating</b></p>
         {starArr.map((starEl, index) => {
