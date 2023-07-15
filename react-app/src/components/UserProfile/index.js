@@ -6,6 +6,7 @@ import SearchBar from "../SearchBar";
 import ReservationModal from "../ReservationModal";
 import OpenModalButton from "../OpenModalButton";
 import DeleteReservationModal from "./DeleteReservationModal";
+import CreateReviewModal from "../Reviews/NewReview";
 
 import "./UserProfile.css"
 
@@ -133,14 +134,11 @@ function UserProfile() {
                                                     <div>
                                                         <p className="reservname">{reservation.restaurant[0].restaurantName}</p>
                                                         <p className="reservtime" >{ reservation.reservationTime }</p>
-                                                        <button>Review</button>
-                                                        {/* <OpenModalButton
-                                                            className='review-reserv'
-                                                            buttonText="Review"
-                                                            onItemClick={ closeMenu }
-                                                            modalComponent={ <ReviewModal reservation={ reservation } /> }
-                                                        /> */}
                                                     </div>
+                                                    <OpenModalButton
+                                                        buttonText='Leave A Review'
+                                                        modalComponent={<CreateReviewModal restaurantId={reservation.restaurant[0].id} />}
+                                                    />
                                                 </div>
                                             ))) : (
                                             <div>You have no past reservations</div>

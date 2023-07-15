@@ -30,7 +30,7 @@ const ReservationForm = () => {
     const [ reservationTime, setReservationTime ] = useState( "" );
     const [ date, setDate ] = useState( getTodayDate() );
     const [ time, setTime ] = useState( getOneHourFromNow() );
-    const [ status, setStatus ] = useState( "Confirmed" );
+    const [ status, setStatus ] = useState( "confirmed" );
     const [ notes, setNotes ] = useState( "" );
     const [ errors, setErrors ] = useState( [] );
 

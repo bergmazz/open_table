@@ -21,11 +21,16 @@ def seed_reservations():
         user_id=4, restaurant_id=3, number_of_people=3, reservation_time=datetime(2023, 9, 4, 16, 00),
         status='confirmed', notes="It's my 30th birthday",
     )
+    reservation5 = Reservation(
+        user_id=1, restaurant_id=3, number_of_people=3, reservation_time=datetime(2023, 5, 30, 10, 30),
+        status='attended', notes='Birthday'
+    )
 
     db.session.add(reservation1)
     db.session.add(reservation2)
     db.session.add(reservation3)
     db.session.add(reservation4)
+    db.session.add(reservation5)
     db.session.commit()
 
 

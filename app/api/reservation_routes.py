@@ -120,12 +120,13 @@ def edit_reservation(restaurant_id, reservation_id):
         if current_user.id is not restaurant.user_id:
             return jsonify({ 'error': 'You are not authorized to edit this post' }), 400
 
-    form = ReservationForm(obj=reservation)
+    form = ReservationForm()
+    form.populate_from_reservation(reservation)
     # form.status = 'confirmed'
     form['csrf_token'].data = request.cookies['csrf_token']
     data = form.data
     # print("-----------------CSRF token:", request.cookies['csrf_token'])
-    # print("----------formdata:", data)
+    print("----------formdata:", data)
 
     # Check if there is an existing reservation at the specified time
     for xreservation in restaurant.reservations:
@@ -135,7 +136,8 @@ def edit_reservation(restaurant_id, reservation_id):
                     return jsonify({'error': 'The selected time slot is already booked'}), 400
 
     if form.validate_on_submit():
-        form.populate_obj(reservation)
+        # form.populate_obj(reservation)
+        form.populate_from_reservation(data)
         reservation.updated_at = datetime.utcnow()
         db.session.commit()
         return reservation.to_dict()
