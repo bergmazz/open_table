@@ -25,6 +25,7 @@
     color: #007BFF;
     align-content: center;
     text-align: center;
+    line-height: 1.5;
 }
 .form-description-b {
     /* border: 2px solid red; */
@@ -34,6 +35,7 @@
     color: #007BFF;
     align-content: center;
     text-align: center;
+    line-height: 1.5;
 }
 
 #create-label {
