@@ -91,7 +91,7 @@ export default function EditReviewForm({ review }) {
           value={review_image}
           onChange={(e) => setReviewImage(e.target.value)}
         />
-      {<span className={hasSubmitted ? 'error' : 'hidden'}>{errors.review_image}</span>}
+      {<span className='error'>{errors.review_image}</span>}
       <div className="editRating-container">
       <p className="rating-text"><b>Rating</b></p>
         {starArr.map((starEl, index) => {
@@ -113,8 +113,8 @@ export default function EditReviewForm({ review }) {
         })}
       </div>
       <button
-      className={emptyField ? 'submit-review-button-disabled' : 'submit-review-button'}
-      disabled={emptyField}
+      className={emptyField || errors.review_image ? 'submit-review-button-disabled' : 'submit-review-button'}
+      disabled={emptyField || errors.review_image}
       type='submit'>Update Review</button>
       </form>
     </div>

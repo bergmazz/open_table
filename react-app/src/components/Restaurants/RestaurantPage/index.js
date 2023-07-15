@@ -102,17 +102,16 @@ const RestaurantPage = () => {
             )
         }
 
-        let reviewStars = '';
-        const makeStars = (obj) => {
-            reviewStars = '';
-            const thisObj = { ...obj };
-            for (let i = 0; i < 5; i++) {
-                if (thisObj.rating >= 1) {
-                    reviewStars += '★';
-                    thisObj.rating -= 1;
-                } else reviewStars += '☆';
+        const makeStars = (rating) => {
+            const starArr = [];
+            for (let i = 1; i <= 5; i++) {
+                if (i <= rating) {
+                    starArr.push(<i key={i} className='fa-solid fa-star '></i>);
+                } else {
+                    starArr.push(<i key={i} className='fa-regular fa-star'></i>);
+                }
             }
-            return reviewStars;
+            return starArr;
         }
         
 
@@ -186,9 +185,11 @@ const RestaurantPage = () => {
                                             <div className="user-section">{review.username} {convertDate(review.createdAt)}</div>
                                             <div className="review-comment">{review.comment}</div>
                                             <div className="review-rating">{makeStars(review.rating)}</div>
-                                            <div className="review-image-container">
-                                                 <img className="review-image" src={review.reviewImage}></img>
-                                            </div>
+                                            {review.reviewImage && review.reviewImage.trim() !== '' && (
+                                                <div className="review-image-container">
+                                                <img className="review-image" src={review.reviewImage} alt='review-image'></img>
+                                           </div>
+                                            )}
                                             {user && user.id === review.userId && (
                                                 <div>
                                                     <div>

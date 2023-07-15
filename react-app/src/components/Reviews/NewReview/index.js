@@ -26,7 +26,8 @@ export default function CreateReviewModal({ reservation }) {
   const isImageURL = (url) => {
     return /\.(png|jpe?g|gif)$/i.test(url);
   };
-  
+
+
 
   useEffect(() => {
     const errors = [];
@@ -86,7 +87,7 @@ export default function CreateReviewModal({ reservation }) {
         value={review_image}
         onChange={(e) => setReviewImage(e.target.value)}
       />
-      {<span className={hasSubmitted ? 'error' : 'hidden'}>{errors.review_image}</span>}
+      {<span className='error'>{errors.review_image}</span>}
       <div className="rating-container">
       <p className="rating-text"><b>Rating</b></p>
         {starArr.map((starEl, index) => {
@@ -108,8 +109,8 @@ export default function CreateReviewModal({ reservation }) {
         })}
       </div>
       <button
-      className={emptyField ? 'submit-review-button-disabled' : 'submit-review-button'}
-      disabled={emptyField}
+      className={emptyField || errors.review_image ? 'submit-review-button-disabled' : 'submit-review-button'}
+      disabled={emptyField || errors.review_image}
       type='submit'>Submit Your Review</button>
       </form>
     </div>
