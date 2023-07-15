@@ -104,7 +104,12 @@ function UserProfile() {
                                                         <p className="reservname">{reservation.restaurant[0].restaurantName}</p>
                                                         <p className="reservtime" >{reservation.reservationTime}</p>
                                                     </div>
-                                                    <button>Modify</button>
+                                                    <OpenModalButton
+                                                        className='edit-reserv'
+                                                        buttonText="Modify"
+                                                        onItemClick={ closeMenu }
+                                                        modalComponent={ <ReservationModal reservation={ reservation } /> }
+                                                    />
 
                                                     <OpenModalButton
                                                         buttonText="Cancel"
