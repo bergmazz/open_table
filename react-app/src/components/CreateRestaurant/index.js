@@ -32,7 +32,6 @@ function CreateRestaurant() {
 
     const [restaurant_name, setRestaurant_name] = useState('');
     const [cover_image, setCover_image] = useState('');
-    const [email, setEmail] = useState('');
     const [address, setAddress] = useState('');
     const [city, setCity] = useState('');
     const [state, setState] = useState('');
@@ -49,6 +48,7 @@ function CreateRestaurant() {
     const dispatch = useDispatch();
     const history = useHistory();
     const sessionUser = useSelector(state => state.session.user);
+    console.log("session user", sessionUser)
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -56,12 +56,6 @@ function CreateRestaurant() {
 
         const newErrors = [];
         if (!restaurant_name) newErrors.push("Please enter a restaurant name");
-        const emailRegEx = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
-        if (!emailRegEx.test(email)) {
-            newErrors.push("Please enter a valid email address");
-        } else if (!email) {
-            newErrors.push("Please enter an email address");
-        }
         if (!address) newErrors.push("Please enter an address");
         if (!city) newErrors.push("Please enter a city");
         if (!state) newErrors.push("Please select a state");
@@ -91,7 +85,7 @@ function CreateRestaurant() {
             userId: sessionUser.id,
             restaurant_name,
             cover_image,
-            email,
+            email: sessionUser.email,
             address,
             city,
             state,
@@ -117,7 +111,7 @@ function CreateRestaurant() {
     return (
         <div className='restaurant-form-container'>
             <h1 className='manage-header'>Lets add Your Restaurant</h1>
-            <h3 className='form-description-a'>By adding your restaurant to our platform, 
+            <h3 className='form-description-a'>By adding your restaurant to our platform,
                 you are opening the doors to a wider audience of potential customers.
             </h3>
             <h3 className='form-description-b'>
@@ -137,18 +131,6 @@ function CreateRestaurant() {
                         type='text'
                         value={restaurant_name}
                         onChange={(e) => setRestaurant_name(e.target.value)}
-                        required
-                        />
-                    </label>
-                </div>
-                <div className='create-email'>
-                    <label >
-                        Email
-                        <input
-                        className='create-input'
-                        type='text'
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
                         required
                         />
                     </label>
@@ -251,7 +233,7 @@ function CreateRestaurant() {
                             <option value='Ethiopian'>Ethiopian</option>
                             <option value='Greek'>Greek</option>
                         </select>
-                    </label>    
+                    </label>
                 </div>
                 <div className='create-price'>
                     <label className='create-label'>
@@ -268,7 +250,7 @@ function CreateRestaurant() {
                             <option value={3}>$$$</option>
                             <option value={4}>$$$$</option>
                         </select>
-                    </label>    
+                    </label>
                 </div>
                 <div className='create-open'>
                     <label className='create-label'>
@@ -286,7 +268,7 @@ function CreateRestaurant() {
                                     </option>
                             ))}
                         </select>
-                    </label>    
+                    </label>
                 </div>
                 <div className='create-close'>
                     <label className='create-label'>
@@ -304,7 +286,7 @@ function CreateRestaurant() {
                                     </option>
                             ))}
                         </select>
-                    </label>    
+                    </label>
                 </div>
                 <div className='create-image'>
                     <label className='create-label'>
@@ -316,7 +298,7 @@ function CreateRestaurant() {
                         onChange={(e) => setCover_image(e.target.value)}
                         required
                         />
-                    </label>   
+                    </label>
                 </div>
                 <button className='create-button' type="submit">Add Restaurant</button>
                 </form>
