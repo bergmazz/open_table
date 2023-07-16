@@ -70,8 +70,8 @@ const RestaurantPage = () => {
         // check restaurant reviews and price
         let reviews = "Reviews";
         if (restaurant.reviews.length === 1) reviews = "Review";
-        let priceRange = "$50 and over"
-        if (restaurant.priceRange <= 2) priceRange = "$30 and under";
+        let priceRange = "$50 or more"
+        if (restaurant.priceRange <= 2) priceRange = "$30 or less";
         if (restaurant.priceRange === 3) priceRange = "$31 to $50";
 
         // star rating
