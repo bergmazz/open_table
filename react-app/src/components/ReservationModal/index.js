@@ -88,6 +88,10 @@ const ReservationModal = ( { reservation } ) => {
         }
     };
 
+    let formattedTime = time
+    if ( !time.includes( ":00:00" ) ) {
+        formattedTime += ":00";
+    }
 
     return (
         <div className="reservation-form-container">
@@ -121,9 +125,8 @@ const ReservationModal = ( { reservation } ) => {
                         className="mtime"
                         type="time"
                         id="time"
-                        value={ time }
-                        onChange={ ( e ) => setTime( e.target.value ) }
-                        step="1800"
+                            value={ formattedTime }
+                            onChange={ ( e ) => setTime( e.target.value ) }
                     />
                 </label>
                 </div>
