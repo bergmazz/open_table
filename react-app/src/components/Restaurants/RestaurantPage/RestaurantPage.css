@@ -522,3 +522,12 @@
   margin-bottom: 10px;
   margin-left: 24px;
 }
+
+.active-price2 {
+  color: rgb(144, 144, 144);;
+  margin-left: 29px;
+}
+
+.inactive-price2 {
+  color: rgb(232, 232, 232); 
+}

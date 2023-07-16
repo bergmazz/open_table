@@ -258,7 +258,8 @@ const RestaurantPage = () => {
 
     <div className="detail-item">
         <h3><i className="fas fa-money-bill-wave"></i>Price Range</h3>
-        <p>{restaurant.priceRange}</p>
+        <span className="active-price2">{ "$".repeat(restaurant.priceRange) }</span>
+        <span className="inactive-price2">{ "$".repeat(4 - restaurant.priceRange) }</span>
     </div>
 
     <div className="detail-item">
