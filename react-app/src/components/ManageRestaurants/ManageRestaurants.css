@@ -1,3 +1,4 @@
+
 .manage-cards {
     display: flex;
     justify-content: space-evenly;
@@ -40,6 +41,7 @@
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    margin-bottom: 225%;
   }
 
   .create-restaurant-button:hover {
@@ -70,6 +72,7 @@
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    margin-bottom: 600%;
   }
 
   .no-restaurant-button:hover {

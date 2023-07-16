@@ -68,7 +68,9 @@ margin: 2px;
 .reservations-container{
     width: 66%;
     float: right;
-    height: calc(100vh - 100px);
+    max-height: calc(100vh - 100px);
+    /* overflow-y: auto; */
+    margin-bottom: 100%;
 }
 /* .reservations-container{
     overflow-y: scroll;

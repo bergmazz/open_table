@@ -53,6 +53,7 @@ const HomePage = () => {
                 <SearchBar />
             </div>
             </div>
+            <div className="featured-restaurant-cards">
             <div className="featured-bar">
                 <h2>Featured restaurants</h2>
                 <Link className="view-restaurants" to='/restaurants'>View all Restaurants</Link>
@@ -76,6 +77,7 @@ const HomePage = () => {
                     </Link>
                     ))
                 }
+            </div>
             </div>
         </div>
     )

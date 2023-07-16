@@ -3,12 +3,14 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 100%;
+    width: 70%;
+    max-width: 1000px;
     margin: 0 auto;
     padding: 50px;
     background-color: #f8f8f8;
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+    /* border: 2px solid red; */
 }
 
 .manage-header {
