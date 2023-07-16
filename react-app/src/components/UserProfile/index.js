@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { getUserReservations } from "../../store/reservation"
+import { authenticate } from "../../store/session";
 import SearchBar from "../SearchBar";
 import ReservationModal from "../ReservationModal";
 import OpenModalButton from "../OpenModalButton";
@@ -37,6 +38,7 @@ function UserProfile() {
     };
 
     useEffect( () => {
+        dispatch( authenticate() )
         dispatch( getUserReservations() );
 
         if ( !showMenu ) return;
