@@ -48,11 +48,11 @@ const Favorites = () => {
                 <div className="featured-bar">
                     <h2>Favorite restaurants</h2>
                 </div>
-                <div className="restaurant-cards">
+                <div className="fav-restaurant-cards">
                     {
                         favRestaurants.map(restaurant => (
                             <Link to={`/restaurants/${restaurant.id}`} key={restaurant.id}>
-                        <div className="card-container">
+                        <div className="fav-card-container">
                             <img className="card-img" src={restaurant.coverImage} alt="restaurant" />
                             <div className="card-name">{ `${ restaurant.restaurantName }` }</div>
                             <div className="card-info">
@@ -71,7 +71,7 @@ const Favorites = () => {
             </div>
         )
     } else  {
-        return (<div>
+        return (<div className="no-fav-restaurants">
             <h1>You have no favorite restaurants</h1>
         </div>
     )}

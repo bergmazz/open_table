@@ -178,6 +178,7 @@
 
 .cuisine-type {
     grid-area: cuisine-type;
+    /* margin-left: 10px; */
     /* background-color: peru; */
 }
 

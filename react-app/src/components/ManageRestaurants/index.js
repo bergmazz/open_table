@@ -91,7 +91,7 @@ const OwnerRestaurant = () => {
     )}
     <div className='create-restaurant'>
         <Link to="/new-restaurant">
-            <button className='create-restaurant-button'>Create a restaurant</button>
+            <button className='create-restaurant-button'>Add your restaurant</button>
         </Link>
     </div>
 </div>

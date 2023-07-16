@@ -10,6 +10,22 @@
   height: 60px;
 }
 
+.logo-button {
+  padding: 0 20px;
+}
+
+.logo {
+  height: 40px;
+  width: 40px;
+  margin-right: -30px;
+}
+
+.left-nav-group {
+  display: flex;
+  align-items: center;
+
+}
+
 .home-link {
   text-decoration: none;
   font-size: 16px; 
@@ -62,6 +78,6 @@
 } */
 
 .home-link:hover {
-  color:#007bff;
+  color: rgb(88, 132, 236);
   /* background-color: #007bff; */
 }

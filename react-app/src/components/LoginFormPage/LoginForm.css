@@ -38,7 +38,7 @@
     padding: 10px;
     border: none;
     border-radius: 5px;
-    background-color: #007bff;
+    background-color: rgb(68, 112, 216);
     color: #dddddd;
     cursor: pointer;
     margin-bottom: 10px;
@@ -46,7 +46,7 @@
   }
   
   .page-loginbttn:hover, .login-signup-button:hover {
-    background-color: #0056b3;
+    background-color: rgb(88, 132, 236);
   }
   
   .page-demoLogin {

@@ -25,7 +25,9 @@
   .table-button {
     padding: 10px 20px;
     margin: 10px;
-    background-color: #007bff;
+    /* background-color: #007bff; */
+    /* background-color: rgb(97, 143, 226); */
+    background-color: rgb(68, 112, 216);
     color: white;
     border: none;
     border-radius: 5px;
@@ -33,7 +35,8 @@
   }
   
   .table-button:hover {
-    background-color: #0056b3;
+    /* background-color: #0056b3; */
+    background-color: rgb(88, 132, 236);
   }
 
   .date, .time, .city, .food-type {

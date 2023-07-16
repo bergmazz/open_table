@@ -44,8 +44,11 @@ body {
 .restaurant-cards {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-around;
     padding: 0 50px;
+    /* margin-bottom: 20%; */
+    max-width: 2500px;
+    margin: 0 auto 20%;
   }
 
   .homepage-header, .reservation-search {
@@ -53,7 +56,11 @@ body {
   }
 
   .view-restaurants {
-    color: #007bff;
+    color: rgb(68, 112, 216);
+  }
+
+  .view-restaurants:hover {
+    color: rgb(88, 132, 236);
   }
 
   .featured-bar {
@@ -65,6 +72,7 @@ body {
     align-items: center;
     margin-right: 90px;
     margin-top: 40px;
+    
   }
 
   .card-container {
@@ -78,6 +86,11 @@ body {
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     overflow: hidden;
     transition: all 0.3s ease-in-out;
+  }
+
+  .featured-restaurant-cards {
+    max-width: 2200px;
+    margin: 0 auto;
   }
 
   .card-container:hover {

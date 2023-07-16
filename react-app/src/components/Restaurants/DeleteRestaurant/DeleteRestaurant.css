@@ -44,7 +44,7 @@
 }
 
 .delete-modal-cancel {
-    background-color: #007bff;
+    background-color: rgb(68, 112, 216);
     width: 40%;
     color: white;
     border: none;
@@ -55,7 +55,7 @@
 }
 
 .delete-modal-cancel:hover {
-    background-color: #0056b3;
+    background-color: rgb(88, 132, 236);
 }
 
 .delete-modal-delete {

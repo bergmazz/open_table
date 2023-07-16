@@ -68,7 +68,9 @@ margin: 2px;
 .reservations-container{
     width: 66%;
     float: right;
-    height: calc(100vh - 100px);
+    max-height: calc(100vh - 100px);
+    /* overflow-y: auto; */
+    margin-bottom: 100%;
 }
 /* .reservations-container{
     overflow-y: scroll;
@@ -115,4 +117,23 @@ object-fit: cover;
         width:100px;
         margin-top: 20px;
         margin-right: 10px;
+            cursor: pointer;
+}
+
+
+.noupcoming{
+   height: 140px;
+  border-bottom: solid lightgray thin;
+  margin: 20px
+}
+
+.tablebutton{
+        background-color: crimson;
+        height: 50px;
+        width:100px;
+        border-radius: 5px;
+            cursor: pointer;
+                border: none;
+                    color: white;
+                        margin-top: 18px;
 }

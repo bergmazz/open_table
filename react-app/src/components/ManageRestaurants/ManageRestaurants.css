@@ -1,3 +1,4 @@
+
 .manage-cards {
     display: flex;
     justify-content: space-evenly;
@@ -34,16 +35,17 @@
     justify-content: flex-end;
     margin: 50px;
     padding: 10px 20px;
-    background-color: #007bff;
+    background-color: rgb(68, 112, 216);
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    margin-bottom: 225%;
   }
 
   .create-restaurant-button:hover {
-    background-color: #0056b3;
+    background-color: rgb(88, 132, 236);
   }
 
   /* .manage-restaurants {
@@ -70,6 +72,7 @@
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    margin-bottom: 600%;
   }
 
   .no-restaurant-button:hover {

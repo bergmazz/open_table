@@ -113,7 +113,7 @@ width: 101%;
     padding: 6px;
     border: none;
     border-radius: 5px;
-    background-color: #007BFF;
+    background-color: rgb(68, 112, 216);
     color: #fff;
     font-size: 13px;
     cursor: pointer;
@@ -121,5 +121,7 @@ width: 101%;
 }
 
 .book-button:hover {
-    background-color: #0056b3;
+  background-color: rgb(88, 132, 236);
 }
+
+
