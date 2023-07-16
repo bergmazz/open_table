@@ -141,7 +141,7 @@ const RestaurantPage = () => {
                             </span>
                         )}
                     </div>
-                    <div className="restaurant-column1">Ï
+                    <div className="restaurant-column1">
                         <ul className="restaurant-links">
                             <li className="restaurant-overview-link">
                                 <a href="#top">Overview</a>
@@ -151,6 +151,7 @@ const RestaurantPage = () => {
                             </li>
                         </ul>
                         <div id="top" className="restaurant-name">{`${restaurant.restaurantName}`}</div>
+                        {/* <div className="separator"></div> */}
                         <div className="random-box">
                             <div className="ratings-average-bar">
                                 <div className="ratings">
@@ -184,23 +185,37 @@ const RestaurantPage = () => {
                                     restaurant.reviews.map((review, i) => (
                                         <div className="individual-review" key={review.id}>
                                             <div className="user-section">{review.username} {convertDate(review.createdAt)}</div>
-                                            <div className="review-comment">{review.comment}</div>
-                                            <div className="review-rating">{makeStars(review.rating)}</div>
-                                            <div className="review-image-container">
-                                                 <img className="review-image" src={review.reviewImage}></img>
+                                            <div className="review-comment2">{review.comment}</div>
+                                            <div className="review-stars">
+                                                {
+                                                    [...Array(5)].map((x, i) => {
+                                                        if (i < Math.floor(review.rating)) {
+                                                          return <i className="fa-solid fa-star" key={i}></i>;
+                                                        } else if (i < review.rating) {
+                                                          return <i className="fa-solid fa-star-half-stroke" key={i}></i>;
+                                                        } else {
+                                                          return <i className="fa-regular fa-star" key={i}></i>;
+                                                        }
+                                                      })
+                                                }
                                             </div>
+                                            
+                                            <div className="review-image-container2">
+                                                 <img className="review-image2" src={review.reviewImage}></img>
+                                            </div>
+                                            <br></br>
                                             {user && user.id === review.userId && (
-                                                <div>
-                                                    <div>
-                                                        <button className="edit-review">
+                                                <div className="review-modal-buttons">
+                                                    <div className="edit-res-review">
+                                                        <button className="edit-review-res-button">
                                                             <OpenModalButton
                                                                 buttonText='Edit Review'
                                                                 modalComponent={<EditReviewForm review={review} />}
                                                             />
                                                         </button>
                                                     </div>
-                                                    <div>
-                                                        <button className="delete-review">
+                                                    <div className="delete-res-review">
+                                                        <button className="del-review-res-button">
                                                             <OpenModalButton
                                                                 buttonText='Delete Review'
                                                                 modalComponent={<DeleteReviewForm review={review}/>}
@@ -227,13 +242,42 @@ const RestaurantPage = () => {
                             <div className="times-booked">Booked 11 times today</div>
                         </div> */}
                         <div className="reservation-box">
-                            <div className="make-res">Make a reservation</div>
+                            <div className="make-res-header">Make a reservation</div>
+                            <div className="separator"></div>
                             <ReservationForm />
                         </div>
+                        <div className="restaurant-details-section">
+    <div className="details-header"> 
+        {/* This is the header for the section */}
+        <h2>Restaurant Details</h2>
+    </div>
+    <div className="details-container">
+    <div className="detail-item">
+        <h3><i className="fas fa-utensils"></i>Cuisine</h3>
+        <p>{restaurant.cuisineType}</p>
+    </div>
 
-                        <div className="delivery-box">Delivery</div>
-                        <div className="map-container">Map</div>
-                        <div className="restaurant-details-box">Details</div>
+    <div className="detail-item">
+        <h3><i className="fas fa-money-bill-wave"></i>Price Range</h3>
+        <p>{restaurant.priceRange}</p>
+    </div>
+
+    <div className="detail-item">
+        <h3><i className="fas fa-clock"></i>Hours of Operation</h3>
+        <div className="sub-detail-item">
+            <h4>Sunday - Saturday</h4>
+            <p>{restaurant.openHours} - {restaurant.closingHours}</p>
+        </div>
+    </div>
+
+    <div className="detail-item">
+        <h3><i className="fas fa-map-marker-alt"></i>Address</h3>
+        <p>{restaurant.address}</p>
+    </div>
+</div>
+</div>
+                        {/* <div className="map-container">Map</div>
+                        <div className="delivery-box">Delivery</div> */}
                     </div>
 
                 </div>

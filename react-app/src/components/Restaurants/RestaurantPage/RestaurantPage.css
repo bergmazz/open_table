@@ -26,14 +26,15 @@
       ". restaurant-column1 . restaurant-column2 ."
       ". restaurant-column1 . restaurant-column2 .";
       background-color: white;
+
 }
 
 .restaurant-cover-image {
     grid-area: restaurant-cover-image;
     /* background-color: lightblue; */
     background-color: white;
-    position: relative; /* set container to a relative position */
-
+    position: relative;
+    z-index: 0;
 }
 
 
@@ -41,7 +42,6 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
-        /* z-index: 1; */
 
 }
 
@@ -51,21 +51,21 @@
   top: 10%; /* adjust the top position of the button */
   left: 85%; /* adjust the left position of the button */
   transform: translate(-50%, -50%); /* center the button */
-  z-index: 2; /* set a higher z-index than the image */
-  background-color: white; /* set your desired background color */
+  /* z-index: 1; set a higher z-index than the image */
+  /* background-color: white; set your desired background color */
   color: red; /* set your desired text color */
   border: none; /* remove button border */
   padding: 10px 20px; /* set your desired padding */
 }
 
 .fav-button:hover {
-  background-color: rgb(251, 243, 243);
+  /* background-color: rgb(251, 243, 243); */
   border: red thin solid;
 }
 
 
 .restaurant-column1 {
-    z-index: 2;
+    z-index: 1;
     grid-area: restaurant-column1;
     background-color: white;
     margin-top: -50px;
@@ -106,15 +106,18 @@
 .restaurant-name {
     grid-area: restaurant-name;
     font-size: 40px;
+    color: #333;
     display: flex;
     align-items: center;
+    margin-bottom: 10px;
     border-bottom: solid lightgray thin;
 }
 
 .random-box {
     grid-area: random-box;
-    background-color: bisque;
-    display: grid;
+    /* border: 3px solid red; */
+    /* background-color: bisque; */
+    display: flex;
     /* grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr 2fr;
     grid-template-areas:
@@ -126,12 +129,14 @@
     grid-template-areas:
         "ratings-average-bar";
     font-size: 12px;
+    /* border: 5px solid red; */
+    /* border-bottom: solid lightgray thin; */
 }
 
 .ratings-average-bar {
     grid-area: ratings-average-bar;
     display: grid;
-    background-color: yellow;
+    /* background-color: yellow; */
     grid-template-columns: 1fr 1fr 1fr 1fr 0.2fr;
     grid-template-rows: 1fr;
     grid-template-areas:
@@ -139,7 +144,7 @@
 }
 .ratings {
   grid-area: ratings;
-  background-color: rgb(85, 25, 145);
+  /* background-color: rgb(85, 25, 145); */
   display: grid;
   grid-template-columns: 1.6fr 1fr;
   grid-template-rows: 1fr;
@@ -152,47 +157,50 @@
   .number-rating {
     grid-area: number-rating;
     color: black;
-    background-color: pink;
+    /* background-color: pink; */
   }
 
   .star-row {
     grid-area: star-row;
-    background-color: aquamarine;
+    /* background-color: aquamarine; */
   }
 
 
   .review-summary {
     grid-area: review-summary;
-    background-color: azure;
+    /* background-color: azure; */
+    color: #333;
   }
 
   .money {
     grid-area: money;
-    background-color: blueviolet;
+    /* background-color: blueviolet; */
   }
 
 .cuisine-type {
     grid-area: cuisine-type;
-    background-color: peru;
+    /* background-color: peru; */
 }
 
 
 .top-tags {
     grid-area: top-tags;
-    background-color: green;
+    /* background-color: green; */
 }
 
 .restaurant-description {
     grid-area: restaurant-description;
-    background-color: aqua;
+    /* background-color: aqua; */
 }
 
 
 
 #restaurant-reviews {
     grid-area: restaurant-reviews;
-    background-color: rgb(150, 150, 99);
+    border-top: 1px solid lightgrey;
+    /* background-color: rgb(150, 150, 99); */
     display: grid;
+    margin-top: 5px;
     grid-template-columns: 1fr;
     grid-template-rows: 50px auto;
     grid-template-areas:
@@ -203,7 +211,12 @@
 .reviews-bar {
   grid-area: reviews-bar;
   display: grid;
-  background-color: blue;
+  font-size: 15px;
+  font-weight: bold;
+  color: #333;
+  /* border: 10px solid green; */
+  margin-top: 10px;
+  /* background-color: blue; */
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr;
   grid-template-areas:
@@ -212,35 +225,69 @@
 
 .total-restaurant-reviews {
   grid-area: total-restaurant-reviews;
-  background-color: orange;
+  /* background-color: orange; */
 }
 
 .sort-reviews {
   grid-area: sort-reviews;
-  background-color: purple;
+  /* background-color: purple; */
 }
 
 .reviews-area {
   grid-area: reviews-area;
+  /* border: 3px solid green */
 }
 
 .individual-review {
   display: grid;
+  /* border: 2px solid red; */
   grid-area: individual-review;
   grid-template-columns: 1fr 4fr;
+  grid-gap: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  background-color: white;
   grid-template-rows: auto;
   grid-template-areas:
     "user-section review-section";
 }
 
+.review-comment2 {
+  font-size: 15px;
+  color: #333;
+  line-height: 1.5;
+}
+
+.review-image-container2 {
+  width: 100px;
+  height: 100px;
+  border-radius: 4px;
+  overflow: hidden;  /* Ensures the image fits within the container */
+}
+
+.review-image2 {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;  /* Ensures the image covers the whole area of the container */
+}
+
+.review-stars {
+  margin-top: 10px;
+  font-size: 16px;
+}
+
 .user-section {
   grid-area: user-section;
-  background-color: aquamarine;
+  font-size: 12px;
+  color: #777;
+  margin-bottom: 10px;
+  /* background-color: aquamarine; */
 }
 
 .review-section {
   grid-area: review-section;
-  background-color: aliceblue;
+  /* background-color: aliceblue; */
 }
 
 .restaurant-column2 {
@@ -253,10 +300,12 @@
     grid-template-rows: 260px 175px 400px auto;
     grid-template-areas:
     "reservation-box"
-    "delivery-box"
+    "restaurant-details-box"
     "map-container"
-    "restaurant-details-box";
+    "delivery-box";
     gap: 15px;
+    /* z-index: 2; */
+    /* border: 3px solid red; */
 }
 
 .reservation-box {
@@ -275,52 +324,68 @@
   box-shadow: 0px 2px 3px 0px rgba(181, 181, 180, 0.438);
   padding: 10px;
   position: -webkit-sticky;
-  position: sticky;
-  top: 0;
+  position: relative;
+  /* z-index: 2; */
+  /* top: -70px; */
   background-color: white;
+  /* border: 4px solid red; */
 }
 
-.make-res {
+.make-res-header {
   grid-area: make-res;
+  color: #333;
+  font-weight: 700;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-bottom: solid lightgray thin;
+  /* border-bottom: solid lightgray thin; */
   border-radius: 4px;
-
 }
 
-.party-size {
+.separator {
+  height: 1px;
+  background-color: lightgray;
+  margin: 5px 0;
+}
+
+.party-size, .date-header, .time-header {
   grid-area: party-size;
-  background-color: blue;
-  font-size: 12px;
+  /* background-color: blue; */
+  font-size: 11px;
   display: flex;
   align-items: center;
+  color: #333;
+  font-weight: bold;
 }
 
 .party-select {
   grid-area: party-select;
-  background-color: yellow;
+  width: 100%;
+  font-size: 11px;
+  color: #333;
+  border: none;
+  /* border-radius: 5px; */
+  /* background-color: yellow; */
 }
 
 .res-time {
   grid-area: res-time;
-  background-color: blueviolet;
+  /* background-color: blueviolet; */
 }
 
 .find-time {
   grid-area: find-time;
-  background-color: rosybrown;
+  /* background-color: rosybrown; */
 }
 
 .times-booked {
   grid-area: times-booked;
-  background-color: aqua;
+  /* background-color: aqua; */
 }
 
 .delivery-box {
   grid-area: delivery-box;
-  background-color: white;
+  /* background-color: white; */
   border-radius: 4px;
   box-shadow: 0px 2px 3px 0px rgba(181, 181, 180, 0.438);
 }
@@ -332,7 +397,7 @@
 
 .restaurant-details-box {
   grid-area: restaurant-details-box;
-  background-color: red;
+  /* background-color: red; */
 }
 
 .review-rating {
@@ -344,7 +409,114 @@
 @media only screen and (max-width: 1055px) {
   /* For mobile phones: */
   [class*="column"] {
-    background-color: yellowgreen;
+    /* background-color: yellowgreen; */
     width: 100%;
   }
+}
+
+.fa-star, .fa-star-half-stroke {
+  font-size: 10px;
+  color: crimson;
+}
+
+.fa-message {
+  font-size: 12px;
+  /* font-weight: bold; */
+}
+
+.fa-money-bill-1 {
+  font-size: 13px;
+  /* font-weight: bold; */
+}
+
+.fa-utensils {
+  font-size: 12px;
+  /* font-weight: bold; */
+}
+
+.edit-review-res-button {
+  /* width: 100%; */
+    margin-top: 3px;
+    margin-left: 2px;
+    padding: 2px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007BFF;
+    color: #fff;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.del-review-res-button {
+  /* width: 100%; */
+    margin-top: 3px;
+    margin-left: 10px;
+    padding: 2px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007BFF;
+    color: #fff;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.del-review-res-button:hover {
+  background-color: #e03b3b;
+}
+
+
+.review-modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px 0;
+}
+
+.details-header h2 {
+  color: #333;
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.details-container {
+  background-color: white;
+  padding: 20px;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  margin-bottom: 20px;
+}
+
+.detail-item {
+  margin-bottom: 20px; 
+}
+
+.detail-item h3 {
+  display: flex;
+  align-items: center;
+  color: #333333;
+  margin-bottom: 10px;
+}
+
+.detail-item p {
+  font-size: 14px;
+  color: rgb(144, 144, 144);
+  margin-left: 25px;
+}
+
+.detail-item h3 i {
+  margin-right: 10px;
+  font-size: 15px;
+  display: flex;
+  justify-content: flex-start;
+  color: #da3743;
+}
+
+.sub-detail-item h4 {
+  display: flex;
+  align-items: center;
+  color: #333333;
+  margin-bottom: 10px;
+  margin-left: 24px;
 }
