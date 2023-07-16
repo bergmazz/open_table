@@ -1,0 +1,44 @@
+
+.page-signup-header {
+    color: #333;
+    margin-bottom: 20px;
+    /* align-items: center; */
+    font-size: 1.5em;
+  }
+  
+  .errors {
+    list-style: none;
+    padding: 0;
+    color: red;
+  }
+  
+  .signup-page-label {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    color: #333;
+    width: 100%;
+    margin-bottom: 15px;
+  }
+  
+  .signup-page-input {
+    width: 25%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  .page-signup-button {
+    width: 20%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .page-signup-button:hover {
+    background-color: #0056b3;
+  }

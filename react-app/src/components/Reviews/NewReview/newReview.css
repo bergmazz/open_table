@@ -32,7 +32,7 @@ textarea::placeholder {
     justify-content: center;
 }
 
-.star-button {
+.solid-star {
     background-color: transparent;
     border: none;
     width: 50px;
@@ -40,6 +40,15 @@ textarea::placeholder {
     color: crimson;
     cursor: pointer;
     /* margin-top: 15px; */
+}
+
+.hollow-star {
+    background-color: transparent;
+    border: none;
+    width: 50px;
+    font-size: 30px;
+    color: crimson;
+    cursor: pointer;
 }
 
 .rating-text {

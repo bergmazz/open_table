@@ -70,7 +70,7 @@ const ReservationModal = ( { reservation } ) => {
             let data = await dispatch( editReservations(
                 reservation.restaurantId, reservation.id, numberOfPeople, reservationTime, status, notes
             ) );
-            // console.log( '-------------data-------', data )
+            console.log( '-------------data-------', data )
             if ( !data.id ) {
                 if ( typeof data[ 0 ] == "object" ) {
                     data = Object.values( data[ 0 ] )
@@ -139,7 +139,7 @@ const ReservationModal = ( { reservation } ) => {
                 </label>
 
 
-                <button className="mbook" type="submit" >Book Table</button>
+                <button className="mbook" type="submit" >Confirm</button>
                 <ul className="merrors-list">
                     { Object.values( errors ).map( ( error, idx ) => <li key={ idx }>{ error }</li> ) }
                 </ul>

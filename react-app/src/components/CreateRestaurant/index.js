@@ -5,6 +5,31 @@ import { addRestaurants, getRestaurants } from '../../store/restaurant';
 import './CreateRestaurant.css'
 
 function CreateRestaurant() {
+
+    const TIMES = [
+        '6:00 AM',
+        '7:00 AM',
+        '8:00 AM',
+        '9:00 AM',
+        '10:00 AM',
+        '11:00 AM',
+        '12:00 PM',
+        '1:00 PM',
+        '2:00 PM',
+        '3:00 PM',
+        '4:00 PM',
+        '5:00 PM',
+        '6:00 PM',
+        '7:00 PM',
+        '8:00 PM',
+        '9:00 PM',
+        '10:00 PM',
+        '11:00 PM',
+        '12:00 AM',
+        '1:00 AM',
+      ];
+
+
     const [restaurant_name, setRestaurant_name] = useState('');
     const [cover_image, setCover_image] = useState('');
     const [email, setEmail] = useState('');
@@ -16,8 +41,8 @@ function CreateRestaurant() {
     const [cuisine_type, setCuisine_type] = useState('');
     const [price_range, setPrice_range] = useState('');
     const [phone_number, setPhone_number] = useState('');
-    const [open_hours, setOpen_hours] = useState('');
-    const [closing_hours, setClosing_hours] = useState('');
+    const [open_hours, setOpen_hours] = useState(TIMES[0]);
+    const [closing_hours, setClosing_hours] = useState(TIMES[0]);
     const [errors, setErrors] = useState([]);
     const [newRestaurant, setNewRestaurant] = useState(null);
 
@@ -25,17 +50,41 @@ function CreateRestaurant() {
     const history = useHistory();
     const sessionUser = useSelector(state => state.session.user);
 
-    const handleAddRestaurant = async (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setErrors([]);
 
-//         const newErrors = [];
-//         if (!restaurant_name) newErrors.push("Please enter a restaurant name");
+        const newErrors = [];
+        if (!restaurant_name) newErrors.push("Please enter a restaurant name");
+        const emailRegEx = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+        if (!emailRegEx.test(email)) {
+            newErrors.push("Please enter a valid email address");
+        } else if (!email) {
+            newErrors.push("Please enter an email address");
+        }
+        if (!address) newErrors.push("Please enter an address");
+        if (!city) newErrors.push("Please enter a city");
+        if (!state) newErrors.push("Please select a state");
+        if (!zip_code) {
+            newErrors.push("Please enter a zip code");
+        } else if (zip_code.toString().length !== 5) {
+            newErrors.push("Please enter a 5-digit zip code");
+        }
+        if (!country) newErrors.push("Please enter a country");
+        if (!cuisine_type) newErrors.push("Please select a cuisine type");
+        if (!price_range) newErrors.push("Please select a price range");
+        if (!phone_number) {
+            newErrors.push("Please enter a phone number");
+        } else if (phone_number.toString().length !== 10) {
+            newErrors.push("Please enter a 10-digit phone number");
+        }
+        if (!open_hours) newErrors.push("Please enter open hours");
+        if (!closing_hours) newErrors.push("Please enter closing hours");
 
-//         if (newErrors.length > 0) {
-//     setErrors(newErrors);
-//     return;
-// }
+        if (newErrors.length > 0) {
+            setErrors(newErrors);
+            return;
+        }
 
 
         const newRestaurant = {
@@ -67,12 +116,18 @@ function CreateRestaurant() {
 
     return (
         <div className='restaurant-form-container'>
-            <h1 className='manage-header'>Add Your Restaurant</h1>
-            <form id="new-restaurant-form" onSubmit={handleAddRestaurant}>
+            <h1 className='manage-header'>Lets add Your Restaurant</h1>
+            <h3 className='form-description-a'>By adding your restaurant to our platform, 
+                you are opening the doors to a wider audience of potential customers.
+            </h3>
+            <h3 className='form-description-b'>
+                Join our community of restaurants today and give your business a digital boost!
+            </h3>
+            <form id="new-restaurant-form" onSubmit={handleSubmit}>
                 <div className='errors'>
-                    {/* {errors.map((error, idx) => (
+                    {errors.map((error, idx) => (
                         <li key={idx}>{error}</li>
-                    ))} */}
+                    ))}
                 </div>
                 <div className='create-name'>
                     <label className='create-label'>
@@ -159,7 +214,7 @@ function CreateRestaurant() {
                         type='number'
                         value={zip_code}
                         onChange={(e) => setZip_code(e.target.value)}
-                        required
+                    required
                         />
                     </label>
                 </div>
@@ -218,25 +273,37 @@ function CreateRestaurant() {
                 <div className='create-open'>
                     <label className='create-label'>
                         Open Hours
-                        <input
-                        className='create-input'
+                        <select
+                        className='create-select'
                         type='text'
                         value={open_hours}
                         onChange={(e) => setOpen_hours(e.target.value)}
                         required
-                        />
+                        >
+                            {TIMES.map((time) => (
+                                <option key={time} value={time}>
+                                    {time}
+                                    </option>
+                            ))}
+                        </select>
                     </label>    
                 </div>
                 <div className='create-close'>
                     <label className='create-label'>
                         Closing Hours
-                        <input
-                        className='create-input'
+                        <select
+                        className='create-select'
                         type='text'
                         value={closing_hours}
                         onChange={(e) => setClosing_hours(e.target.value)}
                         required
-                        />
+                        >
+                            {TIMES.map((time) => (
+                                <option key={time} value={time}>
+                                    {time}
+                                    </option>
+                            ))}
+                        </select>
                     </label>    
                 </div>
                 <div className='create-image'>

@@ -15,6 +15,9 @@ import CreateRestaurant from "./components/CreateRestaurant";
 import OwnerRestaurant from "./components/ManageRestaurants";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import Favorites from "./components/UserProfile/favorites";
+import Footer from "./components/Footer";
+
+import "./index.css";
 
 function App() {
   const dispatch = useDispatch();
@@ -26,7 +29,8 @@ function App() {
   return (
     <>
       <Navigation isLoaded={isLoaded} />
-      {isLoaded && (
+      { isLoaded && (
+        <div className="content-container">
         <Switch>
           <Route exact path="/">
             <HomePage />
@@ -61,8 +65,13 @@ function App() {
           <Route exact path="/user/favorites">
             <Favorites />
           </Route>
-        </Switch>
-      )}
+          </Switch>
+        </div>
+      ) }
+      <footer className="pinme" >
+        <Footer isLoaded={ isLoaded } />
+      </footer>
+
     </>
   );
 }

@@ -1,4 +1,5 @@
 .reservation-box {
+  /* border: 3px solid green; */
 display: grid;
 grid-area: reservation-box;
 grid-template-columns: 2fr;
@@ -13,13 +14,14 @@ grid-template-areas:
 border-radius: 4px;
 box-shadow: 0px 2px 3px 0px rgba(181, 181, 180, 0.438);
 padding: 10px;
-margin-top: 80px
+margin-top: 80px;
+/* z-index: 1; */
 }
 
 
 .make-res {
 grid-area: make-res;
-background-color: green;
+/* background-color: green; */
 display: flex;
 justify-content: center;
 align-items: center;
@@ -27,29 +29,61 @@ border-bottom: solid lightgray thin;
 border-radius: 4px;
 }
 
-.party-size {
-grid-area: party-size;
-background-color: blue;
-font-size: 12px;
-display: flex;
-align-items: center;
-}
+/* .party-size { */
+/* grid-area: party-size; */
+/* background-color: blue; */
+/* font-size: 12px; */
+/* display: flex; */
+/* align-items: center; */
+/* } */
 
-.party-select {
+/* .party-select {
 grid-area: party-select;
 background-color: yellow;
+} */
+
+.date-time-header-container {
+    display: flex;
+    cursor: default;
+    justify-content: space-evenly;
+    color: #333;
 }
 
-.date{
-grid-area: date ;
-/* background-color: blueviolet; */
+.date-header {
+    margin-right: 55px;
 }
 
-.time{
-grid-area: time ;
-/* background-color: blueviolet; */
-}
+.separator-res {
+    border-bottom: 1px solid lightgrey;
+    margin: 5px 0 5px;
+  }
 
+
+.date-time-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 10px;
+    /* border: 2px solid red; */
+  }
+  
+  .date-header, .time-header {
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+
+  .date-input, .time-input {
+    width: 100%;
+    border: 1px solid rgb(139, 139, 139);
+    border: none;
+    font-size: 12px;
+    /* border-radius: 5px; */
+    /* margin-bottom: 3px */
+  }
+
+  .time-input {
+    height: 18px;
+  }
 
 .find-time {
 grid-area: find-time;
@@ -59,8 +93,33 @@ background-color: rosybrown;
 
 .notes {
 grid-area: notes;
+/* color: #333; */
+border: 1px solid lightgray;
+width: 98%;
+height: 30px;
+font-size: 12px;
+border-radius: 3px;
 }
 
 .book {
 grid-area: book;
+width: 101%;
+}
+
+.book-button {
+    width: 100%;
+    margin-top: 10px;
+    margin-left: 2px;
+    padding: 6px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007BFF;
+    color: #fff;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.book-button:hover {
+    background-color: #0056b3;
 }

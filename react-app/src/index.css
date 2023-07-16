@@ -1,1 +1,18 @@
 /* TODO Add site wide styles */
+.app-container {
+  min-height: calc(100vh - 170px);
+}
+
+.pinme{
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  z-index:5
+}
+
+/* .footer-wrapper{
+  position: relative;
+  left: 0;
+  bottom: 0;
+} */

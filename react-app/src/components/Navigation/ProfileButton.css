@@ -32,6 +32,7 @@
     z-index: 1;
     /* display: none; */
     flex-direction: column;
+    /* border: 3px solid red; */
   }
 
   /* .profile-dropdown.dropdown-open {
@@ -40,19 +41,24 @@
   } */
   
   .dropdown-item {
-    padding: 10px 20px;
-    display: block;
+    padding: 10px;
     text-decoration: none;
     color: #333;
     align-items: center;
   }
 
+  .block {
+    display: block;
+    width: 100%;
+    /* border: 2px solid red; */
+}
+
   .user-greeting {
     padding: 10px 20px;
     display: block;
     text-decoration: none;
-    color: #333;
-    pointer-events: none;
+    color: #DA3743;
+    cursor: default;
     font-size: large;
     font-weight: bold;
   }
@@ -76,4 +82,61 @@
     background-color: #0056b3;
   }
 
+  .log-out {
+    padding: 10px 20px;
+    display: block;
+    text-decoration: none;
+    color: #333;
+    align-items: center;
+  }
 
+  .user-points-container {
+    display: flex;
+    cursor: default;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    /* border: 2px solid green; */
+  }
+  
+  .user-points, .goal-points {
+    /* border: 1px solid red; */
+    display: flex;
+    cursor: default;
+    flex-direction: column;
+    align-items: flex-start;
+    /* justify-content: flex-start; */
+  }
+
+  .goal-points {
+    /* border: 1px solid red; */
+    display: flex;
+    cursor: default;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  .user-points p, .goal-points p {
+    font-size: 12px;
+    cursor: default;
+    color: rgb(106, 106, 106);
+  }
+
+  .goal-pts {
+    /* border: 1px solid red; */
+    display: flex;
+    cursor: default;
+    flex-direction: column;
+    align-items: flex-end;
+    font-size: 12px;
+    color: #007bff;
+  }
+
+  .pts {
+    /* border: 1px solid red; */
+    display: flex;
+    cursor: default;
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: 12px;
+    color: #007bff;
+  }

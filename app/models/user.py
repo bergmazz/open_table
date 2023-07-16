@@ -47,7 +47,8 @@ class User(db.Model, UserMixin):
             'createdAt': self.created_at,
             'updatedAt': self.updated_at,
             'favorites': [favorite.to_dict() for favorite in self.favorites],
-            'restaurants': [restaurant.to_dict() for restaurant in self.restaurants]
+            'restaurants': [restaurant.to_dict() for restaurant in self.restaurants],
+            'reviews': [review.to_dict() for review in self.reviews]
         }
 
     def simple_dict(self):
