@@ -152,7 +152,10 @@ function UserProfile() {
 
                                                 </div>
                                             ))) : (
-                                            <div>You have no upcoming reservations</div>
+                                            <div className="noupcoming">
+                                                <p>You have no upcoming reservations</p>
+                                                <button className="table-button" onClick={ () => history.push( '/restaurants' ) }>Find a table</button>
+                                            </div>
                                         )
                                     }
 

@@ -116,3 +116,14 @@ object-fit: cover;
         margin-top: 20px;
         margin-right: 10px;
 }
+
+
+.noupcoming{
+   height: 100px;
+  border-bottom: solid lightgray thin;
+  margin: 20px
+}
+
+.noupcoming button{
+        background-color: crimson;
+}
