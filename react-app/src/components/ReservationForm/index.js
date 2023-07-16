@@ -175,7 +175,7 @@ const ReservationForm = () => {
                         className="notes"
                         type="text"
                         onChange={ ( e ) => setNotes( e.target.value ) }
-                        placeholder="Anything else? (optional)"
+                        placeholder=" Add a special request (optional)"
                     />
                 </label>
                 {/* { errors && <div>{ errors }</div> } */ }

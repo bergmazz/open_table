@@ -178,7 +178,7 @@ const RestaurantPage = () => {
                         <div id="restaurant-reviews">
                             <div className="reviews-bar">
                                 <div className="total-restaurant-reviews">{restaurant.reviews.length} {reviews}</div>
-                                <div className="sort-reviews">Newest</div>
+                                <div className="sort-reviews">{restaurant.reviews.length > 0 ? "Newest" : "No review yet"}</div>
                             </div>
                             <div className="reviews-area">
                                 {

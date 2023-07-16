@@ -47,15 +47,13 @@
 
 .fav-button {
   border-radius: 4px;
-  position: absolute; /* set button to an absolute position */
-  top: 10%; /* adjust the top position of the button */
-  left: 85%; /* adjust the left position of the button */
-  transform: translate(-50%, -50%); /* center the button */
-  /* z-index: 1; set a higher z-index than the image */
-  /* background-color: white; set your desired background color */
-  color: red; /* set your desired text color */
-  border: none; /* remove button border */
-  padding: 10px 20px; /* set your desired padding */
+  position: absolute;
+  top: 10%;
+  left: 85%;
+  transform: translate(-50%, -50%);
+  color: red;
+  border: none;
+  padding: 10px 20px;
 }
 
 .fav-button:hover {
@@ -81,6 +79,7 @@
     padding-right: 15px;
     border-radius: 4px;
     gap: 0px;
+    /* border: 2px solid red; */
 }
 
 .restaurant-links{
@@ -304,12 +303,13 @@
     "map-container"
     "delivery-box";
     gap: 15px;
-    /* z-index: 2; */
+    z-index: 2;
     /* border: 3px solid red; */
 }
 
 .reservation-box {
   display: grid;
+  height: 225px;
   grid-area: reservation-box;
   grid-template-columns: 1fr;
   grid-template-rows: 1.5fr 1fr 1fr 2fr 2fr 1fr;
@@ -326,15 +326,17 @@
   position: -webkit-sticky;
   position: relative;
   /* z-index: 2; */
-  /* top: -70px; */
+  top: -62px;
   background-color: white;
   /* border: 4px solid red; */
 }
 
 .make-res-header {
   grid-area: make-res;
+  margin-bottom: 13px;
   color: #333;
-  font-weight: 700;
+  font-weight: 600;
+  font-size: 14px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -361,10 +363,10 @@
 .party-select {
   grid-area: party-select;
   width: 100%;
+  margin-top: 15px;
   font-size: 11px;
   color: #333;
   border: none;
-  /* border-radius: 5px; */
   /* background-color: yellow; */
 }
 
