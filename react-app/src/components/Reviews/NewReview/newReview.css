@@ -48,11 +48,12 @@ textarea::placeholder {
 
 }
 
-.errors-list {
+.error {
     background-color: transparent;
-    font-size: 12px;
-    padding: 5px;
-    color: #ff5a5f;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    padding: 50px;
+    color: red;
 }
 
 .review-image {

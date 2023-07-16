@@ -1,0 +1,70 @@
+.reservation-form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.edit-res {
+     margin-bottom: 20px;
+}
+.reslabel{
+  display:flex;
+
+  justify-content: center;
+}
+
+.mparty-select{
+    border-radius: 5px;
+    width:94%;
+    height: 25px;
+    margin-left: 10px;
+}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  opacity: 1
+}
+.mnotes {
+    box-sizing: border-box;
+    border-radius: 5px;
+    width:96%;
+    margin-left: 10px;
+    height: 150px;
+}
+
+.merrors-list {
+    align-content: center;
+    justify-content: center;
+    font-size: 14px;
+    padding: 5px;
+    color: #e31c5f;
+}
+
+.mbook {
+    background-color: #e31c5f;
+    width: 96%;
+    border: none;
+    border-radius: 5px;
+    height: 50px;
+    color: white;
+    font-weight: bolder;
+    margin-top: 30px;
+    margin-left: 10px;
+
+}
+
+/* .mbook-disabled {
+    background-color: #e31c5f;
+    opacity: 0.6;
+    width: 100%;
+    border: none;
+    border-radius: 10px;
+    height: 50px;
+    color: white;
+    font-weight: bolder;
+    margin-top: 40px;
+} */
+
+.mbook:hover {
+    cursor: pointer;
+}

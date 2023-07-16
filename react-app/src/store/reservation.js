@@ -123,13 +123,23 @@ export const addReservationThunk = ( restaurant_id, number_of_people, reservatio
 export const editReservations = ( restaurantId, id, number_of_people,
     reservation_time, status, notes ) => async ( dispatch ) => {
 
-        console.log( "json:", JSON.stringify( {
+        console.log( "json1:", JSON.stringify( {
             number_of_people,
             reservation_time,
             status,
             notes
         } ) )
-
+        // console.log( "res length1:", reservation_time.length )
+        if ( reservation_time.length > 19 ) {
+            reservation_time = reservation_time.slice( 0, -3 )
+        }
+        // console.log( "res length2:", reservation_time.length )
+        // console.log( "json2:", JSON.stringify( {
+        //     number_of_people,
+        //     reservation_time,
+        //     status,
+        //     notes
+        // } ) )
         const res = await fetch( `/api/restaurants/${ restaurantId }/reservations/${ id }`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },

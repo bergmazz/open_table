@@ -15,8 +15,8 @@ const getTodayDate = () => {
 
 const getOneHourFromNow = () => {
     const currentTime = new Date();
-    currentTime.setHours( currentTime.getHours() + 1 );
-    currentTime.setMinutes( Math.ceil( currentTime.getMinutes() / 30 ) * 30 ); // Round up to next 30-minute increment
+    currentTime.setHours( currentTime.getUTCHours() + 1 );
+    currentTime.setMinutes( Math.ceil( currentTime.getUTCMinutes() / 30 ) * 30 ); // Round up to next 30-minute increment
     const hours = String( currentTime.getHours() ).padStart( 2, "0" );
     const minutes = String( currentTime.getMinutes() ).padStart( 2, "0" );
     return `${ hours }:${ minutes }`;
@@ -52,18 +52,23 @@ const ReservationForm = () => {
     useEffect( () => {
         if ( date && time ) {
             let dateObject = new Date( `${ date }T${ time }` )
-            const year = dateObject.getUTCFullYear();
-            const month = `0${ dateObject.getUTCMonth() + 1 }`.slice( -2 ); // Months are zero-indexed, so add 1
-            const day = `0${ dateObject.getUTCDate() }`.slice( -2 );
-            const hours = `0${ dateObject.getUTCHours() }`.slice( -2 );
-            const minutes = `0${ dateObject.getUTCMinutes() }`.slice( -2 );
-            const seconds = `0${ dateObject.getUTCSeconds() }`.slice( -2 );
+            const utcDateTime = dateObject.toISOString();
+            console.log( "UTC:", utcDateTime )
+            const year = dateObject.getFullYear();
+            const month = `0${ dateObject.getMonth() + 1 }`.slice( -2 ); // Months are zero-indexed, so add 1
+            const day = `0${ dateObject.getDate() }`.slice( -2 );
+            const hours = `0${ dateObject.getHours() }`.slice( -2 );
+            const minutes = `0${ dateObject.getMinutes() }`.slice( -2 );
+            const seconds = `0${ dateObject.getSeconds() }`.slice( -2 );
             setReservationTime( `${ year }-${ month }-${ day } ${ hours }:${ minutes }:${ seconds }` )
             // setReservationTime( `${ date } ${ time }` )
+
+            // const dateObject = new Date( `${ date }T${ time }` );
+            // const utcDateTime = dateObject.toISOString();
+            // console.log( "UTC:", utcDateTime )
+            // setReservationTime( utcDateTime );
         }
     }, [ date, time ] )
-
-    if ( !currentUser ) return <Redirect to="/login" />;
 
     const handleSubmit = async ( e ) => {
         e.preventDefault();
@@ -86,6 +91,7 @@ const ReservationForm = () => {
                 history.push( "/user" );
             }
         } else {
+            // if ( !currentUser ) return <Redirect to="/signup" />;
             setErrors( [ 'Please create an account' ] );
         }
     };
@@ -178,7 +184,6 @@ const ReservationForm = () => {
                         placeholder=" Add a special request (optional)"
                     />
                 </label>
-                {/* { errors && <div>{ errors }</div> } */ }
 
                 <button className="book-button" type="submit" onClick={ handleAddPoints } >Book Table</button>
                 <ul>

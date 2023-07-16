@@ -1,5 +1,5 @@
 .user{
-    width: 60%;
+    width: 800px;
     margin: 0 auto;
 }
 
@@ -73,32 +73,46 @@ margin: 2px;
 /* .reservations-container{
     overflow-y: scroll;
 } */
+
+.reservation-tile{
+   display: grid;
+   /* grid-template-rows: auto 2fr; */
+   grid-template-columns:auto 2fr;
+   height: 200px;
+  border-bottom: solid lightgray thin;
+  margin: 20px;
+
+}
+
 .reservimg{
 height: 175px;
 width: 200px;
 border-radius: 4px;
 object-fit: cover;
+     /* border: solid lightgray thin;
+     margin: 10px;
+     box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.2);
+    transition: box-shadow 0.3s ease-in-out; */
 }
 
-.reservation-tile{
-   display: grid;
-   grid-template-rows: auto 80px;
-   grid-template-columns: repeat(5, 1fr);
-   /* grid-template-columns: auto 1fr; */
-   height: 240px;
-  border-bottom: solid lightgray thin;
-  margin: 20px;
+.col2{
+    margin-left: 15px;
+    margin-top: 20px;
 }
-
+.reservuser{
+    display:inline-block;
+}
 .reservtime{
-      grid-column: 3 / span 2;
+    display:inline-block;
 }
+
+
 
 /* .edit-reserv .cancel-reserv .review-reserv {} */
 .reservation-tile .open-modal-button{
         background-color: crimson;
         height: 50px;
-        margin-top: 130px;
-        margin-left: 5px;
-        margin-right: 5px;
+        width:100px;
+        margin-top: 20px;
+        margin-right: 10px;
 }

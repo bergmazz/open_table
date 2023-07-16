@@ -6,6 +6,7 @@ import { editReservations, getUserReservations } from "../../store/reservation";
 import { useModal } from "../../context/Modal";
 import "./ReservationModal.css";
 
+// this is the edit form
 
 const ReservationModal = ( { reservation } ) => {
     const dispatch = useDispatch();
@@ -13,8 +14,8 @@ const ReservationModal = ( { reservation } ) => {
     const { closeModal } = useModal();
 //properly populate the form with reservation time in proper format
     let dateTime = new Date( reservation.reservationTime )
-    let hours = dateTime.getHours();
-    let minutes = dateTime.getMinutes();
+    let hours = dateTime.getUTCHours();
+    let minutes = dateTime.getUTCMinutes();
     let slashDate = dateTime.toLocaleDateString( "en-US" );
     let dateParts = slashDate.split( "/" );
     let month = dateParts[ 0 ];
@@ -51,7 +52,7 @@ const ReservationModal = ( { reservation } ) => {
             if ( !time.includes( ":00:00" ) ) {
                 formattedTime += ":00";
             }
-            setReservationTime( `${ date } ${ time }` )
+            // setReservationTime( `${ date } ${ time }` )
             setReservationTime( `${ date } ${ formattedTime }` )
         }
 
@@ -69,7 +70,7 @@ const ReservationModal = ( { reservation } ) => {
             let data = await dispatch( editReservations(
                 reservation.restaurantId, reservation.id, numberOfPeople, reservationTime, status, notes
             ) );
-            // console.log( '-------------data-------', data )
+            console.log( '-------------data-------', data )
             if ( !data.id ) {
                 if ( typeof data[ 0 ] == "object" ) {
                     data = Object.values( data[ 0 ] )
@@ -90,9 +91,10 @@ const ReservationModal = ( { reservation } ) => {
 
     return (
         <div className="reservation-form-container">
-            {/* <h1>Reservation Form</h1> */ }
+            <h1 className="edit-res" >Edit Your Reservation</h1>
             <form className="mreserve" onSubmit={ handleSubmit }>
-                <div className="mparty-size">Party Size</div>
+                {/* <div className="mparty-size"></div> */ }
+                <p className="reslabel">Party Size</p>
                 <label >
                     <input
                         className="mparty-select"
@@ -102,9 +104,9 @@ const ReservationModal = ( { reservation } ) => {
                     />
                 </label>
                 {/* { errors.numberOfPeople && <span>This field is required</span> } */ }
-
-                <div className="mdate-time">Date and Time</div>
-                <label className="mdate">
+                <p className="reslabel">Date and Time</p>
+                <div className="mdate-time">
+                    <label className="mdate">
                     {/* <i className="fas fa-calendar"></i> */ }
                     <input
                         className="mdate"
@@ -124,12 +126,12 @@ const ReservationModal = ( { reservation } ) => {
                         step="1800"
                     />
                 </label>
-
+                </div>
+                <p className="reslabel">Notes</p>
                 <label >
-                    Notes
                     <input
                         className="mnotes"
-                        type="text"
+                        type="text-area"
                         id="notes"
                         value={ notes }
                         onChange={ ( e ) => setNotes( e.target.value ) }
@@ -137,8 +139,8 @@ const ReservationModal = ( { reservation } ) => {
                 </label>
 
 
-                <button className="mbook" type="submit" >Edit Reservation</button>
-                <ul>
+                <button className="mbook" type="submit" >Confirm</button>
+                <ul className="merrors-list">
                     { Object.values( errors ).map( ( error, idx ) => <li key={ idx }>{ error }</li> ) }
                 </ul>
 

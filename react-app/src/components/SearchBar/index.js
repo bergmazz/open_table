@@ -15,8 +15,10 @@ const getOneHourFromNow = () => {
     const currentTime = new Date();
     currentTime.setHours( currentTime.getHours() + 1 );
     currentTime.setMinutes( Math.ceil( currentTime.getMinutes() / 30 ) * 30 ); // Round up to next 30-minute increment
+
     const hours = String( currentTime.getHours() ).padStart( 2, "0" );
     const minutes = String( currentTime.getMinutes() ).padStart( 2, "0" );
+
     return `${ hours }:${ minutes }`;
 };
 
@@ -47,7 +49,7 @@ function SearchBar () {
         <form className="search-form-container" onSubmit={ handleSubmit }>
 
 
-            <label className="date">Date:
+            <label className="date">
                 <input
                     className="dateinput"
                     type="date"
@@ -57,7 +59,7 @@ function SearchBar () {
                 />
             </label>
 
-            <label className="time" >Time:</label>
+            <label className="time" ></label>
             <input
                 className="timeinput"
                 type="time"
@@ -67,7 +69,7 @@ function SearchBar () {
             />
 
 
-            <label className="city" htmlFor="city">City:</label>
+            <label className="city" ></label>
             <select
                 className="cityinput"
                 id="city"
@@ -82,7 +84,7 @@ function SearchBar () {
                 <option value="Houston">Houston</option>
             </select>
 
-            <label className="food-type" htmlFor="cuisine">Cuisine Type:</label>
+            <label className="food-type"></label>
             <select
                 className="typeinput"
                 id="cuisine"

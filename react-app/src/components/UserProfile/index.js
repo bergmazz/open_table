@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { getUserReservations } from "../../store/reservation"
 import SearchBar from "../SearchBar";
 import ReservationModal from "../ReservationModal";
@@ -10,9 +10,21 @@ import CreateReviewModal from "../Reviews/NewReview";
 
 import "./UserProfile.css"
 
+function timeFormat ( reservation ) {
+    const dateArr = reservation.reservationTime.split( " " );
+    // console.log( "date arr ------------", dateArr )
+    const time = dateArr[ 4 ].split( ":" );
+    const amPm = time[ 0 ] >= 12 ? "pm" : "am";
+    const hours = ( ( time[ 0 ] % 12 ) || 12 );
+    const formatTime = hours + ":" + time[ 1 ] + " " + amPm;
+    const formatAll = dateArr[ 0 ] + " " + dateArr[ 2 ] + " " + dateArr[ 1 ] + " " + dateArr[ 3 ] + " " + formatTime
+    return formatAll
+}
+
 function UserProfile() {
 
     const dispatch = useDispatch();
+    const history = useHistory();
     const [ showMenu, setShowMenu ] = useState( false );
     const ulRef = useRef()
 
@@ -51,9 +63,9 @@ function UserProfile() {
     const upcomingReservations = reservations.filter(res => res.status === "confirmed");
     const pastReservations = reservations.filter(res => res.status === "attended");
     const cancelledReservations = reservations.filter(res => res.status === "cancelled");
-    console.log("upcoming", upcomingReservations)
-    console.log("past", pastReservations)
-    console.log("canceled", cancelledReservations)
+    // console.log("upcoming", upcomingReservations)
+    // console.log("past", pastReservations)
+    // console.log("canceled", cancelledReservations)
 
     if (!currentUser) return (
         <div className='no-user'>
@@ -61,7 +73,6 @@ function UserProfile() {
             <Link to="/login"> </Link>
         </div>
     )
-
 
     return (
         <div className="user">
@@ -101,11 +112,10 @@ function UserProfile() {
                                             upcomingReservations.map((reservation) => (
                                                 <div className="reservation-tile">
                                                     <img className="reservimg" src={reservation.restaurant[0].coverImage} />
-                                                    <div>
+                                                    <div className="col2">
                                                         <p className="reservname">{ reservation.restaurant[ 0 ].restaurantName }</p>
-                                                        <p className="reservpeople" >{ reservation.numberOfPeople } guests</p>
-                                                        <p className="reservtime" >{reservation.reservationTime}</p>
-                                                    </div>
+                                                        <span className="reservuser"><i className="fa-regular fa-user"></i>  { reservation.numberOfPeople } guests </span>
+                                                        <span className="reservtime"><i className="fa-regular fa-calendar"></i>   { timeFormat( reservation ) } </span>
                                                     <OpenModalButton
                                                         className='edit-reserv'
                                                         buttonText="Modify"
@@ -117,6 +127,7 @@ function UserProfile() {
                                                         buttonText="Cancel"
                                                         modalComponent={<DeleteReservationModal reservation={reservation} />}
                                                     />
+                                                    </div>
 
                                                 </div>
                                             ))) : (
@@ -133,15 +144,16 @@ function UserProfile() {
                                             pastReservations.map((reservation) => (
                                                 <div className="reservation-tile">
                                                     <img className="reservimg" src={reservation.restaurant[0].coverImage} />
-                                                    <div>
+                                                    <div className="col2">
                                                         <p className="reservname">{reservation.restaurant[0].restaurantName}</p>
-                                                        <p className="reservtime" >{ reservation.reservationTime }</p>
-                                                    </div>
+                                                        <span className="reservuser"><i className="fa-regular fa-user"></i>  { reservation.numberOfPeople } guests </span>
+                                                        <span className="reservtime"><i className="fa-regular fa-calendar"></i>   { timeFormat( reservation ) } </span>
                                                     <OpenModalButton
                                                         className='review-reserv'
-                                                        buttonText='Leave A Review'
+                                                            buttonText='Leave a Review'
                                                         modalComponent={<CreateReviewModal reservation={reservation} />}
                                                     />
+                                                    </div>
                                                 </div>
                                             ))) : (
                                             <div>You have no past reservations</div>
@@ -155,9 +167,10 @@ function UserProfile() {
                                             cancelledReservations.map((reservation) => (
                                                 <div className="reservation-tile">
                                                     <img className="reservimg" src={reservation.restaurant[0].coverImage} />
-                                                    <div>
-                                                        <p className="reservname">{reservation.restaurant[0].restaurantName}</p>
-                                                        <p className="reservtime" >{reservation.reservationTime}</p>
+                                                    <div className="col2">
+                                                        <p className="reservname">{ reservation.restaurant[ 0 ].restaurantName }</p>
+                                                        <span className="reservuser"><i className="fa-regular fa-user"></i>  { reservation.numberOfPeople } guests </span>
+                                                        <span className="reservtime"><i className="fa-regular fa-calendar"></i>   { timeFormat( reservation ) } </span>
                                                     </div>
                                                 </div>
                                             ))) : (
@@ -173,7 +186,9 @@ function UserProfile() {
                             <>
                                 <h1>You have no upoming or past reservations</h1>
                                 <h3>Find your table for any occasion</h3>
-                                {/* <SearchBar></SearchBar> */}
+                                <button className="table-button" onClick={ () => history.push( '/restaurants' ) }>
+                                    Find a table
+                                </button>
                             </>
                         )
                     }

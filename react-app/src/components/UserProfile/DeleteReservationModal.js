@@ -5,9 +5,9 @@ import { deleteReservations } from "../../store/reservation";
 function DeleteReservationModal({reservation}) {
     const dispatch = useDispatch();
     const { closeModal } = useModal();
-    console.log("herrreeeee", reservation)
+    // console.log("herrreeeee", reservation)
     const restaurant = reservation.restaurant[0];
-    console.log("restaurant", restaurant)
+    // console.log("restaurant", restaurant)
     const dateArr = reservation.reservationTime.split(" ");
     const time = dateArr[4].split(":");
     const amPm = time[0] >= 12 ? "pm" : "am";

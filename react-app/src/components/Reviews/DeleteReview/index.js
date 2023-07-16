@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router";
 import { useModal } from "../../../context/Modal";
 import { deleteReviews } from "../../../store/review";
+import { getDetailsRestaurant } from "../../../store/restaurantDetails";
 import './deleteReview.css';
 
 export default function DeleteReviewForm({ review }) {
@@ -22,8 +23,10 @@ export default function DeleteReviewForm({ review }) {
                 if (data && data.errors) setErrors(data.errors);
             })
         
+        dispatch(getDetailsRestaurant(review.restaurantId))
+        
         closeModal();
-        history.go(0);
+    
     }
 
     const keepReview = () => {

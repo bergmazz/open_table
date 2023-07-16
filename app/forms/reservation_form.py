@@ -10,6 +10,12 @@ def validate_date(form, field):
         # print(field.data)
             raise ValidationError("Reservation time cannot be in the past")
 
+# def validate_utcdate(form, field):
+#     if field.data:
+#         if field.data.date() < datetime.utcnow().date():
+#         # print(field.data)
+#             raise ValidationError("Reservation time not available")
+
 def validate_time_slot(form, field):
     if field.data:
         slot_duration = 30  # Set the slot duration to 30 minutes
@@ -17,6 +23,7 @@ def validate_time_slot(form, field):
         reservation_time = field.data.time()
         if reservation_time.minute % slot_duration != 0:
             raise ValidationError(f"Reservation time must be in {slot_duration}-minute increments")
+
 
 class ReservationForm(FlaskForm):
     number_of_people = IntegerField('Number of People', validators=[DataRequired()])
