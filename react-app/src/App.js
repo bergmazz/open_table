@@ -17,6 +17,8 @@ import ProtectedRoute from "./components/auth/ProtectedRoute";
 import Favorites from "./components/UserProfile/favorites";
 import Footer from "./components/Footer";
 
+import "./index.css";
+
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
@@ -27,7 +29,8 @@ function App() {
   return (
     <>
       <Navigation isLoaded={isLoaded} />
-      {isLoaded && (
+      { isLoaded && (
+        <div className="content-container">
         <Switch>
           <Route exact path="/">
             <HomePage />
@@ -62,9 +65,13 @@ function App() {
           <Route exact path="/user/favorites">
             <Favorites />
           </Route>
-        </Switch>
-      )}
-      <Footer isLoaded={isLoaded}/>
+          </Switch>
+        </div>
+      ) }
+      <footer className="pinme" >
+        <Footer isLoaded={ isLoaded } />
+      </footer>
+
     </>
   );
 }
