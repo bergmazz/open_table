@@ -180,7 +180,8 @@ function UserProfile() {
                                                                 buttonText='Leave a Review'
                                                                 modalComponent={ <CreateReviewModal reservation={ reservation } /> }
                                                             /> ) : (
-                                                            <>
+                                                                <>
+                                                                    <button className="table-button" onClick={ () => history.push( `/restaurants/${ reservation.restaurantId }` ) }>See Your Review</button>
                                                                 {/* ******TO DO Does not yet work, isnt accessing review props */ }
                                                                 {/* <OpenModalButton
                                                                     buttonText='Edit Review'

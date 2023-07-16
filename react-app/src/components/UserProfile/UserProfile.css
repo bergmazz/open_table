@@ -68,7 +68,7 @@ margin: 2px;
 .reservations-container{
     width: 66%;
     float: right;
-    height: calc(100vh - 100px);
+margin-bottom: 170px;
 }
 /* .reservations-container{
     overflow-y: scroll;
@@ -124,6 +124,8 @@ object-fit: cover;
   margin: 20px
 }
 
-.noupcoming button{
+.table-button{
         background-color: crimson;
+        height: 50px;
+        width:100px;
 }
