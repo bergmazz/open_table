@@ -198,10 +198,11 @@ const RestaurantPage = () => {
                                                       })
                                                 }
                                             </div>
-
-                                            <div className="review-image-container2">
+                                            { review.reviewImage && (
+                                                <div className="review-image-container2">
                                                  <img className="review-image2" src={review.reviewImage}></img>
                                             </div>
+                                            )}
                                             <br></br>
                                             {user && user.id === review.userId && (
                                                 <div className="review-modal-buttons">
