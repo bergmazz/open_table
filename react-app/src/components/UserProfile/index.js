@@ -154,7 +154,7 @@ function UserProfile() {
                                             ))) : (
                                             <div className="noupcoming">
                                                 <p>You have no upcoming reservations</p>
-                                                <button className="table-button" onClick={ () => history.push( '/restaurants' ) }>Find a table</button>
+                                                <button className="tablebutton" onClick={ () => history.push( '/restaurants' ) }>Find a table</button>
                                             </div>
                                         )
                                     }
@@ -181,7 +181,7 @@ function UserProfile() {
                                                                 modalComponent={ <CreateReviewModal reservation={ reservation } /> }
                                                             /> ) : (
                                                                 <>
-                                                                    <button className="table-button" onClick={ () => history.push( `/restaurants/${ reservation.restaurantId }` ) }>See Your Review</button>
+                                                                    <button className="tablebutton" onClick={ () => history.push( `/restaurants/${ reservation.restaurantId }` ) }>See Your Review</button>
                                                                 {/* ******TO DO Does not yet work, isnt accessing review props */ }
                                                                 {/* <OpenModalButton
                                                                     buttonText='Edit Review'

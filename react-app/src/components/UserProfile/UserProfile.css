@@ -115,17 +115,23 @@ object-fit: cover;
         width:100px;
         margin-top: 20px;
         margin-right: 10px;
+            cursor: pointer;
 }
 
 
 .noupcoming{
-   height: 100px;
+   height: 140px;
   border-bottom: solid lightgray thin;
   margin: 20px
 }
 
-.table-button{
+.tablebutton{
         background-color: crimson;
         height: 50px;
         width:100px;
+        border-radius: 5px;
+            cursor: pointer;
+                border: none;
+                    color: white;
+                        margin-top: 18px;
 }
