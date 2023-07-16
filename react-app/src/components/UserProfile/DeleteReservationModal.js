@@ -1,8 +1,9 @@
 import { useModal } from "../../context/Modal";
 import { useDispatch } from "react-redux";
 import { deleteReservations } from "../../store/reservation";
+import "./DeleteReservationModal.css"
 
-function DeleteReservationModal({reservation}) {
+function DeleteReservationModal({ reservation }) {
     const dispatch = useDispatch();
     const { closeModal } = useModal();
     // console.log("herrreeeee", reservation)
@@ -17,21 +18,23 @@ function DeleteReservationModal({reservation}) {
     const deleteRes = (e) => {
         e.preventDefault();
         return dispatch(deleteReservations(reservation.id, reservation.restaurantId))
-        .then(closeModal)
+            .then(closeModal)
     }
 
     return (
-        <>
-        <div>Are you sure you want to cancel this reservation?</div>
-        <div>{restaurant.restaurantName}</div>
-        <div>
-            <span><i className="fa-regular fa-user"></i> {reservation.numberOfPeople} (Standard seating) </span>
-            <span><i className="fa-regular fa-calendar"></i> {dateArr[0]} {dateArr[1]} {dateArr[2]}</span>
-            <span> at {reservationTime}</span>
+        <div className="delete-res-container">
+            <div className="delete-res-box">
+            <div className="are-you-sure">Are you sure you want to cancel this reservation?</div>
+            <div className="delete-res-name">{restaurant.restaurantName}</div>
+            <div className="delete-res-info">
+                <span><i className="fa-regular fa-user"></i> {reservation.numberOfPeople} (Standard seating) </span>
+                <span><i className="fa-regular fa-calendar"></i> {dateArr[0]} {dateArr[1]} {dateArr[2]}</span>
+                <span> at {reservationTime}</span>
+            </div>
+            <button className="nevermind" onClick={closeModal}>Nevermind</button>
+            <button className="confirm-delete" onClick={deleteRes}>Confirm Cancellation</button>
+            </div>
         </div>
-        <button onClick={closeModal}>Nevermind</button>
-        <button onClick={deleteRes}>Confirm Cancellation</button>
-        </>
     )
 }
 

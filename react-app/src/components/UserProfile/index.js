@@ -128,8 +128,11 @@ function UserProfile() {
                                     {
                                         upcomingReservations.length ? (
                                             upcomingReservations.map((reservation) => (
+
                                                 <div className="reservation-tile">
+                                                     <Link to={`/restaurants/${reservation.restaurantId}`} key={reservation.restaurantId}>
                                                     <img className="reservimg" src={reservation.restaurant[0].coverImage} />
+                                                    </Link>
                                                     <div className="col2">
                                                         <p className="reservname">{ reservation.restaurant[ 0 ].restaurantName }</p>
                                                         <span className="reservuser"><i className="fa-regular fa-user"></i>  { reservation.numberOfPeople } guests </span>
@@ -161,7 +164,9 @@ function UserProfile() {
                                         pastReservations.length ? (
                                             pastReservations.map((reservation) => (
                                                 <div className="reservation-tile">
+                                                     <Link to={`/restaurants/${reservation.restaurantId}`} key={reservation.restaurantId}>
                                                     <img className="reservimg" src={reservation.restaurant[0].coverImage} />
+                                                    </Link>
                                                     <div className="col2">
                                                         <p className="reservname">{reservation.restaurant[0].restaurantName}</p>
                                                         <span className="reservuser"><i className="fa-regular fa-user"></i>  { reservation.numberOfPeople } guests </span>
@@ -197,7 +202,9 @@ function UserProfile() {
                                         cancelledReservations.length ? (
                                             cancelledReservations.map((reservation) => (
                                                 <div className="reservation-tile">
+                                                     <Link to={`/restaurants/${reservation.restaurantId}`} key={reservation.restaurantId}>
                                                     <img className="reservimg" src={reservation.restaurant[0].coverImage} />
+                                                    </Link>
                                                     <div className="col2">
                                                         <p className="reservname">{ reservation.restaurant[ 0 ].restaurantName }</p>
                                                         <span className="reservuser"><i className="fa-regular fa-user"></i>  { reservation.numberOfPeople } guests </span>
