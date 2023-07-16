@@ -14,7 +14,7 @@ const RestaurantPage = () => {
     const { id } = useParams();
     const restaurant = useSelector(state => state.restaurantDetails);
     const favorites = useSelector(state => state.favorites);
-    console.log("FAVORITES", favorites)
+    // console.log("FAVORITES", favorites)
     const user = useSelector(state => state.session.user);
     const [loadingFavorites, setLoadingFavorites] = useState(true);
     const [favorite, setFavorite] = useState(false);
@@ -58,7 +58,7 @@ const RestaurantPage = () => {
                 favId = favorites[i].id
             }
         }
-        console.log("hereeeee, ", favId)
+        // console.log("hereeeee, ", favId)
                 dispatch(deleteFavorites(favId, user.id))
                     .then(() => dispatch(getFavorites(user.id)))
                     .then(() => setFavorite(false))
@@ -113,7 +113,7 @@ const RestaurantPage = () => {
             }
             return starArr;
         }
-        
+
 
 
         // console.log("STARRRRR", starArr)
@@ -198,10 +198,11 @@ const RestaurantPage = () => {
                                                       })
                                                 }
                                             </div>
-                                            
-                                            <div className="review-image-container2">
+                                            { review.reviewImage && (
+                                                <div className="review-image-container2">
                                                  <img className="review-image2" src={review.reviewImage}></img>
                                             </div>
+                                            )}
                                             <br></br>
                                             {user && user.id === review.userId && (
                                                 <div className="review-modal-buttons">
@@ -246,7 +247,7 @@ const RestaurantPage = () => {
                             <ReservationForm />
                         </div>
                         <div className="restaurant-details-section">
-    <div className="details-header"> 
+                            <div className="details-header">
         {/* This is the header for the section */}
         <h2>Restaurant Details</h2>
     </div>
