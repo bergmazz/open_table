@@ -42,15 +42,20 @@ const ReservationModal = ( { reservation } ) => {
     const [ status, setStatus ] = useState( reservation.status );
     const [ notes, setNotes ] = useState( reservation.notes );
     const [ errors, setErrors ] = useState( [] );
-
+    let formattedTime = time
     const currentUser = useSelector( state => state.session.user )
 
     useEffect( () => {
 
         if ( date && time ) {
-            let formattedTime = time
+            formattedTime = time
+            // console.log( "----------timelegth:", time.length )
+            // console.log( "----------time:", time )
             if ( !time.includes( ":00:00" ) ) {
                 formattedTime += ":00";
+            }
+            if ( time.includes( ":0:00" ) ) {
+                formattedTime = time.replace( ":0:00", ":00:00" );
             }
             // setReservationTime( `${ date } ${ time }` )
             setReservationTime( `${ date } ${ formattedTime }` )
@@ -88,9 +93,8 @@ const ReservationModal = ( { reservation } ) => {
         }
     };
 
-    let formattedTime = time
-    if ( !time.includes( ":00:00" ) ) {
-        formattedTime += ":00";
+    if ( time.includes( ":0:00" ) ) {
+        formattedTime = time.replace( ":0:00", ":00:00" );
     }
 
     return (
