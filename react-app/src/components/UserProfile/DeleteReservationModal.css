@@ -1,4 +1,41 @@
-/* .delete-res-container {
+.delete-res-container {
     background-color: white;
-    height: 200px;
-} */
+    margin: -20px;
+    padding: 20px;
+    height: 175px;
+    display: grid;
+}
+
+.are-you-sure {
+    font-size: 20px;
+}
+
+.delete-res-name {
+    font-size: 20px;
+}
+
+
+.delete-res-buttons {
+    display: flex;
+    justify-content: end;
+    gap: 20px;
+    height: 30px;
+
+}
+
+.nevermind {
+    background-color: white;
+    color: rgb(225, 62, 62);
+    padding: 0;
+    border: none;
+    background: none;
+}
+
+
+.confirm-delete {
+    background-color: rgb(225, 62, 62);
+    border: none;
+    border-radius: 3px;
+    color: white;
+    width: 175px;
+}
