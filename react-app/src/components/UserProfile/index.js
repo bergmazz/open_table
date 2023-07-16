@@ -70,14 +70,16 @@ function UserProfile() {
     if (!currentUser) return (
         <div className='no-user'>
             <h1 className='no-user'>Sorry, you need to log in</h1>
-            <Link to="/login"> </Link>
+            <Link to="/login" className="page-login-link">
+      <button className="login-signup-button" type="submit">Login</button> 
+      </Link>
         </div>
     )
 
     return (
         <div className="user">
             <div className="extends-nav-height">
-                <h2>{currentUser.firstName}{currentUser.lastName}</h2>
+                <h2>{currentUser.firstName}{" "}{currentUser.lastName}</h2>
                 <h4>{points} points</h4>
             </div>
 

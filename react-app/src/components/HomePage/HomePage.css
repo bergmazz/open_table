@@ -53,7 +53,11 @@ body {
   }
 
   .view-restaurants {
-    color: #007bff;
+    color: rgb(68, 112, 216);
+  }
+
+  .view-restaurants:hover {
+    color: rgb(88, 132, 236);
   }
 
   .featured-bar {

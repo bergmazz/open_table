@@ -68,7 +68,7 @@
   }
   
   .logout-user, .open-modal-button {
-    background-color: #007bff;
+    background-color: rgb(68, 112, 216);
     width: 100%;
     color: white;
     border: none;
@@ -79,7 +79,7 @@
   }
   
   .logout-user:hover {
-    background-color: #0056b3;
+    background-color: rgb(88, 132, 236);
   }
 
   .log-out {
@@ -128,7 +128,7 @@
     flex-direction: column;
     align-items: flex-end;
     font-size: 12px;
-    color: #007bff;
+    color: rgb(88, 132, 236);
   }
 
   .pts {
@@ -138,5 +138,5 @@
     flex-direction: column;
     align-items: flex-start;
     font-size: 12px;
-    color: #007bff;
+    color: rgb(88, 132, 236);
   }

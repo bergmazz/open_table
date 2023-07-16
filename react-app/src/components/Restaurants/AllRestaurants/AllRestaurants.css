@@ -59,7 +59,7 @@
 .res-name {
     grid-area: res-name;
     text-decoration: none;
-    color: #379091;
+    color: rgb(88, 132, 236);
     font-weight: bold;
     font-size: 18px;
 }

@@ -26,9 +26,15 @@ function SignupFormModal() {
 				setErrors(data);
 			} else {
 				if (owner) {
-					history.push("/new-restaurant");
+					const createRestaurant = window.confirm("Do you want to create a restaurant?")
+					if (createRestaurant) {
+
+						history.push("/new-restaurant");
+					} else {
+						history.push("/");
+					}
 				} else {
-					history.push("/"); // Redirect to homepage if not an owner
+					history.push("/");
 				}
 				closeModal();
 			}

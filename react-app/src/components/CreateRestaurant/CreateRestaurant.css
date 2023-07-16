@@ -22,7 +22,7 @@
     width: 30%;
     font-size: 16px;
     margin-bottom: 20px;
-    color: #007BFF;
+    color: rgb(88, 132, 236);
     align-content: center;
     text-align: center;
     line-height: 1.5;
@@ -32,7 +32,7 @@
     width: 30%;
     font-size: 16px;
     margin-bottom: 20px;
-    color: #007BFF;
+    color: rgb(88, 132, 236);
     align-content: center;
     text-align: center;
     line-height: 1.5;
@@ -70,7 +70,7 @@
     padding: 10px;
     border: none;
     border-radius: 5px;
-    background-color: #007BFF;
+    background-color: rgb(68, 112, 216);
     color: #fff;
     font-size: 1em;
     cursor: pointer;
@@ -78,5 +78,5 @@
 }
 
 .create-button:hover {
-    background-color: #0056b3;
+    background-color: rgb(88, 132, 236);
 }
