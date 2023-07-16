@@ -1,6 +1,16 @@
 /* TODO Add site wide styles */
-.app-container {
-  min-height: calc(100vh - 170px);
+/* .app-container {
+    height: calc(100vh - 300px);
+} */
+
+.appcontainer {
+    /* min-height: calc(100vh - 200px); */
+    /* height: calc(100vh); */
+    margin-bottom: 170px;
+}
+
+.appcontainer > *:not(footer) {
+  margin-bottom: auto;
 }
 
 .pinme{
@@ -8,7 +18,7 @@
   left: 0;
   bottom: 0;
   width: 100%;
-  z-index:5
+  z-index: 5
 }
 
 /* .footer-wrapper{

@@ -30,7 +30,7 @@ function App() {
     <>
       <Navigation isLoaded={isLoaded} />
       { isLoaded && (
-        <div className="content-container">
+        <div className="appcontainer">
         <Switch>
           <Route exact path="/">
             <HomePage />
