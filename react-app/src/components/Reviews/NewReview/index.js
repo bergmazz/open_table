@@ -46,7 +46,7 @@ export default function CreateReviewModal({ reservation }) {
   }, [comment, rating, review_image]);
 
 
-  if (!currentUser) return <Redirect to='/signup' />;
+  if (!currentUser) return <Redirect to='/login' />;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -103,7 +103,7 @@ export default function CreateReviewModal({ reservation }) {
             onMouseEnter={() => setHover(index)}
             onMouseLeave={() => setHover(rating)}
             >
-            <i className={index <= (hover || rating) ? 'fa-solid fa-star' : 'fa-regular fa-star'}></i>
+            <i className={index <= (hover || rating) ? 'fa-solid fa-star solid-star' : 'fa-regular fa-star hollow-star'}></i>
             </button>
           );
         })}

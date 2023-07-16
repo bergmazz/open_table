@@ -126,48 +126,87 @@ const ReservationForm = () => {
             <form className="reserve" onSubmit={ handleSubmit }>
                 <div className="party-size">Party Size</div>
                 <label >
-                    <input
+                    <select
                         className="party-select"
-                        type="number"
                         value={ numberOfPeople }
                         onChange={ ( e ) => setNumberOfPeople( e.target.value ) }
-                    />
+                    >
+                    <option value="1">1 person</option>
+                    <option value="2">2 people</option>
+                    <option value="3">3 people</option>
+                    <option value="4">4 people</option>
+                    <option value="5">5 people</option>
+                    <option value="6">6 people</option>
+                    <option value="7">7 people</option>
+                    <option value="8">8 people</option>
+                    <option value="9">9 people</option>
+                    <option value="10">10 people</option>
+                    <option value="11">11 people</option>
+                    <option value="12">12 people</option>
+                    <option value="13">13 people</option>
+                    <option value="14">14 people</option>
+                    <option value="15">15 people</option>
+                    <option value="16">16 people</option>
+                    <option value="17">17 people</option>
+                    <option value="18">18 people</option>
+                    <option value="19">19 people</option>
+                    <option value="20">20 people</option>
+                    </select>
                 </label>
                 {/* { errors.numberOfPeople && <span>This field is required</span> } */ }
-
-                <div className="date-time">Date and Time</div>
-                <label className="date">
+                <div className="separator"></div>
+                <div className="date-time-header-container">
+                    <div className="date-header">Date</div>
+                    
+                    <div className="time-header">Time</div>
+                </div>
+                <div className="date-time-container">
+                <label>
+                {/* <div className="separator-res"></div> */}
                     {/* <i className="fas fa-calendar"></i> */ }
                     <input
-                        className="date"
+                        className="date-input"
                         type="date"
-                        id="date"
+                        // id="date"
                         value={ date }
                         onChange={ ( e ) => setDate( e.target.value ) }
-                    />
+                        />
                 </label>
+                {/* <div className="separator-res"></div> */}
                 <label >
+                {/* <div className="separator-res"></div> */}
                 <input
-                        className="time"
+                    className="time-input"
                     type="time"
-                    id="time"
+                    // id="time"
                     value={ time }
                     onChange={ ( e ) => setTime( e.target.value ) }
                     />
                 </label>
+                {/* <div className="separator-res"></div> */}
+                    </div>
+                    <div className="separator-res"></div>
+                {/* { errors.time && <span>This field is required</span> } */ }
 
+                {/* EDIT RESERVATION: */ }
+                {/* <label htmlFor="status">Status:</label>
+                <select id="status" name="status" ref={ register( { required: true } ) }>
+                    <option value="Confirmed">Confirmed</option>
+                    <option value="Attended">Attended</option>
+                    <option value="Cancelled">Cancelled</option>
+                </select>
+                { errors.status && <span>This field is required</span> } */}
                 <label >
                     {/* Notes: */ }
                     <input
                         className="notes"
                         type="text"
-                        id="notes"
                         onChange={ ( e ) => setNotes( e.target.value ) }
-                        placeholder="Leave a note, if you'd like."
+                        placeholder=" Add a special request (optional)"
                     />
                 </label>
 
-                <button className="book" type="submit" onClick={ handleAddPoints } >Book Table</button>
+                <button className="book-button" type="submit" onClick={ handleAddPoints } >Book Table</button>
                 <ul>
                     { errors.map( ( error, idx ) => <li key={ idx }>{ error }</li> ) }
                 </ul>

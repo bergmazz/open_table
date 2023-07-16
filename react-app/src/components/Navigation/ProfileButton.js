@@ -1,17 +1,29 @@
 import React, { useState, useEffect, useRef } from "react";
 import { NavLink, useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../store/session";
 import OpenModalButton from "../OpenModalButton";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
+import { getUserReservations } from "../../store/reservation";
 import "./ProfileButton.css";
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
   const history = useHistory();
+  const ulRef = useRef();
+
+  const reservations = useSelector((state) => state.reservations.byUser);
+  const points = reservations.length * 100;
+  const goal = 5000;
+
   const [showMenu, setShowMenu] = useState(false);
-  const ulRef = useRef()
+
+  useEffect(() => {
+    if (user){
+      dispatch(getUserReservations());
+    }
+  }, [dispatch, user]);
 
   const openMenu = () => {
     if (showMenu) return;
@@ -51,23 +63,37 @@ function ProfileButton({ user }) {
   return (
     <div className="dropdown-container">
       <button className="dropdown-btn" onClick={openMenu}>
-        <i className="fas fa-user-circle" />
+      <i class="fa-regular fa-circle-user"></i>
       </button>
       <ul className={ulClassName} ref={ulRef}>
         {user ? (
           <>
             <li className="user-greeting">Hello, {user.firstName}!</li>
+            <div className="user-points-container">
+            <div className="user-points">
+            <p>Earned</p>
+              <div className="pts">
+                {points} PTS
+                </div>
+            </div>
+            <div className="goal-points">
+            <p>Next reward</p>
+            <div className="goal-pts">
+                {goal} PTS
+                </div>
+            </div>
+            </div>
             <div onClick={closeMenuAndNavigate}>
               <li className="dropdown-item">
-                <NavLink to="/user">My Profile</NavLink>
+                <NavLink className='block' to="/user">My Profile</NavLink>
               </li>
             </div>
             <div onClick={closeMenuAndNavigate}>
               <li className="dropdown-item">
-                <NavLink to="/user/favorites">My Favorite Restaurants</NavLink>
+                <NavLink className="block" to="/user/favorites">My Favorite Restaurants</NavLink>
               </li>
             </div>
-            <li className="dropdown-item">
+            <li className="log-out">
               <button onClick={handleLogout} className="logout-user">Log Out</button>
             </li>
           </>

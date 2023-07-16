@@ -15,6 +15,7 @@ import CreateRestaurant from "./components/CreateRestaurant";
 import OwnerRestaurant from "./components/ManageRestaurants";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import Favorites from "./components/UserProfile/favorites";
+import Footer from "./components/Footer";
 
 function App() {
   const dispatch = useDispatch();
@@ -63,6 +64,7 @@ function App() {
           </Route>
         </Switch>
       )}
+      <Footer isLoaded={isLoaded}/>
     </>
   );
 }
