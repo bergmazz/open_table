@@ -23,7 +23,7 @@ function DeleteReservationModal({ reservation }) {
 
     return (
         <div className="delete-res-container">
-            <div className="delete-res-box">
+
             <div className="are-you-sure">Are you sure you want to cancel this reservation?</div>
             <div className="delete-res-name">{restaurant.restaurantName}</div>
             <div className="delete-res-info">
@@ -31,9 +31,11 @@ function DeleteReservationModal({ reservation }) {
                 <span><i className="fa-regular fa-calendar"></i> {dateArr[0]} {dateArr[1]} {dateArr[2]}</span>
                 <span> at {reservationTime}</span>
             </div>
-            <button className="nevermind" onClick={closeModal}>Nevermind</button>
-            <button className="confirm-delete" onClick={deleteRes}>Confirm Cancellation</button>
+            <div className="delete-res-buttons">
+                <button className="nevermind" onClick={closeModal}>Nevermind</button>
+                <button className="confirm-delete" onClick={deleteRes}>Confirm Cancellation</button>
             </div>
+
         </div>
     )
 }
