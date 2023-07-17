@@ -31,8 +31,8 @@ const getOneHourFromNow = () => {
     const today = new Date();
     const currentHour = today.getHours();
 
-    if ( currentHour >= 22 ) {
-        // past 10 PM go to next day at 10am
+    if ( currentHour >= 22 || currentHour < 8 ) {
+        // past 10 PM go to next day at 10am, before 8am, go to 10am
         return `10:30`;
     } else {
         // If it's not past 10 PM, get the current time
@@ -157,7 +157,7 @@ const ReservationForm = () => {
                 <div className="separator"></div>
                 <div className="date-time-header-container">
                     <div className="date-header">Date</div>
-                    
+
                     <div className="time-header">Time</div>
                 </div>
                 <div className="date-time-container">
