@@ -183,7 +183,10 @@ const RestaurantPage = () => {
                                 {
                                     restaurant.reviews.map((review, i) => (
                                         <div className="individual-review" key={review.id}>
-                                            <div className="user-section">{review.username} {convertDate(review.createdAt)}</div>
+                                            <div className="user-section">
+                                               <p className="username"> {review.username} </p>
+                                                <p className="date">{convertDate(review.createdAt)}</p>
+                                            </div>
                                             <div className="review-comment2">{review.comment}</div>
                                             <div className="review-stars">
                                                 {
