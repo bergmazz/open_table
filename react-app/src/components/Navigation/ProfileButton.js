@@ -84,12 +84,12 @@ function ProfileButton({ user }) {
             </div>
             </div>
             <div onClick={closeMenuAndNavigate}>
-              <li className="dropdown-item">
+              <li className="dropdown-item-profile">
                 <NavLink className='block' to="/user">My Profile</NavLink>
               </li>
             </div>
             <div onClick={closeMenuAndNavigate}>
-              <li className="dropdown-item">
+              <li className="dropdown-item-profile">
                 <NavLink className="block" to="/user/favorites">My Favorite Restaurants</NavLink>
               </li>
             </div>

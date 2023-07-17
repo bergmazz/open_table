@@ -1,142 +1,155 @@
 
-  .hidden {
-    display: none;
-  }
-  .dropdown-container {
-    position: relative;
-    /* width: 450px;
-    right: 0;
-    left: 200px; */
-    
-  }
+.hidden {
+  display: none;
+}
+.dropdown-container {
+  position: relative;
+  /* width: 450px;
+  right: 0;
+  left: 200px; */
   
-  .dropdown-btn {
-    background: none;
-    border: none;
-    cursor: pointer;
-  }
-  
-  .dropdown-btn i {
-    font-size: 2em;
-    color: #333;
-  }
-  
-  .profile-dropdown {
-    position: absolute;
-    width: 250px;
-    right: 4px;
-    top: 40px;
-    background-color: white;
-    padding: 10px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.9);
-    z-index: 1;
-    /* display: none; */
-    flex-direction: column;
-    /* border: 3px solid red; */
-  }
-
-  /* .profile-dropdown.dropdown-open {
-    display: flex;
-
-  } */
-  
-  .dropdown-item {
-    padding: 10px;
-    text-decoration: none;
-    color: #333;
-    align-items: center;
-  }
-
-  .block {
-    display: block;
-    width: 100%;
-    /* border: 2px solid red; */
 }
 
-  .user-greeting {
-    padding: 10px 20px;
-    display: block;
-    text-decoration: none;
-    color: #DA3743;
-    cursor: default;
-    font-size: large;
-    font-weight: bold;
-  }
-  
-  .dropdown-item:hover {
-    background-color: #f1f1f1;
-  }
-  
-  .logout-user, .open-modal-button {
-    background-color: rgb(68, 112, 216);
-    width: 100%;
-    color: white;
-    border: none;
-    cursor: pointer;
-    padding: 5px 10px;
-    border-radius: 5px;
-    text-align: center;
-  }
-  
-  .logout-user:hover {
-    background-color: rgb(88, 132, 236);
-  }
+.dropdown-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
 
-  .log-out {
-    padding: 10px 20px;
-    display: block;
-    text-decoration: none;
-    color: #333;
-    align-items: center;
-  }
+.dropdown-btn i {
+  font-size: 2em;
+  color: #333;
+}
 
-  .user-points-container {
-    display: flex;
-    cursor: default;
-    justify-content: space-between;
-    margin-bottom: 20px;
-    /* border: 2px solid green; */
-  }
-  
-  .user-points, .goal-points {
-    /* border: 1px solid red; */
-    display: flex;
-    cursor: default;
-    flex-direction: column;
-    align-items: flex-start;
-    /* justify-content: flex-start; */
-  }
+.profile-dropdown {
+  position: absolute;
+  width: 250px;
+  right: 4px;
+  top: 40px;
+  cursor: default;
+  background-color: white;
+  padding: 10px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.9);
+  z-index: 1;
+  /* display: none; */
+  flex-direction: column;
+  /* border: 3px solid red; */
+}
 
-  .goal-points {
-    /* border: 1px solid red; */
-    display: flex;
-    cursor: default;
-    flex-direction: column;
-    align-items: flex-end;
-  }
+/* .profile-dropdown.dropdown-open {
+  display: flex;
 
-  .user-points p, .goal-points p {
-    font-size: 12px;
-    cursor: default;
-    color: rgb(106, 106, 106);
-  }
+} */
 
-  .goal-pts {
-    /* border: 1px solid red; */
-    display: flex;
-    cursor: default;
-    flex-direction: column;
-    align-items: flex-end;
-    font-size: 12px;
-    color: rgb(88, 132, 236);
-  }
+.dropdown-item {
+  padding: 10px;
+  text-decoration: none;
+  color: #333;
+  align-items: center;
+}
 
-  .pts {
-    /* border: 1px solid red; */
-    display: flex;
-    cursor: default;
-    flex-direction: column;
-    align-items: flex-start;
-    font-size: 12px;
-    color: rgb(88, 132, 236);
-  }
+.dropdown-item-profile {
+  padding: 10px;
+  text-decoration: none;
+  color: #333;
+  align-items: center;
+  list-style: none;
+}
+
+.dropdown-item-profile:hover {
+  background-color: #f1f1f1;
+}
+
+.block {
+  display: block;
+  width: 100%;
+  /* border: 2px solid red; */
+}
+
+.user-greeting {
+  padding: 10px 20px;
+  display: block;
+  text-decoration: none;
+  color: #DA3743;
+  cursor: default;
+  font-size: large;
+  font-weight: bold;
+}
+
+.dropdown-item-profile:hover {
+  background-color: #f1f1f1;
+}
+
+.logout-user, .open-modal-button {
+  background-color: rgb(68, 112, 216);
+  width: 100%;
+  color: white;
+  border: none;
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.logout-user:hover {
+  background-color: rgb(88, 132, 236);
+}
+
+.log-out {
+  padding: 10px 20px;
+  display: block;
+  text-decoration: none;
+  color: #333;
+  align-items: center;
+}
+
+.user-points-container {
+  display: flex;
+  cursor: default;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  /* border: 2px solid green; */
+}
+
+.user-points, .goal-points {
+  /* border: 1px solid red; */
+  display: flex;
+  cursor: default;
+  flex-direction: column;
+  align-items: flex-start;
+  /* justify-content: flex-start; */
+}
+
+.goal-points {
+  /* border: 1px solid red; */
+  display: flex;
+  cursor: default;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.user-points p, .goal-points p {
+  font-size: 12px;
+  cursor: default;
+  color: rgb(106, 106, 106);
+}
+
+.goal-pts {
+  /* border: 1px solid red; */
+  display: flex;
+  cursor: default;
+  flex-direction: column;
+  align-items: flex-end;
+  font-size: 12px;
+  color: rgb(88, 132, 236);
+}
+
+.pts {
+  /* border: 1px solid red; */
+  display: flex;
+  cursor: default;
+  flex-direction: column;
+  align-items: flex-start;
+  font-size: 12px;
+  color: rgb(88, 132, 236);
+}
