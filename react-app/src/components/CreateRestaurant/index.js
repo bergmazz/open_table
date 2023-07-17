@@ -25,8 +25,6 @@ function CreateRestaurant() {
         '9:00 PM',
         '10:00 PM',
         '11:00 PM',
-        '12:00 AM',
-        '1:00 AM',
       ];
 
 
@@ -36,7 +34,7 @@ function CreateRestaurant() {
     const [city, setCity] = useState('');
     const [state, setState] = useState('');
     const [zip_code, setZip_code] = useState('');
-    const [country, setCountry] = useState('');
+    const [country, setCountry] = useState("USA");
     const [cuisine_type, setCuisine_type] = useState('');
     const [price_range, setPrice_range] = useState('');
     const [phone_number, setPhone_number] = useState('');
@@ -55,6 +53,8 @@ function CreateRestaurant() {
         setErrors([]);
 
         const newErrors = [];
+        let regex = /(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/;
+
         if (!restaurant_name) newErrors.push("Please enter a restaurant name");
         if (!address) newErrors.push("Please enter an address");
         if (!city) newErrors.push("Please enter a city");
@@ -63,17 +63,26 @@ function CreateRestaurant() {
             newErrors.push("Please enter a zip code");
         } else if (zip_code.toString().length !== 5) {
             newErrors.push("Please enter a 5-digit zip code");
+        } else if ((Number.isNaN(Number(zip_code)))) {
+            newErrors.push("Zip Code must be numbers only");
         }
         if (!country) newErrors.push("Please enter a country");
         if (!cuisine_type) newErrors.push("Please select a cuisine type");
         if (!price_range) newErrors.push("Please select a price range");
         if (!phone_number) {
             newErrors.push("Please enter a phone number");
-        } else if (phone_number.toString().length !== 10) {
+        } else if (phone_number.toString().length !== 10 ) {
             newErrors.push("Please enter a 10-digit phone number");
+        } else if ((Number.isNaN(Number(phone_number)))) {
+            newErrors.push("Phone Number must be numbers only");
+        } else if (parseInt(phone_number.slice(0, 3)) < 200) {
+            newErrors.push("Area code must be greater than 200");
         }
         if (!open_hours) newErrors.push("Please enter open hours");
         if (!closing_hours) newErrors.push("Please enter closing hours");
+        if (!cover_image.match(regex)) {
+            newErrors.push("Invalid image URL");
+        }
 
         if (newErrors.length > 0) {
             setErrors(newErrors);
@@ -119,9 +128,9 @@ function CreateRestaurant() {
             </h3>
             <form id="new-restaurant-form" onSubmit={handleSubmit}>
                 <div className='errors'>
-                    {errors.map((error, idx) => (
+                    {/* {errors.map((error, idx) => (
                         <li key={idx}>{error}</li>
-                    ))}
+                    ))} */}
                 </div>
                 <div className='create-name'>
                     <label className='create-label'>
@@ -140,11 +149,20 @@ function CreateRestaurant() {
                         Phone Number
                         <input
                         className='create-input'
-                        type='number'
+                        type='text'
                         value={phone_number}
                         onChange={(e) => setPhone_number(e.target.value)}
                         required
                         />
+                        {errors.includes("Please enter a 10-digit phone number") && (
+                        <span className='error'>Please enter a 10-digit phone number</span>
+                        )}
+                        {errors.includes("Phone Number must be numbers only") && (
+                        <span className='error'>Phone Number must be numbers only</span>
+                        )}
+                        {errors.includes("Area code must be greater than 200") && (
+                        <span className='error'>Area code must be greater than 200</span>
+                        )}
                     </label>
                 </div>
                 <div className='create-city'>
@@ -193,11 +211,17 @@ function CreateRestaurant() {
                         Zip Code
                         <input
                         className='create-input'
-                        type='number'
+                        type='text'
                         value={zip_code}
                         onChange={(e) => setZip_code(e.target.value)}
-                    required
+                        required
                         />
+                        {errors.includes("Please enter a 5-digit zip code") && (
+                        <span className='error'>Please enter a 5-digit zip code</span>
+                        )}
+                        {errors.includes("Zip Code must be numbers only") && (
+                        <span className='error'>Zip Code must be numbers only</span>
+                        )}
                     </label>
                 </div>
                 <div className='create-country'>
@@ -298,6 +322,9 @@ function CreateRestaurant() {
                         onChange={(e) => setCover_image(e.target.value)}
                         required
                         />
+                        {errors.includes("Invalid image URL") && (
+                        <span className='error'>Invalid image URL (must end in .jpg, .pgn, or .gif)</span>
+                        )}
                     </label>
                 </div>
                 <button className='create-button' type="submit">Add Restaurant</button>
@@ -307,3 +334,4 @@ function CreateRestaurant() {
 }
 
 export default CreateRestaurant;
+
