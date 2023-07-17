@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: c9c9a8d7a3c0
+Revision ID: f9bc4ba66ece
 Revises: 
-Create Date: 2023-07-16 18:44:37.732888
+Create Date: 2023-07-17 12:02:01.626885
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'c9c9a8d7a3c0'
+revision = 'f9bc4ba66ece'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -29,8 +29,7 @@ def upgrade():
     sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.Column('updated_at', sa.DateTime(), nullable=True),
     sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('email'),
-    sa.UniqueConstraint('phone_number')
+    sa.UniqueConstraint('email')
     )
     op.create_table('restaurants',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -45,7 +44,7 @@ def upgrade():
     sa.Column('country', sa.String(length=30), nullable=False),
     sa.Column('cuisine_type', sa.String(length=30), nullable=False),
     sa.Column('price_range', sa.Integer(), nullable=False),
-    sa.Column('phone_number', sa.Integer(), nullable=False),
+    sa.Column('phone_number', sa.String(), nullable=False),
     sa.Column('open_hours', sa.String(length=8), nullable=True),
     sa.Column('closing_hours', sa.String(length=8), nullable=True),
     sa.Column('created_at', sa.DateTime(), nullable=True),
