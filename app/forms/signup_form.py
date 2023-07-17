@@ -32,6 +32,6 @@ class SignUpForm(FlaskForm):
     first_name = StringField('first name', validators=[DataRequired()])
     last_name = StringField('last name', validators=[DataRequired()])
     email = StringField('email', validators=[DataRequired(), Email(), user_exists])
-    phone_number = IntegerField('phone number', validators=[DataRequired(message="Phone number must be digits only"), phone_number_format])
+    phone_number = StringField('phone number', validators=[DataRequired(message="Phone number must be digits only"), phone_number_format])
     password = StringField('password', validators=[DataRequired()])
     owner = BooleanField('owner')

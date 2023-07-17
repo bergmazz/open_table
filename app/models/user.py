@@ -14,7 +14,7 @@ class User(db.Model, UserMixin):
     first_name = db.Column(db.String(40), nullable=False)
     last_name = db.Column(db.String(40), nullable=False)
     email = db.Column(db.String(255), nullable=False, unique=True)
-    phone_number = db.Column(db.Integer, nullable=False, unique=True)
+    phone_number = db.Column(db.String, nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
     owner = db.Column(db.Boolean, default=False)
     created_at = db.Column(db.DateTime, default= datetime.utcnow)
