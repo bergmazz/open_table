@@ -25,7 +25,7 @@ def num_exists(form, field):
     phone_number = field.data
     user = User.query.filter(User.phone_number == phone_number).first()
     if user:
-        raise ValidationError(Phone number is already in use.')
+        raise ValidationError('Phone number is already in use.')
 
 def phone_number_valid(form, field):
     #Don't allow leading zeros or ones
