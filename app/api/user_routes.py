@@ -39,7 +39,7 @@ def get_user_restaurant():
 def get_user_reservation():
     curr_user_id = current_user.id
     reservations = db.session.query(Reservation).filter(
-        Reservation.user_id == curr_user_id).all()
+        Reservation.user_id == curr_user_id).order_by(Reservation.reservation_time).all()
     for reservation in reservations:
         reservation.status = reservation.status.lower()
         # print(reservation.id, "---------datetime:", datetime.utcnow().date())
