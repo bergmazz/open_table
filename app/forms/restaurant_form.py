@@ -11,14 +11,14 @@ def phone_number_format(form, field):
     if not re.match(r'^\d{10}$', str(phone_number)):
         raise ValidationError('Phone number must be 10 digits long.')
 
-def phone_number_valid(form, field):
-    #Don't allow leading zeros
-    phone_number = field.data
-    area_code = int(phone_number[:3])
-    # print("---------------phone:", phone_number)
-    # print("---------------area:",area_code)
-    if area_code < 200:
-        raise ValidationError('Please enter a valid US phone number, starting with an area code between 2 and 9.')
+# def phone_number_valid(form, field):
+#     #Don't allow leading zeros
+#     phone_number = field.data
+#     area_code = int(phone_number[:3])
+#     # print("---------------phone:", phone_number)
+#     # print("---------------area:",area_code)
+#     if area_code < 200:
+#         raise ValidationError('Please enter a valid US phone number, starting with an area code between 2 and 9.')
 
 
 def validate_time_format(form, field):
@@ -48,7 +48,7 @@ class RestaurantForm(FlaskForm):
         ("Greek", "Greek")
     ], validators=[DataRequired(), AnyOf(["Italian", "Chinese", "Mexican", "Japanese", "American", "Indian", "Thai", "Spanish", "Ethiopian",  "Greek"])])
     price_range = SelectField("Price Range", choices=[(1, '$'), (2, '$$'), (3, '$$$'), (4, '$$$$')], coerce=int, validators=[DataRequired()])
-    phone_number = StringField("Phone Number", validators=[DataRequired(), phone_number_format, phone_number_valid])
+    phone_number = StringField("Phone Number", validators=[DataRequired(), phone_number_format])
     open_hours = StringField("Open Hours", validators=[DataRequired(), validate_time_format, Length(max=8)])
     closing_hours = StringField("Closing Hours", validators=[DataRequired(), validate_time_format, Length(max=8)])
     submit = SubmitField("Submit")

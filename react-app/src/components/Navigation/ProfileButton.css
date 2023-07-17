@@ -46,6 +46,7 @@
   text-decoration: none;
   color: #333;
   align-items: center;
+  list-style: none;
 }
 
 .dropdown-item-profile {
