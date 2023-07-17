@@ -19,13 +19,13 @@ def username_exists(form, field):
     user = User.query.filter(User.username == username).first()
     if user:
         raise ValidationError('Username is already in use.')
-        
-def num_exists(form, field):
-    # Checking if num exists
-    phone_number = field.data
-    user = User.query.filter(User.phone_number == phone_number).first()
-    if user:
-        raise ValidationError('Phone number is already in use.')
+## Someone please find the typo in this:        
+# def num_exists(form, field):
+#     # Checking if num exists
+#     phone_number = field.data
+#     user = User.query.filter(User.phone_number == phone_number).first()
+#     if user:
+#         raise ValidationError('Phone number is already in use.')
 
 def phone_number_valid(form, field):
     #Don't allow leading zeros or ones
