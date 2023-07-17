@@ -23,7 +23,7 @@ def username_exists(form, field):
 def num_exists(form, field):
     # Checking if num exists
     phonenumber = field.data
-    user = User.query.filter(User. phone_number == phonenumber).first()
+    user = User.query.filter(User.phone_number == phonenumber).first()
     if user:
         raise ValidationError(Phone number is already in use.')
 
