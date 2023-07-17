@@ -140,7 +140,7 @@ function CreateRestaurant() {
                         Phone Number
                         <input
                         className='create-input'
-                        type='number'
+                        type='text'
                         value={phone_number}
                         onChange={(e) => setPhone_number(e.target.value)}
                         required
