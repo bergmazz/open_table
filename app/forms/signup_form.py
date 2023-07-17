@@ -20,12 +20,12 @@ def username_exists(form, field):
     if user:
         raise ValidationError('Username is already in use.')
 ## Someone please find the typo in this then add  num_exists to validators list:        
-# def num_exists(form, field):
-#     # Checking if num exists
-#     phone_number = field.data
-#     user = User.query.filter(User.phone_number == phone_number).first()
-#     if user:
-#         raise ValidationError('Phone number is already in use.')
+def num_exists(form, field):
+    # Checking if num exists
+    phone_number = field.data
+    user = User.query.filter(User.phone_number == phone_number).first()
+    if user:
+        raise ValidationError('Phone number is already in use.')
 
 def phone_number_valid(form, field):
     #Don't allow leading zeros or ones
@@ -49,6 +49,6 @@ class SignUpForm(FlaskForm):
     first_name = StringField('first name', validators=[DataRequired()])
     last_name = StringField('last name', validators=[DataRequired()])
     email = StringField('email', validators=[DataRequired(), Email(), user_exists])
-    phone_number = StringField('phone number', validators=[DataRequired(message="Phone number must be digits only"), phone_number_format, phone_number_valid])
+    phone_number = StringField('phone number', validators=[DataRequired(message="Phone number must be digits only"), phone_number_format, phone_number_valid, num_exists])
     password = StringField('password', validators=[DataRequired()])
     owner = BooleanField('owner')
