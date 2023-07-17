@@ -38,7 +38,7 @@ def get_user_restaurant():
 @user_routes.route('/reservations')
 def get_user_reservation():
     curr_user_id = current_user.id
-    reservations = db.session.query(Reservation).filter(
+    reservations = db.session.query(Reservation).order_by(Reservation.reservation_time).filter(
         Reservation.user_id == curr_user_id).all()
     for reservation in reservations:
         reservation.status = reservation.status.lower()
