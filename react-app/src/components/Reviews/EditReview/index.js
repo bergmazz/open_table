@@ -25,22 +25,26 @@ export default function EditReviewForm({ review }) {
     const starArr = ["", "", "", "", ""];
 
     const isImageURL = (url) => {
-      return /\.(png|jpe?g|gif)$/i.test(url);
+      return /\.(png|jpe?g)$/i.test(url);
     };
 
 
     useEffect(() => {
         const errors = [];
 
-        if (comment.length < 10 || rating < 1) {
+        if (comment.length < 10 || comment.length > 500 || rating < 1) {
         setEmptyField(true);
         } else setEmptyField(false)
 
         if (review_image) {
           if (!isImageURL(review_image)) {
-            errors.review_image = "Invalid Image URL. Please provide a valid image url.";
+            errors.review_image = "Please provide a valid image url ending in .png, .jpg, or .jpeg";
           }
         }
+        if (comment.length > 500) {
+          errors.comment = 'Review must be between 10 and 500 characters'
+        }
+
         setErrors(errors);
 
     }, [comment, rating, review_image]);
@@ -85,6 +89,7 @@ export default function EditReviewForm({ review }) {
         value={comment}
         onChange={(e) => setComment(e.target.value)}
       />
+      {<span className="error">{errors.comment}</span>}
       <textarea
           className="editReview-image"
           placeholder="Image URL"
@@ -107,7 +112,7 @@ export default function EditReviewForm({ review }) {
             onMouseEnter={() => setHover(index)}
             onMouseLeave={() => setHover(rating)}
             >
-            <i className={index <= (hover || rating) ? 'fa-solid fa-star' : 'fa-regular fa-star'}></i>
+            <i className={index <= (hover || rating) ? 'fa-solid fa-star solid-star' : 'fa-regular fa-star hollow-star'}></i>
             </button>
           );
         })}

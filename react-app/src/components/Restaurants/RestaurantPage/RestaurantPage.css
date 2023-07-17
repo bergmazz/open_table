@@ -5,47 +5,56 @@
   grid-template-areas:
   ". restaurant-container .";
   background-color: #f7f7f7;
-
-}
-
-
-.restaurant-container {
-    /* max-width: 1600px; */
-    margin: auto;
-    grid-area: restaurant-container;
-    font-family: sans-serif;
-    width: 100%;
-    display: grid;
-    grid-template-columns: 0.9fr 2.5fr 0.15fr 1.2fr 0.9fr;
-    grid-template-rows: 375px auto auto auto auto;
-    gap: 0px 0px;
-    grid-auto-flow: row;
-    grid-template-areas:
-      "restaurant-cover-image restaurant-cover-image restaurant-cover-image restaurant-cover-image restaurant-cover-image"
-      ". restaurant-column1 . restaurant-column2 ."
-      ". restaurant-column1 . restaurant-column2 ."
-      ". restaurant-column1 . restaurant-column2 .";
-      background-color: white;
-
-}
-
-.restaurant-cover-image {
-    grid-area: restaurant-cover-image;
-    /* background-color: lightblue; */
-    background-color: white;
-    position: relative;
-    z-index: 0;
-}
-
-
-.restaurant-image-cover {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-
-}
-
-.fav-button {
+  
+  
+  }
+  
+  
+  
+  
+  .restaurant-container {
+  /* max-width: 1600px; */
+  margin: auto;
+  grid-area: restaurant-container;
+  font-family: sans-serif;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 0.9fr 2.5fr 0.15fr 1.2fr 0.9fr;
+  grid-template-rows: 375px auto auto auto auto;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+  "restaurant-cover-image restaurant-cover-image restaurant-cover-image restaurant-cover-image restaurant-cover-image"
+  ". restaurant-column1 . restaurant-column2 ."
+  ". restaurant-column1 . restaurant-column2 ."
+  ". restaurant-column1 . restaurant-column2 .";
+  background-color: white;
+  
+  
+  }
+  
+  
+  .restaurant-cover-image {
+  grid-area: restaurant-cover-image;
+  /* background-color: lightblue; */
+  background-color: white;
+  position: relative;
+  z-index: 0;
+  }
+  
+  
+  
+  
+  .restaurant-image-cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  
+  
+  }
+  
+  
+  .fav-button {
   border-radius: 4px;
   position: absolute;
   top: 10%;
@@ -54,161 +63,184 @@
   color: red;
   border: none;
   padding: 10px 20px;
-}
-
-.fav-button:hover {
+  }
+  
+  
+  .fav-button:hover {
   /* background-color: rgb(251, 243, 243); */
   border: red thin solid;
-}
-
-
-.restaurant-column1 {
-    z-index: 1;
-    grid-area: restaurant-column1;
-    background-color: white;
-    margin-top: -50px;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 62px 100px 20px auto;
-    grid-template-areas:
-      "restaurant-links"
-      "restaurant-name"
-      "random-box"
-      "restaurant-reviews";
-    padding-left: 15px;
-    padding-right: 15px;
-    border-radius: 4px;
-    gap: 0px;
-    /* border: 2px solid red; */
-}
-
-.restaurant-links{
-    grid-area: restaurant-links;
-    height: 50px;
-    background-color: white;
-    display: flex;
-    flex-direction: row;
-    list-style: none;
-    gap: 20px;
-    justify-content: flex-start;
-    align-items: center;
-    padding-left: 0px;
-    font-size: 12px;
-    color: lightgray;
-    border-bottom: solid lightgray thin;
-    position: -webkit-sticky;
-    position: sticky;
-    top: 0;
-
-}
-
-.restaurant-name {
-    grid-area: restaurant-name;
-    font-size: 40px;
-    color: #333;
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-    border-bottom: solid lightgray thin;
-}
-
-.random-box {
-    grid-area: random-box;
-    /* border: 3px solid red; */
-    /* background-color: bisque; */
-    display: flex;
-    /* grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr 2fr;
-    grid-template-areas:
-        "ratings-average-bar"
-        "top-tags"
-        "restaurant-description"; */
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr;
-    grid-template-areas:
-        "ratings-average-bar";
-    font-size: 12px;
-    /* border: 5px solid red; */
-    /* border-bottom: solid lightgray thin; */
-}
-
-.ratings-average-bar {
-    grid-area: ratings-average-bar;
-    display: grid;
-    /* background-color: yellow; */
-    grid-template-columns: 1fr 1fr 1fr 1fr 0.2fr;
-    grid-template-rows: 1fr;
-    grid-template-areas:
-        "ratings review-summary money cuisine-type .";
-}
-.ratings {
+  }
+  
+  
+  
+  
+  .restaurant-column1 {
+  z-index: 1;
+  grid-area: restaurant-column1;
+  background-color: white;
+  margin-top: -50px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 62px 100px 20px auto;
+  grid-template-areas:
+  "restaurant-links"
+  "restaurant-name"
+  "random-box"
+  "restaurant-reviews";
+  padding-left: 15px;
+  padding-right: 15px;
+  border-radius: 4px;
+  gap: 0px;
+  /* border: 2px solid red; */
+  }
+  
+  
+  .restaurant-links{
+  grid-area: restaurant-links;
+  height: 50px;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  gap: 20px;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 0px;
+  font-size: 12px;
+  color: lightgray;
+  border-bottom: solid lightgray thin;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  
+  
+  }
+  
+  
+  .restaurant-name {
+  grid-area: restaurant-name;
+  font-size: 40px;
+  color: #333;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  border-bottom: solid lightgray thin;
+  font-family: Marker Felt, fantasy;
+  }
+  
+  
+  .random-box {
+  grid-area: random-box;
+  /* border: 3px solid red; */
+  /* background-color: bisque; */
+  display: flex;
+  /* grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr 2fr;
+  grid-template-areas:
+  "ratings-average-bar"
+  "top-tags"
+  "restaurant-description"; */
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  grid-template-areas:
+  "ratings-average-bar";
+  font-size: 12px;
+  /* border: 5px solid red; */
+  /* border-bottom: solid lightgray thin; */
+  }
+  
+  
+  .ratings-average-bar {
+  grid-area: ratings-average-bar;
+  display: grid;
+  /* background-color: yellow; */
+  grid-template-columns: 1fr 1fr 1fr 1fr 0.2fr;
+  grid-template-rows: 1fr;
+  grid-template-areas:
+  "ratings review-summary money cuisine-type .";
+  }
+  .ratings {
   grid-area: ratings;
   /* background-color: rgb(85, 25, 145); */
   display: grid;
   grid-template-columns: 1.6fr 1fr;
   grid-template-rows: 1fr;
   grid-template-areas:
-    "star-row number-rating";
+  "star-row number-rating";
   color: red;
-
-}
-
+  
+  
+  }
+  
+  
   .number-rating {
-    grid-area: number-rating;
-    color: black;
-    /* background-color: pink; */
+  grid-area: number-rating;
+  color: black;
+  /* background-color: pink; */
   }
-
+  
+  
   .star-row {
-    grid-area: star-row;
-    /* background-color: aquamarine; */
+  grid-area: star-row;
+  /* background-color: aquamarine; */
   }
-
-
+  
+  
+  
+  
   .review-summary {
-    grid-area: review-summary;
-    /* background-color: azure; */
-    color: #333;
+  grid-area: review-summary;
+  /* background-color: azure; */
+  color: #333;
   }
-
+  
+  
   .money {
-    grid-area: money;
-    /* background-color: blueviolet; */
+  grid-area: money;
+  /* background-color: blueviolet; */
   }
-
-.cuisine-type {
-    grid-area: cuisine-type;
-    /* margin-left: 10px; */
-    /* background-color: peru; */
-}
-
-
-.top-tags {
-    grid-area: top-tags;
-    /* background-color: green; */
-}
-
-.restaurant-description {
-    grid-area: restaurant-description;
-    /* background-color: aqua; */
-}
-
-
-
-#restaurant-reviews {
-    grid-area: restaurant-reviews;
-    border-top: 1px solid lightgrey;
-    /* background-color: rgb(150, 150, 99); */
-    display: grid;
-    margin-top: 5px;
-    grid-template-columns: 1fr;
-    grid-template-rows: 50px auto;
-    grid-template-areas:
-        "reviews-bar"
-        "reviews-area";
-}
-
-.reviews-bar {
+  
+  
+  .cuisine-type {
+  grid-area: cuisine-type;
+  /* margin-left: 10px; */
+  /* background-color: peru; */
+  }
+  
+  
+  
+  
+  .top-tags {
+  grid-area: top-tags;
+  /* background-color: green; */
+  }
+  
+  
+  .restaurant-description {
+  grid-area: restaurant-description;
+  /* background-color: aqua; */
+  }
+  
+  
+  
+  
+  
+  
+  #restaurant-reviews {
+  grid-area: restaurant-reviews;
+  border-top: 1px solid lightgrey;
+  /* background-color: rgb(150, 150, 99); */
+  display: grid;
+  margin-top: 5px;
+  grid-template-columns: 1fr;
+  grid-template-rows: 50px auto;
+  grid-template-areas:
+  "reviews-bar"
+  "reviews-area";
+  }
+  
+  
+  .reviews-bar {
   grid-area: reviews-bar;
   display: grid;
   font-size: 15px;
@@ -220,25 +252,29 @@
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr;
   grid-template-areas:
-    "total-restaurant-reviews sort-reviews";
-}
-
-.total-restaurant-reviews {
+  "total-restaurant-reviews sort-reviews";
+  }
+  
+  
+  .total-restaurant-reviews {
   grid-area: total-restaurant-reviews;
   /* background-color: orange; */
-}
-
-.sort-reviews {
+  }
+  
+  
+  .sort-reviews {
   grid-area: sort-reviews;
   /* background-color: purple; */
-}
-
-.reviews-area {
+  }
+  
+  
+  .reviews-area {
   grid-area: reviews-area;
   /* border: 3px solid green */
-}
-
-.individual-review {
+  }
+  
+  
+  .individual-review {
   display: grid;
   /* border: 2px solid red; */
   grid-area: individual-review;
@@ -246,81 +282,106 @@
   grid-gap: 10px;
   padding: 10px;
   border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  box-shadow: 0 0 10px rgba(0,0,0,1);
   background-color: white;
   grid-template-rows: auto;
-  grid-template-areas:
-    "user-section review-section";
-}
-
-.review-comment2 {
+  grid-template-areas: "user-section review-section";
+  margin: 5px 0px 30px -10px ;
+  width: 103%;
+  border: solid crimson thin ;
+  }
+  
+  
+  .username, .date {
+  font-weight: bolder;
   font-size: 15px;
+  color: gray;
+  font-family: Marker Felt, fantasy;
+  }
+  
+  
+  
+  
+  .review-comment2 {
+  font-size: 15px;
+  font-family: Comic Sans MS, Comic Sans, cursive;
   color: #333;
   line-height: 1.5;
-}
-
-.review-image-container2 {
-  width: 100px;
-  height: 100px;
-  border-radius: 4px;
-  overflow: hidden;  /* Ensures the image fits within the container */
-}
-
-.review-image2 {
+  }
+  
+  
+  .review-image-container2 {
   width: 100%;
   height: 100%;
-  object-fit: cover;  /* Ensures the image covers the whole area of the container */
-}
-
-.review-stars {
+  border: solid crimson thin;
+  box-shadow: 0 0 10px rgba(0,0,0,1);
+  border-radius: 4px;
+  overflow: hidden;/* Ensures the image fits within the container */
+  }
+  
+  
+  
+  
+  .review-image2 {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures the image covers the whole area of the container */
+  }
+  
+  
+  .review-stars {
   margin-top: 10px;
-  font-size: 16px;
-}
-
-.user-section {
+  font-size: 10px;
+  }
+  
+  
+  .user-section {
   grid-area: user-section;
   font-size: 12px;
   color: #777;
   margin-bottom: 10px;
   /* background-color: aquamarine; */
-}
-
-.review-section {
+  }
+  
+  
+  .review-section {
   grid-area: review-section;
   /* background-color: aliceblue; */
-}
-
-.restaurant-column2 {
-    grid-area: restaurant-column2;
-    background-color: white;
-    margin-top: -50px;
-    border-radius: 4px;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 260px 175px 400px auto;
-    grid-template-areas:
-    "reservation-box"
-    "restaurant-details-box"
-    "map-container"
-    "delivery-box";
-    gap: 15px;
-    z-index: 2;
-    /* border: 3px solid red; */
-}
-
-.reservation-box {
+  }
+  
+  
+  .restaurant-column2 {
+  grid-area: restaurant-column2;
+  background-color: white;
+  margin-top: -50px;
+  border-radius: 4px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 260px 175px 400px auto;
+  grid-template-areas:
+  "reservation-box"
+  "restaurant-details-box"
+  "map-container"
+  "delivery-box";
+  gap: 15px;
+  z-index: 2;
+  /* border: 3px solid red; */
+  }
+  
+  
+  .reservation-box {
   display: grid;
   height: 225px;
   grid-area: reservation-box;
   grid-template-columns: 1fr;
   grid-template-rows: 1.5fr 1fr 1fr 2fr 2fr 1fr;
   grid-template-areas:
-    "make-res"
-    "party-size"
-    "party-select"
-    "res-time"
-    "find-time"
-    "times-booked";
+  "make-res"
+  "party-size"
+  "party-select"
+  "res-time"
+  "find-time"
+  "times-booked";
   border-radius: 4px;
   box-shadow: 0px 2px 3px 0px rgba(181, 181, 180, 0.438);
   padding: 10px;
@@ -330,9 +391,10 @@
   top: -62px;
   background-color: white;
   /* border: 4px solid red; */
-}
-
-.make-res-header {
+  }
+  
+  
+  .make-res-header {
   grid-area: make-res;
   margin-bottom: 13px;
   color: #333;
@@ -343,15 +405,17 @@
   align-items: center;
   /* border-bottom: solid lightgray thin; */
   border-radius: 4px;
-}
-
-.separator {
+  }
+  
+  
+  .separator {
   height: 1px;
   background-color: lightgray;
   margin: 5px 0;
-}
-
-.party-size, .date-header, .time-header {
+  }
+  
+  
+  .party-size, .date-header, .time-header {
   grid-area: party-size;
   /* background-color: blue; */
   font-size: 11px;
@@ -359,9 +423,10 @@
   align-items: center;
   color: #333;
   font-weight: bold;
-}
-
-.party-select {
+  }
+  
+  
+  .party-select {
   grid-area: party-select;
   width: 100%;
   margin-top: 15px;
@@ -369,166 +434,201 @@
   color: #333;
   border: none;
   /* background-color: yellow; */
-}
-
-.res-time {
+  }
+  
+  
+  .res-time {
   grid-area: res-time;
   /* background-color: blueviolet; */
-}
-
-.find-time {
+  }
+  
+  
+  .find-time {
   grid-area: find-time;
   /* background-color: rosybrown; */
-}
-
-.times-booked {
+  }
+  
+  
+  .times-booked {
   grid-area: times-booked;
   /* background-color: aqua; */
-}
-
-.delivery-box {
+  }
+  
+  
+  .delivery-box {
   grid-area: delivery-box;
   /* background-color: white; */
   border-radius: 4px;
   box-shadow: 0px 2px 3px 0px rgba(181, 181, 180, 0.438);
-}
-
-.map-container {
+  }
+  
+  
+  .map-container {
   grid-area: map-container;
   background-color: yellow;
-}
-
-.restaurant-details-box {
+  }
+  
+  
+  .restaurant-details-box {
   grid-area: restaurant-details-box;
   /* background-color: red; */
-}
-
-.review-rating {
+  }
+  
+  
+  .review-rating {
   color: crimson;
   font-size: large;
-}
-
-
-@media only screen and (max-width: 1055px) {
+  }
+  
+  
+  
+  
+  @media only screen and (max-width: 1055px) {
   /* For mobile phones: */
   [class*="column"] {
-    /* background-color: yellowgreen; */
-    width: 100%;
+  /* background-color: yellowgreen; */
+  width: 100%;
   }
-}
-
-.fa-star, .fa-star-half-stroke {
+  }
+  
+  
+  .fa-star, .fa-star-half-stroke {
   font-size: 10px;
   color: crimson;
-}
-
-.fa-message {
+  }
+  
+  
+  .fa-message {
   font-size: 12px;
   /* font-weight: bold; */
-}
-
-.fa-money-bill-1 {
+  }
+  
+  
+  .fa-money-bill-1 {
   font-size: 13px;
   /* font-weight: bold; */
-}
-
-.fa-utensils {
+  }
+  
+  
+  .fa-utensils {
   font-size: 12px;
   /* font-weight: bold; */
-}
-
-.edit-review-res-button {
+  }
+  
+  
+  .edit-review-res-button {
   /* width: 100%; */
-    margin-top: 3px;
-    margin-left: 2px;
-    padding: 2px;
-    border: none;
-    border-radius: 5px;
-    background-color: #007BFF;
-    color: #fff;
-    font-size: 1em;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.del-review-res-button {
+  margin-top: 3px;
+  margin-left: 2px;
+  padding: 2px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007BFF;
+  color: #fff;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  }
+  
+  
+  .del-review-res-button {
   /* width: 100%; */
-    margin-top: 3px;
-    margin-left: 10px;
-    padding: 2px;
-    border: none;
-    border-radius: 5px;
-    background-color: #007BFF;
-    color: #fff;
-    font-size: 1em;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.del-review-res-button:hover {
+  margin-top: 3px;
+  margin-left: 10px;
+  padding: 2px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007BFF;
+  color: #fff;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  }
+  
+  
+  .del-review-res-button:hover {
   background-color: #e03b3b;
-}
-
-
-.review-modal-buttons {
+  box-shadow: 0 0 15px rgb(241, 5, 5);
+  }
+  
+  
+  .edit-review-res-button:hover {
+  border: solid #007BFF;
+  box-shadow: 0 0 15px #007BFF;
+  }
+  
+  
+  
+  
+  .review-modal-buttons {
   display: flex;
   justify-content: flex-end;
   padding: 10px 0;
-}
-
-.details-header h2 {
+  }
+  
+  
+  .details-header h2 {
   color: #333;
   font-size: 20px;
   font-weight: bold;
   margin-bottom: 10px;
-}
-
-.details-container {
+  }
+  
+  
+  .details-container {
   background-color: white;
   padding: 20px;
   border-radius: 4px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   margin-bottom: 20px;
-}
-
-.detail-item {
-  margin-bottom: 20px; 
-}
-
-.detail-item h3 {
+  }
+  
+  
+  .detail-item {
+  margin-bottom: 20px;
+  }
+  
+  
+  .detail-item h3 {
   display: flex;
   align-items: center;
   color: #333333;
   margin-bottom: 10px;
-}
-
-.detail-item p {
+  }
+  
+  
+  .detail-item p {
   font-size: 14px;
   color: rgb(144, 144, 144);
   margin-left: 25px;
-}
-
-.detail-item h3 i {
+  }
+  
+  
+  .detail-item h3 i {
   margin-right: 10px;
   font-size: 15px;
   display: flex;
   justify-content: flex-start;
   color: #da3743;
-}
-
-.sub-detail-item h4 {
+  }
+  
+  
+  .sub-detail-item h4 {
   display: flex;
   align-items: center;
   color: #333333;
   margin-bottom: 10px;
   margin-left: 24px;
-}
-
-.active-price2 {
+  }
+  
+  
+  .active-price2 {
   color: rgb(144, 144, 144);;
   margin-left: 29px;
-}
-
-.inactive-price2 {
-  color: rgb(232, 232, 232); 
-}
+  }
+  
+  
+  .inactive-price2 {
+  color: rgb(232, 232, 232);
+  }
+  

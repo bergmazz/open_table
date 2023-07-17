@@ -24,7 +24,7 @@ export default function CreateReviewModal({ reservation }) {
   const starArr = ["", "", "", "", ""];
 
   const isImageURL = (url) => {
-    return /\.(png|jpe?g|gif)$/i.test(url);
+    return /\.(png|jpe?g)$/i.test(url);
   };
 
 
@@ -32,7 +32,7 @@ export default function CreateReviewModal({ reservation }) {
   useEffect(() => {
     const errors = [];
 
-    if (comment.length < 10 || rating < 1) {
+    if (comment.length < 10 || comment.length > 500 || rating < 1) {
       setEmptyField(true);
     } else setEmptyField(false)
 
@@ -40,6 +40,9 @@ export default function CreateReviewModal({ reservation }) {
       if (!isImageURL(review_image)) {
         errors.review_image = "Invalid Image URL. Please provide a valid image url.";
       }
+    }
+    if (comment.length > 500) {
+      errors.comment = 'Review must be between 10 and 500 characters'
     }
     setErrors(errors);
 
@@ -81,6 +84,7 @@ export default function CreateReviewModal({ reservation }) {
         value={comment}
         onChange={(e) => setComment(e.target.value)}
       />
+      {<span className="error">{errors.comment}</span>}
       <textarea
         className="review-image"
         placeholder="Image URL"
