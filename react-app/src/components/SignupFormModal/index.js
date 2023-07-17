@@ -18,30 +18,61 @@ function SignupFormModal() {
 	const [errors, setErrors] = useState([]);
 	const { closeModal } = useModal();
 
+	// const handleSubmit = async (e) => {
+	// 	e.preventDefault();
+	// 	if (password === confirmPassword) {
+	// 		const data = await dispatch(signUp(first_name, last_name, email, phone_number, password, owner));
+	// 		if (data) {
+	// 			setErrors(data);
+	// 		} else {
+	// 			if (owner) {
+	// 				const createRestaurant = window.confirm("Do you want to create a restaurant?")
+	// 				if (createRestaurant) {
+
+	// 					history.push("/new-restaurant");
+	// 				} else {
+	// 					history.push("/");
+	// 				}
+	// 			} else {
+	// 				history.push("/");
+	// 			}
+	// 			closeModal();
+	// 		}
+	// 	} else {
+	// 		setErrors([
+	// 			"Confirm Password field must be the same as the Password field",
+	// 		]);
+	// 	}
+	// };
+
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		if (password === confirmPassword) {
-			const data = await dispatch(signUp(first_name, last_name, email, phone_number, password, owner));
-			if (data) {
-				setErrors(data);
-			} else {
-				if (owner) {
-					const createRestaurant = window.confirm("Do you want to create a restaurant?")
-					if (createRestaurant) {
-
-						history.push("/new-restaurant");
-					} else {
-						history.push("/");
-					}
+		let errors = [];
+		if (!/^[2-9]/.test(phone_number)) {
+			errors.push('Phone number must start with a digit between 2 and 9');
+		}
+		if (password !== confirmPassword) {
+			errors.push("Confirm Password field must be the same as the Password field");
+		}
+		if (errors.length > 0) {
+			setErrors(errors);
+			return;
+		}
+		const data = await dispatch(signUp(first_name, last_name, email, phone_number, password, owner));
+		if (data) {
+			setErrors(data);
+		} else {
+			if (owner) {
+				const createRestaurant = window.confirm("Do you want to create a restaurant?")
+				if (createRestaurant) {
+					history.push("/new-restaurant");
 				} else {
 					history.push("/");
 				}
-				closeModal();
+			} else {
+				history.push("/");
 			}
-		} else {
-			setErrors([
-				"Confirm Password field must be the same as the Password field",
-			]);
+			closeModal();
 		}
 	};
 

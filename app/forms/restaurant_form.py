@@ -38,7 +38,7 @@ class RestaurantForm(FlaskForm):
         ("Greek", "Greek")
     ], validators=[DataRequired(), AnyOf(["Italian", "Chinese", "Mexican", "Japanese", "American", "Indian", "Thai", "Spanish", "Ethiopian",  "Greek"])])
     price_range = SelectField("Price Range", choices=[(1, '$'), (2, '$$'), (3, '$$$'), (4, '$$$$')], coerce=int, validators=[DataRequired()])
-    phone_number = IntegerField("Phone Number", validators=[DataRequired(), phone_number_format])
+    phone_number = StringField("Phone Number", validators=[DataRequired(), phone_number_format])
     open_hours = StringField("Open Hours", validators=[DataRequired(), validate_time_format, Length(max=8)])
     closing_hours = StringField("Closing Hours", validators=[DataRequired(), validate_time_format, Length(max=8)])
     submit = SubmitField("Submit")

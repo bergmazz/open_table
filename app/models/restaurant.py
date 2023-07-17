@@ -21,7 +21,7 @@ class Restaurant(db.Model, UserMixin):
     country= db.Column(db.String(30), nullable=False)
     cuisine_type= db.Column(db.String(30), nullable=False)
     price_range= db.Column(db.Integer, nullable=False)
-    phone_number = db.Column(db.Integer, nullable=False, unique=True)
+    phone_number = db.Column(db.String, nullable=False, unique=True)
     open_hours = db.Column(db.String(8))
     closing_hours = db.Column(db.String(8))
     created_at = db.Column(db.DateTime, default= datetime.utcnow)
