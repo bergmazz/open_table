@@ -250,7 +250,7 @@ const ReservationForm = () => {
 
                 <button className="book-button" type="submit" onClick={ handleAddPoints } >Book Table</button>
                 <ul>
-                    { errors.map( ( error, idx ) => <li key={ idx }>{ error }</li> ) }
+                    { errors.map( ( error, idx ) => <li className="owner-error" key={ idx }>{ error }</li> ) }
                 </ul>
 
             </form>

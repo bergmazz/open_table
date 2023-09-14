@@ -97,13 +97,13 @@ function UserProfile() {
     return (
         <div className="user">
             <div className="extends-nav-height">
-                <h2>{currentUser.firstName}{" "}{currentUser.lastName}</h2>
-                <h4>{points} points</h4>
+                <h2 className="user-profile-name">{currentUser.firstName}{" "}{currentUser.lastName}</h2>
+                <h4 className="user-profile-points">{points} points</h4>
             </div>
 
             <div className="links">
-                <Link to="/user/restaurants">Owned Restaurants</Link>
-                <Link to="/user/favorites">Favorites</Link>
+                <Link className='button-style user-owned' to="/user/restaurants">Owned Restaurants</Link>
+                <Link className='button-style user-favorite' to="/user/favorites">Favorites</Link>
                 {/* <Link to="/user/details">Account Details</Link> */}
             </div>
 

@@ -29,6 +29,16 @@ border-bottom: solid lightgray thin;
 border-radius: 4px;
 }
 
+.owner-error {
+  background-color: rgba(0, 0, 0, 0.9);
+  color: red;
+  padding: 10px;
+  border-radius: 5px;
+  list-style-type: none; 
+  margin: 10px 0;
+}
+
+
 /* .party-size { */
 /* grid-area: party-size; */
 /* background-color: blue; */

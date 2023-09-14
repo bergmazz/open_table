@@ -120,12 +120,14 @@
   .restaurant-name {
   grid-area: restaurant-name;
   font-size: 40px;
+  font-weight: bold;
   color: #333;
   display: flex;
   align-items: center;
   margin-bottom: 10px;
   border-bottom: solid lightgray thin;
-  font-family: Marker Felt, fantasy;
+
+  /* font-family: Marker Felt, fantasy; */
   }
   
   
@@ -281,22 +283,30 @@
   grid-template-columns: 1fr 4fr;
   grid-gap: 10px;
   padding: 10px;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0,0,0,1);
+  /* border-radius: 5px; */
+  border-top: 2px solid lightgray;
+  /* border-bottom: 2px solid lightgray; */
+  /* box-shadow: 0 0 10px rgba(0,0,0,1); */
   background-color: white;
   grid-template-rows: auto;
   grid-template-areas: "user-section review-section";
   margin: 5px 0px 30px -10px ;
   width: 103%;
-  border: solid crimson thin ;
+  /* border: solid crimson thin ; */
   }
   
   
-  .username, .date {
+  .date {
   font-weight: bolder;
   font-size: 15px;
   color: gray;
-  font-family: Marker Felt, fantasy;
+  /* font-family: Marker Felt, fantasy; */
+  }
+
+  .username {
+    font-weight: bolder;
+    font-size: 15px;
+    color: #333
   }
   
   
@@ -304,7 +314,7 @@
   
   .review-comment2 {
   font-size: 15px;
-  font-family: Comic Sans MS, Comic Sans, cursive;
+  /* font-family: Comic Sans MS, Comic Sans, cursive; */
   color: #333;
   line-height: 1.5;
   }
@@ -313,7 +323,7 @@
   .review-image-container2 {
   width: 100%;
   height: 100%;
-  border: solid crimson thin;
+  /* border: solid crimson thin; */
   box-shadow: 0 0 10px rgba(0,0,0,1);
   border-radius: 4px;
   overflow: hidden;/* Ensures the image fits within the container */

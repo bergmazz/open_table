@@ -12,11 +12,16 @@
 }
 
 .extends-nav-height h4 {
-margin: 1px;
+    margin: 0; 
+    font-size: 18px;
+    color: #555;
 }
 
 .extends-nav-height h2 {
-margin: 1px;
+    margin: 0;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
 }
 
 .links {
@@ -136,4 +141,22 @@ object-fit: cover;
                 border: none;
                     color: white;
                         margin-top: 18px;
+}
+
+.button-style {
+    background-color: rgb(68, 112, 216);
+    color: white;
+    padding: 10px 15px;
+    width: 142px;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    display: inline-block;
+    margin: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button-style:hover {
+    background-color: rgb(48, 92, 196);
 }
