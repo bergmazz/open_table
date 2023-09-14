@@ -106,14 +106,29 @@ const ReservationForm = () => {
         dispatch( { type: "UPDATE_POINTS", points: newPoints } );
     };
 
+    const convertTo24Hour = (time) => {
+        const [hours, minutes] = time.split(':');
+        const period = time.includes('PM') ? 'PM' : 'AM';
+        let hour = parseInt(hours, 10);
+    
+        if (period === 'PM' && hour !== 12) {
+            hour += 12;
+        } else if (period === 'AM' && hour === 12) {
+            hour = 0;
+        }
+    
+        return `${String(hour).padStart(2, '0')}:${minutes.split(' ')[0]}`;
+    };
+
 
     useEffect( () => {
         if ( date && time ) {
-            let dateObject = new Date( `${ date }T${ time }` )
+            const convertedTime = convertTo24Hour(time);
+            let dateObject = new Date( `${ date }T${ convertedTime }` )
             const utcDateTime = dateObject.toISOString();
             console.log( "UTC:", utcDateTime )
             const year = dateObject.getFullYear();
-            const month = `0${ dateObject.getMonth() + 1 }`.slice( -2 ); // Months are zero-indexed, so add 1
+            const month = `0${ dateObject.getMonth() + 1 }`.slice( -2 );
             const day = `0${ dateObject.getDate() }`.slice( -2 );
             const hours = `0${ dateObject.getHours() }`.slice( -2 );
             const minutes = `0${ dateObject.getMinutes() }`.slice( -2 );

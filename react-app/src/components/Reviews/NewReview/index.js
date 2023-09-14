@@ -87,7 +87,7 @@ export default function CreateReviewModal({ reservation }) {
       {<span className="error">{errors.comment}</span>}
       <textarea
         className="review-image"
-        placeholder="Image URL"
+        placeholder="Image URL (must be .jpg, .jpeg, or .png)"
         value={review_image}
         onChange={(e) => setReviewImage(e.target.value)}
       />
