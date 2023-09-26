@@ -49,7 +49,7 @@ export const addFavorites = (userId, restaurantId) => async (dispatch) => {
 }
 
 export const deleteFavorites = (favId, userId) => async (dispatch) => {
-    ("in FELETE THUNKKKK", favId, userId)
+
     const response = await fetch(`/api/user/${userId}/favorites/${favId}`, {
         method: 'DELETE',
     });

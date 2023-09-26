@@ -126,36 +126,32 @@ const ReservationForm = () => {
             const convertedTime = convertTo24Hour(time);
             let dateObject = new Date(`${date}T${convertedTime}`)
             const utcDateTime = dateObject.toISOString();
-            ("UTC:", utcDateTime)
-            const year = dateObject.getFullYear();
-            const month = `0${dateObject.getMonth() + 1}`.slice(-2);
-            const day = `0${dateObject.getDate()}`.slice(-2);
-            const hours = `0${dateObject.getHours()}`.slice(-2);
-            const minutes = `0${dateObject.getMinutes()}`.slice(-2);
-            const seconds = `0${dateObject.getSeconds()}`.slice(-2);
-            setReservationTime(`${year}-${month}-${day} ${hours}:${minutes}:${seconds}`)
-            // setReservationTime( `${ date } ${ time }` )
 
-            // const dateObject = new Date( `${ date }T${ time }` );
-            // const utcDateTime = dateObject.toISOString();
-            // ( "UTC:", utcDateTime )
-            // setReservationTime( utcDateTime );
+            const year = dateObject.getFullYear();
+            const month = `0${ dateObject.getMonth() + 1 }`.slice( -2 );
+            const day = `0${ dateObject.getDate() }`.slice( -2 );
+            const hours = `0${ dateObject.getHours() }`.slice( -2 );
+            const minutes = `0${ dateObject.getMinutes() }`.slice( -2 );
+            const seconds = `0${ dateObject.getSeconds() }`.slice( -2 );
+            setReservationTime( `${ year }-${ month }-${ day } ${ hours }:${ minutes }:${ seconds }` )
+
+
         }
     }, [date, time])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (currentUser) {
-            // ( " reservationTime: ", reservationTime )
-            // ( " numberOfPeople: ", numberOfPeople )
-            // ( " status: ", status )
-            let data = await dispatch(addReservationThunk(
+
+        if ( currentUser ) {
+
+            let data = await dispatch( addReservationThunk(
                 id, numberOfPeople, reservationTime, status, notes
-            ));
-            // ( '-------------data-------', data )
-            if (!data.id) {
-                if (typeof data[0] == "object") {
-                    data = Object.values(data[0])
+            ) );
+  
+            if ( !data.id ) {
+                if ( typeof data[ 0 ] == "object" ) {
+                    data = Object.values( data[ 0 ] )
+
                 }
                 // const errorArray = Object.values( data ).map( ( error ) => error );
                 // setErrors( errorArray );
@@ -168,9 +164,7 @@ const ReservationForm = () => {
             setErrors(['Please create an account']);
         }
     };
-    // if ( restaurant.slots ) {
-    //     ( "restaurant slots:", Object.values( restaurant.slots ) )
-    // }
+
 
     return (
         <div className="reservation-form-container">

@@ -24,20 +24,17 @@ const Favorites = () => {
         </div>
     }
 
-    ("USER", user)
-        ("RESTAURANTS", restaurants)
-        ("FAVS", favorites)
+
 
     let favRestaurants = [];
     if (Object.values(restaurants).length) {
         for (let i = 0; i < favorites.length; i++) {
             let restaurant = Object.values(restaurants).filter(r => r.id === favorites[i].restaurantId);
-            ("innnn", restaurant)
+
             favRestaurants.push(restaurant[0])
         }
     }
 
-    favRestaurants.map(restaurant => { ("restairant, ", restaurant) })
 
     if (user && Object.keys(restaurants) && favorites.length) {
         return (

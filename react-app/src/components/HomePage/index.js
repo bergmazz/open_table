@@ -33,14 +33,13 @@ const HomePage = () => {
 
     const shuffledRestaurants = shuffle(restaurantValues)
     const selectedRestaurants = shuffledRestaurants.slice(0, 12)
-    // ("RANDOM, ", selectedRestaurants)
+
 
 
     useEffect(() => {
         dispatch(getRestaurants(cuisineType, city));
     }, [dispatch, cuisineType, city])
 
-        ("1: IN RESTAURANTS COMPONENT", allRestaurants);
 
 
 

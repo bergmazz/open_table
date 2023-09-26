@@ -57,11 +57,11 @@ function UserProfile() {
     const currentUser = useSelector(state => state.session.user)
     const reservations = useSelector(state => state.reservations.byUser)
     const reviews = currentUser.reviews
-        ("reviews:", reviews)
-    // ("RESERRRVATTIIONNNNS", reservations)
-    // const points = useSelector( ( state ) => state.reservations.points );
+<
+
     const points = reservations.length * 100
-    // ( "---------------byUser state:", reservations )
+
+
     const goal = 5000;
     const progress = Math.min((points / goal) * 100, 100);
 
@@ -69,10 +69,12 @@ function UserProfile() {
     const pastReservations = reservations.filter(res => res.status === "attended");
     const cancelledReservations = reservations.filter(res => res.status === "cancelled");
 
-    if (pastReservations) {
-        for (let reserv of pastReservations) {
-            ("reservation:", Object.values(reserv))
-            reserv["hasReview"] = false
+
+    if ( pastReservations ) {
+        for ( let reserv of pastReservations ) {
+        
+            reserv[ "hasReview" ] = false
+
 
             for (let review of reviews) {
                 if (review.restaurantId === reserv.restaurantId) {
@@ -89,8 +91,10 @@ function UserProfile() {
         <div className='no-user'>
             <h1 className='no-user'>Sorry, you need to log in</h1>
             <Link to="/login" className="page-login-link">
-                <button className="login-signup-button" type="submit">Login</button>
-            </Link>
+
+      <button className="login-signup-button" type="submit">Login</button>
+      </Link>
+
         </div>
     )
 

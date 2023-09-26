@@ -24,9 +24,11 @@ const AllRestaurants = () => {
     }, [dispatch, cuisineType, city]);
 
     if (restaurantValues.length) {
-        ("RESTAURABT--------", restaurantValues)
 
-            ;
+
+
+       
+
 
         function starRating(averageRating) {
             let fullStars = Math.floor(averageRating);

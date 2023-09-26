@@ -46,7 +46,7 @@ function CreateRestaurant() {
     const dispatch = useDispatch();
     const history = useHistory();
     const sessionUser = useSelector(state => state.session.user);
-    ("session user", sessionUser)
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();

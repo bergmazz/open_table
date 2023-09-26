@@ -144,25 +144,29 @@ export const editReservations = (restaurantId, id, number_of_people,
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body:
-                JSON.stringify({
-                    number_of_people,
-                    reservation_time,
-                    status,
-                    notes
-                })
-        });
-        ("res:", res)
 
-        if (res.ok) {
+                JSON.stringify( {
+                number_of_people,
+                reservation_time,
+                status,
+                notes
+            } )
+        } );
+
+
+        if ( res.ok ) {
             const reservation = await res.json();
-            ("----reservation:", reservation)
-            dispatch(editReservation(restaurantId, reservation));
+
+            dispatch( editReservation( restaurantId, reservation ) );
+
             // dispatch( getUserReservation( reservation ) );
             return reservation
         } else {
             const data = await res.json();
-            ("data:", data)
-            return Object.values(data)
+
+
+            return Object.values( data )
+
         }
 
     }
@@ -171,7 +175,7 @@ export const deleteReservations = (reservationId, restaurantId) => async (dispat
     const res = await fetch(`api/restaurants/${restaurantId}/reservations/${reservationId}`, {
         method: 'DELETE'
     });
-    ("ressss", res)
+
     if (res.ok) {
         const deletedReservation = await res.json();
         dispatch(getUserReservations())
@@ -224,8 +228,9 @@ export default function reservationsReducer(state = initialState, action) {
         }
         case DELETE_RESERVATIONS: {
             newState = { ...state }
-                ()
-            newState.byRestaurant[action.restaurantId] = newState.byRestaurant[
+
+            newState.byRestaurant[ action.restaurantId ] = newState.byRestaurant[
+
                 action.restaurantId
             ].filter((reservation) => reservation.id !== action.reservationId);
             return newState;

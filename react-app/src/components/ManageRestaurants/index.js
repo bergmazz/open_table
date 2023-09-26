@@ -25,7 +25,7 @@ const OwnerRestaurant = () => {
 
     const myRestaurants = restaurantValues.filter(restaurant => restaurant.userId == user.id);
 
-    ("hello", myRestaurants)
+
 
     const handleDelete = (restaurantId) => {
         setRestaurantToDelete(restaurantId);

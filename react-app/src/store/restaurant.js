@@ -49,9 +49,11 @@ export const getRestaurants = (type, city) => async (dispatch) => {
         },
     });
     if (response.ok) {
-        ("5: I'm in the right thunk, response ok: ", )
+
+
         const restaurants = await response.json();
-        ("RESTAURANTTTTTTTS:======= ", restaurants)
+
+
         dispatch(getRestaurant(restaurants));
         return restaurants;
     }
