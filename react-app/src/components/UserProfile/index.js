@@ -13,14 +13,14 @@ import DeleteReviewForm from "../Reviews/DeleteReview";
 
 import "./UserProfile.css"
 
-function timeFormat ( reservation ) {
-    const dateArr = reservation.reservationTime.split( " " );
-    // console.log( "date arr ------------", dateArr )
-    const time = dateArr[ 4 ].split( ":" );
-    const amPm = time[ 0 ] >= 12 ? "pm" : "am";
-    const hours = ( ( time[ 0 ] % 12 ) || 12 );
-    const formatTime = hours + ":" + time[ 1 ] + " " + amPm;
-    const formatAll = dateArr[ 0 ] + " " + dateArr[ 2 ] + " " + dateArr[ 1 ] + " " + dateArr[ 3 ] + " " + formatTime
+function timeFormat(reservation) {
+    const dateArr = reservation.reservationTime.split(" ");
+    // ( "date arr ------------", dateArr )
+    const time = dateArr[4].split(":");
+    const amPm = time[0] >= 12 ? "pm" : "am";
+    const hours = ((time[0] % 12) || 12);
+    const formatTime = hours + ":" + time[1] + " " + amPm;
+    const formatAll = dateArr[0] + " " + dateArr[2] + " " + dateArr[1] + " " + dateArr[3] + " " + formatTime
     return formatAll
 }
 
@@ -28,40 +28,40 @@ function UserProfile() {
 
     const dispatch = useDispatch();
     const history = useHistory();
-    const [ showMenu, setShowMenu ] = useState( false );
+    const [showMenu, setShowMenu] = useState(false);
     const ulRef = useRef()
 
-    const closeMenu = ( e ) => {
-        if ( !ulRef.current.contains( e.target ) ) {
-            setShowMenu( false );
+    const closeMenu = (e) => {
+        if (!ulRef.current.contains(e.target)) {
+            setShowMenu(false);
         }
     };
 
-    useEffect( () => {
-        dispatch( authenticate() )
-        dispatch( getUserReservations() );
+    useEffect(() => {
+        dispatch(authenticate())
+        dispatch(getUserReservations());
 
-        if ( !showMenu ) return;
+        if (!showMenu) return;
 
         closeMenu()
-        document.addEventListener( "click", closeMenu );
+        document.addEventListener("click", closeMenu);
 
-        return () => document.removeEventListener( "click", closeMenu );
+        return () => document.removeEventListener("click", closeMenu);
 
-    }, [ dispatch, showMenu ] );
+    }, [dispatch, showMenu]);
 
     useEffect(() => {
         dispatch(getUserReservations());
     }, [dispatch]);
 
     const currentUser = useSelector(state => state.session.user)
-    const reservations = useSelector( state => state.reservations.byUser )
+    const reservations = useSelector(state => state.reservations.byUser)
     const reviews = currentUser.reviews
-    console.log( "reviews:", reviews )
-    // console.log("RESERRRVATTIIONNNNS", reservations)
+        ("reviews:", reviews)
+    // ("RESERRRVATTIIONNNNS", reservations)
     // const points = useSelector( ( state ) => state.reservations.points );
     const points = reservations.length * 100
-    // console.log( "---------------byUser state:", reservations )
+    // ( "---------------byUser state:", reservations )
     const goal = 5000;
     const progress = Math.min((points / goal) * 100, 100);
 
@@ -69,14 +69,14 @@ function UserProfile() {
     const pastReservations = reservations.filter(res => res.status === "attended");
     const cancelledReservations = reservations.filter(res => res.status === "cancelled");
 
-    if ( pastReservations ) {
-        for ( let reserv of pastReservations ) {
-            console.log( "reservation:", Object.values( reserv ) )
-            reserv[ "hasReview" ] = false
+    if (pastReservations) {
+        for (let reserv of pastReservations) {
+            ("reservation:", Object.values(reserv))
+            reserv["hasReview"] = false
 
-            for ( let review of reviews ) {
-                if ( review.restaurantId === reserv.restaurantId ) {
-                    reserv[ "hasReview" ] = true
+            for (let review of reviews) {
+                if (review.restaurantId === reserv.restaurantId) {
+                    reserv["hasReview"] = true
                 }
             }
         }
@@ -89,8 +89,8 @@ function UserProfile() {
         <div className='no-user'>
             <h1 className='no-user'>Sorry, you need to log in</h1>
             <Link to="/login" className="page-login-link">
-      <button className="login-signup-button" type="submit">Login</button> 
-      </Link>
+                <button className="login-signup-button" type="submit">Login</button>
+            </Link>
         </div>
     )
 
@@ -121,71 +121,71 @@ function UserProfile() {
                     <div className="progress" style={{ width: `${progress}%` }}></div>
                 </div>
             </div>
-                <div className="reservations-container">
-                    {
-                        reservations.length ? (
-                            <>
-                                <div>
-                                    <h2>Upcoming Reservations</h2>
-                                    {
-                                        upcomingReservations.length ? (
-                                            upcomingReservations.map((reservation) => (
+            <div className="reservations-container">
+                {
+                    reservations.length ? (
+                        <>
+                            <div>
+                                <h2>Upcoming Reservations</h2>
+                                {
+                                    upcomingReservations.length ? (
+                                        upcomingReservations.map((reservation) => (
 
-                                                <div className="reservation-tile">
-                                                     <Link to={`/restaurants/${reservation.restaurantId}`} key={reservation.restaurantId}>
+                                            <div className="reservation-tile">
+                                                <Link to={`/restaurants/${reservation.restaurantId}`} key={reservation.restaurantId}>
                                                     <img className="reservimg" src={reservation.restaurant[0].coverImage} />
-                                                    </Link>
-                                                    <div className="col2">
-                                                        <p className="reservname">{ reservation.restaurant[ 0 ].restaurantName }</p>
-                                                        <span className="reservuser"><i className="fa-regular fa-user"></i>  { reservation.numberOfPeople } guests </span>
-                                                        <span className="reservtime"><i className="fa-regular fa-calendar"></i>   { timeFormat( reservation ) } </span>
+                                                </Link>
+                                                <div className="col2">
+                                                    <p className="reservname">{reservation.restaurant[0].restaurantName}</p>
+                                                    <span className="reservuser"><i className="fa-regular fa-user"></i>  {reservation.numberOfPeople} guests </span>
+                                                    <span className="reservtime"><i className="fa-regular fa-calendar"></i>   {timeFormat(reservation)} </span>
                                                     <OpenModalButton
                                                         className='edit-reserv'
                                                         buttonText="Modify"
-                                                        onItemClick={ closeMenu }
-                                                        modalComponent={ <ReservationModal reservation={ reservation } /> }
+                                                        onItemClick={closeMenu}
+                                                        modalComponent={<ReservationModal reservation={reservation} />}
                                                     />
                                                     <OpenModalButton
                                                         className='cancel-reserv'
                                                         buttonText="Cancel"
                                                         modalComponent={<DeleteReservationModal reservation={reservation} />}
                                                     />
-                                                    </div>
-
                                                 </div>
-                                            ))) : (
-                                            <div className="noupcoming">
-                                                <p>You have no upcoming reservations</p>
-                                                <button className="tablebutton" onClick={ () => history.push( '/restaurants' ) }>Find a table</button>
+
                                             </div>
-                                        )
-                                    }
+                                        ))) : (
+                                        <div className="noupcoming">
+                                            <p>You have no upcoming reservations</p>
+                                            <button className="tablebutton" onClick={() => history.push('/restaurants')}>Find a table</button>
+                                        </div>
+                                    )
+                                }
 
-                                </div>
+                            </div>
 
-                                <div>
-                                    <h2>Past Reservations</h2>
-                                    {
-                                        pastReservations.length ? (
-                                            pastReservations.map((reservation) => (
-                                                <div className="reservation-tile">
-                                                     <Link to={`/restaurants/${reservation.restaurantId}`} key={reservation.restaurantId}>
+                            <div>
+                                <h2>Past Reservations</h2>
+                                {
+                                    pastReservations.length ? (
+                                        pastReservations.map((reservation) => (
+                                            <div className="reservation-tile">
+                                                <Link to={`/restaurants/${reservation.restaurantId}`} key={reservation.restaurantId}>
                                                     <img className="reservimg" src={reservation.restaurant[0].coverImage} />
-                                                    </Link>
-                                                    <div className="col2">
-                                                        <p className="reservname">{reservation.restaurant[0].restaurantName}</p>
-                                                        <span className="reservuser"><i className="fa-regular fa-user"></i>  { reservation.numberOfPeople } guests </span>
-                                                        <span className="reservtime"><i className="fa-regular fa-calendar"></i>   { timeFormat( reservation ) } </span>
-                                                        { !reservation.hasReview ? (
-                                                            <OpenModalButton
-                                                                className='review-reserv'
-                                                                buttonText='Leave a Review'
-                                                                modalComponent={ <CreateReviewModal reservation={ reservation } /> }
-                                                            /> ) : (
-                                                                <>
-                                                                    <button className="tablebutton" onClick={ () => history.push( `/restaurants/${ reservation.restaurantId }` ) }>See Your Review</button>
-                                                                {/* ******TO DO Does not yet work, isnt accessing review props */ }
-                                                                {/* <OpenModalButton
+                                                </Link>
+                                                <div className="col2">
+                                                    <p className="reservname">{reservation.restaurant[0].restaurantName}</p>
+                                                    <span className="reservuser"><i className="fa-regular fa-user"></i>  {reservation.numberOfPeople} guests </span>
+                                                    <span className="reservtime"><i className="fa-regular fa-calendar"></i>   {timeFormat(reservation)} </span>
+                                                    {!reservation.hasReview ? (
+                                                        <OpenModalButton
+                                                            className='review-reserv'
+                                                            buttonText='Leave a Review'
+                                                            modalComponent={<CreateReviewModal reservation={reservation} />}
+                                                        />) : (
+                                                        <>
+                                                            <button className="tablebutton" onClick={() => history.push(`/restaurants/${reservation.restaurantId}`)}>See Your Review</button>
+                                                            {/* ******TO DO Does not yet work, isnt accessing review props */}
+                                                            {/* <OpenModalButton
                                                                     buttonText='Edit Review'
                                                                     modalComponent={ <EditReviewForm review={ review } /> }
                                                                 />
@@ -193,49 +193,49 @@ function UserProfile() {
                                                                     buttonText='Delete Review'
                                                                     modalComponent={ <DeleteReviewForm review={ review } /> }
                                                                 /> */}
-                                                            </>
-                                                        ) }
-                                                    </div>
+                                                        </>
+                                                    )}
                                                 </div>
-                                            ))) : (
-                                            <div>You have no past reservations</div>
-                                        )
-                                    }
-                                </div>
-                                <div>
-                                    <h2>Cancelled Reservations</h2>
-                                    {
-                                        cancelledReservations.length ? (
-                                            cancelledReservations.map((reservation) => (
-                                                <div className="reservation-tile">
-                                                     <Link to={`/restaurants/${reservation.restaurantId}`} key={reservation.restaurantId}>
+                                            </div>
+                                        ))) : (
+                                        <div>You have no past reservations</div>
+                                    )
+                                }
+                            </div>
+                            <div>
+                                <h2>Cancelled Reservations</h2>
+                                {
+                                    cancelledReservations.length ? (
+                                        cancelledReservations.map((reservation) => (
+                                            <div className="reservation-tile">
+                                                <Link to={`/restaurants/${reservation.restaurantId}`} key={reservation.restaurantId}>
                                                     <img className="reservimg" src={reservation.restaurant[0].coverImage} />
-                                                    </Link>
-                                                    <div className="col2">
-                                                        <p className="reservname">{ reservation.restaurant[ 0 ].restaurantName }</p>
-                                                        <span className="reservuser"><i className="fa-regular fa-user"></i>  { reservation.numberOfPeople } guests </span>
-                                                        <span className="reservtime"><i className="fa-regular fa-calendar"></i>   { timeFormat( reservation ) } </span>
-                                                    </div>
+                                                </Link>
+                                                <div className="col2">
+                                                    <p className="reservname">{reservation.restaurant[0].restaurantName}</p>
+                                                    <span className="reservuser"><i className="fa-regular fa-user"></i>  {reservation.numberOfPeople} guests </span>
+                                                    <span className="reservtime"><i className="fa-regular fa-calendar"></i>   {timeFormat(reservation)} </span>
                                                 </div>
-                                            ))) : (
-                                            <div>You have no cancelled reservations</div>
-                                        )
-                                    }
-                                </div>
-                            </>
+                                            </div>
+                                        ))) : (
+                                        <div>You have no cancelled reservations</div>
+                                    )
+                                }
+                            </div>
+                        </>
 
 
 
-                        ) : (
-                            <>
-                                <h1>You have no upoming or past reservations</h1>
-                                <h3>Find your table for any occasion</h3>
-                                <button className="table-button" onClick={ () => history.push( '/restaurants' ) }>
-                                    Find a table
-                                </button>
-                            </>
-                        )
-                    }
+                    ) : (
+                        <>
+                            <h1>You have no upoming or past reservations</h1>
+                            <h3>Find your table for any occasion</h3>
+                            <button className="table-button" onClick={() => history.push('/restaurants')}>
+                                Find a table
+                            </button>
+                        </>
+                    )
+                }
 
             </div>
         </div>

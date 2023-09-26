@@ -25,8 +25,8 @@ const OwnerRestaurant = () => {
 
     const myRestaurants = restaurantValues.filter(restaurant => restaurant.userId == user.id);
 
-    console.log("hello", myRestaurants)
-    
+    ("hello", myRestaurants)
+
     const handleDelete = (restaurantId) => {
         setRestaurantToDelete(restaurantId);
         setDeleteModalOpen(true);
@@ -57,47 +57,45 @@ const OwnerRestaurant = () => {
 
     return (
         <div className='manage-restaurants'>
-    <h1 className='manage-header'>My Restaurants</h1>
-    <div className='manage-cards'>
-    {myRestaurants.map(restaurant => (
-        <div key={restaurant.id}>
-            <Link to={`/restaurants/${restaurant.id}`}>
-                <div className="card-container">
-                    <img className="card-img" src={restaurant.coverImage} alt="restaurant" />
-                    <div className="card-name">{ `${ restaurant.restaurantName }` }</div>
-                    <div className="card-info">
-                        <div className="card-cuisine">{ `${ restaurant.cuisineType }` }</div>
-                        <p className="dot">•</p>
-                        <span className="actice-price">{ '$'.repeat(restaurant.priceRange) }</span>
-                        <span className="inactive-price">{ '$'.repeat(4 - restaurant.priceRange) }</span>
-                        <p className="dot">•</p>
-                        <div className="card-city">{ `${ restaurant.city }` }</div>
+            <h1 className='manage-header'>My Restaurants</h1>
+            <div className='manage-cards'>
+                {myRestaurants.map(restaurant => (
+                    <div key={restaurant.id}>
+                        <Link to={`/restaurants/${restaurant.id}`}>
+                            <div className="card-container">
+                                <img className="card-img" src={restaurant.coverImage} alt="restaurant" />
+                                <div className="card-name">{`${restaurant.restaurantName}`}</div>
+                                <div className="card-info">
+                                    <div className="card-cuisine">{`${restaurant.cuisineType}`}</div>
+                                    <p className="dot">•</p>
+                                    <span className="actice-price">{'$'.repeat(restaurant.priceRange)}</span>
+                                    <span className="inactive-price">{'$'.repeat(4 - restaurant.priceRange)}</span>
+                                    <p className="dot">•</p>
+                                    <div className="card-city">{`${restaurant.city}`}</div>
+                                </div>
+                            </div>
+                        </Link>
+                        <div className='manage-restaurant-button-container'>
+                            <button className='manage-restaurant-button' onClick={() => handleDelete(restaurant.id)}>Delete Restaurant</button>
+                        </div>
                     </div>
-                </div>
-            </Link>
-            <div className='manage-restaurant-button-container'>
-            <button className='manage-restaurant-button' onClick={() => handleDelete(restaurant.id)}>Delete Restaurant</button>
+                ))}
+            </div>
+            {deleteModalOpen && (
+                <DeleteRestaurantModal
+                    isOpen={deleteModalOpen}
+                    onDelete={handleDeleteConfirm}
+                    onCancel={handleDeleteCancel}
+                    onClose={() => setDeleteModalOpen(false)}
+                />
+            )}
+            <div className='create-restaurant'>
+                <Link to="/new-restaurant">
+                    <button className='create-restaurant-button'>Add your restaurant</button>
+                </Link>
             </div>
         </div>
-    ))}
-    </div>
-    {deleteModalOpen && (
-        <DeleteRestaurantModal
-            isOpen={deleteModalOpen}
-            onDelete={handleDeleteConfirm}
-            onCancel={handleDeleteCancel}
-            onClose={() => setDeleteModalOpen(false)}
-        />
-    )}
-    <div className='create-restaurant'>
-        <Link to="/new-restaurant">
-            <button className='create-restaurant-button'>Add your restaurant</button>
-        </Link>
-    </div>
-</div>
     )
 }
 
 export default OwnerRestaurant;
-
-

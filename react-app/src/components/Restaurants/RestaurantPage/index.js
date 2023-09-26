@@ -14,7 +14,7 @@ const RestaurantPage = () => {
     const { id } = useParams();
     const restaurant = useSelector(state => state.restaurantDetails);
     const favorites = useSelector(state => state.favorites);
-    // console.log("FAVORITES", favorites)
+    // ("FAVORITES", favorites)
     const user = useSelector(state => state.session.user);
     const [loadingFavorites, setLoadingFavorites] = useState(true);
     const [favorite, setFavorite] = useState(false);
@@ -25,7 +25,7 @@ const RestaurantPage = () => {
             dispatch(getFavorites(user.id))
                 .then(() => setLoadingFavorites(false))
                 .catch((error) => {
-                    console.log("Error fetching favorites:", error);
+                    ("Error fetching favorites:", error);
                     setLoadingFavorites(false);
                 });
         } else {
@@ -37,7 +37,7 @@ const RestaurantPage = () => {
     useEffect(() => {
         if (user && favorites.length) {
             for (let i = 0; i < favorites.length; i++) {
-                if(favorites[i].restaurantId == id) {
+                if (favorites[i].restaurantId == id) {
                     setFavorite(true)
                 }
             }
@@ -48,21 +48,21 @@ const RestaurantPage = () => {
         dispatch(addFavorites(user.id, id))
             .then(() => dispatch(getFavorites(user.id)))
             .then(() => setFavorite(true))
-            .catch((error) => console.log("Error adding favorite: ", error));
+            .catch((error) => ("Error adding favorite: ", error));
     };
 
     const deleteFav = () => {
         let favId;
         for (let i = 0; i < favorites.length; i++) {
-            if(favorites[i].restaurantId == id) {
+            if (favorites[i].restaurantId == id) {
                 favId = favorites[i].id
             }
         }
-        // console.log("hereeeee, ", favId)
-                dispatch(deleteFavorites(favId, user.id))
-                    .then(() => dispatch(getFavorites(user.id)))
-                    .then(() => setFavorite(false))
-                    .catch((error) => console.log("Error deleting favorite: ", error));
+        // ("hereeeee, ", favId)
+        dispatch(deleteFavorites(favId, user.id))
+            .then(() => dispatch(getFavorites(user.id)))
+            .then(() => setFavorite(false))
+            .catch((error) => ("Error deleting favorite: ", error));
 
     };
 
@@ -90,7 +90,7 @@ const RestaurantPage = () => {
         }
 
         const monthNames = ["January", "February", "March", "April", "May", "June",
-        "July", "August", "September", "October", "November", "December"
+            "July", "August", "September", "October", "November", "December"
         ];
 
         const convertDate = (date) => {
@@ -116,7 +116,7 @@ const RestaurantPage = () => {
 
 
 
-        // console.log("STARRRRR", starArr)
+        // ("STARRRRR", starArr)
         if (loadingFavorites && !user) {
             return <div>Loading favorites....</div>
         }
@@ -184,7 +184,7 @@ const RestaurantPage = () => {
                                     restaurant.reviews.map((review, i) => (
                                         <div className="individual-review" key={review.id}>
                                             <div className="user-section">
-                                               <p className="username"> {review.username} </p>
+                                                <p className="username"> {review.username} </p>
                                                 <p className="date">{convertDate(review.createdAt)}</p>
                                             </div>
                                             <div className="review-comment2">{review.comment}</div>
@@ -192,19 +192,19 @@ const RestaurantPage = () => {
                                                 {
                                                     [...Array(5)].map((x, i) => {
                                                         if (i < Math.floor(review.rating)) {
-                                                          return <i className="fa-solid fa-star" key={i}></i>;
+                                                            return <i className="fa-solid fa-star" key={i}></i>;
                                                         } else if (i < review.rating) {
-                                                          return <i className="fa-solid fa-star-half-stroke" key={i}></i>;
+                                                            return <i className="fa-solid fa-star-half-stroke" key={i}></i>;
                                                         } else {
-                                                          return <i className="fa-regular fa-star" key={i}></i>;
+                                                            return <i className="fa-regular fa-star" key={i}></i>;
                                                         }
-                                                      })
+                                                    })
                                                 }
                                             </div>
-                                            { review.reviewImage && (
+                                            {review.reviewImage && (
                                                 <div className="review-image-container2">
-                                                 <img className="review-image2" src={review.reviewImage}></img>
-                                            </div>
+                                                    <img className="review-image2" src={review.reviewImage}></img>
+                                                </div>
                                             )}
                                             <br></br>
                                             {user && user.id === review.userId && (
@@ -221,7 +221,7 @@ const RestaurantPage = () => {
                                                         <button className="del-review-res-button">
                                                             <OpenModalButton
                                                                 buttonText='Delete Review'
-                                                                modalComponent={<DeleteReviewForm review={review}/>}
+                                                                modalComponent={<DeleteReviewForm review={review} />}
                                                             />
                                                         </button>
                                                     </div>
@@ -231,7 +231,7 @@ const RestaurantPage = () => {
                                             )}
 
                                         </div>
-                                ))}
+                                    ))}
                             </div>
                         </div>
                     </div>
@@ -251,35 +251,35 @@ const RestaurantPage = () => {
                         </div>
                         <div className="restaurant-details-section">
                             <div className="details-header">
-        {/* This is the header for the section */}
-        <h2>Restaurant Details</h2>
-    </div>
-    <div className="details-container">
-    <div className="detail-item">
-        <h3><i className="fas fa-utensils"></i>Cuisine</h3>
-        <p>{restaurant.cuisineType}</p>
-    </div>
+                                {/* This is the header for the section */}
+                                <h2>Restaurant Details</h2>
+                            </div>
+                            <div className="details-container">
+                                <div className="detail-item">
+                                    <h3><i className="fas fa-utensils"></i>Cuisine</h3>
+                                    <p>{restaurant.cuisineType}</p>
+                                </div>
 
-    <div className="detail-item">
-        <h3><i className="fas fa-money-bill-wave"></i>Price Range</h3>
-        <span className="active-price2">{ "$".repeat(restaurant.priceRange) }</span>
-        <span className="inactive-price2">{ "$".repeat(4 - restaurant.priceRange) }</span>
-    </div>
+                                <div className="detail-item">
+                                    <h3><i className="fas fa-money-bill-wave"></i>Price Range</h3>
+                                    <span className="active-price2">{"$".repeat(restaurant.priceRange)}</span>
+                                    <span className="inactive-price2">{"$".repeat(4 - restaurant.priceRange)}</span>
+                                </div>
 
-    <div className="detail-item">
-        <h3><i className="fas fa-clock"></i>Hours of Operation</h3>
-        <div className="sub-detail-item">
-            <h4>Sunday - Saturday</h4>
-            <p>{restaurant.openHours} - {restaurant.closingHours}</p>
-        </div>
-    </div>
+                                <div className="detail-item">
+                                    <h3><i className="fas fa-clock"></i>Hours of Operation</h3>
+                                    <div className="sub-detail-item">
+                                        <h4>Sunday - Saturday</h4>
+                                        <p>{restaurant.openHours} - {restaurant.closingHours}</p>
+                                    </div>
+                                </div>
 
-    <div className="detail-item">
-        <h3><i className="fas fa-map-marker-alt"></i>Address</h3>
-        <p>{restaurant.address}</p>
-    </div>
-</div>
-</div>
+                                <div className="detail-item">
+                                    <h3><i className="fas fa-map-marker-alt"></i>Address</h3>
+                                    <p>{restaurant.address}</p>
+                                </div>
+                            </div>
+                        </div>
                         {/* <div className="map-container">Map</div>
                         <div className="delivery-box">Delivery</div> */}
                     </div>
