@@ -49,7 +49,7 @@ export const addFavorites = (userId, restaurantId) => async (dispatch) => {
 }
 
 export const deleteFavorites = (favId, userId) => async (dispatch) => {
- 
+
     const response = await fetch(`/api/user/${userId}/favorites/${favId}`, {
         method: 'DELETE',
     });
@@ -62,18 +62,18 @@ const initialState = [];
 
 const favoriteReducer = (state = initialState, action) => {
     switch (action.type) {
-      case GET_FAVORITE: {
-          return action.payload.favorites;
+        case GET_FAVORITE: {
+            return action.payload.favorites;
         }
         case ADD_FAVORITE: {
-        return [...state, action.payload];
-      }
-      case DELETE_FAVORITE: {
-        return state.filter((favorite) => favorite.id !== action.payload);
-      }
-      default:
-        return state;
+            return [...state, action.payload];
+        }
+        case DELETE_FAVORITE: {
+            return state.filter((favorite) => favorite.id !== action.payload);
+        }
+        default:
+            return state;
     }
-  };
+};
 
 export default favoriteReducer;

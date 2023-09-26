@@ -53,22 +53,24 @@ export const getRestaurantReviews = (restaurantId) => async (dispatch) => {
 }
 
 
-export const addReviews = ( restaurant_id, rating, comment, review_image ) => async ( dispatch ) => {
+export const addReviews = (restaurant_id, rating, comment, review_image) => async (dispatch) => {
     const reviewData = {
         rating, comment, review_image
     }
+
   
     const res = await fetch( `/api/restaurants/${ restaurant_id }/reviews/`, {
+
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
             rating, comment, review_image
         })
-    } );
+    });
 
     if (res.ok) {
         const review = await res.json();
-        dispatch( addReview( restaurant_id, review) );
+        dispatch(addReview(restaurant_id, review));
         return review
     } else if (res.status < 500) {
         const data = await res.json();

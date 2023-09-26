@@ -25,8 +25,8 @@
 
 //     const myRestaurants = restaurantValues.filter(restaurant => restaurant.userId == user.id);
 
-//     console.log("hello", myRestaurants)
-    
+//     ("hello", myRestaurants)
+
 //     const handleDelete = (restaurantId) => {
 //         setRestaurantToDelete(restaurantId);
 //         setDeleteModalOpen(true);
@@ -82,7 +82,7 @@
 //                     isOpen={deleteModalOpen}
 //                     onDelete={handleDeleteConfirm}
 //                     onCancel={handleDeleteCancel}
-//                     onClose={() => 
+//                     onClose={() =>
 //                         setDeleteModalOpen(false)
 //                     }
 //                 />

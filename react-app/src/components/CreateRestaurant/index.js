@@ -25,7 +25,7 @@ function CreateRestaurant() {
         '9:00 PM',
         '10:00 PM',
         '11:00 PM',
-      ];
+    ];
 
 
     const [restaurant_name, setRestaurant_name] = useState('');
@@ -46,6 +46,7 @@ function CreateRestaurant() {
     const dispatch = useDispatch();
     const history = useHistory();
     const sessionUser = useSelector(state => state.session.user);
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -70,7 +71,7 @@ function CreateRestaurant() {
         if (!price_range) newErrors.push("Please select a price range");
         if (!phone_number) {
             newErrors.push("Please enter a phone number");
-        } else if (phone_number.toString().length !== 10 ) {
+        } else if (phone_number.toString().length !== 10) {
             newErrors.push("Please enter a 10-digit phone number");
         } else if ((Number.isNaN(Number(phone_number)))) {
             newErrors.push("Phone Number must be numbers only");
@@ -110,7 +111,7 @@ function CreateRestaurant() {
         history.push('user/restaurants');
     }
 
-    useEffect (() => {
+    useEffect(() => {
         if (newRestaurant) {
             dispatch(getRestaurants());
         }
@@ -135,11 +136,11 @@ function CreateRestaurant() {
                     <label className='create-label'>
                         Restaurant Name
                         <input
-                        className='create-input'
-                        type='text'
-                        value={restaurant_name}
-                        onChange={(e) => setRestaurant_name(e.target.value)}
-                        required
+                            className='create-input'
+                            type='text'
+                            value={restaurant_name}
+                            onChange={(e) => setRestaurant_name(e.target.value)}
+                            required
                         />
                     </label>
                 </div>
@@ -147,20 +148,20 @@ function CreateRestaurant() {
                     <label className='create-label'>
                         Phone Number
                         <input
-                        className='create-input'
-                        type='text'
-                        value={phone_number}
-                        onChange={(e) => setPhone_number(e.target.value)}
-                        required
+                            className='create-input'
+                            type='text'
+                            value={phone_number}
+                            onChange={(e) => setPhone_number(e.target.value)}
+                            required
                         />
                         {errors.includes("Please enter a 10-digit phone number") && (
-                        <span className='error'>Please enter a 10-digit phone number</span>
+                            <span className='error'>Please enter a 10-digit phone number</span>
                         )}
                         {errors.includes("Phone Number must be numbers only") && (
-                        <span className='error'>Phone Number must be numbers only</span>
+                            <span className='error'>Phone Number must be numbers only</span>
                         )}
                         {errors.includes("Area code must be greater than 200") && (
-                        <span className='error'>Area code must be greater than 200</span>
+                            <span className='error'>Area code must be greater than 200</span>
                         )}
                     </label>
                 </div>
@@ -168,11 +169,11 @@ function CreateRestaurant() {
                     <label className='create-label'>
                         City
                         <input
-                        className='create-input'
-                        type='text'
-                        value={city}
-                        onChange={(e) => setCity(e.target.value)}
-                        required
+                            className='create-input'
+                            type='text'
+                            value={city}
+                            onChange={(e) => setCity(e.target.value)}
+                            required
                         />
                     </label>
                 </div>
@@ -180,10 +181,10 @@ function CreateRestaurant() {
                     <label className='create-label'>
                         State
                         <select
-                        className='create-select'
-                        value={state}
-                        onChange={(e) => setState(e.target.value)}
-                        required
+                            className='create-select'
+                            value={state}
+                            onChange={(e) => setState(e.target.value)}
+                            required
                         >
                             <option value=''>--Select a State--</option>
                             <option value='CA'>California</option>
@@ -197,11 +198,11 @@ function CreateRestaurant() {
                     <label className='create-label'>
                         Address
                         <input
-                        className='create-input'
-                        type='text'
-                        value={address}
-                        onChange={(e) => setAddress(e.target.value)}
-                        required
+                            className='create-input'
+                            type='text'
+                            value={address}
+                            onChange={(e) => setAddress(e.target.value)}
+                            required
                         />
                     </label>
                 </div>
@@ -209,17 +210,17 @@ function CreateRestaurant() {
                     <label className='create-label'>
                         Zip Code
                         <input
-                        className='create-input'
-                        type='text'
-                        value={zip_code}
-                        onChange={(e) => setZip_code(e.target.value)}
-                        required
+                            className='create-input'
+                            type='text'
+                            value={zip_code}
+                            onChange={(e) => setZip_code(e.target.value)}
+                            required
                         />
                         {errors.includes("Please enter a 5-digit zip code") && (
-                        <span className='error'>Please enter a 5-digit zip code</span>
+                            <span className='error'>Please enter a 5-digit zip code</span>
                         )}
                         {errors.includes("Zip Code must be numbers only") && (
-                        <span className='error'>Zip Code must be numbers only</span>
+                            <span className='error'>Zip Code must be numbers only</span>
                         )}
                     </label>
                 </div>
@@ -227,11 +228,11 @@ function CreateRestaurant() {
                     <label className='create-label'>
                         Country
                         <input
-                        className='create-input'
-                        type='text'
-                        value={country}
-                        onChange={(e) => setCountry(e.target.value)}
-                        required
+                            className='create-input'
+                            type='text'
+                            value={country}
+                            onChange={(e) => setCountry(e.target.value)}
+                            required
                         />
                     </label>
                 </div>
@@ -239,10 +240,10 @@ function CreateRestaurant() {
                     <label className='create-label'>
                         Cuisine Type
                         <select
-                        className='create-select'
-                        value={cuisine_type}
-                        onChange={(e) => setCuisine_type(e.target.value)}
-                        required
+                            className='create-select'
+                            value={cuisine_type}
+                            onChange={(e) => setCuisine_type(e.target.value)}
+                            required
                         >
                             <option value=''>--Please select your restaurants cuisine--</option>
                             <option value='Italian'>Italian</option>
@@ -262,10 +263,10 @@ function CreateRestaurant() {
                     <label className='create-label'>
                         Price Range
                         <select
-                        className='create-select'
-                        value={price_range}
-                        onChange={(e) => setPrice_range(e.target.value)}
-                        required
+                            className='create-select'
+                            value={price_range}
+                            onChange={(e) => setPrice_range(e.target.value)}
+                            required
                         >
                             <option value=''>--Select Price Range--</option>
                             <option value={1}>$</option>
@@ -279,16 +280,16 @@ function CreateRestaurant() {
                     <label className='create-label'>
                         Open Hours
                         <select
-                        className='create-select'
-                        type='text'
-                        value={open_hours}
-                        onChange={(e) => setOpen_hours(e.target.value)}
-                        required
+                            className='create-select'
+                            type='text'
+                            value={open_hours}
+                            onChange={(e) => setOpen_hours(e.target.value)}
+                            required
                         >
                             {TIMES.map((time) => (
                                 <option key={time} value={time}>
                                     {time}
-                                    </option>
+                                </option>
                             ))}
                         </select>
                     </label>
@@ -297,16 +298,16 @@ function CreateRestaurant() {
                     <label className='create-label'>
                         Closing Hours
                         <select
-                        className='create-select'
-                        type='text'
-                        value={closing_hours}
-                        onChange={(e) => setClosing_hours(e.target.value)}
-                        required
+                            className='create-select'
+                            type='text'
+                            value={closing_hours}
+                            onChange={(e) => setClosing_hours(e.target.value)}
+                            required
                         >
                             {TIMES.map((time) => (
                                 <option key={time} value={time}>
                                     {time}
-                                    </option>
+                                </option>
                             ))}
                         </select>
                     </label>
@@ -315,20 +316,20 @@ function CreateRestaurant() {
                     <label className='create-label'>
                         Cover Image
                         <input
-                        className='create-input'
-                        type='text'
-                        value={cover_image}
-                        onChange={(e) => setCover_image(e.target.value)}
-                        required
+                            className='create-input'
+                            type='text'
+                            value={cover_image}
+                            onChange={(e) => setCover_image(e.target.value)}
+                            required
                         />
                         {errors.includes("Invalid image URL") && (
-                        <span className='error'>Invalid image URL (must end in .jpg, .pgn, or .gif)</span>
+                            <span className='error'>Invalid image URL (must end in .jpg, .pgn, or .gif)</span>
                         )}
                     </label>
                 </div>
                 <button className='create-button' type="submit">Add Restaurant</button>
-                </form>
-            </div>
+            </form>
+        </div>
     )
 }
 

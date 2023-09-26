@@ -8,22 +8,22 @@ const UPDATE_POINTS = 'reservations/UPDATE_POINTS';
 // ------------------------------------------------- ACTIONS
 
 export const getUserReservation = (reservations) => {
-    reservations = Object.values( reservations )
+    reservations = Object.values(reservations)
     return {
         type: GET_USER_RESERVATIONS,
         reservations
     }
 }
 
- export const getRestaurantReservation = (restaurantId, reservations) => {
+export const getRestaurantReservation = (restaurantId, reservations) => {
     return {
         type: GET_RESTAURANT_RESERVATIONS,
         restaurantId,
         reservations
     }
- }
+}
 
-export const addReservation = ( restaurantId, newReservation ) => {
+export const addReservation = (restaurantId, newReservation) => {
     return {
         type: ADD_RESERVATIONS,
         restaurantId,
@@ -47,7 +47,7 @@ export const deleteReservation = (reservationId) => {
     }
 }
 
-export const updatePoints = ( points ) => {
+export const updatePoints = (points) => {
     return {
         type: UPDATE_POINTS,
         points
@@ -66,7 +66,7 @@ export const getUserReservations = () => async (dispatch) => {
     if (res.ok) {
         const reservation = await res.json();
 
-        dispatch( getUserReservation( reservation ) );
+        dispatch(getUserReservation(reservation));
         return reservation;
     }
 }
@@ -85,65 +85,66 @@ export const getRestaurantReservations = (restaurantId) => async (dispatch) => {
     }
 }
 
-export const addReservationThunk = ( restaurant_id, number_of_people, reservation_time, status = "Confirmed", notes ) => async ( dispatch ) => {
+export const addReservationThunk = (restaurant_id, number_of_people, reservation_time, status = "Confirmed", notes) => async (dispatch) => {
     const reservationData = {
         number_of_people, reservation_time, status, notes
     }
 
-    // console.log( "thunk reservation data:", reservationData )
-    const res = await fetch( `/api/restaurants/${ restaurant_id }/reservations`, {
+    // ( "thunk reservation data:", reservationData )
+    const res = await fetch(`/api/restaurants/${restaurant_id}/reservations`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
             number_of_people, reservation_time, status, notes
         })
-    } );
-    // console.log( "res:", res )
+    });
+    // ( "res:", res )
     if (res.ok) {
         const reservation = await res.json();
-        dispatch( addReservation( restaurant_id, reservationData ) );
-        dispatch( updatePoints( 100 ) );
+        dispatch(addReservation(restaurant_id, reservationData));
+        dispatch(updatePoints(100));
         return reservation
     } else {
         const data = await res.json();
-        return Object.values( data )
-        // console.log( "data:", data )
+        return Object.values(data)
+        // ( "data:", data )
 
         // if ( data.errors ) {
         //     const errorData = await res.json()
         //     return errorData.errors
         // }
-            // else {
-            //     return ['An error occured. Please try again.']
-            // }
+        // else {
+        //     return ['An error occured. Please try again.']
+        // }
 
     }
 }
 
-export const editReservations = ( restaurantId, id, number_of_people,
-    reservation_time, status, notes ) => async ( dispatch ) => {
+export const editReservations = (restaurantId, id, number_of_people,
+    reservation_time, status, notes) => async (dispatch) => {
 
-        console.log( "json1:", JSON.stringify( {
+        ("json1:", JSON.stringify({
             number_of_people,
             reservation_time,
             status,
             notes
-        } ) )
-        // console.log( "res length1:", reservation_time.length )
-        if ( reservation_time.length > 19 ) {
-            reservation_time = reservation_time.slice( 0, -3 )
+        }))
+        // ( "res length1:", reservation_time.length )
+        if (reservation_time.length > 19) {
+            reservation_time = reservation_time.slice(0, -3)
         }
-        // console.log( "res length2:", reservation_time.length )
-        // console.log( "json2:", JSON.stringify( {
+        // ( "res length2:", reservation_time.length )
+        // ( "json2:", JSON.stringify( {
         //     number_of_people,
         //     reservation_time,
         //     status,
         //     notes
         // } ) )
-        const res = await fetch( `/api/restaurants/${ restaurantId }/reservations/${ id }`, {
+        const res = await fetch(`/api/restaurants/${restaurantId}/reservations/${id}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body:
+
                 JSON.stringify( {
                 number_of_people,
                 reservation_time,
@@ -157,12 +158,15 @@ export const editReservations = ( restaurantId, id, number_of_people,
             const reservation = await res.json();
 
             dispatch( editReservation( restaurantId, reservation ) );
+
             // dispatch( getUserReservation( reservation ) );
             return reservation
         } else {
             const data = await res.json();
 
+
             return Object.values( data )
+
         }
 
     }
@@ -198,14 +202,14 @@ export default function reservationsReducer(state = initialState, action) {
         }
         case GET_RESTAURANT_RESERVATIONS: {
             newState = { ...state }
-            newState.byRestaurant[ action.restaurantId ] = action.reservations;
+            newState.byRestaurant[action.restaurantId] = action.reservations;
             return newState;
         }
         case ADD_RESERVATIONS: {
             newState = { ...state };
-            newState.byRestaurant[ action.restaurantId ] = {
-                ...newState.byRestaurant[ action.restaurantId ],
-                [ action.newReservation.id ]: action.newReservation,
+            newState.byRestaurant[action.restaurantId] = {
+                ...newState.byRestaurant[action.restaurantId],
+                [action.newReservation.id]: action.newReservation,
             };
             return newState;
         }
@@ -216,9 +220,9 @@ export default function reservationsReducer(state = initialState, action) {
             // ].map((reservation) => reservation.id === action.newReservation.id ? action.newReservation : reservation);
             // return newState;
             newState = { ...state };
-            newState.byRestaurant[ action.restaurantId ] = {
-                ...newState.byRestaurant[ action.restaurantId ],
-                [ action.newReservation.id ]: action.newReservation,
+            newState.byRestaurant[action.restaurantId] = {
+                ...newState.byRestaurant[action.restaurantId],
+                [action.newReservation.id]: action.newReservation,
             }
             return newState;
         }
@@ -226,6 +230,7 @@ export default function reservationsReducer(state = initialState, action) {
             newState = { ...state }
 
             newState.byRestaurant[ action.restaurantId ] = newState.byRestaurant[
+
                 action.restaurantId
             ].filter((reservation) => reservation.id !== action.reservationId);
             return newState;

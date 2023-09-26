@@ -20,15 +20,15 @@ export const addRestaurant = (newRestaurant) => ({
 export const deleteRestaurant = (restaurantId) => ({
     type: DELETE_RESTAURANT,
     restaurantId
-} )
+})
 
-export const clear = () => ( {
+export const clear = () => ({
     type: CLEAR_RESTAURANTS
-} );
+});
 
 //Thunks
-export const clearRestaurants = () => ( dispatch ) => {
-    dispatch( clear() );
+export const clearRestaurants = () => (dispatch) => {
+    dispatch(clear());
 };
 
 export const getRestaurants = (type, city) => async (dispatch) => {
@@ -50,7 +50,9 @@ export const getRestaurants = (type, city) => async (dispatch) => {
     });
     if (response.ok) {
 
+
         const restaurants = await response.json();
+
 
         dispatch(getRestaurant(restaurants));
         return restaurants;
@@ -128,7 +130,7 @@ const initialState = {};
 
 const restaurantReducer = (state = initialState, action) => {
     let newState;
-    switch ( action.type ) {
+    switch (action.type) {
 
         case CLEAR_RESTAURANTS:
             return {
@@ -137,7 +139,7 @@ const restaurantReducer = (state = initialState, action) => {
 
         case GET_RESTAURANT:
             newState = { ...state };
-            // console.log("GETTTTTTTRESTTTTTAURANTTTT STATE-------", action.restaurants)
+            // ("GETTTTTTTRESTTTTTAURANTTTT STATE-------", action.restaurants)
             action.restaurants.restaurants.forEach(restaurant => {
                 newState[restaurant.id] = restaurant;
             });
