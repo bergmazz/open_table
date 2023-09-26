@@ -49,8 +49,7 @@ const ReservationModal = ( { reservation } ) => {
 
         if ( date && time ) {
             formattedTime = time
-            // console.log( "----------timelegth:", time.length )
-            // console.log( "----------time:", time )
+
             if ( !time.includes( ":00:00" ) ) {
                 formattedTime += ":00";
             }
@@ -68,14 +67,12 @@ const ReservationModal = ( { reservation } ) => {
     const handleSubmit = async ( e ) => {
         e.preventDefault();
         if ( currentUser ) {
-            console.log( "  in edit submit- reservationTime: ", reservationTime )
-            console.log( " numberOfPeople: ", numberOfPeople )
-            console.log( " status: ", status )
+
 
             let data = await dispatch( editReservations(
                 reservation.restaurantId, reservation.id, numberOfPeople, reservationTime, status, notes
             ) );
-            console.log( '-------------data-------', data )
+   
             if ( !data.id ) {
                 if ( typeof data[ 0 ] == "object" ) {
                     data = Object.values( data[ 0 ] )

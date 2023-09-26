@@ -57,11 +57,9 @@ function UserProfile() {
     const currentUser = useSelector(state => state.session.user)
     const reservations = useSelector( state => state.reservations.byUser )
     const reviews = currentUser.reviews
-    console.log( "reviews:", reviews )
-    // console.log("RESERRRVATTIIONNNNS", reservations)
-    // const points = useSelector( ( state ) => state.reservations.points );
+
     const points = reservations.length * 100
-    // console.log( "---------------byUser state:", reservations )
+
     const goal = 5000;
     const progress = Math.min((points / goal) * 100, 100);
 
@@ -71,7 +69,7 @@ function UserProfile() {
 
     if ( pastReservations ) {
         for ( let reserv of pastReservations ) {
-            console.log( "reservation:", Object.values( reserv ) )
+        
             reserv[ "hasReview" ] = false
 
             for ( let review of reviews ) {
@@ -89,7 +87,7 @@ function UserProfile() {
         <div className='no-user'>
             <h1 className='no-user'>Sorry, you need to log in</h1>
             <Link to="/login" className="page-login-link">
-      <button className="login-signup-button" type="submit">Login</button> 
+      <button className="login-signup-button" type="submit">Login</button>
       </Link>
         </div>
     )

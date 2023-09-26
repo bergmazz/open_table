@@ -17,12 +17,12 @@ const HomePage = () => {
 
     function shuffle(restaurantValues) {
         let currentIndex = restaurantValues.length, temporaryValue, randomIndex;
-    
+
         while (0 !== currentIndex) {
-    
+
             randomIndex = Math.floor(Math.random() * currentIndex);
             currentIndex -= 1;
-    
+
 
             temporaryValue = restaurantValues[currentIndex];
             restaurantValues[currentIndex] = restaurantValues[randomIndex];
@@ -33,14 +33,14 @@ const HomePage = () => {
 
     const shuffledRestaurants = shuffle(restaurantValues)
     const selectedRestaurants = shuffledRestaurants.slice(0, 12)
-    // console.log("RANDOM, ", selectedRestaurants)
-    
-    
+
+
+
     useEffect(() => {
         dispatch(getRestaurants(cuisineType, city));
     }, [dispatch, cuisineType, city])
 
-    console.log("1: IN RESTAURANTS COMPONENT", allRestaurants);
+
 
 
 

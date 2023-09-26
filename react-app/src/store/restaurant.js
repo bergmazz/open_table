@@ -49,9 +49,9 @@ export const getRestaurants = (type, city) => async (dispatch) => {
         },
     });
     if (response.ok) {
-        console.log("5: I'm in the right thunk, response ok: ", )
+
         const restaurants = await response.json();
-        console.log("RESTAURANTTTTTTTS:======= ",restaurants)
+
         dispatch(getRestaurant(restaurants));
         return restaurants;
     }

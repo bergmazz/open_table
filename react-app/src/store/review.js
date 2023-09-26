@@ -44,7 +44,7 @@ export const getRestaurantReviews = (restaurantId) => async (dispatch) => {
             'Content-Type': 'application/json'
         }
     });
-    
+
     if (res.ok) {
         const reviews = await res.json();
         dispatch(getReviews(restaurantId, reviews));
@@ -57,7 +57,7 @@ export const addReviews = ( restaurant_id, rating, comment, review_image ) => as
     const reviewData = {
         rating, comment, review_image
     }
-    console.log( "thunk review data:", reviewData )
+  
     const res = await fetch( `/api/restaurants/${ restaurant_id }/reviews/`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

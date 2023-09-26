@@ -25,8 +25,7 @@ const OwnerRestaurant = () => {
 
     const myRestaurants = restaurantValues.filter(restaurant => restaurant.userId == user.id);
 
-    console.log("hello", myRestaurants)
-    
+
     const handleDelete = (restaurantId) => {
         setRestaurantToDelete(restaurantId);
         setDeleteModalOpen(true);
@@ -99,5 +98,3 @@ const OwnerRestaurant = () => {
 }
 
 export default OwnerRestaurant;
-
-

@@ -14,7 +14,7 @@ const RestaurantPage = () => {
     const { id } = useParams();
     const restaurant = useSelector(state => state.restaurantDetails);
     const favorites = useSelector(state => state.favorites);
-    // console.log("FAVORITES", favorites)
+  
     const user = useSelector(state => state.session.user);
     const [loadingFavorites, setLoadingFavorites] = useState(true);
     const [favorite, setFavorite] = useState(false);

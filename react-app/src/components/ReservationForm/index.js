@@ -110,13 +110,13 @@ const ReservationForm = () => {
         const [hours, minutes] = time.split(':');
         const period = time.includes('PM') ? 'PM' : 'AM';
         let hour = parseInt(hours, 10);
-    
+
         if (period === 'PM' && hour !== 12) {
             hour += 12;
         } else if (period === 'AM' && hour === 12) {
             hour = 0;
         }
-    
+
         return `${String(hour).padStart(2, '0')}:${minutes.split(' ')[0]}`;
     };
 
@@ -126,7 +126,6 @@ const ReservationForm = () => {
             const convertedTime = convertTo24Hour(time);
             let dateObject = new Date( `${ date }T${ convertedTime }` )
             const utcDateTime = dateObject.toISOString();
-            console.log( "UTC:", utcDateTime )
             const year = dateObject.getFullYear();
             const month = `0${ dateObject.getMonth() + 1 }`.slice( -2 );
             const day = `0${ dateObject.getDate() }`.slice( -2 );
@@ -134,25 +133,18 @@ const ReservationForm = () => {
             const minutes = `0${ dateObject.getMinutes() }`.slice( -2 );
             const seconds = `0${ dateObject.getSeconds() }`.slice( -2 );
             setReservationTime( `${ year }-${ month }-${ day } ${ hours }:${ minutes }:${ seconds }` )
-            // setReservationTime( `${ date } ${ time }` )
 
-            // const dateObject = new Date( `${ date }T${ time }` );
-            // const utcDateTime = dateObject.toISOString();
-            // console.log( "UTC:", utcDateTime )
-            // setReservationTime( utcDateTime );
         }
     }, [ date, time ] )
 
     const handleSubmit = async ( e ) => {
         e.preventDefault();
         if ( currentUser ) {
-            // console.log( " reservationTime: ", reservationTime )
-            // console.log( " numberOfPeople: ", numberOfPeople )
-            // console.log( " status: ", status )
+
             let data = await dispatch( addReservationThunk(
                 id, numberOfPeople, reservationTime, status, notes
             ) );
-            // console.log( '-------------data-------', data )
+  
             if ( !data.id ) {
                 if ( typeof data[ 0 ] == "object" ) {
                     data = Object.values( data[ 0 ] )
@@ -168,9 +160,7 @@ const ReservationForm = () => {
             setErrors( [ 'Please create an account' ] );
         }
     };
-    // if ( restaurant.slots ) {
-    //     console.log( "restaurant slots:", Object.values( restaurant.slots ) )
-    // }
+
 
     return (
         <div className="reservation-form-container">
