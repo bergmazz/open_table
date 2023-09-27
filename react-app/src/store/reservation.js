@@ -122,13 +122,6 @@ export const addReservationThunk = (restaurant_id, number_of_people, reservation
 
 export const editReservations = (restaurantId, id, number_of_people,
     reservation_time, status, notes) => async (dispatch) => {
-
-        ("json1:", JSON.stringify({
-            number_of_people,
-            reservation_time,
-            status,
-            notes
-        }))
         // ( "res length1:", reservation_time.length )
         if (reservation_time.length > 19) {
             reservation_time = reservation_time.slice(0, -3)

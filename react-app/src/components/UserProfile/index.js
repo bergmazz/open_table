@@ -57,7 +57,7 @@ function UserProfile() {
     const currentUser = useSelector(state => state.session.user)
     const reservations = useSelector(state => state.reservations.byUser)
     const reviews = currentUser.reviews
-<
+
 
     const points = reservations.length * 100
 

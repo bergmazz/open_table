@@ -25,7 +25,7 @@ const RestaurantPage = () => {
             dispatch(getFavorites(user.id))
                 .then(() => setLoadingFavorites(false))
                 .catch((error) => {
-                    ("Error fetching favorites:", error);
+                    console.error("Error fetching favorites:", error);
                     setLoadingFavorites(false);
                 });
         } else {
